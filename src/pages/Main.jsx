@@ -3,7 +3,7 @@ import React from 'react';
 const Main = () => {
   return (
     <>
-      <main>
+      <div id="main">
         <section className="main__visual"></section>
         <section className="main__banner"></section>
         <section className="main__prd"></section>
@@ -11,7 +11,7 @@ const Main = () => {
         <section className="main__res_store"></section>
         <section className="main__event"></section>
         <section className="main__promo"></section>
-      </main>
+      </div>
     </>
   );
 };
