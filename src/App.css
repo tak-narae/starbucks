@@ -116,7 +116,7 @@ select {
   width: 100%;
   height: 46px;
   padding: 0 24px;
-  background: transparent url("../images/arrow_select.png") no-repeat top 14px right 24px / 14px auto;
+  background: transparent url("../public/images/arrow_select.png") no-repeat top 14px right 24px / 14px auto;
   border: 1px solid var(--br-color1);
   border-radius: 6px;
   letter-spacing: -0.5px;
@@ -205,7 +205,7 @@ header .btn_hamburger {
   /* 선으로 수정 > 트랜지션 */
   width: 24px;
   height: 24px;
-  background: transparent url("../images/header_hamburger.png") no-repeat center/cover;
+  background: transparent url("../public/images/header_hamburger.png") no-repeat center/cover;
   font-size: 0;
   color: transparent;
   text-indent: -9999px;
@@ -223,7 +223,7 @@ header h1 a,
 .starbucks_logo a {
   width: 228px;
   height: 50px;
-  background: transparent url("../images/logo_header.png") no-repeat center/contain;
+  background: transparent url("../public/images/logo_header.png") no-repeat center/contain;
   font-size: 0;
   color: transparent;
   text-indent: -9999px;
