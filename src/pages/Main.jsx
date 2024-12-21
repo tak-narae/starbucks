@@ -17,12 +17,12 @@ const Main = () => {
               <span className="sub">Season</span>
               <h2 className="tit-em">홀리데이 상품</h2>
             </div>
-            <PrdList/>
+            <PrdList />
           </div>
         </section>
         <section className="main__res_mz">
           <div className="layout_fix">
-           <div className="heading">
+            <div className="heading">
               <span className="sub">Reserve Magazine</span>
               <h2 className="tit">리저브 매거진</h2>
               <p className="desc-light">다채로운, 그리고 향기로운 커피 이야기</p>
@@ -35,7 +35,7 @@ const Main = () => {
               <span className="sub-light">Starbucks</span>
               <h2 className="tit">리저브 매장</h2>
               <p className="desc-light">
-                내 취향이 머무는 곳,<br/>
+                내 취향이 머무는 곳,<br />
                 취향을 채우는 STARBUCKS RESERVE™ 매장
               </p>
             </div>
@@ -49,7 +49,7 @@ const Main = () => {
           </div>
         </section>
         <section className="main__promo"></section>
-      </main>
+      </div>
     </>
   );
 };
