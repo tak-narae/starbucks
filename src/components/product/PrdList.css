@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+.prd_list {
+  margin-left: -20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.prd_list > li {
+  padding-left: 20px;
+
+}
