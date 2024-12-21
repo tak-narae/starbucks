@@ -169,25 +169,12 @@ strong {
   font-weight: 700;
 }
 
-.guideItem {
-  margin-bottom: 80px;
-}
-
-.guideTitle {
-  margin-top: 60px;
-  margin-bottom: 16px;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--main-color1);
-}
-
-.guideTitle::before {
-  content: "";
-  display: inline-block;
+.displaynone {
+  display: none !important;
 }
 
 header {
-  padding: 13px 0;
+  padding: 13px 20px;
   background-color: #fff;
   position: fixed;
   top: 0;
@@ -195,6 +182,8 @@ header {
   left: 0;
   z-index: 30;
   border-bottom: 1px solid var(--br-color1);
+  overflow: hidden;
+  /*임시*/
 }
 
 header .layout_fix {
@@ -222,6 +211,7 @@ header .starbucks_logo {
   display: inline-block;
 }
 
+header h1 a,
 .starbucks_logo a {
   width: 228px;
   height: 50px;
@@ -264,19 +254,34 @@ header .starbucks_logo {
   background-image: url("./images/header_menu4.png");
 }
 
+#main {
+  padding-top: 77px;
+}
+
+#main section:not([class*="banner"]) {
+  padding: 100px 0;
+}
+
+#container {
+  padding-top: 157px;
+}
+
+#main {
+  padding-top: 77px;
+}
+
+#main section:not([class*="banner"]) {
+  padding: 100px 0;
+}
+
+#container {
+  padding-top: 157px;
+}
+
 .layout_fix {
   width: 1320px;
   padding: 0 20px;
   margin: 0 auto;
-}
-
-#contents {
-  padding-top: 156px;
-  padding-bottom: 100px;
-}
-
-.displaynone {
-  display: none;
 }
 
 /* ===== COMPONENTS */
@@ -359,6 +364,32 @@ header .starbucks_logo {
   margin-top: 20px;
 }
 
+/* ===== .heading */
+.heading [class^="tit"] {
+  color: var(--bk-color1);
+}
+
+.heading [class^="tit"][class$="-em"] {
+  color: var(--main-color1);
+}
+
+.heading [class^="sub"] {
+  color: var(--bk-color2);
+}
+
+.heading [class^="sub"][class$="-light"] {
+  color: var(--bk-color3);
+}
+
+.heading [class^="desc"] {
+  color: var(--bk-color1);
+}
+
+.heading [class^="desc"][class$="-light"] {
+  color: var(--bk-color2);
+}
+
+/* !!!수정예정!!! */
 .prd_list {
   margin-left: -20px;
   display: flex;

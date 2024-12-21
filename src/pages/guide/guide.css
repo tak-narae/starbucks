@@ -1,10 +1,29 @@
 @charset "utf-8";
 
+
+.guideItem {
+  margin-bottom: 80px;
+}
+
+.guideTitle {
+  margin-top: 60px;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--main-color1);
+}
+
+.guideTitle::before {
+  content: "";
+  display: inline-block;
+}
+
 .guide .heading h2.tit {
   line-height: 1;
   font-size: 42px;
   font-weight: 400;
 }
+
 .guide .heading h2.tit2 {
   font-size: 26px;
   font-weight: 400;
@@ -21,7 +40,7 @@
   gap: 24px;
 }
 
-.guide .sort_list > li {
+.guide .sort_list>li {
   font-size: 16px;
   position: relative;
 }
@@ -33,13 +52,13 @@
   display: inline-block;
 }
 
-.guide .sort_list label + a {
+.guide .sort_list label+a {
   padding-right: 16px;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.guide .sort_list label + a::after {
+.guide .sort_list label+a::after {
   content: "";
   position: absolute;
   top: 10px;
@@ -48,7 +67,7 @@
   border-top: 4px solid var(--bk-color1);
 }
 
-.guide .sort_list label + a.active::after {
+.guide .sort_list label+a.active::after {
   top: 6px;
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
@@ -70,9 +89,10 @@
   display: none;
 }
 
-.guide .sort_list .active + ul {
+.guide .sort_list .active+ul {
   display: inline-block;
 }
+
 .guide .sort_list ul::-webkit-scrollbar {
   width: 6px;
   /* background: var(--br-color);
@@ -80,6 +100,7 @@
   border-bottom-right-radius: 12px;
   display: block; */
 }
+
 .guide .sort_list ul::-webkit-scrollbar-thumb {
   background: transparent;
   background-clip: padding-box;
@@ -91,6 +112,7 @@
   margin-top: 8px;
   font-size: 15px;
 }
+
 .guide .sort_list ul li a:hover {
   text-decoration: underline;
 }
@@ -128,6 +150,7 @@ table .underline {
   height: 130px;
   padding: 22px 8px 22px 0;
 }
+
 .tb_prd tbody .number .date {
   font-size: 14px;
   display: block;
@@ -142,6 +165,7 @@ table .underline {
   border-top: 1px solid var(--bk-color2);
   table-layout: fixed;
 }
+
 .tb_list thead th {
   height: 62px;
   text-align: center;
@@ -149,14 +173,17 @@ table .underline {
   font-weight: 500;
   color: var(--bk-color2);
 }
+
 .tb_list tbody td {
   height: 64px;
   text-align: center;
 }
+
 .tb_list tbody td.subject {
-  padding-left:32px;
+  padding-left: 32px;
   text-align: left;
 }
+
 .tb_list tbody td.subject a {
   max-width: 80%;
   overflow: hidden;
@@ -165,7 +192,7 @@ table .underline {
 }
 
 .tb_list tbody tr:last-child td {
-  border-color:var(--bk-color2);
+  border-color: var(--bk-color2);
 }
 
 .tb_grid {
@@ -182,6 +209,7 @@ table .underline {
   /* padding-top: 14px;
   padding-bottom:16px; */
 }
+
 .tb_block,
 .tb_block tbody,
 .tb_block tr,
@@ -191,7 +219,7 @@ table .underline {
   border: 0;
 }
 
-.tb_block tr + tr {
+.tb_block tr+tr {
   margin-top: 20px;
 }
 
@@ -201,6 +229,7 @@ table .underline {
   font-weight: 500;
   color: var(--bk-color2);
 }
+
 .tb_block th.required::after {
   content: "*";
   margin-left: 4px;

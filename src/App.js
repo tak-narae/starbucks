@@ -22,20 +22,7 @@ function App() {
   }, [])
   return (
     <>
-      <DataContext.Provider value={{ loading }}>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/coffee/:id" element={<Coffee />}></Route >
-          <Route path="/product/:id" element={<Product />}></Route >
-          <Route path="/beverage/:id" element={<Beverage />}></Route >
-          <Route path="/food/:id" element={<Food />}></Route >
-          <Route path="/event" element={<Event />}></Route >
-          <Route path="/notice" element={<Notice />}></Route >
-          <Route path="/store" element={<Store />}></Route >
-        </Routes>
-        <Footer />
-      </DataContext.Provider >
+      <Header />
     </>
   );
 }
