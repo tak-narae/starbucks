@@ -110,13 +110,16 @@ input::-webkit-inner-spin-button {
   appearance: none;
 }
 
-textarea {}
+textarea {
+}
 
 select {
   width: 100%;
   height: 46px;
   padding: 0 24px;
-  background: transparent url("../images/arrow_select.png") no-repeat top 14px right 24px / 14px auto;
+  background: transparent url("./images/arrow_select.png") no-repeat top 14px
+    right 24px / 14px auto;
+  /* background: transparent url("../images/arrow_select.png") no-repeat top 14px right 24px / 14px auto; */
   border: 1px solid var(--br-color1);
   border-radius: 6px;
   letter-spacing: -0.5px;
@@ -168,25 +171,13 @@ strong {
   font-weight: 700;
 }
 
-.guideItem {
-  margin-bottom: 80px;
-}
-
-.guideTitle {
-  margin-top: 60px;
-  margin-bottom: 16px;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--main-color1);
-}
-
-.guideTitle::before {
-  content: "";
-  display: inline-block;
+.displaynone {
+  display: none !important;
 }
 
 header {
-  padding: 13px 20px;
+  height: 77px;
+  padding: 13px 0;
   background-color: #fff;
   position: fixed;
   top: 0;
@@ -194,9 +185,10 @@ header {
   left: 0;
   z-index: 30;
   border-bottom: 1px solid var(--br-color1);
+  overflow: hidden; /*임시*/
 }
 
-header .h_flex {
+header .layout_fix {
   display: flex;
   justify-content: space-between;
 }
@@ -205,7 +197,9 @@ header .btn_hamburger {
   /* 선으로 수정 > 트랜지션 */
   width: 24px;
   height: 24px;
-  background: transparent url("../images/header_hamburger.png") no-repeat center/cover;
+  background: transparent url("./images/header_hamburger.png") no-repeat
+    center/cover;
+  /* background: transparent url("../images/header_hamburger.png") no-repeat center/cover; */
   font-size: 0;
   color: transparent;
   text-indent: -9999px;
@@ -214,16 +208,17 @@ header .btn_hamburger {
 }
 
 header h1,
-.starbucks_logo {
+header .starbucks_logo {
   vertical-align: middle;
   display: inline-block;
 }
 
-header h1 a,
-.starbucks_logo a {
+header .starbucks_logo a {
   width: 228px;
   height: 50px;
-  background: transparent url("../images/logo_header.png") no-repeat center/contain;
+  background: transparent url("./images/logo_header.png") no-repeat
+    center/contain;
+  /* background: transparent url("../images/logo_header.png") no-repeat center/contain; */
   font-size: 0;
   color: transparent;
   text-indent: -9999px;
@@ -238,19 +233,22 @@ header h1 a,
   gap: 25px;
 }
 
+#main {
+  padding-top: 77px;
+}
+
+#main section:not([class*="banner"]) {
+  padding: 100px 0;
+}
+
+#container {
+  padding-top: 157px;
+}
+
 .layout_fix {
   width: 1320px;
   padding: 0 20px;
   margin: 0 auto;
-}
-
-#contents {
-  padding-top: 156px;
-  padding-bottom: 100px;
-}
-
-.displaynone {
-  display: none;
 }
 
 /* ===== COMPONENTS */
@@ -329,17 +327,43 @@ header h1 a,
   border-radius: 6px;
 }
 
-.mg_list>li+li {
+.mg_list > li + li {
   margin-top: 20px;
 }
 
+/* ===== .heading */
+.heading [class^="tit"] {
+  color: var(--bk-color1);
+}
+
+.heading [class^="tit"][class$="-em"] {
+  color: var(--main-color1);
+}
+
+.heading [class^="sub"] {
+  color: var(--bk-color2);
+}
+
+.heading [class^="sub"][class$="-light"] {
+  color: var(--bk-color3);
+}
+
+.heading [class^="desc"] {
+  color: var(--bk-color1);
+}
+
+.heading [class^="desc"][class$="-light"] {
+  color: var(--bk-color2);
+}
+
+/* !!!수정예정!!! */
 .prd_list {
   margin-left: -20px;
   display: flex;
   flex-wrap: wrap;
 }
 
-.prd_list>li {
+.prd_list > li {
   width: 25%;
   min-width: 25%;
   padding-left: 20px;
@@ -484,3 +508,8 @@ footer {
 .f_plus_right {
   float: right;
 }
+
+
+
+
+

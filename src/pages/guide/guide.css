@@ -1,5 +1,23 @@
 @charset "utf-8";
 
+
+.guideItem {
+  margin-bottom: 80px;
+}
+
+.guideTitle {
+  margin-top: 60px;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--main-color1);
+}
+
+.guideTitle::before {
+  content: "";
+  display: inline-block;
+}
+
 .guide .heading h2.tit {
   line-height: 1;
   font-size: 42px;

@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+:not([class*="visual"]) .heading {
+  margin-bottom: 40px;
+}
+
+:not([class*="visual"]) .heading [class^="tit"] {
+  font-size: 30px;
+}
+
+:not([class*="visual"]) .heading [class^="sub"] {
+  margin-bottom: 8px;
+  font-size: 14px;
+  display: block;
+}
+
+:not([class*="visual"]) .heading [class^="desc"] {
+  margin-top: 30px;
+}
+
+.main__res_mz {
+  background-color: #deddd9;
+}
+
+.main__res_mz .heading .sub {
+  margin-bottom: 30px;
+}
+
+.main__res_store {
+  background-color: #f6f6f7;
+}
