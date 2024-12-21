@@ -309,22 +309,22 @@ footer .menu_corp a:first-child {
 }
 
 footer .fnb {
-  padding: 40px 0 50px 0;
+  padding: 50px 0;
   border-top: 1px solid var(--br-color1);
 }
 
-footer .logo_sns h1 {
-  padding: 10px 0;
+footer .logo_sns {
+  position: relative;
 }
 
-footer .info_sns {
+footer .sns {
   height: 70px;
   position: absolute;
   top: 0;
   right: 0;
 }
 
-footer .info_sns a {
+footer .sns a {
   width: 32px;
   height: 32px;
   background-repeat: no-repeat;
@@ -337,35 +337,34 @@ footer .info_sns a {
   display: inline-block;
 }
 
-footer .info_sns .insta {
+footer .sns .insta {
   background-image: url("./images/f_sns1.png");
 }
 
-footer .info_sns .youtube {
+footer .sns .youtube {
   background-image: url("./images/f_sns2.png");
 }
 
-footer .info_sns .x {
+footer .sns .x {
   background-image: url("./images/f_sns3.png");
 }
 
-footer .info_sns .facebook {
+footer .sns .facebook {
   background-image: url("./images/f_sns4.png");
 }
 
-footer .info_sns .blog {
+footer .sns .blog {
   background-image: url("./images/f_sns5.png");
 }
 
-footer .info {
+footer .biz {
   width: 100%;
   padding-right: 710px;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 20px;
-  position: relative;
 }
 
-footer .info span {
+footer .biz span {
   display: inline-block;
   margin-right: 18px;
   color: var(--bk-color3);
@@ -373,13 +372,13 @@ footer .info span {
   font-weight: 400;
 }
 
-footer .info span:first-child {
+footer .biz span:first-child {
   color: var(--bk-color1);
 }
 
 footer .copyright {
   width: 100%;
-  line-height: 22px;
+  line-height: 28px;
   font-size: 12px;
   color: var(--bk-color2);
   display: inline-block;
@@ -511,4 +510,61 @@ footer .link b {
 
 .heading [class^="desc"][class$="-light"] {
   color: var(--bk-color2);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  width: 12px;
+  height: 12px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  width: 12px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: var(--br-color2);
+}
+
+:not(body)::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+:not(body)::-webkit-scrollbar-button {
+  display: none;
+}
+
+:not(body)::-webkit-scrollbar-track {
+  width: 3px;
+  height: 3px;
+  background-color: transparent;
+}
+
+:not(body)::-webkit-scrollbar-corner {
+  width: 3px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+:not(body)::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: var(--br-color2);
 }
