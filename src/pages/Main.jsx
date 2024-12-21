@@ -49,7 +49,7 @@ const Main = () => {
           </div>
         </section>
         <section className="main__promo"></section>
-      </div>
+      </main>
     </>
   );
 };

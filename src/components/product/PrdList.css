@@ -7,6 +7,13 @@
 }
 
 .prd_list > li {
+  width: 25%;
+  min-width: 25%;
   padding-left: 20px;
+  padding-bottom: 40px;
+}
 
+.prd_list > li > a {
+  border: 1px solid var(--bk-color3);
+  display: block;
 }
