@@ -11,6 +11,7 @@ import Event from 'pages/Event/Event';
 import Notice from 'pages/Notice/Notice';
 import Store from 'pages/Store/Store';
 import Footer from 'components/layout/Footer';
+import Guide from 'pages/guide/Guide';
 
 const DataContext = createContext();
 
@@ -23,6 +24,11 @@ function App() {
   return (
     <>
       <Header />
+      <Routes>
+        <Route path="/" element={<Main />}></Route>
+        <Route path="/guide" element={<Guide />}></Route>
+      </Routes>
+      <Footer />
     </>
   );
 }

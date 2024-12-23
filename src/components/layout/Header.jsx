@@ -12,7 +12,7 @@ const Header = () => {
                 </div>
                 <ul className="menu_util">
                     <li className="util_search"><Link to="/">검색</Link></li>
-                    <li className="util_mypage"><Link to="/">마이페이지</Link></li>
+                    <li className="util_mypage"><Link to="/mypage">마이페이지</Link></li>
                     <li className="util_cart"><Link to="/">장바구니</Link></li>
                     <li className="util_card"><Link to="/">카드</Link></li>
                 </ul>

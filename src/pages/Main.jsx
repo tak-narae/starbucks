@@ -10,7 +10,8 @@ const Main = () => {
     <>
       <main id="main">
         <section className="main__visual"></section>
-        <section className="main__banner"></section>
+        <section className="main__banner">
+        </section>
         <section className="main__prd">
           <div className="layout_fix">
             <div className="heading">
@@ -49,7 +50,7 @@ const Main = () => {
           </div>
         </section>
         <section className="main__promo"></section>
-      </div>
+      </main>
     </>
   );
 };
