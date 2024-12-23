@@ -71,7 +71,7 @@ input[type="password"] {
   color: var(--bk-color1);
   border: 1px solid var(--br-color1);
   border-radius: 6px;
-  letter-spacing: -0.5px;
+  letter-spacing: -.5px;
   outline: none;
   -webkit-appearance: none;
   appearance: none;
@@ -120,7 +120,7 @@ select {
   /* background: transparent url("../images/arrow_select.png") no-repeat top 14px right 24px / 14px auto; */
   border: 1px solid var(--br-color1);
   border-radius: 6px;
-  letter-spacing: -0.5px;
+  letter-spacing: -.5px;
   outline: none;
   -webkit-appearance: none;
   appearance: none;
@@ -205,14 +205,13 @@ header .btn_hamburger {
   margin-right: 32px;
 }
 
-header h1,
 header .starbucks_logo {
   vertical-align: middle;
   display: inline-block;
 }
 
-header h1 a,
-.starbucks_logo a {
+header .starbucks_logo a,
+footer .starbucks_logo a {
   width: 228px;
   height: 50px;
   background: transparent url("./images/logo_header.png") no-repeat center/contain;
@@ -223,34 +222,37 @@ header h1 a,
   display: block;
 }
 
-.menu_util {
-  display: flex;
-  gap: 18px;
+header .menu_util {
   color: transparent;
+  display: flex;
+  align-self: stretch;
+  gap: 18px;
 }
 
-.menu_util li {
+header .menu_util li a {
   width: 28px;
   height: 20px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  font-size: 0;
+  text-indent: -9999px;
   color: transparent;
 }
 
-.menu_util .util_search {
+header .menu_util .search a {
   background-image: url("./images/header_menu1.png");
 }
 
-.menu_util .util_mypage {
+header .menu_util .mypage a {
   background-image: url("./images/header_menu2.png");
 }
 
-.menu_util .util_cart {
+header .menu_util .cart a {
   background-image: url("./images/header_menu3.png");
 }
 
-.menu_util .util_card {
+header .menu_util .card a {
   background-image: url("./images/header_menu4.png");
 }
 
@@ -258,30 +260,151 @@ header h1 a,
   padding-top: 77px;
 }
 
-#main section:not([class*="banner"]) {
-  padding: 100px 0;
-}
-
 #container {
   padding-top: 157px;
 }
 
-#main {
-  padding-top: 77px;
-}
-
 #main section:not([class*="banner"]) {
   padding: 100px 0;
-}
-
-#container {
-  padding-top: 157px;
 }
 
 .layout_fix {
   width: 1320px;
   padding: 0 20px;
   margin: 0 auto;
+}
+
+footer {
+  background-color: #fff;
+  border-top: 1px solid var(--br-color1);
+}
+
+footer .menu_corp .layout_fix {
+  display: flex;
+}
+
+footer .menu_corp a {
+  width: 320px;
+  height: 54px;
+  padding: 0 25px;
+  line-height: 54px;
+  position: relative;
+  border-right: 1px solid var(--br-color1);
+  display: block;
+}
+
+footer .menu_corp a::after {
+  content: "+";
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 20px;
+  position: absolute;
+  top: 17px;
+  right: 25px;
+}
+
+footer .menu_corp a:first-child {
+  border-left:1px solid var(--br-color1);
+}
+
+footer .fnb {
+  padding: 50px 0;
+  border-top: 1px solid var(--br-color1);
+}
+
+footer .logo_sns {
+  position: relative;
+}
+
+footer .sns {
+  height: 70px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+footer .sns a {
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  font-size: 0;
+  color: transparent;
+  text-indent: -9999px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+footer .sns .insta {
+  background-image: url("./images/f_sns1.png");
+}
+
+footer .sns .youtube {
+  background-image: url("./images/f_sns2.png");
+}
+
+footer .sns .x {
+  background-image: url("./images/f_sns3.png");
+}
+
+footer .sns .facebook {
+  background-image: url("./images/f_sns4.png");
+}
+
+footer .sns .blog {
+  background-image: url("./images/f_sns5.png");
+}
+
+footer .biz {
+  width: 100%;
+  padding-right: 710px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+footer .biz span {
+  display: inline-block;
+  margin-right: 18px;
+  color: var(--bk-color3);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+footer .biz span:first-child {
+  color: var(--bk-color1);
+}
+
+footer .copyright {
+  width: 100%;
+  line-height: 28px;
+  font-size: 12px;
+  color: var(--bk-color2);
+  display: inline-block;
+}
+
+footer .link {
+  width: 100%;
+  line-height: 22px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer .link button {
+  margin-right: 20px;
+  color: var(--bk-color1);
+}
+
+footer .link > div:last-child button {
+  margin-right: 0;
+  margin-left: 20px;
+}
+
+footer .link b {
+  font-weight: 500;
+  color: var(--main-color1);
 }
 
 /* ===== COMPONENTS */
@@ -389,190 +512,59 @@ header h1 a,
   color: var(--bk-color2);
 }
 
-/* !!!수정예정!!! */
-.prd_list {
-  margin-left: -20px;
-  display: flex;
-  flex-wrap: wrap;
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background-color: transparent;
 }
 
-.prd_list>li {
-  width: 25%;
-  min-width: 25%;
-  padding-left: 20px;
-  margin-bottom: 40px;
+::-webkit-scrollbar-button {
+  display: none;
 }
 
-.login_input {
-  width: 400px;
-  height: 60px;
-  position: relative;
-  margin-bottom: 16px;
+::-webkit-scrollbar-track {
+  width: 12px;
+  height: 12px;
+  background-color: transparent;
 }
 
-.login_input input {
-  width: 100%;
-  height: 100%;
-  padding-left: 125px;
-  background-color: var(--bg-color2);
-  border: 1px solid var(--br-color2);
-  border-radius: 10px;
-  position: absolute;
-  color: var(--bk-color3, #999);
-  font-size: 14px;
-  font-weight: 350;
+::-webkit-scrollbar-corner {
+  width: 12px;
+  border-radius: 50%;
+  background-color: transparent;
 }
 
-.login_input h5 {
-  height: 100%;
-  padding: 20px 0 20px 24px;
-  position: absolute;
-
-  color: var(--bk-color2, #666);
-  font-size: 12px;
-  font-weight: 500;
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: var(--br-color2);
 }
 
-footer {
-  height: auto;
-  background-color: #fff;
+:not(body)::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-radius: 0;
+  background-color: transparent;
 }
 
-.f_border {
-  border: 1px solid var(--bg-color1);
+:not(body)::-webkit-scrollbar-button {
+  display: none;
 }
 
-.f_quick_menu {
-  display: flex;
+:not(body)::-webkit-scrollbar-track {
+  width: 3px;
+  height: 3px;
+  background-color: transparent;
 }
 
-.f_quick_menu a {
-  width: 320px;
-  height: 54px;
-  padding: 0 25px;
-  box-sizing: border-box;
-  display: block;
-  border-right: 1px solid var(--bg-color1);
-  line-height: 54px;
-  position: relative;
+:not(body)::-webkit-scrollbar-corner {
+  width: 3px;
+  border-radius: 50%;
+  background-color: transparent;
 }
 
-.f_quick_menu:nth-child(1) {
-  border-left: 1px solid var(--bg-color1);
-}
-
-.f_quick_menu a::after {
-  content: "+";
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
-  line-height: 20px;
-  position: absolute;
-  top: 17px;
-  right: 25px;
-}
-
-.f_content {
-  padding: 40px 0 50px 0;
-}
-
-.f_logo_sns {
-  margin-bottom: 20px;
-}
-
-.f_logo_sns h1 {
-  padding: 10px;
-}
-
-.f_logo_sns .f_sns {
-  height: 70px;
-  padding: 19.5px 12px;
-  float: right;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.f_sns a {
-  width: 31px;
-  height: 31px;
-  display: inline-block;
-  vertical-align: middle;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  color: transparent;
-}
-
-.f_sns .insta {
-  background-image: url("./images/f_sns1.png");
-}
-
-.f_sns .youtube {
-  background-image: url("./images/f_sns2.png");
-}
-
-.f_sns .x {
-  background-image: url("./images/f_sns3.png");
-}
-
-.f_sns .facebook {
-  background-image: url("./images/f_sns4.png");
-}
-
-.f_sns .blog {
-  background-image: url("./images/f_sns5.png");
-}
-
-.f_info {
-  width: 100%;
-  padding-right: 710px;
-  margin-bottom: 20px;
-}
-
-.f_info span {
-  display: inline-block;
-  margin-right: 18px;
-  color: var(--bk-color3);
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.f_info span:first-child {
-  color: var(--bk-color1);
-}
-
-.f_copy_plus {
-  width: 100%;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 22.5px;
-}
-
-.f_copy {
-  width: 100%;
-  display: inline-block;
-  color: var(--bk-color2, #666);
-}
-
-.f_plus {
-  width: 100%;
-}
-
-.f_plus button {
-  color: var(--bk-color1, #222);
-  margin-right: 20px;
-}
-
-.f_plus_left {
-  width: 50%;
-  display: inline-block;
-}
-
-.f_plus .f_plus_color {
-  color: var(--main-color1, #006241);
-  font-weight: 500;
-}
-
-.f_plus_right {
-  float: right;
+:not(body)::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: var(--br-color2);
 }

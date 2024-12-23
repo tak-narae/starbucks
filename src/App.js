@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
 import './App.css';
+
 import Header from 'components/layout/Header';
 import Main from 'pages/Main';
 import Coffee from 'pages/Coffee/Coffee';
@@ -23,12 +25,22 @@ function App() {
   }, [])
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Main />}></Route>
-        <Route path="/guide" element={<Guide />}></Route>
-      </Routes>
-      <Footer />
+      <Header/>
+      <DataContext.Provider value={{ loading }}>
+        <Header />
+        <Routes>
+          <Route path="/guide" element={<Guide/>}></Route>
+          <Route path="/" element={<Main/>}></Route>
+          <Route path="/coffee/:id" element={<Coffee/>}></Route>
+          <Route path="/product/:id" element={<Product/>}></Route>
+          <Route path="/beverage/:id" element={<Beverage/>}></Route>
+          <Route path="/food/:id" element={<Food/>}></Route>
+          <Route path="/event" element={<Event/>}></Route>
+          <Route path="/notice" element={<Notice/>}></Route>
+          <Route path="/store" element={<Store/>}></Route>
+        </Routes>
+        <Footer />
+      </DataContext.Provider >
     </>
   );
 }
