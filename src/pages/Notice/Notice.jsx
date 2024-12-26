@@ -2,9 +2,8 @@ import React from 'react';
 
 const Notice = () => {
   return (
-    <>
-      Notice.jsx
-    </>
+    <div>
+    </div>
   );
 };
 
