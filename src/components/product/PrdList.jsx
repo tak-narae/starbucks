@@ -1,19 +1,41 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import productData from 'json/product/product.json';
+
 const PrdList = () => {
+  const [products, setProducts] = useState([]); //전체상품
+  const [prdSeason, setPrdSeason] = useState([]); //시즌상품
+
+  useEffect(() => {
+    setProducts(productData);
+    const seasonAll = productData.flatMap((el)=>{
+      const seasonCate = el.products.filter((prd) => prd.name.includes("홀리데이") );
+      console.log("시즌리스트==", seasonCate);
+      return seasonCate;
+    })
+    setPrdSeason(seasonAll);
+    console.log("상품리스트==", seasonAll);
+  }, []);
+
   return (
     <>
       <ul className="prd_list">
-        <li><Link to="/">상품1</Link></li>
-        <li><Link to="/">상품2</Link></li>
-        <li><Link to="/">상품3</Link></li>
-        <li><Link to="/">상품4</Link></li>
-        <li><Link to="/">상품5</Link></li>
-        <li><Link to="/">상품6</Link></li>
-        <li><Link to="/">상품7</Link></li>
-        <li><Link to="/">상품8</Link></li>
+        {products.map((el,idx) => (
+          <li key={idx}>
+            <h2>{el.category}</h2>
+            <ul>
+              {el.products.map((product) => (
+                <li key={product.id}>
+                  <Link to={`/product/${product.key}`}>
+                    <img src={product.img} alt={product.name} />
+                    <span>{product.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
       </ul>
     </>
   );

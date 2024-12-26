@@ -1,6 +1,7 @@
 import React from 'react';
 import "./Main.css";
 
+
 import PrdList from 'components/product/PrdList';
 import "components/product/PrdList.css";
 
@@ -14,7 +15,7 @@ const Main = () => {
             <div className="swiper-visual">SWIPER</div>
 
           </div>
-          <div class="split">STARBUCKS</div>
+          <div className="split">STARBUCKS</div>
         </section>
         <section className="main__banner"></section>
         <section className="main__prd">
@@ -23,7 +24,7 @@ const Main = () => {
               <span className="sub">Season</span>
               <h2 className="tit-em">홀리데이 상품</h2>
             </div>
-            <PrdList />
+            <PrdList/>
           </div>
         </section>
         <section className="main__res_mz">
