@@ -27,9 +27,7 @@ function App() {
     <>
       <Header/>
       <DataContext.Provider value={{ loading }}>
-        <Header />
         <Routes>
-          <Route path="/guide" element={<Guide/>}></Route>
           <Route path="/" element={<Main/>}></Route>
           <Route path="/coffee/:id" element={<Coffee/>}></Route>
           <Route path="/product/:id" element={<Product/>}></Route>
@@ -38,6 +36,7 @@ function App() {
           <Route path="/event" element={<Event/>}></Route>
           <Route path="/notice" element={<Notice/>}></Route>
           <Route path="/store" element={<Store/>}></Route>
+          <Route path="/guide" element={<Guide/>}></Route>
         </Routes>
         <Footer />
       </DataContext.Provider >
