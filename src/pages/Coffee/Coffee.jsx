@@ -3,7 +3,7 @@ import React from 'react';
 const Coffee = () => {
   return (
     <>
-      커피
+      
     </>
   );
 };

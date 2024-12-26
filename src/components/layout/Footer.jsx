@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer>
-      <div className="menu_corp">
+      <div id="container" className="menu_corp">
         <div className="layout_fix">
           <Link to="/">회사소개</Link>
           <Link to="/">단체구매안내</Link>
