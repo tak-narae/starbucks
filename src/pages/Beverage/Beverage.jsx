@@ -11,7 +11,7 @@ import PrdList from "components/product/PrdList";
 
 const Beverage = () => {
   const { beverage, setBeverage } = useContext(DataContext); 
-  console.log(beverage);
+  // console.log(beverage);
   // const [category, setCategory] = useState([]);
   // const [categoryList, setCategoryList] = useState([]);
 
@@ -43,14 +43,14 @@ const Beverage = () => {
             } */}
         </ul>
       </div>
-      <div className="guideItem layout_fix">
+      {/* <div className="guideItem layout_fix">
         <p className="guideTitle"></p>
         <ul className="prd_list">
           <li>
             <div className="item">
               <div className="thumbnail">
                 <Link to="javascript: ;">
-                  {/* <img src={`categoryList.img`} /> */}
+                  <img src={`categoryList.img`} />
                 </Link>
               </div>
               <div className="desc">
@@ -117,7 +117,7 @@ const Beverage = () => {
             </div>
           </li>
         </ul>
-      </div>
+      </div> */}
     </>
   );
 };
