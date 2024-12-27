@@ -57,6 +57,7 @@ function App() {
             <Route path="product" element={<Product/>}></Route>
             <Route path="beverage" element={<Beverage/>}></Route>
             <Route path="food" element={<Food/>}></Route>
+            {/* <Route path=":categoryIndex" element={<Menu />} /> */}
           </Route>
           <Route path="/event" element={<Event/>}></Route>
           <Route path="/notice" element={<Notice/>}></Route>

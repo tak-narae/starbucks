@@ -8,13 +8,8 @@ import { DataContext } from "App";
 
 const PrdList = () => {
   
-  const [products, setProducts] = useState([]); //전체상품
-  const [prdSeason, setPrdSeason] = useState([]); //시즌상품
-
-  // const { coffee, setCoffee } = useContext(DataContext);
-  // const { beverage, setBeverage } = useContext(DataContext);
-  // const { product, setProduct } = useContext(DataContext);
-  // const { food, setFood } = useContext(DataContext);
+  // const [products, setProducts] = useState([]); //전체상품
+  // const [prdSeason, setPrdSeason] = useState([]); //시즌상품
 
   // useEffect(() => {
   //   setProducts(productData);

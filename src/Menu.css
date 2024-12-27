@@ -3,11 +3,24 @@
   height: 54px;
   border: 1px solid var(--br-color1);
 }
-.cate_list{
-    height: 100%;
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    font-size: 16px;
-    color: var(--bk-color2);
+.cate_list {
+  height: 100%;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  font-size: 16px;
+  color: var(--bk-color2);
+}
+
+.menu_category > .depth {
+    background-color: var(--bg-color2);
+}
+
+.active{
+    color: var(--main-color1);
+    font-weight: 500;
+}
+
+.menu_category > .depth .active {
+    color: var(--bk-color1);
 }
