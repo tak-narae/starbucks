@@ -2,7 +2,9 @@
   width: 100%;
   height: 54px;
   border: 1px solid var(--br-color1);
+  margin-bottom: 60px;
 }
+
 .cate_list {
   height: 100%;
   display: flex;
@@ -12,15 +14,15 @@
   color: var(--bk-color2);
 }
 
-.menu_category > .depth {
-    background-color: var(--bg-color2);
+.menu_category>.depth {
+  background-color: var(--bg-color2);
 }
 
-.active{
-    color: var(--main-color1);
-    font-weight: 500;
+.active {
+  color: var(--main-color1);
+  font-weight: 500;
 }
 
-.menu_category > .depth .active {
-    color: var(--bk-color1);
+.menu_category>.depth .active {
+  color: var(--bk-color1);
 }

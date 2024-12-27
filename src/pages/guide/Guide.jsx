@@ -26,45 +26,45 @@ const Guide = () => {
               <ul className="sort_list">
                 <li>
                   <label>조회기간</label>
-                  <Link to="javascript:;" className="active">
+                  <Link onClick={e => e.preventDefault()} className="active">
                     전체
                   </Link>
                   <ul>
                     <li>
-                      <Link to="javascript:;">전체</Link>
+                      <Link onClick={e => e.preventDefault()}>전체</Link>
                     </li>
                     <li>
-                      <Link to="javascript:;">옵션1</Link>
+                      <Link onClick={e => e.preventDefault()}>옵션1</Link>
                     </li>
                     <li>
-                      <Link to="javascript:;">옵션2</Link>
+                      <Link onClick={e => e.preventDefault()}>옵션2</Link>
                     </li>
                     <li>
-                      <Link to="javascript:;">옵션3</Link>
+                      <Link onClick={e => e.preventDefault()}>옵션3</Link>
                     </li>
                     <li>
-                      <Link to="javascript:;">옵션4</Link>
+                      <Link onClick={e => e.preventDefault()}>옵션4</Link>
                     </li>
                     <li>
-                      <Link to="javascript:;">옵션5</Link>
+                      <Link onClick={e => e.preventDefault()}>옵션5</Link>
                     </li>
                   </ul>
                 </li>
                 <li>
                   <label>처리상태</label>
-                  <Link to="javascript:;">전체</Link>
+                  <Link onClick={e => e.preventDefault()}>전체</Link>
                   <ul>
                     <li>
-                      <Link to="javascript:;">전체</Link>
+                      <Link onClick={e => e.preventDefault()}>전체</Link>
                     </li>
                     <li>
-                      <Link to="javascript:;">옵션1</Link>
+                      <Link onClick={e => e.preventDefault()}>옵션1</Link>
                     </li>
                     <li>
-                      <Link to="javascript:;">옵션2</Link>
+                      <Link onClick={e => e.preventDefault()}>옵션2</Link>
                     </li>
                     <li>
-                      <Link to="javascript:;">옵션3</Link>
+                      <Link onClick={e => e.preventDefault()}>옵션3</Link>
                     </li>
                   </ul>
                 </li>
@@ -93,16 +93,16 @@ const Guide = () => {
                 <tr>
                   <td class="number">
                     <span class="date">2024-12-04</span>
-                    <Link to="javaxcript: ;" class="underline">
+                    <Link onClick={e => e.preventDefault()} class="underline">
                       O2024120123375331114
                     </Link>
                   </td>
                   <td>
                     <Link
-                      to="javaxcript: ;"
-                      style={{display: "inline-flex", alignItems: "center", gap: "20px",}}
+                      onClick={e => e.preventDefault()}
+                      style={{ display: "inline-flex", alignItems: "center", gap: "20px", }}
                     >
-                      <div style={{width: "80px", height: "80px", background: "#fafafa",}}></div>
+                      <div style={{ width: "80px", height: "80px", background: "#fafafa", }}></div>
                       <span>홀리데이 프렌즈 플레이트 커트러리 세트</span>
                     </Link>
                   </td>
@@ -119,11 +119,11 @@ const Guide = () => {
             <p class="guideTitle">.tb_list</p>
             <table class="tb_list">
               <colgroup>
-                <col style={{width: "100px"}} />
-                <col style={{width: "160px"}} />
-                <col style={{width: "auto"}} />
-                <col style={{width: "120px"}} />
-                <col style={{width: "120px"}} />
+                <col style={{ width: "100px" }} />
+                <col style={{ width: "160px" }} />
+                <col style={{ width: "auto" }} />
+                <col style={{ width: "120px" }} />
+                <col style={{ width: "120px" }} />
               </colgroup>
               <thead>
                 <tr>
@@ -139,7 +139,7 @@ const Guide = () => {
                   <td>2</td>
                   <td>문화소식</td>
                   <td class="subject">
-                    <Link to="javaxcript: ;">나의 오감을 깨워요</Link>
+                    <Link onClick={e => e.preventDefault()}>나의 오감을 깨워요</Link>
                   </td>
                   <td>관리자</td>
                   <td>2024-12-02</td>
@@ -148,7 +148,7 @@ const Guide = () => {
                   <td>1</td>
                   <td>공지사항</td>
                   <td class="subject">
-                    <Link to="javaxcript: ;">
+                    <Link onClick={e => e.preventDefault()}>
                       단체 대량 구매 문의 (CONTACT FOR GROUP-BULK ORDER CONTACT
                       FOR GROUP-BULK ORDER)
                     </Link>
@@ -306,23 +306,23 @@ const Guide = () => {
             <ul className="mg_list">
               <li>
                 <div className="btn_primary">
-                  <Link to="javascript: ;" className="btn_dark">
+                  <Link onClick={e => e.preventDefault()} className="btn_dark">
                     btn1
                   </Link>
-                  <Link to="javascript: ;" className="btn_light">
+                  <Link onClick={e => e.preventDefault()} className="btn_light">
                     btn2
                   </Link>
-                  <Link to="javascript: ;" className="btn_normal">
+                  <Link onClick={e => e.preventDefault()} className="btn_normal">
                     btn3
                   </Link>
                 </div>
               </li>
               <li>
                 <div className="btn_primary column">
-                  <Link to="javascript: ;" className="btn_strong">
+                  <Link onClick={e => e.preventDefault()} className="btn_strong">
                     btn1
                   </Link>
-                  <Link to="javascript: ;" className="btn_basic">
+                  <Link onClick={e => e.preventDefault()} className="btn_basic">
                     btn2
                   </Link>
                 </div>
@@ -336,8 +336,8 @@ const Guide = () => {
               <li>
                 <div className="item">
                   <div className="thumbnail">
-                    <Link to="javascript: ;">
-                      <img src="https://placehold.co/600" />
+                    <Link onClick={e => e.preventDefault()}>
+                      <img src="https://placehold.co/600" alt="" />
                     </Link>
                   </div>
                   <div className="desc">
@@ -350,8 +350,8 @@ const Guide = () => {
               <li>
                 <div className="item">
                   <div className="thumbnail">
-                    <Link to="javascript: ;">
-                      <img src="https://placehold.co/600" />
+                    <Link onClick={e => e.preventDefault()}>
+                      <img src="https://placehold.co/600" alt="" />
                     </Link>
                   </div>
                   <div className="desc">
@@ -364,8 +364,8 @@ const Guide = () => {
               <li>
                 <div className="item">
                   <div className="thumbnail">
-                    <Link to="javascript: ;">
-                      <img src="https://placehold.co/600" />
+                    <Link onClick={e => e.preventDefault()}>
+                      <img src="https://placehold.co/600" alt="" />
                     </Link>
                   </div>
                   <div className="desc">
@@ -378,8 +378,8 @@ const Guide = () => {
               <li>
                 <div className="item">
                   <div className="thumbnail">
-                    <Link to="javascript: ;">
-                      <img src="https://placehold.co/600" />
+                    <Link onClick={e => e.preventDefault()}>
+                      <img src="https://placehold.co/600" alt="" />
                     </Link>
                   </div>
                   <div className="desc">
@@ -392,8 +392,8 @@ const Guide = () => {
               <li>
                 <div className="item">
                   <div className="thumbnail">
-                    <Link to="javascript: ;">
-                      <img src="https://placehold.co/600" />
+                    <Link onClick={e => e.preventDefault()}>
+                      <img src="https://placehold.co/600" alt="" />
                     </Link>
                   </div>
                   <div className="desc">
