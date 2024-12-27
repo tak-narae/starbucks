@@ -30,10 +30,12 @@ function App() {
   const getdata = async () => {
     try {
       const response = await axios.get(`https://raw.githubusercontent.com/deliondane/db/main/db.json`);
-      console.log(response.data);
+      // console.log(response.data);
       setMenuTit(response.data);
       setCoffee(response.data.coffee);
+      // console.log(response.data.coffee);
       setBeverage(response.data.beverage);
+      // console.log(response.data.beverage);
       setProduct(response.data.product);
       setFood(response.data.food);
     } catch (err) {
