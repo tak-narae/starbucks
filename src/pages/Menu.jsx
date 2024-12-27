@@ -38,21 +38,25 @@ const Menu = () => {
 
   return (
     <>
-      <div id="container" className="layout_fix">
+      <div id="container">
         <div className="heading">
-          <span className="sub">{title}</span>
-          <h2 className="tit-em">{title}</h2>
+          <div className="layout_fix">
+            <span className="sub">{title}</span>
+            <h2 className="tit-em">{title}</h2>
+          </div>
         </div>
+        <div className="menu_category">
+          <ul className="cate_list layout_fix">
+            {categories.map((category, idx) => (
+              <li key={idx}>
+                <Link to={`/menu/${pathName}/${idx}`}>{category}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
       </div>
-      <div className="menu_category">
-        <ul className="cate_list layout_fix">
-          {categories.map((category, idx) => (
-            <li key={idx}>
-              <Link to={`/menu/${pathName}/${idx}`}>{category}</Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+
       <div className="layout_fix">
         <PrdList />
       </div>

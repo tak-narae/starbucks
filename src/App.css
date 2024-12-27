@@ -173,95 +173,13 @@ strong {
   display: none !important;
 }
 
-header {
-  padding: 13px 20px;
-  background-color: #fff;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 30;
-  border-bottom: 1px solid var(--br-color1);
-  overflow: hidden;
-  /*임시*/
-}
-
-header .layout_fix {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header .btn_hamburger {
-  /* 선으로 수정 > 트랜지션 */
-  width: 24px;
-  height: 24px;
-  background: transparent url("./images/header_hamburger.png") no-repeat center/cover;
-  /* background: transparent url("../images/header_hamburger.png") no-repeat center/cover; */
-  font-size: 0;
-  color: transparent;
-  text-indent: -9999px;
-  vertical-align: middle;
-  margin-right: 32px;
-}
-
-header .starbucks_logo {
-  vertical-align: middle;
-  display: inline-block;
-}
-
-header .starbucks_logo a,
-footer .starbucks_logo a {
-  width: 228px;
-  height: 50px;
-  background: transparent url("./images/logo_header.png") no-repeat center/contain;
-  /* background: transparent url("../images/logo_header.png") no-repeat center/contain; */
-  font-size: 0;
-  color: transparent;
-  text-indent: -9999px;
-  display: block;
-}
-
-header .menu_util {
-  color: transparent;
-  display: flex;
-  align-self: stretch;
-  gap: 18px;
-}
-
-header .menu_util li a {
-  width: 28px;
-  height: 20px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  font-size: 0;
-  text-indent: -9999px;
-  color: transparent;
-}
-
-header .menu_util .search a {
-  background-image: url("./images/header_menu1.png");
-}
-
-header .menu_util .mypage a {
-  background-image: url("./images/header_menu2.png");
-}
-
-header .menu_util .cart a {
-  background-image: url("./images/header_menu3.png");
-}
-
-header .menu_util .card a {
-  background-image: url("./images/header_menu4.png");
-}
-
 #main {
   padding-top: 77px;
 }
 
 #container {
   padding-top: 157px;
+  padding-bottom: 100px;
 }
 
 #main section:not([class*="banner"]) {

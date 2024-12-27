@@ -1,0 +1,183 @@
+header {
+  padding: 13px 0;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 30;
+  border-bottom: 1px solid var(--br-color1);
+  /* overflow: hidden; */
+  /*임시*/
+}
+
+header .layout_fix {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .btn_hamburger {
+  /* 선으로 수정 > 트랜지션 */
+  width: 24px;
+  height: 24px;
+  background: transparent url("../../images/header_hamburger.png") no-repeat center/cover;
+  font-size: 0;
+  color: transparent;
+  text-indent: -9999px;
+  vertical-align: middle;
+  margin-right: 32px;
+}
+
+header .starbucks_logo {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+header .starbucks_logo a,
+footer .starbucks_logo a {
+  width: 228px;
+  height: 50px;
+  background: transparent url("../../images/logo_header.png") no-repeat center/contain;
+  font-size: 0;
+  color: transparent;
+  text-indent: -9999px;
+  display: block;
+}
+
+header .shop_util {
+  color: transparent;
+  display: flex;
+  align-self: stretch;
+  gap: 18px;
+}
+
+header .shop_util li a {
+  width: 28px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  font-size: 0;
+  text-indent: -9999px;
+  color: transparent;
+}
+
+header .shop_util .search a {
+  background-image: url("../../images/header_menu1.png");
+}
+
+header .shop_util .mypage a {
+  background-image: url("../../images/header_menu2.png");
+}
+
+header .shop_util .cart a {
+  background-image: url("../../images/header_menu3.png");
+}
+
+header .shop_util .card a {
+  background-image: url("../../images/header_menu4.png");
+}
+
+header .header_nav {
+  min-height: 360px;
+  min-height: 584px;
+  max-height: 100vh;
+  max-height: calc(100vh - 94px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid var(--br-color2);
+  position: absolute;
+  top: 77px;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  /* display: none; */
+}
+
+header .header_nav .nav_cont {
+  width: 100%;
+  width: 1320px;
+  max-height: 100%;
+  padding: 0 20px 32px;
+  margin: 0 auto;
+  position: relative;
+  /* overflow-y: auto;
+    display: flex;
+    flex-direction: row; */
+}
+
+header .header_nav ul {
+  display: flex;
+}
+
+header .header_nav .gnb {
+  padding: 34px 0;
+  position: relative;
+  flex-direction: column;
+}
+
+header .header_nav .gnb::before {
+  content: '';
+  width: 1px;
+  height: 276px;
+  background: linear-gradient(to bottom, #fff,#eee,#fff);
+  position: absolute;
+  top: 0;
+  left: 90px;
+  z-index: 1;
+  display: block;
+}
+
+header .header_nav .gnb>li {
+  padding: 16px 0;
+  line-height: 1;
+  display: flex;
+}
+
+header .header_nav .gnb h2 {
+  width: 90px;
+  margin-right: 50px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+header .header_nav .gnb ul {
+  gap: 24px;
+}
+
+header .header_nav .gnb>li li {
+  display: inline-block;
+}
+
+header .header_nav .banner {
+  width: 100%;
+  gap: 40px;
+}
+
+header .header_nav .banner li {
+  line-height: 160px;
+  text-align: center;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  flex: 1;
+}
+
+header .header_nav .customer {
+  background-color: var(--bg-color2);
+}
+
+header .header_nav .menu_util {
+  width: 1320px;
+  padding: 20px;
+  margin: 0 auto;
+  gap:32px;
+}
+
+header .header_nav .menu_util li a {
+  font-size: 15px;
+  color: var(--bk-color2);
+}
