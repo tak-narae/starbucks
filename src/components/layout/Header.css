@@ -21,7 +21,8 @@ header .btn_hamburger {
   /* 선으로 수정 > 트랜지션 */
   width: 24px;
   height: 24px;
-  background: transparent url("../../images/header_hamburger.png") no-repeat center/cover;
+  background: transparent url("../../images/header_hamburger.png") no-repeat
+    center/cover;
   font-size: 0;
   color: transparent;
   text-indent: -9999px;
@@ -38,7 +39,8 @@ header .starbucks_logo a,
 footer .starbucks_logo a {
   width: 228px;
   height: 50px;
-  background: transparent url("../../images/logo_header.png") no-repeat center/contain;
+  background: transparent url("../../images/logo_header.png") no-repeat
+    center/contain;
   font-size: 0;
   color: transparent;
   text-indent: -9999px;
@@ -120,10 +122,10 @@ header .header_nav .gnb {
 }
 
 header .header_nav .gnb::before {
-  content: '';
+  content: "";
   width: 1px;
   height: 276px;
-  background: linear-gradient(to bottom, #fff,#eee,#fff);
+  background: linear-gradient(to bottom, #fff, #eee, #fff);
   position: absolute;
   top: 0;
   left: 90px;
@@ -131,7 +133,7 @@ header .header_nav .gnb::before {
   display: block;
 }
 
-header .header_nav .gnb>li {
+header .header_nav .gnb > li {
   padding: 16px 0;
   line-height: 1;
   display: flex;
@@ -146,11 +148,17 @@ header .header_nav .gnb h2 {
 }
 
 header .header_nav .gnb ul {
+  font-size: 16px;
+  color: var(--bk-color2);
   gap: 24px;
 }
 
-header .header_nav .gnb>li li {
+header .header_nav .gnb > li li {
   display: inline-block;
+}
+
+header .header_nav .gnb > li li:hover {
+  color: var(--main-color1);
 }
 
 header .header_nav .banner {
@@ -166,18 +174,34 @@ header .header_nav .banner li {
   flex: 1;
 }
 
+header .header_nav .banner li a {
+  display: block;
+}
+
 header .header_nav .customer {
   background-color: var(--bg-color2);
 }
 
 header .header_nav .menu_util {
   width: 1320px;
-  padding: 20px;
+  padding: 16px 20px 18px;
   margin: 0 auto;
-  gap:32px;
+  gap: 32px;
 }
 
 header .header_nav .menu_util li a {
   font-size: 15px;
   color: var(--bk-color2);
+  display:block;
 }
+
+header .header_nav .menu_util img {
+  height:18px;
+  margin-right:6px;
+}
+
+header .header_nav .menu_util * {
+  vertical-align:middle;
+}
+
+

@@ -4,6 +4,7 @@ import './Header.css';
 
 import { Link } from 'react-router-dom';
 
+
 const Header = () => {
     return (
         <header>
@@ -79,17 +80,17 @@ const Header = () => {
                         </ul>
                     </nav>
                     <ul className="banner">
-                    <li>img1</li>
-                    <li>img2</li>
-                    <li>img3</li>
+                    <li><Link to="/">img1</Link></li>
+                    <li><Link to="/">img2</Link></li>
+                    <li><Link to="/">img3</Link></li>
                     </ul>
                 </div>
                 <div className="customer">
                     <ul className="menu_util">
-                        <li><Link to="/"><img src="./images/header_util1.png" alt="이벤트"/>이벤트</Link></li>
-                        <li><Link to="/"><img src="./images/header_util2.png" alt="공지사항"/>공지사항</Link></li>
-                        <li><Link to="/"><img src="./images/header_util3.png" alt="매장안내"/>매장안내</Link></li>
-                        <li><Link to="/"><img src="./images/header_util4.png" alt="고객센터"/>고객센터</Link></li>
+                        <li><Link to="/"><img src={require('../../images/header_util1.png')} alt="이벤트"/><span>이벤트</span></Link></li>
+                        <li><Link to="/"><img src={require('../../images/header_util2.png')} alt="공지사항"/><span>공지사항</span></Link></li>
+                        <li><Link to="/"><img src={require('../../images/header_util3.png')} alt="매장안내"/><span>매장안내</span></Link></li>
+                        <li><Link to="/"><img src={require('../../images/header_util4.png')} alt="고객센터"/><span>고객센터</span></Link></li>
                     </ul>
                 </div>
             </div>
