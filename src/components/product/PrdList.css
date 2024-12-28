@@ -13,7 +13,33 @@
   padding-bottom: 40px;
 }
 
-.prd_list>li>a {
-  border: 1px solid var(--bk-color3);
+.item .thumbnail {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.item .thumbnail a {
+  border-radius: 10px;
   display: block;
+}
+
+.item .thumbnail a img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.item .desc {
+  font-size: 15px;
+}
+
+.item .desc .review {
+  padding: 3px 0;
+  font-size: 13px;
+}
+
+.item .desc .price {
+  font-weight: bold;
+  color: var(--main-color1);
 }

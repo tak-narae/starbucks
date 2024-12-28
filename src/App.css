@@ -223,7 +223,7 @@ footer .menu_corp a::after {
 }
 
 footer .menu_corp a:first-child {
-  border-left:1px solid var(--br-color1);
+  border-left: 1px solid var(--br-color1);
 }
 
 footer .fnb {
@@ -315,7 +315,7 @@ footer .link button {
   color: var(--bk-color1);
 }
 
-footer .link > div:last-child button {
+footer .link>div:last-child button {
   margin-right: 0;
   margin-left: 20px;
 }
