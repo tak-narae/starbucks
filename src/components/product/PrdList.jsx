@@ -41,7 +41,12 @@ const PrdList = ({ selectedCate, selectedDepth, currentData, pathName }) => {
           filteredProducts.map((product) => (
             <li key={`product-${product.id}`}>
               <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`}>
-                <img src={product.img} alt={product.name} />
+                {/* <img src={require(`${product.img}`)} alt={product.name} /> */}
+                {/* <img src={getImagePath(product.img)} alt={product.name} /> */}
+                <img
+                  src={`${process.env.PUBLIC_URL}/${product.img}`}
+                  alt={product.name}
+                />
                 <span>{product.name}</span>
               </Link>
             </li>

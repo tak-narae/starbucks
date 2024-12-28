@@ -21,7 +21,7 @@ const Header = () => {
                     </ul>
                 </div>
             </div>
-            <div className="header_nav">
+            {/* <div className="header_nav">
                 <div className="nav_cont">
                     <nav>
                         <ul className="gnb">
@@ -79,20 +79,20 @@ const Header = () => {
                         </ul>
                     </nav>
                     <ul className="banner">
-                    <li>img1</li>
-                    <li>img2</li>
-                    <li>img3</li>
+                        <li>img1</li>
+                        <li>img2</li>
+                        <li>img3</li>
                     </ul>
                 </div>
                 <div className="customer">
                     <ul className="menu_util">
-                        <li><Link to="/"><img src="./images/header_util1.png" alt="이벤트"/>이벤트</Link></li>
-                        <li><Link to="/"><img src="./images/header_util2.png" alt="공지사항"/>공지사항</Link></li>
-                        <li><Link to="/"><img src="./images/header_util3.png" alt="매장안내"/>매장안내</Link></li>
-                        <li><Link to="/"><img src="./images/header_util4.png" alt="고객센터"/>고객센터</Link></li>
+                        <li><Link to="/"><img src="./images/header_util1.png" alt="이벤트" />이벤트</Link></li>
+                        <li><Link to="/"><img src="./images/header_util2.png" alt="공지사항" />공지사항</Link></li>
+                        <li><Link to="/"><img src="./images/header_util3.png" alt="매장안내" />매장안내</Link></li>
+                        <li><Link to="/"><img src="./images/header_util4.png" alt="고객센터" />고객센터</Link></li>
                     </ul>
                 </div>
-            </div>
+            </div> */}
 
         </header>
     );
