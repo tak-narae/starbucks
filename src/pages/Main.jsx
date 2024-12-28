@@ -1,12 +1,27 @@
-import React from 'react';
-import "./Main.css";
+import React, { useContext, useState, useEffect } from 'react';
+import { DataContext } from "App";
+import useQueryParams from 'hooks/useQueryParams';
 
+import "./Main.css";
 
 import PrdList from 'components/product/PrdList';
 import "components/product/PrdList.css";
 
 
 const Main = () => {
+  const { product } = useContext(DataContext);
+  const { selectedCate, selectedDepth, pathName } = useQueryParams();
+
+  const [prdSeason, setPrdSeason] = useState([]); // 홀리데이 상품
+
+  useEffect(() => {
+    const seasonAll = product.flatMap((el) => {
+      const seasonCate = el.products.filter((prd) => prd.name.includes("홀리데이"));
+      return seasonCate;
+    });
+    setPrdSeason(seasonAll); // "홀리데이" 제품만 추출
+  }, [product]);
+
   return (
     <>
       <main id="main">
@@ -24,7 +39,13 @@ const Main = () => {
               <span className="sub">Season</span>
               <h2 className="tit-em">홀리데이 상품</h2>
             </div>
-            <PrdList/>
+            <PrdList
+              selectedCate={selectedCate}
+              selectedDepth={selectedDepth}
+              currentData={product} // 현재 데이터 전달
+              pathName={pathName}
+              prdSeason={prdSeason} // 시즌 상품 (홀리데이 제품) 전달
+            />
           </div>
         </section>
         <section className="main__res_mz">
