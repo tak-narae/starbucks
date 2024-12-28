@@ -72,26 +72,26 @@ const Menu = () => {
               );
             })}
           </ul>
-          {title === "커피" && (
-            <div className="menu_category depth">
-              <ul className="cate_list layout_fix">
-                <li className={!selectedDepth ? "active" : ""}>
-                  <Link to={`/menu/coffee?cate=전체`}>전체</Link>
-                </li>
-                {labels.map((label, idx) => {
-                  const isActive = selectedDepth === label; // 선택된 depth 확인
-                  return (
-                    <li key={idx} className={isActive ? "active" : ""}>
-                      <Link to={`/menu/${pathName}?cate=${selectedCate}&depth=${label}`}>
-                        {label}
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-          )}
         </div>
+        {title === "커피" && (
+          <div className="menu_category depth">
+            <ul className="cate_list layout_fix">
+              <li className={!selectedDepth ? "active" : ""}>
+                <Link to={`/menu/coffee?cate=전체`}>전체</Link>
+              </li>
+              {labels.map((label, idx) => {
+                const isActive = selectedDepth === label; // 선택된 depth 확인
+                return (
+                  <li key={idx} className={isActive ? "active" : ""}>
+                    <Link to={`/menu/${pathName}?cate=${selectedCate}&depth=${label}`}>
+                      {label}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )}
         <div className="layout_fix">
           <PrdList
             selectedCate={selectedCate}
