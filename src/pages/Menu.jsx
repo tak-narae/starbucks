@@ -1,17 +1,14 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
-import { Outlet, useLocation, Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { DataContext } from "App";
 import PrdList from "components/product/PrdList";
+import useQueryParams from 'hooks/useQueryParams';
 
 import "./Menu.css";
 
 const Menu = () => {
   const { coffee, beverage, product, food } = useContext(DataContext);
-  const location = useLocation();
-  const pathName = location.pathname.split("/").pop();
-  const queryParams = new URLSearchParams(location.search); // 쿼리 문자열 파싱
-  const selectedCate = queryParams.get("cate"); // 현재 선택된 cate 값
-  const selectedDepth = queryParams.get("depth"); // 현재 선택된 depth 값
+  const { selectedCate, selectedDepth, pathName } = useQueryParams();
 
   const titleMap = useMemo(
     () => ({
@@ -75,26 +72,26 @@ const Menu = () => {
               );
             })}
           </ul>
-          {title === "커피" && (
-            <div className="menu_category depth">
-              <ul className="cate_list layout_fix">
-                <li className={!selectedDepth ? "active" : ""}>
-                  <Link to={`/menu/coffee?cate=전체`}>전체</Link>
-                </li>
-                {labels.map((label, idx) => {
-                  const isActive = selectedDepth === label; // 선택된 depth 확인
-                  return (
-                    <li key={idx} className={isActive ? "active" : ""}>
-                      <Link to={`/menu/${pathName}?cate=${selectedCate}&depth=${label}`}>
-                        {label}
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-          )}
         </div>
+        {title === "커피" && (
+          <div className="menu_category depth">
+            <ul className="cate_list layout_fix">
+              <li className={!selectedDepth ? "active" : ""}>
+                <Link to={`/menu/coffee?cate=전체`}>전체</Link>
+              </li>
+              {labels.map((label, idx) => {
+                const isActive = selectedDepth === label; // 선택된 depth 확인
+                return (
+                  <li key={idx} className={isActive ? "active" : ""}>
+                    <Link to={`/menu/${pathName}?cate=${selectedCate}&depth=${label}`}>
+                      {label}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )}
         <div className="layout_fix">
           <PrdList
             selectedCate={selectedCate}

@@ -23,6 +23,6 @@
   font-weight: 500;
 }
 
-.menu_category>.depth .active {
+.depth .active {
   color: var(--bk-color1);
 }
