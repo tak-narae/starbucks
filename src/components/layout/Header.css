@@ -83,7 +83,7 @@ header .shop_util .card a {
 
 header .header_nav {
   min-height: 360px;
-  min-height: 584px;
+  min-height: 526px;
   max-height: 100vh;
   max-height: calc(100vh - 94px);
   overflow-x: hidden;

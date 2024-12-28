@@ -22,7 +22,7 @@ const Header = () => {
                     </ul>
                 </div>
             </div>
-            <div className="header_nav">
+            {/* <div className="header_nav">
                 <div className="nav_cont">
                     <nav>
                         <ul className="gnb">
@@ -93,7 +93,7 @@ const Header = () => {
                         <li><Link to="/"><img src={require('../../images/header_util4.png')} alt="고객센터"/><span>고객센터</span></Link></li>
                     </ul>
                 </div>
-            </div>
+            </div> */}
 
         </header>
     );

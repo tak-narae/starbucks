@@ -54,6 +54,8 @@ const Menu = () => {
 
   useEffect(() => {
     const newLabels = getLabels(currentData);
+    console.log(currentData);
+    console.log(categories);
     setLabels(newLabels);
   }, [currentData]);
 
