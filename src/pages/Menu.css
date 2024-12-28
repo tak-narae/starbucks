@@ -1,11 +1,17 @@
 .menu_category {
   width: 100%;
   height: 54px;
-  border: 1px solid var(--br-color1);
   margin-bottom: 60px;
+  border-top: 1px solid var(--br-color1);
+  border-bottom: 1px solid var(--br-color1);
 }
 
-.cate_list {
+.menu_category + .menu_category {
+  margin-top: -60px;
+  border-top: 0;
+}
+
+.menu_category .cate_list {
   height: 100%;
   display: flex;
   gap: 18px;
@@ -14,15 +20,15 @@
   color: var(--bk-color2);
 }
 
-.menu_category>.depth {
+.menu_category.depth {
   background-color: var(--bg-color2);
 }
 
-.active {
+.menu_category .active {
   color: var(--main-color1);
   font-weight: 500;
 }
 
-.menu_category>.depth .active {
+.menu_category.depth .active {
   color: var(--bk-color1);
 }

@@ -77,7 +77,8 @@ const Menu = () => {
               );
             })}
           </ul>
-          {title === "커피" && (
+        </div>
+        {title === "커피" && (
             <div className="menu_category depth">
               <ul className="cate_list layout_fix">
                 <li className={!selectedDepth ? "active" : ""}>
@@ -96,7 +97,6 @@ const Menu = () => {
               </ul>
             </div>
           )}
-        </div>
         <div className="layout_fix">
           
           <PrdList
