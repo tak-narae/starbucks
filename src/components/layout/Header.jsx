@@ -2,15 +2,46 @@ import React from 'react';
 import '../../App.css';
 import './Header.css';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from "react";
+
 
 const Header = () => {
+    const location = useLocation();
+    useEffect(()=>{
+        if (location.pathname !== '/'){
+            document.querySelectorAll("header .btn_hamburger i").forEach(i => {
+                i.style.transition = "none";
+                setTimeout(() => i.removeAttribute("style"), 0);
+            });
+            document.querySelector("header .btn_hamburger").classList.remove("active");
+            document.querySelector("header .header_nav").classList.remove("active");
+        };
+    },[location])
+    useEffect(()=>{
+        document.querySelector("header .btn_hamburger").addEventListener("click", (e)=>{
+            e.currentTarget.classList.toggle("active");
+            document.querySelector("header .header_nav").classList.toggle("active");
+        })
+        document.querySelectorAll(".header_nav .gnb ul").forEach(el => {
+            el.addEventListener("mouseenter", (item)=>{
+                item.target.closest('li').classList.add("active");
+            })
+            el.addEventListener("mouseleave", (item)=>{
+                item.target.closest('li').classList.remove("active");
+            })
+        })
+    },[])
+
+
     return (
         <header>
             <div className="header_shop">
                 <div className="layout_fix">
                     <div className="shop_logo">
-                        <Link to="/" className="btn_hamburger">메뉴</Link>
+                        <Link to="/" className="btn_hamburger">
+                            <i className="i1"></i><i className="i2"></i><i className="i3"></i>
+                        </Link>
                         <h1 className="starbucks_logo"><Link to="/">스타벅스 로고</Link></h1>
                     </div>
                     <ul className="shop_util">
@@ -21,17 +52,17 @@ const Header = () => {
                     </ul>
                 </div>
             </div>
-            {/* <div className="header_nav">
+            <div className="header_nav">
                 <div className="nav_cont">
                     <nav>
                         <ul className="gnb">
                             <li>
                                 <h2>커피</h2>
                                 <ul>
-                                    <li><Link to="/">원두</Link></li>
-                                    <li><Link to="/">비아</Link></li>
-                                    <li><Link to="/">오리가미</Link></li>
-                                    <li><Link to="/">앳홈 by 캡슐</Link></li>
+                                    <li><Link to="/menu/coffee?cate=0">원두</Link></li>
+                                    <li><Link to="/menu/coffee?cate=1">비아</Link></li>
+                                    <li><Link to="/menu/coffee?cate=2">오리가미</Link></li>
+                                    <li><Link to="/menu/coffee?cate=3">앳홈 by 캡슐</Link></li>
                                 </ul>
                             </li>
                             <li>
@@ -79,21 +110,20 @@ const Header = () => {
                         </ul>
                     </nav>
                     <ul className="banner">
-                        <li>img1</li>
-                        <li>img2</li>
-                        <li>img3</li>
+                    <li><Link to="/"><img src={require("../../images/header_banner1.png")} alt="이벤트 배너"/></Link></li>
+                    <li><Link to="/"><img src={require("../../images/header_banner2.png")} alt="이벤트 배너"/></Link></li>
+                    <li><Link to="/"><img src={require("../../images/header_banner3.png")} alt="이벤트 배너"/></Link></li>
                     </ul>
                 </div>
                 <div className="customer">
                     <ul className="menu_util">
-                        <li><Link to="/"><img src="./images/header_util1.png" alt="이벤트" />이벤트</Link></li>
-                        <li><Link to="/"><img src="./images/header_util2.png" alt="공지사항" />공지사항</Link></li>
-                        <li><Link to="/"><img src="./images/header_util3.png" alt="매장안내" />매장안내</Link></li>
-                        <li><Link to="/"><img src="./images/header_util4.png" alt="고객센터" />고객센터</Link></li>
+                        <li><Link to="/"><img src={require('../../images/header_util1.png')} alt="이벤트"/><span>이벤트</span></Link></li>
+                        <li><Link to="/"><img src={require('../../images/header_util2.png')} alt="공지사항"/><span>공지사항</span></Link></li>
+                        <li><Link to="/"><img src={require('../../images/header_util3.png')} alt="매장안내"/><span>매장안내</span></Link></li>
+                        <li><Link to="/"><img src={require('../../images/header_util4.png')} alt="고객센터"/><span>고객센터</span></Link></li>
                     </ul>
                 </div>
-            </div> */}
-
+            </div>
         </header>
     );
 };
