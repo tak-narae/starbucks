@@ -3,8 +3,17 @@ import { Link } from 'react-router-dom';
 import { DataContext } from "App";
 import useQueryParams from 'hooks/useQueryParams';
 
+// swiper
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+// css
 import "./Main.css";
 
+// components
 import PrdList from 'components/product/PrdList';
 import "components/product/PrdList.css";
 
@@ -33,7 +42,9 @@ const Main = () => {
           </div>
           <div className="split">STARBUCKS</div>
         </section>
-        <section className="main__banner"></section>
+        <section className="main__banner">
+          banner-img
+        </section>
         <section className="main__prd">
           <div className="layout_fix">
             <div className="heading">
@@ -47,6 +58,7 @@ const Main = () => {
               pathName={pathName}
               prdSeason={prdSeason} // 시즌 상품 (홀리데이 제품) 전달
             />
+            <Link to="/menu/product?cate=0">MORE</Link>
           </div>
         </section>
         <section className="main__res_mz">
@@ -84,7 +96,37 @@ const Main = () => {
               <li><Link to="/"><img src={require("../images/main_promo_banner2.png")}/></Link></li>
             </ul>
             <div className="notice">
-              notice-swiper
+              <b>공지</b>
+              <Swiper className="swiper_notice"
+                  modules={[Autoplay, Navigation, Pagination]}
+                  slidesPerView={1}
+                  touchRatio={0}
+                  direction={"vertical"}
+                  autoHeight={true}
+                  autoplay={{
+                    delay: 2000,
+                    disableOnInteraction: false,
+                  }}>
+                    <SwiperSlide>
+                      <Link to="/">
+                        <p className="tit">11111-스마트로 PG(전자결제대행사)를 통한 일부 자동 충전 서비스 종료 사전 안내를 통한 일부 자동 충전 서비스 종료 사전 안내를 통한 일부 자동</p>
+                        <span className="date">2024-11-21</span>
+                      </Link>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <Link to="/">
+                        <p className="tit">22222-스마트로 PG(전자결제대행사)를 통한 일부 자동 충전 서비스 종료 사전 안내</p>
+                        <span className="date">2024-11-18</span>
+                      </Link>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <Link to="/">
+                        <p className="tit">33333-스마트로 PG(전자결제대행사)를 통한 일부 자동 충전 서비스 종료 사전 안내</p>
+                        <span className="date">2024-11-14</span>
+                      </Link>
+                    </SwiperSlide>
+              </Swiper>
+              <Link to="/" className="btn_link">더보기 +</Link>
             </div>
           </div>
         </section>
