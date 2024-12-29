@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { DataContext } from "App";
 import useQueryParams from 'hooks/useQueryParams';
 
@@ -76,7 +77,17 @@ const Main = () => {
             </div>
           </div>
         </section>
-        <section className="main__promo"></section>
+        <section className="main__promo">
+          <div className="layout_fix">
+            <ul className="banner">
+              <li><Link to="/"><img src={require("../images/main_promo_banner1.png")}/></Link></li>
+              <li><Link to="/"><img src={require("../images/main_promo_banner2.png")}/></Link></li>
+            </ul>
+            <div className="notice">
+              notice-swiper
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );
