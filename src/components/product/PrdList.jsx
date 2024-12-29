@@ -26,17 +26,17 @@ const PrdList = ({ selectedCate, selectedDepth, currentData, pathName, prdSeason
           filteredProducts.map((product) => (
             <li key={product.id}>
               <div className="item">
-                <div className="thumbnail">
-                  <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`}>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/${product.img}`}
-                      alt={product.name}
-                    />
-                  </Link>
-                </div>
+                <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`} className="thumbnail">
+                  <div className="image">
+                      <img
+                        src={`${process.env.PUBLIC_URL}/${product.img}`}
+                        alt={product.name}
+                      />
+                  </div>
+                </Link>
                 <div className="desc">
                   <div className="name">{product.name}</div>
-                  <div className="review">4.9</div>
+                  {/* <div className="review">4.9</div> */}
                   <div className="price">39,000원</div>
                 </div>
               </div>
@@ -47,14 +47,14 @@ const PrdList = ({ selectedCate, selectedDepth, currentData, pathName, prdSeason
           prdSeason.map((el) => (
             <li key={el.key}>
               <div className="item">
-                <div className="thumbnail">
-                  <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${el.id}`}>
-                    <img src={`${process.env.PUBLIC_URL}/${el.img}`} alt={el.name} />
-                  </Link>
-                </div>
+                <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${el.id}`} className="thumbnail">
+                  <div className="image">
+                      <img src={`${process.env.PUBLIC_URL}/${el.img}`} alt={el.name} />
+                  </div>
+                </Link>
                 <div className="desc">
                   <div className="name">{el.name}</div>
-                  <div className="review">4.9</div>
+                  {/* <div className="review">4.9</div> */}
                   <div className="price">39,000원</div>
                 </div>
               </div>

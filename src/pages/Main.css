@@ -29,3 +29,18 @@
 .main__res_store {
   background-color: #f6f6f7;
 }
+
+.main__promo .banner{
+  display:flex;
+  gap:40px;
+}
+
+.main__promo .banner a {
+  border-radius:22px;
+  overflow:hidden;
+  display: block;
+}
+
+.main__promo .notice {
+  margin-top:40px;
+}
