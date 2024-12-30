@@ -7,6 +7,7 @@ import useQueryParams from 'hooks/useQueryParams';
 import "./Menu.css";
 
 const Menu = () => {
+  //=== URL + PrdList
   const { coffee, beverage, product, food } = useContext(DataContext);
   const { selectedCate, selectedDepth, pathName } = useQueryParams();
 
@@ -54,42 +55,61 @@ const Menu = () => {
     setLabels(newLabels);
   }, [currentData]);
 
+
+  //=== btn_search .active
+  const [search,setSearch] = useState();
+  useEffect(()=>{
+    document.querySelector(".menu_category .btn_search").addEventListener("click", (e)=>{
+      e.target.closest(".search").classList.toggle("active");
+      if(search !== "") e.preventDefault(); //action추가
+    })
+  },[search])
+
   return (
     <>
-      <div id="container">
+      <div id="container" className="prd__list">
         <div className="heading layout_fix">
           <span className="sub">{title}</span>
           <h2 className="tit-em">{title}</h2>
         </div>
         <div className="menu_category">
-          <ul className="cate_list layout_fix">
-            {categories.map((category, idx) => {
-              const isActive = selectedCate === String(idx); // 선택된 cate 확인
-              return (
-                <li key={idx} className={isActive ? "active" : ""}>
-                  <Link to={`/menu/${pathName}?cate=${idx}`}>{category}</Link>
-                </li>
-              );
-            })}
-          </ul>
+          <div className="layout_fix">
+            <ul className="cate_list">
+              {categories.map((category, idx) => {
+                const isActive = selectedCate === String(idx); // 선택된 cate 확인
+                return (
+                  <li key={idx} className={isActive ? "active" : ""}>
+                    <Link to={`/menu/${pathName}?cate=${idx}`}>{category}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="search">
+              <input onChange={(e)=>{ setSearch(e.target.value); }}
+              type="text" placeholder="검색어 입력"/>
+              <button className="btn_search">Search</button>
+            </div>
+          </div>
         </div>
         {title === "커피" && (
           <div className="menu_category depth">
-            <ul className="cate_list layout_fix">
-              <li className={!selectedDepth ? "active" : ""}>
-                <Link to={`/menu/coffee?cate=전체`}>전체</Link>
-              </li>
-              {labels.map((label, idx) => {
-                const isActive = selectedDepth === label; // 선택된 depth 확인
-                return (
-                  <li key={idx} className={isActive ? "active" : ""}>
-                    <Link to={`/menu/${pathName}?cate=${selectedCate}&depth=${label}`}>
-                      {label}
-                    </Link>
+            <div className="layout_fix">
+              <ul className="cate_list">
+                  <li className={!selectedDepth ? "active" : ""}>
+                    <Link to={`/menu/coffee?cate=전체`}>전체</Link>
                   </li>
-                )
-              })}
-            </ul>
+                  {labels.map((label, idx) => {
+                    const isActive = selectedDepth === label; // 선택된 depth 확인
+                    return (
+                      <li key={idx} className={isActive ? "active" : ""}>
+                        <Link to={`/menu/${pathName}?cate=${selectedCate}&depth=${label}`}>
+                          {label}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+            </div>
           </div>
         )}
         <div className="layout_fix">

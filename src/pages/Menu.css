@@ -1,6 +1,5 @@
 .menu_category {
   width: 100%;
-  height: 54px;
   margin-bottom: 60px;
   border-top: 1px solid var(--br-color1);
   border-bottom: 1px solid var(--br-color1);
@@ -11,13 +10,17 @@
   border-top: 0;
 }
 
+.menu_category .layout_fix {
+  position: relative;
+}
+
 .menu_category .cate_list {
-  height: 100%;
-  display: flex;
-  gap: 18px;
-  align-items: center;
+  height: 60px;
   font-size: 16px;
   color: var(--bk-color2);
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 .menu_category.depth {
@@ -31,4 +34,52 @@
 
 .menu_category.depth .active {
   color: var(--bk-color1);
+}
+
+.menu_category .search {
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  border: 1px solid var(--br-color1);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: end;
+  transition: .35s ease;
+}
+
+.menu_category .search.active {
+  width: 210px;
+}
+
+.menu_category .search input {
+  height: 38px;
+  padding: 0;
+  background-color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  border: 0;
+  visibility: hidden;
+  flex: 0;
+  transition: flex .35s ease;
+}
+
+.menu_category .search.active input {
+  padding: 0 4px 2px 16px;
+  opacity: 1;
+  visibility: visible;
+  flex: 1;
+}
+
+.menu_category .search .btn_search {
+  width: 40px;
+  min-width: 40px;
+  margin-left: auto;
+  font-size: 0;
+  background: #fff url("../images/header_menu1.png") no-repeat 14px 10px / auto
+    16px;
 }
