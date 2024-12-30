@@ -12,10 +12,14 @@
   gap:10px;
 }
 
+.heading .path .home {
+  
+}
+
 .heading [class^="tit"] {
   line-height: 1;
   font-size: 34px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 [class^="main__"]:not([class*="visual"]) .heading {
@@ -59,6 +63,22 @@
 
 .main__visual .split>.line {
   text-align: center !important;
+}
+
+.main__prd .btn_link {
+  width:40px;
+  line-height:40px;
+  margin:20px auto 0;
+  background:transparent url("../images/btn_more.png")no-repeat center/contain;
+  font-size:0;
+  border-radius:50px;
+  overflow:hidden;
+  display: block;
+}
+
+.main__prd .btn_link:hover {
+  background-image:url("../images/btn_more_active.png");
+  transition:.35s ease;
 }
 
 .main__res_mz {
