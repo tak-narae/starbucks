@@ -46,7 +46,7 @@ const Main = () => {
               swiper-visual
             </div>
           </div>
-          <div class="split">STARBUCKS</div>
+          <div className="split">STARBUCKS</div>
         </section>
         <section className="main__banner">
           banner-img

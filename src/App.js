@@ -6,7 +6,7 @@ import './App.css';
 
 import Header from 'components/layout/Header';
 import Main from 'pages/Main';
-import Menu from 'pages/Menu';
+import Menu from 'pages/Menu/Menu';
 import Coffee from 'pages/Coffee/Coffee';
 import Product from 'pages/Product/Product';
 import Beverage from 'pages/Beverage/Beverage';
