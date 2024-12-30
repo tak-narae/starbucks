@@ -64,7 +64,7 @@ const Main = () => {
               pathName={pathName}
               prdSeason={prdSeason} // 시즌 상품 (홀리데이 제품) 전달
             />
-            <Link to="/menu/product?cate=0">MORE</Link>
+            <Link to="/menu/product?cate=0" className="btn_link">MORE</Link>
           </div>
         </section>
         <section className="main__res_mz">

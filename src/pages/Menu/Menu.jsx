@@ -7,15 +7,14 @@ import useQueryParams from 'hooks/useQueryParams';
 import "./Menu.css";
 
 const Menu = () => {
-  //=== URL + PrdList
   const { coffee, beverage, product, food } = useContext(DataContext);
-  const { selectedCate, selectedDepth, pathName } = useQueryParams();
+  const { selectedCate, selectedDepth, pathName } = useQueryParams(); //소분류(selectedDepth)
 
   const titleMap = useMemo(
     () => ({
       coffee: "커피",
       beverage: "음료",
-      product: "제품",
+      product: "상품",
       food: "푸드",
     }),
     []
@@ -31,7 +30,7 @@ const Menu = () => {
     [coffee, beverage, product, food]
   );
 
-  const title = titleMap[pathName];
+  const title = titleMap[pathName]; //대분류
   const currentData = useMemo(() => dataMap[pathName] || [], [dataMap, pathName]);
   // const currentData = dataMap[pathName] || {};
   const categories = useMemo(() => currentData.map((item) => item.category || ""), [currentData]);
@@ -49,11 +48,22 @@ const Menu = () => {
     });
     return newLabels;
   };
-
+  
   useEffect(() => {
     const newLabels = getLabels(currentData);
     setLabels(newLabels);
   }, [currentData]);
+
+
+  //중분류
+  // cate번호확인(new URLSearchParams(location.search).get('cate');)
+  const [cateEm,setCateEm] = useState();
+  useEffect(()=>{
+    {categories.map((el,idx)=>{
+      if(selectedCate == String(idx)) setCateEm(el);
+    })}
+    // console.log(title,cateEm,selectedDepth);
+  })
 
 
   //=== btn_search .active
@@ -70,8 +80,12 @@ const Menu = () => {
     <>
       <div id="container" className="prd__list">
         <div className="heading layout_fix">
-          <span className="sub">{title}</span>
-          <h2 className="tit-em">{title}</h2>
+          <ul className="path">
+            <li className="home"><Link to="/">홈</Link></li>
+            <li><Link to="/">{title}</Link></li>
+            <li><Link to="/">{cateEm}</Link></li>
+          </ul>
+          <h2 className="tit">{title}</h2>
         </div>
         <div className="menu_category">
           <div className="layout_fix">
