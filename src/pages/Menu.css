@@ -54,6 +54,7 @@
 
 .menu_category .search.active {
   width: 210px;
+  border-color:var(--bk-color3);
 }
 
 .menu_category .search input {

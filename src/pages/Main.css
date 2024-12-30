@@ -18,6 +18,31 @@
   margin-top: 30px;
 }
 
+.main__visual {
+  height: 100vh;
+  min-height:820px;
+  position: relative;
+}
+
+.main__visual .split {
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 120px;
+  font-size: 170px;
+  font-weight: 900;
+  color: #eee;
+  position: absolute;
+  bottom: calc(0vh + 160px);
+  z-index: -1;
+  letter-spacing: 14px;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.main__visual .split > .line {
+  text-align: center !important;
+}
+
 .main__res_mz {
   background-color: #deddd9;
 }

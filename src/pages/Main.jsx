@@ -10,10 +10,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-// css
+// css/js
 import "./Main.css";
 
 // components
+import SplitEffect from './MainSplit';
 import PrdList from 'components/product/PrdList';
 import "components/product/PrdList.css";
 
@@ -32,15 +33,20 @@ const Main = () => {
     setPrdSeason(seasonAll); // "홀리데이" 제품만 추출
   }, [product]);
 
+  useEffect(()=>{
+    SplitEffect();
+  },[])
+
   return (
     <>
       <main id="main">
         <section className="main__visual">
           <div className="layout_fix">
-            <div className="swiper-visual">SWIPER</div>
-
+            <div className="swiper-visual">
+              swiper-visual
+            </div>
           </div>
-          <div className="split">STARBUCKS</div>
+          <div class="split">STARBUCKS</div>
         </section>
         <section className="main__banner">
           banner-img
