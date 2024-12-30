@@ -70,8 +70,11 @@ const Menu = () => {
     <>
       <div id="container" className="prd__list">
         <div className="heading layout_fix">
-          <span className="sub">{title}</span>
-          <h2 className="tit-em">{title}</h2>
+          <ul className="path">
+            <li><Link to="/">홈</Link></li>
+            <li><Link to="/">text</Link></li>
+          </ul>
+          <h2 className="tit">{title}</h2>
         </div>
         <div className="menu_category">
           <div className="layout_fix">
