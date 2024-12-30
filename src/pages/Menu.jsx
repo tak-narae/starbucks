@@ -57,13 +57,14 @@ const Menu = () => {
 
 
   //=== btn_search .active
-  const [search,setSearch] = useState();
-  useEffect(()=>{
-    document.querySelector(".menu_category .btn_search").addEventListener("click", (e)=>{
+  const [search,setSearch] = useState("");
+  useEffect(() => {
+    document.querySelector(".menu_category .btn_search").addEventListener("click", (e) => {
       e.target.closest(".search").classList.toggle("active");
-      if(search !== "") e.preventDefault(); //action추가
-    })
-  },[search])
+      // if (search !== null && e.target.closest(".search").classList.contains("active")) { }
+      document.querySelector(".menu_category input").focus();
+    });
+  }, [search]);
 
   return (
     <>
@@ -85,7 +86,7 @@ const Menu = () => {
               })}
             </ul>
             <div className="search">
-              <input onChange={(e)=>{ setSearch(e.target.value); }}
+              <input value={search} onChange={(e)=>{ setSearch(e.target.value); }}
               type="text" placeholder="검색어 입력"/>
               <button className="btn_search">Search</button>
             </div>
