@@ -16,6 +16,7 @@ import Notice from 'pages/Notice/Notice';
 import Store from 'pages/Store/Store';
 import Footer from 'components/layout/Footer';
 import Guide from 'pages/guide/Guide';
+import UtilProvider from 'hooks/UtilContext';
 
 const DataContext = createContext();
 
@@ -40,7 +41,7 @@ function App() {
       setProduct(response.data.product);
       setFood(response.data.food);
       setNotice(response.data.notice);
-      console.log(response.data.notice);
+      // console.log(response.data.notice);
     } catch (err) {
       console.error("Error:", err);
     }
@@ -53,19 +54,21 @@ function App() {
     <>
       <Header />
       <DataContext.Provider value={{ loading, coffee, setCoffee, beverage, setBeverage, product, setProduct, food, setFood, notice, setNotice }}>
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/menu/" element={<Menu />}>
-            <Route path="coffee" element={<Coffee />}></Route>
-            <Route path="product" element={<Product />}></Route>
-            <Route path="beverage" element={<Beverage />}></Route>
-            <Route path="food" element={<Food />}></Route>
-          </Route>
-          <Route path="/event" element={<Event />}></Route>
-          <Route path="/notice" element={<Notice />}></Route>
-          <Route path="/store" element={<Store />}></Route>
-          <Route path="/guide" element={<Guide />}></Route>
-        </Routes>
+        <UtilProvider>
+          <Routes>
+            <Route path="/" element={<Main />}></Route>
+            <Route path="/menu/" element={<Menu />}>
+              <Route path="coffee" element={<Coffee />}></Route>
+              <Route path="product" element={<Product />}></Route>
+              <Route path="beverage" element={<Beverage />}></Route>
+              <Route path="food" element={<Food />}></Route>
+            </Route>
+            <Route path="/event" element={<Event />}></Route>
+            <Route path="/notice" element={<Notice />}></Route>
+            <Route path="/store" element={<Store />}></Route>
+            <Route path="/guide" element={<Guide />}></Route>
+          </Routes>
+        </UtilProvider>
         <Footer />
       </DataContext.Provider >
     </>
