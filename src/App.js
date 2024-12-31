@@ -26,6 +26,7 @@ function App() {
   const [beverage, setBeverage] = useState([]);
   const [product, setProduct] = useState([]);
   const [food, setFood] = useState([]);
+  const [notice, setNotice] = useState([]);
 
   const getdata = async () => {
     try {
@@ -38,6 +39,8 @@ function App() {
       // console.log(response.data.beverage);
       setProduct(response.data.product);
       setFood(response.data.food);
+      setNotice(response.data.notice);
+      console.log(response.data.notice);
     } catch (err) {
       console.error("Error:", err);
     }
@@ -49,7 +52,7 @@ function App() {
   return (
     <>
       <Header />
-      <DataContext.Provider value={{ loading, coffee, setCoffee, beverage, setBeverage, product, setProduct, food, setFood }}>
+      <DataContext.Provider value={{ loading, coffee, setCoffee, beverage, setBeverage, product, setProduct, food, setFood, notice, setNotice }}>
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/menu/" element={<Menu />}>
