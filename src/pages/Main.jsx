@@ -11,7 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 // css/js
-import "./Main.css";
+import "./Main.scss";
 
 // components
 import SplitEffect from './MainSplit';

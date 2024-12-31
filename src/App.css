@@ -406,7 +406,26 @@ footer .link b {
 }
 
 /* ===== .heading */
+.heading {
+  margin-bottom: 60px;
+}
+
+.heading .path {
+  margin-bottom:16px;
+  font-size:13px;
+  color:var(--bk-color3);
+  display:flex;
+  gap:10px;
+}
+
+.heading .path .home {
+  
+}
+
 .heading [class^="tit"] {
+  line-height: 1;
+  font-size: 34px;
+  font-weight: 400;
   color: var(--bk-color1);
 }
 
