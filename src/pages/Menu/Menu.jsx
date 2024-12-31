@@ -50,6 +50,7 @@ const Menu = () => {
   };
   
   useEffect(() => {
+    window.scrollTo({ top:0 }); //메인진입
     const newLabels = getLabels(currentData);
     setLabels(newLabels);
   }, [currentData]);
@@ -68,13 +69,13 @@ const Menu = () => {
 
   //=== btn_search .active
   const [search,setSearch] = useState("");
-  useEffect(() => {
-    document.querySelector(".menu_category .btn_search").addEventListener("click", (e) => {
-      e.target.closest(".search").classList.toggle("active");
-      // if (search !== null && e.target.closest(".search").classList.contains("active")) { }
-      document.querySelector(".menu_category input").focus();
-    });
-  }, [search]);
+  const searchAction = (e)=>{
+    if ((search !== "") && (e.target.closest(".search.active"))){
+      return false;
+    }
+    e.target.closest(".search").classList.toggle("active");
+    document.querySelector(".menu_category input").focus();
+  }
 
   return (
     <>
@@ -82,8 +83,7 @@ const Menu = () => {
         <div className="heading layout_fix">
           <ul className="path">
             <li className="home"><Link to="/">홈</Link></li>
-            <li><Link to="/">{title}</Link></li>
-            <li><Link to="/">{cateEm}</Link></li>
+            <li>{title}</li>
           </ul>
           <h2 className="tit">{title}</h2>
         </div>
@@ -102,7 +102,7 @@ const Menu = () => {
             <div className="search">
               <input value={search} onChange={(e)=>{ setSearch(e.target.value); }}
               type="text" placeholder="검색어 입력"/>
-              <button className="btn_search">Search</button>
+              <button className="btn_search" onClick={(e)=> searchAction(e) }>Search</button>
             </div>
           </div>
         </div>
@@ -134,6 +134,7 @@ const Menu = () => {
             selectedDepth={selectedDepth}
             currentData={currentData}
             pathName={pathName}
+            search={search} //검색필터
           />
         </div>
         <Outlet />
