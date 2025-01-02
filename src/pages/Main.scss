@@ -1,0 +1,128 @@
+@charset "utf-8";
+
+[class^="main__"]:not([class*="visual"]) .heading {
+  margin-bottom: 40px;
+
+  [class^="tit"] {
+    font-size: 30px;
+  }
+
+  [class^="sub"] {
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: block;
+  }
+
+  [class^="desc"] {
+    margin-top: 30px;
+  }
+}
+
+.main__visual {
+  height: 100vh;
+  min-height: 820px;
+  position: relative;
+
+  .split {
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 120px;
+    font-size: 170px;
+    font-weight: 900;
+    color: #eee;
+    position: absolute;
+    bottom: calc(0vh + 160px);
+    z-index: -1;
+    letter-spacing: 14px;
+    white-space: nowrap;
+    user-select: none;
+
+    > .line {
+      text-align: center !important;
+    }
+  }
+}
+
+.main__prd .btn_link {
+  width: 40px;
+  line-height: 40px;
+  margin: 20px auto 0;
+  background: transparent url("../images/btn_more.png") no-repeat (center / contain);
+  font-size: 0;
+  border-radius: 50px;
+  overflow: hidden;
+  display: block;
+
+  &:hover {
+    background-image: url("../images/btn_more_active.png");
+    transition: .35s ease;
+  }
+}
+
+.main__res_mz {
+  background-color: #deddd9;
+
+  .heading .sub {
+    margin-bottom: 30px;
+  }
+}
+
+.main__res_store {
+  background-color: #f6f6f7;
+}
+
+.main__promo {
+  .banner {
+    display: flex;
+    gap: 40px;
+
+    a {
+      border-radius: 22px;
+      overflow: hidden;
+      display: block;
+    }
+  }
+
+  .notice {
+    padding: 34px 136px 38px 104px;
+    margin-top: 40px;
+    background-color: var(--main-color1);
+    color: #fff;
+    position: relative;
+    border-radius: 10px;
+
+    .swiper-slide {
+      height: auto !important;
+
+      a {
+        line-height: 28px;
+        font-size: 16px;
+        font-weight: 300;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    b {
+      margin-top: -12px;
+      position: absolute;
+      top: 50%;
+      left: 40px;
+      font-weight: 500;
+    }
+
+    .tit {
+      max-width: 85%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn_link {
+      margin-top: -12px;
+      position: absolute;
+      top: 50%;
+      right: 40px;
+    }
+  }
+}

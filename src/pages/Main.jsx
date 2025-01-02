@@ -11,7 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 // css/js
-import "./Main.css";
+import "./Main.scss";
 
 // components
 import SplitEffect from './MainSplit';
@@ -64,7 +64,7 @@ const Main = () => {
               pathName={pathName}
               prdSeason={prdSeason} // 시즌 상품 (홀리데이 제품) 전달
             />
-            <Link to="/menu/product?cate=0">MORE</Link>
+            <Link to="/menu/product?cate=0" className="btn_link">MORE</Link>
           </div>
         </section>
         <section className="main__res_mz">

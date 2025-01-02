@@ -16,6 +16,7 @@ import Notice from 'pages/Notice/Notice';
 import Store from 'pages/Store/Store';
 import Footer from 'components/layout/Footer';
 import Guide from 'pages/guide/Guide';
+import UtilProvider from 'hooks/UtilContext';
 
 const DataContext = createContext();
 

@@ -6,11 +6,32 @@
   flex-wrap: wrap;
 }
 
-.prd_list > li {
+.prd_list>li {
   width: 25%;
   min-width: 25%;
   padding-left: 20px;
   padding-bottom: 40px;
+}
+
+.main__prd .prd_list>li:has(img[src*="[9300000005342]"]) {
+  order: -4;
+}
+
+.main__prd .prd_list>li:has(img[src*="[9300000005340]"], [src*="[9300000005341]"], [src*="[9300000005335]"]) {
+  order: -3;
+}
+
+.main__prd .prd_list>li:has(img[src*="[9300000005321]"], [src*="[9300000005329]"], [src*="[9300000005345]"]) {
+  order: -2;
+}
+
+.main__prd .prd_list>li:has(img[src*="[9300000005334]"]) {
+  order: -1;
+}
+
+.main__prd .prd_list>li:not(:has(img[src*="[9300000005342]"], [src*="[9300000005340]"], [src*="[9300000005341]"], [src*="[9300000005335]"], [src*="[9300000005321]"], [src*="[9300000005329]"], [src*="[9300000005345]"], [src*="[9300000005334]"])) {
+  display: none;
+  /*예쁜 상품 제외하고*/
 }
 
 .prd_list .thumbnail {
@@ -20,22 +41,34 @@
   display: block;
 }
 
+.main__prd .prd_list .thumbnail {
+  background-color: #f6f5f0;
+}
+
 .prd_list .thumbnail .image {
   border-radius: 10px;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .prd_list .thumbnail .image img {
   width: 100%;
   transform: scale(1);
-  transition:.25s ease;
+  transition: .25s ease;
   aspect-ratio: 1/1;
   object-fit: cover;
   display: block;
 }
 
-.prd_list .thumbnail .image:hover img{
+.main__prd .prd_list .thumbnail .image img {
+  transform: scale(.8);
+}
+
+.prd_list .thumbnail .image:hover img {
   transform: scale(1.03);
+}
+
+.main__prd .prd_list .thumbnail .image:hover img {
+  transform: scale(.85);
 }
 
 .prd_list .desc {
