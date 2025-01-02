@@ -65,6 +65,15 @@ const Event = () => {
     (_, i) => startPage + i
   );
 
+  const [search, setSearch] = useState("");
+  const searchAction = (e) => {
+    if (search !== "" && e.target.closest(".search.active")) {
+      return false;
+    }
+    e.target.closest(".event_search").classList.toggle("active");
+    document.querySelector(".tab input").focus();
+  };
+
   return (
     <div id="container" className="layout_fix guide">
       <div className="heading">
@@ -94,7 +103,23 @@ const Event = () => {
       </div>
 
       <div className="tab">
-        
+        <div className="event_tab">
+          <p className="event_ing active">진행중인 이벤트</p>
+          <p className="event_end">종료된 이벤트</p>
+        </div>
+        <div className="event_search">
+          <input
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            type="text"
+            placeholder="검색어 입력"
+          />
+          <button className="btn_search" onClick={(e) => searchAction(e)}>
+            Search
+          </button>
+        </div>
       </div>
 
       <ul className="event_list">

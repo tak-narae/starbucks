@@ -43,7 +43,7 @@ function App() {
       setProduct(response.data.product);
       setFood(response.data.food);
       setNotice(response.data.notice);
-      console.log(response.data.events);
+      // console.log(response.data.events);
       setEvents(response.data.events);
     } catch (err) {
       console.error("Error:", err);
