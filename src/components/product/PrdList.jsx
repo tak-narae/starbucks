@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
     prdSeason : 홀리데이정보(메인)
   === */ 
 
-const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, currentData, prdSeason, search} ) => {
+const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, currentData, prdSeason=[], search} ) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
@@ -31,7 +31,6 @@ const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, current
         product.name.toLowerCase().includes(search.toLowerCase()) // 대소문자 무시 검색
       );
     }
-
     setFilteredProducts(filtered);
 
   }, [selectedCate, selectedDepth, currentData, search]);
