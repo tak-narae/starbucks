@@ -1,0 +1,3 @@
+.prd_item { position:relative; display:flex; }
+.prd_item .thumb_cont { height:1800px; }
+.prd_item .info_cont { position:sticky; }

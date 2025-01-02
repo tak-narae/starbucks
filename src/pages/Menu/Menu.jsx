@@ -6,6 +6,15 @@ import useQueryParams from 'hooks/useQueryParams';
 
 import "./Menu.css";
 
+  /* ===
+    title : 한글대분류
+    pathName : 영문대분류
+    cateKo : 한글중분류
+    selectedCate : 중분류카테고리번호
+    selectedDepth : 한글소분류(커피)
+    currentData : 해당리스트정보
+  === */ 
+
 const Menu = () => {
   const { coffee, beverage, product, food } = useContext(DataContext);
   const { selectedCate, selectedDepth, pathName } = useQueryParams(); //소분류(selectedDepth)
@@ -49,6 +58,7 @@ const Menu = () => {
     return newLabels;
   };
   
+
   useEffect(() => {
     window.scrollTo({ top:0 }); //메인진입
     const newLabels = getLabels(currentData);
@@ -58,14 +68,13 @@ const Menu = () => {
 
   //중분류
   // cate번호확인(new URLSearchParams(location.search).get('cate');)
-  const [cateEm,setCateEm] = useState();
+  const [cateKo,setCateKo] = useState();
   useEffect(()=>{
     {categories.map((el,idx)=>{
-      if(selectedCate == String(idx)) setCateEm(el);
+      if(selectedCate == String(idx)) setCateKo(el);
     })}
-    // console.log(title,cateEm,selectedDepth);
+    // console.log(title,cateKo,selectedDepth);
   })
-
 
   //=== btn_search .active
   const [search,setSearch] = useState("");
@@ -110,34 +119,35 @@ const Menu = () => {
           <div className="menu_category depth">
             <div className="layout_fix">
               <ul className="cate_list">
-                  <li className={!selectedDepth ? "active" : ""}>
-                    <Link to={`/menu/coffee?cate=전체`}>전체</Link>
-                  </li>
-                  {labels.map((label, idx) => {
-                    const isActive = selectedDepth === label; // 선택된 depth 확인
-                    return (
-                      <li key={idx} className={isActive ? "active" : ""}>
-                        <Link to={`/menu/${pathName}?cate=${selectedCate}&depth=${label}`}>
-                          {label}
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
+                <li className={!selectedDepth ? "active" : ""}>
+                  <Link to={`/menu/coffee?cate=전체`}>전체</Link>
+                </li>
+                {labels.map((label, idx) => {
+                  const isActive = selectedDepth === label; // 선택된 depth 확인
+                  return (
+                    <li key={idx} className={isActive ? "active" : ""}>
+                      <Link to={`/menu/${pathName}?cate=${selectedCate}&depth=${label}`}>
+                        {label}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
           </div>
         )}
         <div className="layout_fix">
-          
           <PrdList
+            title={title}
+            cateKo={cateKo}
+            pathName={pathName}
             selectedCate={selectedCate}
             selectedDepth={selectedDepth}
             currentData={currentData}
-            pathName={pathName}
             search={search} //검색필터
           />
         </div>
-        <Outlet />
+        {/* <Outlet/> */}
       </div>
     </>
   );

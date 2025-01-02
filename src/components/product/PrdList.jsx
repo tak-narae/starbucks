@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const PrdList = ({ selectedCate, selectedDepth, currentData, pathName, prdSeason, search }) => {
+  /* ===
+    title : 한글대분류
+    pathName : 영문대분류
+    cateKo : 한글중분류
+    selectedCate : 중분류카테고리번호
+    selectedDepth : 한글소분류(커피)
+    currentData : 해당리스트정보
+    prdSeason : 홀리데이정보(메인)
+  === */ 
+
+const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, currentData, prdSeason, search} ) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
@@ -23,12 +33,12 @@ const PrdList = ({ selectedCate, selectedDepth, currentData, pathName, prdSeason
     }
 
     setFilteredProducts(filtered);
+
   }, [selectedCate, selectedDepth, currentData, search]);
 
   return (
     <>
       <ul className="prd_list">
-
 
         {/* selectedCate와 selectedDepth가 있을 때 필터링된 제품 목록 렌더링 */}
         {selectedCate || selectedDepth ? (
@@ -36,7 +46,14 @@ const PrdList = ({ selectedCate, selectedDepth, currentData, pathName, prdSeason
             filteredProducts.map((product) => (
               <li key={product.id}>
                 <div className="item">
-                  <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`} className="thumbnail">
+                  {/* <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`} className="thumbnail"> */}
+                  <Link className="thumbnail"
+                  to={{
+                    pathname : `/menu/detail/${pathName}`,
+                    search: `?cate=${selectedCate}&id=${product.id}`,
+                  }}
+                  state={{ title, cateKo, product }}
+                  >
                     <div className="image">
                         <img
                           src={`${process.env.PUBLIC_URL}/${product.img}`}

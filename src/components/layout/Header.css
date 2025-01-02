@@ -8,6 +8,29 @@ header {
   /*임시*/
 }
 
+header::before{
+  content:'';
+  background-color:rgba(0,0,0,0);
+  position: fixed;
+  top:0;
+  right:0;
+  bottom:-10vh;
+  left:0;
+  opacity:0;
+  z-index:-1;
+  visibility: hidden;
+  display: block;
+}
+
+header:has(.btn_hamburger.active)::before{
+  width:100vw;
+  height:100vh;
+  background-color:rgba(0,0,0,.5);
+  opacity:1;
+  visibility: visible;
+  transition:opacity .25s ease;
+}
+
 header .header_shop {
   padding: 13px 0;
   background-color: #fff;
@@ -142,7 +165,7 @@ header .header_nav.active {
   transform: translate(0, 0);
   opacity: 1;
   visibility: visible;
-  transition: 0.35s ease;
+  transition: transform 0.35s ease;
 }
 
 header .header_nav .nav_cont {
