@@ -6,7 +6,7 @@
   border-bottom: 1px solid var(--br-color1);
 }
 
-.menu_category + .menu_category {
+.menu_category+.menu_category {
   margin-top: -60px;
   border-top: 0;
 }
@@ -17,7 +17,8 @@
 
 .menu_category .cate_list {
   height: 60px;
-  font-size: 16px;
+  padding-bottom: 4px;
+  font-size: 15px;
   color: var(--bk-color2);
   display: flex;
   align-items: center;
@@ -54,8 +55,8 @@
 }
 
 .menu_category .search.active {
-  width: 210px;
-  border-color:var(--bk-color3);
+  width: 200px;
+  border-color: var(--bk-color3);
 }
 
 .menu_category .search input {
@@ -82,6 +83,5 @@
   min-width: 40px;
   margin-left: auto;
   font-size: 0;
-  background: #fff url("../../images/header_menu1.png") no-repeat 14px 10px / auto
-    16px;
+  background: #fff url("../../images/header_menu1.png") no-repeat 14px 10px / auto 16px;
 }

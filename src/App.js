@@ -7,6 +7,7 @@ import './App.css';
 import Header from 'components/layout/Header';
 import Main from 'pages/Main';
 import Menu from 'pages/Menu/Menu';
+import Detail from 'pages/Menu/Detail';
 import Coffee from 'pages/Coffee/Coffee';
 import Product from 'pages/Product/Product';
 import Beverage from 'pages/Beverage/Beverage';
@@ -64,13 +65,14 @@ function App() {
             <Route path="beverage" element={<Beverage />}></Route>
             <Route path="food" element={<Food />}></Route>
           </Route>
+          <Route path="/menu/detail/:category" element={<Detail />}></Route>
           <Route path="/event" element={<Event />}></Route>
           <Route path="/notice" element={<Notice />}></Route>
           <Route path="/store" element={<Store />}></Route>
           <Route path="/guide" element={<Guide />}></Route>
         </Routes>
         <Footer />
-      </DataContext.Provider >
+      </DataContext.Provider>
     </>
   );
 }
