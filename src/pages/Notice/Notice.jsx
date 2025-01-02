@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { DataContext } from "App";
 
