@@ -1,37 +1,94 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { DataContext } from "App";
 
 const Notice = () => {
   const { notice } = useContext(DataContext);
+  notice.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const [isActive, setIsActive] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("전체");
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
+
+  const itemsPerPage = 10; // 한 페이지당 표시할 항목 수
+  const totalPages = Math.ceil(
+    (selectedCategory === "전체"
+      ? notice.length
+      : notice.filter((n) => n.category === selectedCategory).length) /
+      itemsPerPage
+  );
+
+  const toggleActive = () => {
+    if (isActive) {
+      setIsClosing(true);
+      setTimeout(() => {
+        setIsActive(false);
+        setIsClosing(false);
+      }, 300);
+    } else {
+      setIsActive(true);
+    }
+  };
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category); // 선택된 카테고리 설정
+    setCurrentPage(1); //카테고리 변경 시 페이지 초기화
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsActive(false);
+      setIsClosing(false);
+    }, 300);
+  };
+
+  const filteredNotices =
+    selectedCategory === "전체"
+      ? notice
+      : notice.filter((n) => n.category === selectedCategory);
+
+  const paginatedNotices = filteredNotices.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // //pagination 표시 범위 계산
+  const maxVisiblePages = 5;
+  const currentBlock = Math.ceil(currentPage / maxVisiblePages);
+  const startPage = (currentBlock - 1) * maxVisiblePages + 1;
+  const endPage = Math.min(currentBlock * maxVisiblePages, totalPages);
+  const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+
 
   return (
     <div id="container" className="layout_fix guide">
       <div className="heading">
-        <h2 className="tit">공지사항</h2>
+        <h2 className="tit"><Link to="/notice">공지사항</Link></h2>
         <ul className="sort_list">
-          <li>
-            <Link onClick={(e) => e.preventDefault()} className="active">
-              전체
-            </Link>
-            <ul>
-              <li>
-                <Link onClick={(e) => e.preventDefault()}>전체</Link>
-              </li>
-              <li>
-                <Link onClick={(e) => e.preventDefault()}>공지사항</Link>
-              </li>
-              <li>
-                <Link onClick={(e) => e.preventDefault()}>문화소식</Link>
-              </li>
-              <li>
-                <Link onClick={(e) => e.preventDefault()}>사회공헌</Link>
-              </li>
+          <li className={`sort_item ${isActive ? "active" : ""}`}>
+            <label onClick={toggleActive}>카테고리</label>
+            <Link onClick={toggleActive}>{selectedCategory}</Link>
+            <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
+              {["전체", "공지사항", "문화소식", "사회공헌"].map((category) => (
+                <li key={category}>
+                  <Link
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryClick(category);
+                    }}
+                  >
+                    {category}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </li>
         </ul>
       </div>
-      <table class="tb_list">
+      <table className="tb_list">
         <colgroup>
           <col style={{ width: "100px" }} />
           <col style={{ width: "160px" }} />
@@ -49,21 +106,45 @@ const Notice = () => {
           </tr>
         </thead>
         <tbody>
-          {notice.map((notices, key) => (
-            <tr key={key}>
-              <td>{notices.key}</td>
-              <td>{notices.category}</td>
-              <td class="subject">
+          {paginatedNotices.map((notice, idx) => (
+            <tr key={idx}>
+              <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
+              <td>{notice.category}</td>
+              <td className="subject">
                 <Link onClick={(e) => e.preventDefault()}>
-                  {notices.subject}
+                  {notice.subject}
                 </Link>
               </td>
               <td>관리자</td>
-              <td>{notices.date}</td>
+              <td>{notice.date}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      <div className="pagination">
+        <button
+          className="prev"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          &laquo;
+        </button>
+        {pages.map((page) => (
+          <button
+            key={page}
+            className={`page ${currentPage === page ? "active" : ""}`}
+            onClick={() => handlePageChange(page)}
+          >
+            {page}
+          </button>
+        ))}
+        <button className="next"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          &raquo;
+        </button>
+      </div>
     </div>
   );
 };
