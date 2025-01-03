@@ -1,3 +1,4 @@
 .prd_item { position:relative; display:flex; }
-.prd_item .thumb_cont { height:1800px; }
-.prd_item .info_cont { position:sticky; }
+.prd_item .thumb_cont { width:660px; min-width:660px; }
+.prd_item .thumb_cont img { width:100%; }
+.prd_item .info_cont { position:sticky; top:157px; align-self:baseline; }
