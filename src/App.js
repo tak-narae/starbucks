@@ -13,11 +13,12 @@ import Product from 'pages/Product/Product';
 import Beverage from 'pages/Beverage/Beverage';
 import Food from 'pages/Food/Food';
 import Event from 'pages/Event/Event';
+import EventDetail from 'pages/Event/EventDetail';
 import Notice from 'pages/Notice/Notice';
+import NoticeDetail from 'pages/Notice/NoticeDetail';
 import Store from 'pages/Store/Store';
 import Footer from 'components/layout/Footer';
 import Guide from 'pages/guide/Guide';
-import UtilProvider from 'hooks/UtilContext';
 
 const DataContext = createContext();
 
@@ -43,7 +44,7 @@ function App() {
       setProduct(response.data.product);
       setFood(response.data.food);
       setNotice(response.data.notice);
-      console.log(response.data.events);
+      // console.log(response.data.events);
       setEvents(response.data.events);
     } catch (err) {
       console.error("Error:", err);
@@ -67,7 +68,9 @@ function App() {
           </Route>
           <Route path="/menu/detail/:category" element={<Detail />}></Route>
           <Route path="/event" element={<Event />}></Route>
+          <Route path="/event/:key" element={<EventDetail />}></Route>
           <Route path="/notice" element={<Notice />}></Route>
+          <Route path='/notice/:key' element={<NoticeDetail />}></Route>
           <Route path="/store" element={<Store />}></Route>
           <Route path="/guide" element={<Guide />}></Route>
         </Routes>

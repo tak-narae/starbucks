@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { DataContext } from "App";
 
 const Notice = () => {
@@ -60,34 +60,65 @@ const Notice = () => {
   const currentBlock = Math.ceil(currentPage / maxVisiblePages);
   const startPage = (currentBlock - 1) * maxVisiblePages + 1;
   const endPage = Math.min(currentBlock * maxVisiblePages, totalPages);
-  const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+  const pages = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, i) => startPage + i
+  );
 
+  const [search, setSearch] = useState("");
+  const searchAction = (e) => {
+    if (search !== "" && e.target.closest(".search.active")) {
+      return false;
+    }
+    e.target.closest(".notice_search").classList.toggle("active");
+    document.querySelector(".notice_search input").focus();
+  };
 
   return (
-    <div id="container" className="layout_fix guide">
+    <div id="container" className="layout_fix notice">
       <div className="heading">
-        <h2 className="tit"><Link to="/notice">공지사항</Link></h2>
-        <ul className="sort_list">
-          <li className={`sort_item ${isActive ? "active" : ""}`}>
-            <label onClick={toggleActive}>카테고리</label>
-            <Link onClick={toggleActive}>{selectedCategory}</Link>
-            <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
-              {["전체", "공지사항", "문화소식", "사회공헌"].map((category) => (
-                <li key={category}>
-                  <Link
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryClick(category);
-                    }}
-                  >
-                    {category}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </li>
-        </ul>
+        <div className="notice_tit">
+          <h2 className="tit">
+            <Link to="/notice">공지사항</Link>
+          </h2>
+          <ul className="sort_list">
+            <li className={`sort_item ${isActive ? "active" : ""}`}>
+              <label onClick={toggleActive}>카테고리</label>
+              <Link onClick={toggleActive}>{selectedCategory}</Link>
+              <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
+                {["전체", "공지사항", "문화소식", "사회공헌"].map(
+                  (category) => (
+                    <li key={category}>
+                      <Link
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleCategoryClick(category);
+                        }}
+                      >
+                        {category}
+                      </Link>
+                    </li>
+                  )
+                )}
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div className="notice_search">
+          <input
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            type="text"
+            placeholder="검색어 입력"
+          />
+          <button className="btn_search" onClick={(e) => searchAction(e)}>
+            Search
+          </button>
+        </div>
       </div>
+
       <table className="tb_list">
         <colgroup>
           <col style={{ width: "100px" }} />
@@ -111,7 +142,7 @@ const Notice = () => {
               <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
               <td>{notice.category}</td>
               <td className="subject">
-                <Link onClick={(e) => e.preventDefault()}>
+                <Link to={`/notice/${notice.key}`}>
                   {notice.subject}
                 </Link>
               </td>
@@ -138,13 +169,15 @@ const Notice = () => {
             {page}
           </button>
         ))}
-        <button className="next"
+        <button
+          className="next"
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
           &raquo;
         </button>
       </div>
+      <Outlet />
     </div>
   );
 };

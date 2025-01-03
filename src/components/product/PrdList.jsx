@@ -31,7 +31,6 @@ const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, current
         product.name.toLowerCase().includes(search.toLowerCase()) // 대소문자 무시 검색
       );
     }
-
     setFilteredProducts(filtered);
 
   }, [selectedCate, selectedDepth, currentData, search]);
