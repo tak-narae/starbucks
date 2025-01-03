@@ -10,6 +10,7 @@ const Detail = () => {
 
   const location = useLocation();
   const { title, cateKo, product } = location.state || {};
+  console.log(title, cateKo, product);
   if(!product){
     return <div id="container" className="prd__detail" style={{textAlign:"center"}}>상품 정보가 없습니다</div>;
   }
