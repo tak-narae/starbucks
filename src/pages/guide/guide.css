@@ -17,7 +17,7 @@
   display: inline-block;
 }
 
-.guide .heading h2.tit{
+.guide .heading h2.tit {
   line-height: 1;
   font-size: 30px;
   font-weight: 400;
@@ -40,8 +40,8 @@
   gap: 24px;
 }
 
-.guide .sort_list > li,
-.notice .sort_list > li {
+.guide .sort_list>li,
+.notice .sort_list>li {
   font-size: 16px;
   position: relative;
 }
@@ -54,15 +54,15 @@
   display: inline-block;
 }
 
-.guide .sort_list label + a,
-.notice .sort_list label + a {
+.guide .sort_list label+a,
+.notice .sort_list label+a {
   padding-right: 16px;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.guide .sort_list label + a::after,
-.notice .sort_list label + a::after {
+.guide .sort_list label+a::after,
+.notice .sort_list label+a::after {
   content: "";
   position: absolute;
   top: 10px;
@@ -71,9 +71,9 @@
   border-top: 4px solid var(--bk-color1);
 }
 
-.guide .sort_list label + a.active::after,
-.guide .sort_list li.active label + a::after,
-.notice .sort_list li.active label + a::after {
+.guide .sort_list label+a.active::after,
+.guide .sort_list li.active label+a::after,
+.notice .sort_list li.active label+a::after {
   top: 6px;
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
@@ -97,8 +97,9 @@
 @keyframes slideDown {
   from {
     max-height: 0;
-    opacity:1;
+    opacity: 1;
   }
+
   to {
     max-height: 144px;
     opacity: 1;
@@ -110,15 +111,16 @@
     max-height: 144px;
     opacity: 0;
   }
+
   to {
     max-height: 0;
     opacity: 0;
   }
 }
 
-.sort_list .active .dropdown{
- animation: slideDown 0.3s ease forwards;
- padding: 8px 16px 16px;
+.sort_list .active .dropdown {
+  animation: slideDown 0.3s ease forwards;
+  padding: 8px 16px 16px;
 }
 
 .sort_list .dropdown.closing {
@@ -153,6 +155,57 @@
 .notice .sort_list ul li a:hover {
   text-decoration: underline;
 }
+
+.notice_detail .heading {
+  margin-bottom: 40px;
+}
+
+.notice_detail .tit {
+  font-weight: 500;
+}
+
+.notice_tit .date {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--bk-color2);
+}
+
+.notice_cont {
+  padding: 40px 0;
+  color: var(--bk-color1);
+  font-size: 15px;
+  white-space: pre-line;
+  border-top: 1px solid var(--br-color1);
+  border-bottom: 1px solid var(--br-color1);
+}
+
+.post_nav {}
+
+.post_nav>div {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.post_nav button {
+  font-size: 0;
+  background: url(../../images/arrow_select.png);
+}
+
+.post_nav span {
+  width: 50px;
+  margin: 0 26px 0 44px;
+  color: var(--Starbucks-bk-color1, #222);
+  font-size: 15px;
+}
+
+.post_nav .prev_tit {
+  width: 100%;
+}
+
+.post {}
+
+.post button {}
 
 caption {
   font-size: 0;
@@ -256,7 +309,7 @@ table .underline {
   border: 0;
 }
 
-.tb_block tr + tr {
+.tb_block tr+tr {
   margin-top: 20px;
 }
 
@@ -353,11 +406,13 @@ table .underline {
   text-align: center;
   cursor: pointer;
 }
+
 .tab .event_tab .active {
   background-color: var(--main-color1);
   color: #fff;
   font-weight: 500;
 }
+
 .tab .event_search,
 .notice_search {
   width: 40px;
@@ -365,7 +420,7 @@ table .underline {
   text-align: center;
   border: 1px solid var(--br-color1);
   border-radius: 8px;
-  overflow: hidden;   
+  overflow: hidden;
   display: flex;
   justify-content: end;
   transition: .35s ease;
@@ -407,12 +462,12 @@ table .underline {
   background: #fff url("../../images/header_menu1.png") no-repeat 14px 10px / auto 16px;
 }
 
-.notice .heading{
+.notice .heading {
   display: flex;
   justify-content: space-between;
 }
 
-.notice .heading .notice_tit{
+.notice .heading .notice_tit {
   display: flex;
   align-items: center;
 }
@@ -424,7 +479,7 @@ table .underline {
 }
 
 
-.event_list > li {
+.event_list>li {
   width: 290px;
   min-width: 290px;
   height: 290px;
@@ -437,11 +492,11 @@ table .underline {
 }
 
 .event_list li:hover .hover,
-.event_list .li-ended .hover{
+.event_list .li-ended .hover {
   display: flex;
 }
 
-.event_list .item{
+.event_list .item {
   width: 100%;
   height: 100%;
 }
@@ -453,7 +508,7 @@ table .underline {
   overflow: hidden;
 }
 
-.event_list .thumbnail a{
+.event_list .thumbnail a {
   width: 100%;
   height: 100%;
 }
@@ -477,11 +532,9 @@ table .underline {
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  background: linear-gradient(
-    180deg,
-    rgba(34, 34, 34, 0.8) 0%,
-    rgba(34, 34, 34, 0.4) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(34, 34, 34, 0.8) 0%,
+      rgba(34, 34, 34, 0.4) 100%);
   opacity: 0;
   transition: opacity 0.25s ease;
   z-index: 1;
@@ -519,7 +572,7 @@ table .underline {
   line-height: 50.223px;
 }
 
-.event_list .thumbnail::before{
+.event_list .thumbnail::before {
   content: '';
   position: absolute;
   top: 0;
@@ -533,6 +586,6 @@ table .underline {
   z-index: 10;
 }
 
-.event_list li.li-ended .thumbnail::before{
+.event_list li.li-ended .thumbnail::before {
   opacity: 1;
 }

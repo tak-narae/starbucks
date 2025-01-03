@@ -16,7 +16,7 @@ const Notice = () => {
     (selectedCategory === "전체"
       ? notice.length
       : notice.filter((n) => n.category === selectedCategory).length) /
-      itemsPerPage
+    itemsPerPage
   );
 
   const toggleActive = () => {
@@ -142,7 +142,7 @@ const Notice = () => {
               <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
               <td>{notice.category}</td>
               <td className="subject">
-                <Link to={`/notice/${notice.key}`}>
+                <Link to={`/notice/${idx}`}>
                   {notice.subject}
                 </Link>
               </td>

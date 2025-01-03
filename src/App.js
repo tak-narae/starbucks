@@ -70,7 +70,7 @@ function App() {
           <Route path="/event" element={<Event />}></Route>
           <Route path="/event/:key" element={<EventDetail />}></Route>
           <Route path="/notice" element={<Notice />}></Route>
-          <Route path='/notice/:key' element={<NoticeDetail />}></Route>
+          <Route path='/notice/:idx' element={<NoticeDetail />}></Route>
           <Route path="/store" element={<Store />}></Route>
           <Route path="/guide" element={<Guide />}></Route>
         </Routes>

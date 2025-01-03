@@ -411,33 +411,33 @@ footer .link b {
 }
 
 .heading .path {
-  margin-bottom:20px;
-  line-height:1.2;
-  font-size:13px;
-  color:var(--bk-color3);
-  display:flex;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  font-size: 13px;
+  color: var(--bk-color3);
+  display: flex;
   align-items: center;
-  gap:10px;
+  gap: 10px;
 }
 
 .heading .path .home a {
-  width:16px;
-  height:16px;
-  font-size:0;
-  background:transparent url("./images/icon_path.png")no-repeat center/contain;
+  width: 16px;
+  height: 16px;
+  font-size: 0;
+  background: transparent url("./images/icon_path.png")no-repeat center/contain;
   vertical-align: middle;
 }
 
 .heading .path .home a:hover {
-  filter:brightness(0.6);
+  filter: brightness(0.6);
 }
 
-.heading .path li + li::before {
-  content:'';
-  width:12px;
-  height:8px;
-  margin-right:10px;
-  background:transparent url("./images/arrow_path.png")no-repeat center -1px/contain;
+.heading .path li+li::before {
+  content: '';
+  width: 12px;
+  height: 8px;
+  margin-right: 10px;
+  background: transparent url("./images/arrow_path.png")no-repeat center -1px/contain;
   display: inline-block;
 }
 
@@ -469,9 +469,9 @@ footer .link b {
 }
 
 /* SELECTION/SCROLLBAR */
-::selection{
-  background-color:var(--main-color1);
-  color:#fff;
+::selection {
+  background-color: var(--main-color1);
+  color: #fff;
 }
 
 ::-webkit-scrollbar {
