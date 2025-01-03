@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { DataContext } from "App";
 
 const Notice = () => {
@@ -142,7 +142,7 @@ const Notice = () => {
               <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
               <td>{notice.category}</td>
               <td className="subject">
-                <Link onClick={(e) => e.preventDefault()}>
+                <Link to={`/notice/${notice.key}`}>
                   {notice.subject}
                 </Link>
               </td>
@@ -177,6 +177,7 @@ const Notice = () => {
           &raquo;
         </button>
       </div>
+      <Outlet />
     </div>
   );
 };

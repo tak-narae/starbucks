@@ -72,7 +72,8 @@
 }
 
 .guide .sort_list label + a.active::after,
-.notice .sort_list label + a.active::after {
+.guide .sort_list li.active label + a::after,
+.notice .sort_list li.active label + a::after {
   top: 6px;
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
@@ -343,8 +344,8 @@ table .underline {
 }
 
 .tab .event_tab p {
-  width: 122px;
-  padding: 9px 7px;
+  padding: 10px 15px 12px;
+  margin-right: 8px;
   display: inline-block;
   border-radius: 8px;
   color: var(--bk-color2);

@@ -4,25 +4,53 @@ import { Link } from "react-router-dom";
 
 const Event = () => {
   const { events } = useContext(DataContext);
+  const [isActive, setIsActive] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("전체");
   const [activeTab, setActiveTab] = useState("ongoing"); // 기본 탭은 진행 중
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const today = new Date(); //오늘 날짜 받아오기
 
-  // 진행 중 이벤트
-  const ongoingEvents = events.filter(
-    (event) =>
-      new Date(event.startDate) <= today &&
-      (!event.endDate || today <= new Date(event.endDate))
-  );
+  const toggleActive = () => {
+    if (isActive) {
+      setIsClosing(true);
+      setTimeout(() => {
+        setIsActive(false);
+        setIsClosing(false);
+      }, 300);
+    } else {
+      setIsActive(true);
+    }
+  };
 
-  // 종료된 이벤트
-  const endEvents = events.filter(
-    (event) => event.endDate && new Date(event.endDate) < today
-  );
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category); // 선택된 카테고리 설정
+    setCurrentPage(1);
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsActive(false);
+      setIsClosing(false);
+    }, 300);
+  };
+
+  const filteredEvents =
+    selectedCategory === "전체"
+      ? events
+      : events.filter((n) => n.category === selectedCategory);
 
   // 현재 탭에 따른 이벤트 선택
-  const displayedEvents = activeTab === "ongoing" ? ongoingEvents : endEvents;
-
+  const displayedEvents = filteredEvents.filter((event) => {
+    if (activeTab === "ongoing") { //진행 중 이벤트
+      return (
+        new Date(event.startDate) <= today &&
+        (!event.endDate || today <= new Date(event.endDate))
+      );
+    } else if (activeTab === "past") { //종료된 이벤트
+      return event.endDate && new Date(event.endDate) < today;
+    }
+    return false;
+  });
+  
   const itemsPerPage = 16; // 한 페이지당 표시할 항목 수
   const totalPages = Math.ceil(displayedEvents.length / itemsPerPage);
 
@@ -30,11 +58,11 @@ const Event = () => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-
+  
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  
   // Pagination 표시 범위 계산
   const maxVisiblePages = 5;
   const currentBlock = Math.ceil(currentPage / maxVisiblePages); //5개씩 보여질 수 있도록
@@ -60,6 +88,26 @@ const Event = () => {
         <h2 className="tit">
           <Link to="/event">이벤트</Link>
         </h2>
+        <ul className="sort_list">
+          <li className={`sort_item ${isActive ? "active" : ""}`}>
+            <label onClick={toggleActive}>카테고리</label>
+            <Link onClick={toggleActive}>{selectedCategory}</Link>
+            <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
+              {["전체", "상품출시", "카드출시"].map((category) => (
+                <li key={category}>
+                  <Link
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryClick(category);
+                    }}
+                  >
+                    {category}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </li>
+        </ul>
       </div>
 
       <div className="tab">
@@ -109,7 +157,7 @@ const Event = () => {
             <li key={event.key} className={isEnded ? "li-ended" : ""}>
               <div className="item">
                 <div className="thumbnail">
-                  <Link onClick={(e) => e.preventDefault()}>
+                  <Link to={`/event/${event.key}`}>
                     <img src={event.img} alt={event.title} />
                   </Link>
                 </div>
@@ -123,7 +171,6 @@ const Event = () => {
                   </div>
                 </div>
               </div>
-              {console.log(isEnded ? 'Ended' : 'Ongoing')}  {/* 확인용 로그 */}
             </li>
           );})
         ) : (
