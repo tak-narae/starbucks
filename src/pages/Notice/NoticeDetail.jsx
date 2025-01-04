@@ -23,7 +23,7 @@ const NoticeDetail = () => {
   //받아온 key값은 문자열이므로 notices.key안의 값을 문자열로 형변환
 
   return (
-    <div id="container" className="notice_detail">
+    <div id="container" className="notice__detail">
       <div className="layout_fix">
         {notices ? (
           <>

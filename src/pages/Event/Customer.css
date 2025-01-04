@@ -1,0 +1,124 @@
+/*===== EVENT */
+.event_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.event_list>li {
+  width: 290px;
+  min-width: 290px;
+  height: 290px;
+  position: relative;
+}
+
+.event_list li:hover .thumbnail::after,
+.event_list .li-ended .thumbnail::after {
+  opacity: 1;
+}
+
+.event_list li:hover .hover,
+.event_list .li-ended .hover {
+  display: flex;
+}
+
+.event_list .item {
+  width: 100%;
+  height: 100%;
+}
+
+.event_list .thumbnail {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.event_list .thumbnail a {
+  width: 100%;
+  height: 100%;
+}
+
+.event_list .thumbnail img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  transform: scale(1);
+  transition: 0.25s ease;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+}
+
+.event_list .thumbnail::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(180deg,
+      rgba(34, 34, 34, 0.8) 0%,
+      rgba(34, 34, 34, 0.4) 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 1;
+}
+
+.event_list .hover {
+  width: 290px;
+  height: 290px;
+  padding: 16px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.event_list .hover .m_tit {
+  margin-bottom: 16px;
+  color: var(--main-color2);
+  font-size: 20px;
+  font-weight: 700;
+  white-space: pre-line;
+}
+
+.event_list .hover .sub_tit {
+  color: #fff;
+  font-size: 12px;
+}
+
+.event_list .hover .date {
+  color: #fff;
+  font-size: 13px;
+  line-height: 50.223px;
+}
+
+.event_list .thumbnail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: url(../../images/event_end.png) center/cover no-repeat;
+  object-fit: cover;
+  opacity: 0;
+  z-index: 10;
+}
+
+.event_list li.li-ended .thumbnail::before {
+  opacity: 1;
+}
+
+/*===== NOTICE */
+.board__notice_list .heading .notice_tit {
+  display: flex;
+  align-items: center;
+}
+

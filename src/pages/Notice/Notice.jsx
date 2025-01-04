@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { DataContext } from "App";
 
+import "pages/Event/Customer.css";
+
 const Notice = () => {
   const { notice } = useContext(DataContext);
   notice.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -67,20 +69,22 @@ const Notice = () => {
 
   const [search, setSearch] = useState("");
   const searchAction = (e) => {
-    if (search !== "" && e.target.closest(".search.active")) {
+    if (search !== "" && e.target.closest("[class*='search_']:has(.btn_search).active")) {
       return false;
     }
-    e.target.closest(".notice_search").classList.toggle("active");
-    document.querySelector(".notice_search input").focus();
+    e.target.closest(".search_notice").classList.toggle("active");
+    document.querySelector(".search_notice input").focus();
   };
 
+  // 1. sort_list > li가 2개일 때 ?
+  // 2. sort_list label 클릭 시 ?
+  // 3. sort_list li click 시 검색어 입력 input 액션 ?
+
   return (
-    <div id="container" className="layout_fix notice">
-      <div className="heading">
-        <div className="notice_tit">
-          <h2 className="tit">
-            <Link to="/notice">공지사항</Link>
-          </h2>
+    <div id="container" className="board__notice_list">
+      <div className="layout_fix">
+        <div className="heading">
+          <h2 className="tit">공지사항</h2>
           <ul className="sort_list">
             <li className={`sort_item ${isActive ? "active" : ""}`}>
               <label onClick={toggleActive}>카테고리</label>
@@ -103,81 +107,81 @@ const Notice = () => {
               </ul>
             </li>
           </ul>
+          <div className="search_notice">
+            <input
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+              type="text"
+              placeholder="검색어 입력"
+            />
+            <button className="btn_search" onClick={(e) => searchAction(e)}>
+              Search
+            </button>
+          </div>
         </div>
-        <div className="notice_search">
-          <input
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
-            type="text"
-            placeholder="검색어 입력"
-          />
-          <button className="btn_search" onClick={(e) => searchAction(e)}>
-            Search
-          </button>
-        </div>
-      </div>
 
-      <table className="tb_list">
-        <colgroup>
-          <col style={{ width: "100px" }} />
-          <col style={{ width: "160px" }} />
-          <col style={{ width: "auto" }} />
-          <col style={{ width: "120px" }} />
-          <col style={{ width: "120px" }} />
-        </colgroup>
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>카테고리</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>날짜</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedNotices.map((notice, idx) => (
-            <tr key={idx}>
-              <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
-              <td>{notice.category}</td>
-              <td className="subject">
-                <Link to={`/notice/${idx}`}>
-                  {notice.subject}
-                </Link>
-              </td>
-              <td>관리자</td>
-              <td>{notice.date}</td>
+        <table className="tb_list">
+          <colgroup>
+            <col style={{ width: "100px" }} />
+            <col style={{ width: "160px" }} />
+            <col style={{ width: "auto" }} />
+            <col style={{ width: "120px" }} />
+            <col style={{ width: "120px" }} />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>카테고리</th>
+              <th>제목</th>
+              <th>작성자</th>
+              <th>날짜</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="pagination">
-        <button
-          className="prev"
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          &laquo;
-        </button>
-        {pages.map((page) => (
+          </thead>
+          <tbody>
+            {paginatedNotices.map((notice, idx) => (
+              <tr key={idx}>
+                <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
+                <td>{notice.category}</td>
+                <td className="subject">
+                  <Link to={`/notice/${idx}`}>
+                    {notice.subject}
+                  </Link>
+                </td>
+                <td>관리자</td>
+                <td>{notice.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="pagination">
           <button
-            key={page}
-            className={`page ${currentPage === page ? "active" : ""}`}
-            onClick={() => handlePageChange(page)}
+            className="prev"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
           >
-            {page}
+            &laquo;
           </button>
-        ))}
-        <button
-          className="next"
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          &raquo;
-        </button>
+          {pages.map((page) => (
+            <button
+              key={page}
+              className={`page ${currentPage === page ? "active" : ""}`}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            className="next"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            &raquo;
+          </button>
+        </div>
+        <Outlet />
       </div>
-      <Outlet />
     </div>
   );
 };

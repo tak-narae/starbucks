@@ -325,7 +325,8 @@ footer .link b {
   color: var(--main-color1);
 }
 
-/* ===== COMPONENTS */
+/* COMPONENTS */
+/* ===== BUTTON */
 .flex_items:has(input[type="text"]) {
   display: flex;
   align-items: center;
@@ -401,13 +402,112 @@ footer .link b {
   border-radius: 6px;
 }
 
-.mg_list>li+li {
-  margin-top: 20px;
+.pagination {
+  margin: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination button {
+  width: 30px;
+  height: 30px;
+  margin: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-size: 15px;
+  color: var(--bk-color2);
+}
+
+.pagination button.active {
+  color: var(--main-color1);
+  font-weight: 600;
 }
 
 /* ===== .heading */
-.heading {
+[class^="heading"] {
   margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+}
+
+[class^="heading"]:has(.path){
+  align-items: baseline;
+  flex-direction: column;
+}
+
+.heading [class^="tit"] {
+  line-height: 1;
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--bk-color1);
+}
+
+.heading [class^="tit"][class$="-em"] {
+  color: var(--main-color1);
+}
+
+.heading [class^="sub"] {
+  color: var(--bk-color2);
+}
+
+.heading [class^="sub"][class$="-light"] {
+  color: var(--bk-color3);
+}
+
+.heading [class^="desc"] {
+  color: var(--bk-color1);
+}
+
+.heading [class^="desc"][class$="-light"] {
+  color: var(--bk-color2);
+}
+
+[class*="search_"]:has(.btn_search) {
+  margin-left:auto;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid var(--br-color1);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: end;
+  transition: .35s ease;
+}
+
+[class*="search_"]:has(.btn_search).active {
+  width: 200px;
+  border-color: var(--bk-color3);
+}
+
+[class*="search_"]:has(.btn_search) input {
+  height: 38px;
+  padding: 0;
+  background-color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  border: 0;
+  visibility: hidden;
+  flex: 0;
+  transition: flex .35s ease;
+}
+
+[class*="search_"]:has(.btn_search).active input{
+  padding: 0 4px 2px 16px;
+  opacity: 1;
+  visibility: visible;
+  flex: 1;
+}
+
+[class*="search_"]:has(.btn_search) .btn_search {
+  width: 40px;
+  min-width: 40px;
+  margin-left: auto;
+  font-size: 0;
+  background: #fff url("./images/header_menu1.png") no-repeat 14px 10px / auto 16px;
 }
 
 .heading .path {
@@ -441,32 +541,141 @@ footer .link b {
   display: inline-block;
 }
 
-.heading [class^="tit"] {
-  line-height: 1;
-  font-size: 30px;
-  font-weight: 400;
-  color: var(--bk-color1);
+/* ===== TAB */
+.heading_tab{
+  margin-bottom: 40px;
 }
 
-.heading [class^="tit"][class$="-em"] {
-  color: var(--main-color1);
-}
-
-.heading [class^="sub"] {
+.tab_rect p {
+  padding: 10px 15px 12px;
+  margin-right: 8px;
+  display: inline-block;
+  border-radius: 8px;
   color: var(--bk-color2);
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
 }
 
-.heading [class^="sub"][class$="-light"] {
-  color: var(--bk-color3);
+.tab_rect .active {
+  background-color: var(--main-color1);
+  color: #fff;
+  font-weight: 500;
 }
 
-.heading [class^="desc"] {
-  color: var(--bk-color1);
+/* ===== LIST */
+.mg_list>li+li {
+  margin-top: 20px;
 }
 
-.heading [class^="desc"][class$="-light"] {
+.sort_list {
+  margin-left: 32px;
+  display: flex;
+  gap: 24px;
+}
+
+.sort_list > li {
+  font-size: 16px;
+  position: relative;
+}
+
+.sort_list label {
+  margin-right: 12px;
   color: var(--bk-color2);
+  vertical-align: top;
+  display: inline-block;
 }
+
+.sort_list label + a {
+  padding-right: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sort_list label + a::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 0;
+  border: 4px solid transparent;
+  border-top: 4px solid var(--bk-color1);
+}
+
+.sort_list label + a.active::after {
+  top: 6px;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.sort_list .dropdown {
+  width: 100%;
+  max-height: 144px;
+  padding: 8px 16px 16px;
+  background-color: #fff;
+  position: absolute;
+  top: 32px;
+  left: 0;
+  z-index: 1;
+  overflow-y: auto;
+  vertical-align: top;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  display: none;
+}
+
+.sort_list a.active + .dropdown {
+  display: inline-block;
+  animation: slideDown 0.3s ease forwards;
+}
+
+.sort_list .dropdown.closing {
+  animation: slideUp 0.2s ease forwards;
+}
+
+@keyframes slideDown {
+  from {
+    max-height: 0;
+    opacity: 1;
+  }
+
+  to {
+    max-height: 144px;
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    max-height: 144px;
+    opacity: 0;
+  }
+
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+.sort_list .dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sort_list .dropdown::-webkit-scrollbar-thumb {
+  background: transparent;
+  background-clip: padding-box;
+  border: 4px solid var(--br-color1);
+  border-radius: 12px;
+}
+
+.sort_list .dropdown li {
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+.sort_list .dropdown li a:hover {
+  text-decoration: underline;
+}
+
 
 /* SELECTION/SCROLLBAR */
 ::selection {
