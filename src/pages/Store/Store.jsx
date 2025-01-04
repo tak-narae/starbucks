@@ -3,7 +3,11 @@ import React from 'react';
 const Store = () => {
   return (
     <>
-      Store.jsx
+      <div id="container" className="store__idx">
+        <div className="layout_fix">
+          Store.jsx
+        </div>
+      </div>
     </>
   );
 };

@@ -77,18 +77,18 @@ const Notice = () => {
   };
 
   // 1. sort_list > li가 2개일 때 ?
-  // 2. sort_list label 클릭 시 ?
+  // 2. sort_list label 클릭 시 (.sort_item.active > 찰나 .dropdown.closing)
   // 3. sort_list li click 시 검색어 입력 input 액션 ?
 
   return (
-    <div id="container" className="board__notice_list">
+    <div id="container" className="board__notice">
       <div className="layout_fix">
         <div className="heading">
           <h2 className="tit">공지사항</h2>
           <ul className="sort_list">
-            <li className={`sort_item ${isActive ? "active" : ""}`}>
-              <label onClick={toggleActive}>카테고리</label>
-              <Link onClick={toggleActive}>{selectedCategory}</Link>
+            <li className={`sort_item`}>
+              <label>카테고리</label>
+              <Link className={`${isActive ? "active" : ""}`} onClick={toggleActive}>{selectedCategory}</Link>
               <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
                 {["전체", "공지사항", "문화소식", "사회공헌"].map(
                   (category) => (

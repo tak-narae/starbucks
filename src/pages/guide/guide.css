@@ -108,20 +108,20 @@
 }
 
 /* .guide .sort_list,
-.board__notice_list .sort_list {
+.board__notice .sort_list {
   margin-left: 32px;
   display: flex;
   gap: 24px;
 }
 
 .guide .sort_list>li,
-.board__notice_list .sort_list>li {
+.board__notice .sort_list>li {
   font-size: 16px;
   position: relative;
 }
 
 .guide .sort_list label,
-.board__notice_list .sort_list label {
+.board__notice .sort_list label {
   margin-right: 12px;
   color: var(--bk-color2);
   vertical-align: top;
@@ -129,14 +129,14 @@
 }
 
 .guide .sort_list label+a,
-.board__notice_list .sort_list label+a {
+.board__notice .sort_list label+a {
   padding-right: 16px;
   overflow: hidden;
   white-space: nowrap;
 }
 
 .guide .sort_list label+a::after,
-.board__notice_list .sort_list label+a::after {
+.board__notice .sort_list label+a::after {
   content: "";
   position: absolute;
   top: 10px;
@@ -147,14 +147,14 @@
 
 .guide .sort_list label+a.active::after,
 .guide .sort_list li.active label+a::after,
-.board__notice_list .sort_list li.active label+a::after {
+.board__notice .sort_list li.active label+a::after {
   top: 6px;
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
 .guide .sort_list ul,
-.board__notice_list .sort_list ul {
+.board__notice .sort_list ul {
   width: 100%;
   max-height: 0;
   background-color: #fff;
@@ -203,12 +203,12 @@
 }
 
 .guide .sort_list ul::-webkit-scrollbar,
-.board__notice_list .sort_list ul::-webkit-scrollbar {
+.board__notice .sort_list ul::-webkit-scrollbar {
   width: 6px;
 }
 
 .guide .sort_list ul::-webkit-scrollbar-thumb,
-.board__notice_list .sort_list ul::-webkit-scrollbar-thumb {
+.board__notice .sort_list ul::-webkit-scrollbar-thumb {
   background: transparent;
   background-clip: padding-box;
   border: 4px solid var(--br-color1);
@@ -216,13 +216,13 @@
 }
 
 .guide .sort_list ul li,
-.board__notice_list .sort_list ul li {
+.board__notice .sort_list ul li {
   margin-top: 8px;
   font-size: 15px;
 }
 
 .guide .sort_list ul li a:hover,
-.board__notice_list .sort_list ul li a:hover {
+.board__notice .sort_list ul li a:hover {
   text-decoration: underline;
 } */
 

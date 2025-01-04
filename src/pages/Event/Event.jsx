@@ -2,6 +2,8 @@ import { DataContext } from "App";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
+import "pages/Event/Customer.css";
+
 const Event = () => {
   const { events } = useContext(DataContext);
   const [isActive, setIsActive] = useState(false);
@@ -83,14 +85,14 @@ const Event = () => {
   };
 
   return (
-    <div id="container" className="board__event_list">
+    <div id="container" className="board__event">
       <div className="layout_fix">
         <div className="heading">
           <h2 className="tit">이벤트</h2>
           <ul className="sort_list">
-            <li className={`sort_item ${isActive ? "active" : ""}`}>
-              <label onClick={toggleActive}>카테고리</label>
-              <Link onClick={toggleActive}>{selectedCategory}</Link>
+            <li className={`sort_item`}>
+              <label>카테고리</label>
+              <Link className={`${isActive ? "active" : ""}`} onClick={toggleActive}>{selectedCategory}</Link>
               <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
                 {["전체", "상품출시", "카드출시"].map((category) => (
                   <li key={category}>
@@ -154,22 +156,20 @@ const Event = () => {
               const isEnded = event.endDate && new Date(event.endDate) < today; //종료 이벤트 확인
               return (
               <li key={event.key} className={isEnded ? "li-ended" : ""}>
-                <div className="item">
+                <Link to={`/event/${event.key}`} className="item">
                   <div className="thumbnail">
-                    <Link to={`/event/${event.key}`}>
-                      <img src={event.img} alt={event.title} />
-                    </Link>
+                    <img src={event.img} alt={event.title} />
                   </div>
-                  <div className="hover">
-                    <div className="tit">
-                      <div className="m_tit">{event.title}</div>
+                  <div className="overlay">
+                    <div className="subject">
+                      <div className="tit">{event.title}</div>
                       <div className="sub_tit">{event.title2}</div>
                     </div>
                     <div className="date">
                       {event.startDate} ~ {event.endDate}
                     </div>
                   </div>
-                </div>
+                </Link>
               </li>
             );})
           ) : (
