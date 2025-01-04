@@ -48,7 +48,7 @@ const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, current
                   {/* <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`} className="thumbnail"> */}
                   <Link className="thumbnail"
                   to={{
-                    pathname : `/menu/detail/${pathName}`,
+                    pathname : `/menu/${pathName=="beverage"||pathName=="food" ? "info" : "detail"}/${pathName}`,
                     search: `?cate=${selectedCate}&id=${product.id}`,
                   }}
                   state={{ title, cateKo, product }}
@@ -57,10 +57,11 @@ const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, current
                         <img
                           src={`${process.env.PUBLIC_URL}/${product.img}`}
                           alt={product.name}
-                        />
+                          />
                     </div>
                   </Link>
                   <div className="desc">
+                    <p>{pathName}</p>
                     <div className="name">{product.name}</div>
                     {/* <div className="review">4.9</div> */}
                     <div className="price">39,000원</div>
@@ -76,7 +77,7 @@ const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, current
           prdSeason.map((product) => (
             <li key={product.key}>
               <div className="item">
-                {/* <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${el.id}`} className="thumbnail"> */}
+                {/* <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`} className="thumbnail"> */}
                 <Link className="thumbnail"
                   to={{
                     pathname : `/menu/detail/${pathName}`,

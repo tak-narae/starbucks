@@ -8,10 +8,11 @@ import Header from 'components/layout/Header';
 import Main from 'pages/Main';
 import Menu from 'pages/Menu/Menu';
 import Detail from 'pages/Menu/Detail';
-import Coffee from 'pages/Coffee/Coffee';
-import Product from 'pages/Product/Product';
-import Beverage from 'pages/Beverage/Beverage';
-import Food from 'pages/Food/Food';
+import DetailInfo from 'pages/Menu/DetailInfo';
+import Coffee from 'pages/Menu/Coffee/Coffee';
+import Product from 'pages/Menu/Product/Product';
+import Beverage from 'pages/Menu/Beverage/Beverage';
+import Food from 'pages/Menu/Food/Food';
 import Event from 'pages/Event/Event';
 import EventDetail from 'pages/Event/EventDetail';
 import Notice from 'pages/Notice/Notice';
@@ -67,6 +68,7 @@ function App() {
             <Route path="food" element={<Food />}></Route>
           </Route>
           <Route path="/menu/detail/:category" element={<Detail />}></Route>
+          <Route path="/menu/info/:category" element={<DetailInfo />}></Route>
           <Route path="/event" element={<Event />}></Route>
           <Route path="/event/:key" element={<EventDetail />}></Route>
           <Route path="/notice" element={<Notice />}></Route>

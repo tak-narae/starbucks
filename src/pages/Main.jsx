@@ -24,7 +24,6 @@ const Main = () => {
   const { selectedCate, selectedDepth, pathName } = useQueryParams();
 
   const [prdSeason, setPrdSeason] = useState([]); // 홀리데이 상품
-
   useEffect(() => {
     const seasonAll = product.flatMap((el) => {
       const seasonCate = el.products.filter((prd) => prd.name.includes("홀리데이"));
@@ -34,7 +33,7 @@ const Main = () => {
   }, [product]);
 
   useEffect(()=>{
-    SplitEffect();
+    SplitEffect(); //.split
   },[])
 
   return (
@@ -64,6 +63,7 @@ const Main = () => {
               pathName={pathName}
               prdSeason={prdSeason} // 시즌 상품 (홀리데이 제품) 전달
             />
+            {/* selectedCate 확인하기 */}
             <Link to="/menu/product?cate=0" className="btn_link">MORE</Link>
           </div>
         </section>
