@@ -79,22 +79,24 @@ const Menu = () => {
   //=== btn_search .active
   const [search,setSearch] = useState("");
   const searchAction = (e)=>{
-    if ((search !== "") && (e.target.closest(".search.active"))){
+    if ((search !== "") && (e.target.closest(".search_prd.active"))){
       return false;
     }
-    e.target.closest(".search").classList.toggle("active");
+    e.target.closest(".search_prd").classList.toggle("active");
     document.querySelector(".menu_category input").focus();
   }
 
   return (
     <>
       <div id="container" className="prd__list">
-        <div className="heading layout_fix">
-          <ul className="path">
-            <li className="home"><Link to="/">홈</Link></li>
-            <li>{title}</li>
-          </ul>
-          <h2 className="tit">{title}</h2>
+        <div className="layout_fix">
+          <div className="heading">
+            <ul className="path">
+              <li className="home"><Link to="/">홈</Link></li>
+              <li>{title}</li>
+            </ul>
+            <h2 className="tit">{title}</h2>
+          </div>
         </div>
         <div className="menu_category">
           <div className="layout_fix">
@@ -108,7 +110,7 @@ const Menu = () => {
                 );
               })}
             </ul>
-            <div className="search">
+            <div className="search_prd">
               <input value={search} onChange={(e)=>{ setSearch(e.target.value); }}
               type="text" placeholder="검색어 입력"/>
               <button className="btn_search" onClick={(e)=> searchAction(e) }>Search</button>

@@ -2,6 +2,8 @@ import { DataContext } from "App";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
+import "pages/Event/Customer.css";
+
 const Event = () => {
   const { events } = useContext(DataContext);
   const [isActive, setIsActive] = useState(false);
@@ -75,133 +77,131 @@ const Event = () => {
 
   const [search, setSearch] = useState("");
   const searchAction = (e) => {
-    if (search !== "" && e.target.closest(".search.active")) {
+    if (search !== "" && e.target.closest("[class*='search_']:has(.btn_search).active")) {
       return false;
     }
-    e.target.closest(".event_search").classList.toggle("active");
-    document.querySelector(".tab input").focus();
+    e.target.closest(".search_event").classList.toggle("active");
+    document.querySelector(".heading_tab input").focus();
   };
 
   return (
-    <div id="container" className="layout_fix guide">
-      <div className="heading">
-        <h2 className="tit">
-          <Link to="/event">이벤트</Link>
-        </h2>
-        <ul className="sort_list">
-          <li className={`sort_item ${isActive ? "active" : ""}`}>
-            <label onClick={toggleActive}>카테고리</label>
-            <Link onClick={toggleActive}>{selectedCategory}</Link>
-            <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
-              {["전체", "상품출시", "카드출시"].map((category) => (
-                <li key={category}>
-                  <Link
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryClick(category);
-                    }}
-                  >
-                    {category}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <div className="tab">
-        <div className="event_tab">
-          {/* 진행 중 이벤트 탭 */}
-          <p
-            className={`event_ing ${activeTab === "ongoing" ? "active" : ""}`}
-            onClick={() => {
-              setActiveTab("ongoing");
-              setCurrentPage(1); // 탭 변경 시 페이지를 1로 초기화
-            }}
-          >
-            진행중인 이벤트
-          </p>
-
-          {/* 종료된 이벤트 탭 */}
-          <p
-            className={`event_end ${activeTab === "past" ? "active" : ""}`}
-            onClick={() => {
-              setActiveTab("past");
-              setCurrentPage(1); // 탭 변경 시 페이지를 1로 초기화
-            }}
-          >
-            종료된 이벤트
-          </p>
-        </div>
-        <div className="event_search">
-          <input
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
-            type="text"
-            placeholder="검색어 입력"
-          />
-          <button className="btn_search" onClick={(e) => searchAction(e)}>
-            Search
-          </button>
-        </div>
-      </div>
-
-      <ul className="event_list">
-        {paginatedEvents.length > 0 ? (
-          paginatedEvents.map((event) => {
-            const isEnded = event.endDate && new Date(event.endDate) < today; //종료 이벤트 확인
-            return (
-            <li key={event.key} className={isEnded ? "li-ended" : ""}>
-              <div className="item">
-                <div className="thumbnail">
-                  <Link to={`/event/${event.key}`}>
-                    <img src={event.img} alt={event.title} />
-                  </Link>
-                </div>
-                <div className="hover">
-                  <div className="tit">
-                    <div className="m_tit">{event.title}</div>
-                    <div className="sub_tit">{event.title2}</div>
-                  </div>
-                  <div className="date">
-                    {event.startDate} ~ {event.endDate}
-                  </div>
-                </div>
-              </div>
+    <div id="container" className="board__event">
+      <div className="layout_fix">
+        <div className="heading">
+          <h2 className="tit">이벤트</h2>
+          <ul className="sort_list">
+            <li className={`sort_item`}>
+              <label>카테고리</label>
+              <Link className={`${isActive ? "active" : ""}`} onClick={toggleActive}>{selectedCategory}</Link>
+              <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
+                {["전체", "상품출시", "카드출시"].map((category) => (
+                  <li key={category}>
+                    <Link
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleCategoryClick(category);
+                      }}
+                    >
+                      {category}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </li>
-          );})
-        ) : (
-          <p>현재 표시할 이벤트가 없습니다.</p>
-        )}
-      </ul>
+          </ul>
+        </div>
 
-      <div className="pagination">
-        <button
-          className="prev"
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          &laquo;
-        </button>
-        {pages.map((page) => (
+        <div className="heading_tab">
+          <div className="tab_rect">
+            {/* 진행 중 이벤트 탭 */}
+            <p
+              className={`event_ing ${activeTab === "ongoing" ? "active" : ""}`}
+              onClick={() => {
+                setActiveTab("ongoing");
+                setCurrentPage(1); // 탭 변경 시 페이지를 1로 초기화
+              }}
+            >
+              진행중인 이벤트
+            </p>
+
+            {/* 종료된 이벤트 탭 */}
+            <p
+              className={`event_end ${activeTab === "past" ? "active" : ""}`}
+              onClick={() => {
+                setActiveTab("past");
+                setCurrentPage(1); // 탭 변경 시 페이지를 1로 초기화
+              }}
+            >
+              종료된 이벤트
+            </p>
+          </div>
+          <div className="search_event">
+            <input
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+              type="text"
+              placeholder="검색어 입력"
+            />
+            <button className="btn_search" onClick={(e) => searchAction(e)}>
+              Search
+            </button>
+          </div>
+        </div>
+
+        <ul className="event_list">
+          {paginatedEvents.length > 0 ? (
+            paginatedEvents.map((event) => {
+              const isEnded = event.endDate && new Date(event.endDate) < today; //종료 이벤트 확인
+              return (
+              <li key={event.key} className={isEnded ? "li-ended" : ""}>
+                <Link to={`/event/${event.key}`} className="item">
+                  <div className="thumbnail">
+                    <img src={event.img} alt={event.title} />
+                  </div>
+                  <div className="overlay">
+                    <div className="subject">
+                      <div className="tit">{event.title}</div>
+                      <div className="sub_tit">{event.title2}</div>
+                    </div>
+                    <div className="date">
+                      {event.startDate} ~ {event.endDate}
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            );})
+          ) : (
+            <li className="empty">현재 표시할 이벤트가 없습니다.</li>
+          )}
+        </ul>
+
+        <div className="pagination">
           <button
-            key={page}
-            className={`page ${currentPage === page ? "active" : ""}`}
-            onClick={() => handlePageChange(page)}
+            className="prev"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
           >
-            {page}
+            &laquo;
           </button>
-        ))}
-        <button
-          className="next"
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          &raquo;
-        </button>
+          {pages.map((page) => (
+            <button
+              key={page}
+              className={`page ${currentPage === page ? "active" : ""}`}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            className="next"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            &raquo;
+          </button>
+        </div>
       </div>
     </div>
   );

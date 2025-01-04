@@ -1,0 +1,106 @@
+/*===== EVENT */
+.event_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.event_list>li {
+  width: 290px;
+  min-width: 290px;
+  height: 290px;
+  position: relative;
+}
+
+.event_list .item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
+}
+
+.event_list .thumbnail img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  transition: 0.25s ease;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+}
+
+.event_list .overlay {
+  padding: 24px;
+  background: linear-gradient(180deg,
+  rgba(34, 34, 34, 0.8) 0%,
+  rgba(34, 34, 34, 0.4) 100%);
+  position: absolute;
+  top: 0;
+  right:0;
+  bottom:0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.event_list li:not(.li-ended) .overlay {
+  opacity: 0;
+}
+
+.event_list li:not(.li-ended):hover .overlay {
+  opacity: 1;
+  transition: .5s ease;
+}
+
+.event_list .li-ended .overlay::before {
+  content: '';
+  background: transparent url(../../images/event_end.png) no-repeat center/cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.event_list .overlay .tit {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--main-color2);
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+.event_list .overlay .sub_tit {
+  color: #fff;
+  font-size: 12px;
+}
+
+.event_list .overlay * {
+  transform: translate(-8px,0);
+}
+
+.event_list li:not(.li-ended):hover .overlay * {
+  transform: translate(0,0);
+  transition: .5s ease;
+}
+
+.event_list .overlay .date {
+  margin-bottom:16px;
+  font-size: 13px;
+  color: #fff;
+}
+
+/*===== NOTICE */
+.board__notice .heading .notice_tit {
+  display: flex;
+  align-items: center;
+}
+
+/*===== STORE */
+
+/*===== NOTICE */
+
