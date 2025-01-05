@@ -79,7 +79,7 @@
   font-size: 12px;
 }
 
-.event_list .overlay * {
+.event_list li:not(.li-ended) .overlay * {
   transform: translate(-8px,0);
 }
 
