@@ -6,6 +6,8 @@ import "pages/Event/Customer.css";
 
 const Event = () => {
   const { events } = useContext(DataContext);
+  events.sort((a, b) => new Date(b.date) - new Date(a.date));
+  console.log(events);
   const [isActive, setIsActive] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("전체");
@@ -152,10 +154,10 @@ const Event = () => {
 
         <ul className="event_list">
           {paginatedEvents.length > 0 ? (
-            paginatedEvents.map((event) => {
+            paginatedEvents.map((event, idx) => {
               const isEnded = event.endDate && new Date(event.endDate) < today; //종료 이벤트 확인
               return (
-              <li key={event.key} className={isEnded ? "li-ended" : ""}>
+              <li key={idx} className={isEnded ? "li-ended" : ""}>
                 <Link to={`/event/${event.key}`} className="item">
                   <div className="thumbnail">
                     <img src={event.img} alt={event.title} />
