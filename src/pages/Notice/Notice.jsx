@@ -93,7 +93,12 @@ const Notice = () => {
           <ul className="sort_list">
             <li className={`sort_item`}>
               <label>카테고리</label>
-              <Link className={`${isActive ? "active" : ""}`} onClick={toggleActive}>{selectedCategory}</Link>
+              <Link
+                className={`${isActive ? "active" : ""}`}
+                onClick={toggleActive}
+              >
+                {selectedCategory}
+              </Link>
               <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
                 {["전체", "공지사항", "문화소식", "사회공헌"].map(
                   (category) => (
@@ -126,63 +131,63 @@ const Notice = () => {
             Search
           </button>
         </div>
-      </div>
 
-      <table className="tb_list">
-        <colgroup>
-          <col style={{ width: "100px" }} />
-          <col style={{ width: "160px" }} />
-          <col style={{ width: "auto" }} />
-          <col style={{ width: "120px" }} />
-          <col style={{ width: "120px" }} />
-        </colgroup>
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>카테고리</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>날짜</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedNotices.map((notice, idx) => (
-            <tr key={idx}>
-              <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
-              <td>{notice.category}</td>
-              <td className="subject">
-                <Link to={`/notice/${idx}`}>{notice.subject}</Link>
-              </td>
-              <td>관리자</td>
-              <td>{notice.date}</td>
+        <table className="tb_list">
+          <colgroup>
+            <col style={{ width: "100px" }} />
+            <col style={{ width: "160px" }} />
+            <col style={{ width: "auto" }} />
+            <col style={{ width: "120px" }} />
+            <col style={{ width: "120px" }} />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>카테고리</th>
+              <th>제목</th>
+              <th>작성자</th>
+              <th>날짜</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="pagination">
-        <button
-          className="prev"
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          &laquo;
-        </button>
-        {pages.map((page) => (
+          </thead>
+          <tbody>
+            {paginatedNotices.map((notice, idx) => (
+              <tr key={idx}>
+                <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
+                <td>{notice.category}</td>
+                <td className="subject">
+                  <Link to={`/notice/${idx}`}>{notice.subject}</Link>
+                </td>
+                <td>관리자</td>
+                <td>{notice.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="pagination">
           <button
-            key={page}
-            className={`page ${currentPage === page ? "active" : ""}`}
-            onClick={() => handlePageChange(page)}
+            className="prev"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
           >
-            {page}
+            &laquo;
           </button>
-        ))}
-        <button
-          className="next"
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          &raquo;
-        </button>
+          {pages.map((page) => (
+            <button
+              key={page}
+              className={`page ${currentPage === page ? "active" : ""}`}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            className="next"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            &raquo;
+          </button>
+        </div>
       </div>
       <Outlet />
     </div>
