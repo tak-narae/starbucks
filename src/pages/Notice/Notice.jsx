@@ -6,7 +6,7 @@ import "pages/Event/Customer.css";
 const Notice = () => {
   const { notice } = useContext(DataContext);
   notice.sort((a, b) => new Date(b.date) - new Date(a.date));
-  console.log(notice);
+  // console.log(notice);
 
   const [isActive, setIsActive] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -22,12 +22,12 @@ const Notice = () => {
   );
 
   const toggleActive = () => {
-    if (isActive) {
+    if (isActive) {      
       setIsClosing(true);
       setTimeout(() => {
         setIsActive(false);
         setIsClosing(false);
-      }, 300);
+      }, 0);
     } else {
       setIsActive(true);
     }
@@ -40,7 +40,7 @@ const Notice = () => {
     setTimeout(() => {
       setIsActive(false);
       setIsClosing(false);
-    }, 300);
+    }, 0);
   };
 
   const filteredNotices =
@@ -99,7 +99,7 @@ const Notice = () => {
               >
                 {selectedCategory}
               </Link>
-              <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
+              <ul className="dropdown">
                 {["전체", "공지사항", "문화소식", "사회공헌"].map(
                   (category) => (
                     <li key={category}>
@@ -117,19 +117,19 @@ const Notice = () => {
               </ul>
             </li>
           </ul>
-        </div>
-        <div className="search_notice">
-          <input
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
-            type="text"
-            placeholder="검색어 입력"
-          />
-          <button className="btn_search" onClick={(e) => searchAction(e)}>
-            Search
-          </button>
+            <div className="search_notice">
+              <input
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                type="text"
+                placeholder="검색어 입력"
+              />
+              <button className="btn_search" onClick={(e) => searchAction(e)}>
+                Search
+              </button>
+            </div>
         </div>
 
         <table className="tb_list">
