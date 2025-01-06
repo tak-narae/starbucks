@@ -57,7 +57,7 @@ const Menu = () => {
     });
     return newLabels;
   };
-  
+
 
   useEffect(() => {
     window.scrollTo({ top:0 }); //메인진입

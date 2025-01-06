@@ -9,7 +9,6 @@ const Notice = () => {
   console.log(notice);
 
   const [isActive, setIsActive] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("전체");
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
 
@@ -23,11 +22,9 @@ const Notice = () => {
 
   const toggleActive = () => {
     if (isActive) {
-      setIsClosing(true);
       setTimeout(() => {
         setIsActive(false);
-        setIsClosing(false);
-      }, 300);
+      }, 0);
     } else {
       setIsActive(true);
     }
@@ -36,11 +33,9 @@ const Notice = () => {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category); // 선택된 카테고리 설정
     setCurrentPage(1); //카테고리 변경 시 페이지 초기화
-    setIsClosing(true);
     setTimeout(() => {
       setIsActive(false);
-      setIsClosing(false);
-    }, 300);
+    },0);
   };
 
   const filteredNotices =
@@ -95,17 +90,22 @@ const Notice = () => {
               <label>카테고리</label>
               <Link
                 className={`${isActive ? "active" : ""}`}
-                onClick={toggleActive}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleActive();
+                }}
               >
                 {selectedCategory}
               </Link>
-              <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
+              <ul className={`dropdown`}>
                 {["전체", "공지사항", "문화소식", "사회공헌"].map(
                   (category) => (
                     <li key={category}>
                       <Link
                         onClick={(e) => {
                           e.preventDefault();
+                          e.stopPropagation();
                           handleCategoryClick(category);
                         }}
                       >
@@ -117,19 +117,19 @@ const Notice = () => {
               </ul>
             </li>
           </ul>
-        </div>
-        <div className="search_notice">
-          <input
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
-            type="text"
-            placeholder="검색어 입력"
-          />
-          <button className="btn_search" onClick={(e) => searchAction(e)}>
-            Search
-          </button>
+          <div className="search_notice">
+            <input
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+              type="text"
+              placeholder="검색어 입력"
+            />
+            <button className="btn_search" onClick={(e) => searchAction(e)}>
+              Search
+            </button>
+          </div>
         </div>
 
         <table className="tb_list">

@@ -8,9 +8,9 @@ const NoticeDetail = () => {
   let { idx } = useParams();
   console.log("idx===", idx);
   const { notice } = useContext(DataContext);
-  console.log("notice===", notice);
+  // console.log("notice===", notice);
   const notices = notice[parseInt(idx)]; // index를 그대로 사용
-  console.log("notices===", notices);
+  // console.log("notices===", notices);
   const prevNotice = notice[parseInt(idx) - 1];
   console.log(prevNotice);
   const nextNotice = notice[parseInt(idx) + 1];
@@ -40,7 +40,7 @@ const NoticeDetail = () => {
                 <span>이전글</span>
                 <div className="prev_tit">
                   <Link to={`/notice/${parseInt(idx) - 1}`}>
-                    {prevNotice ? prevNotice.subject : "해당 글이 없습니다"}
+                    {prevNotice ? (<div>prevNotice.subject</div>) : (<p>해당 글이 없습니다</p>)}
                   </Link>
                 </div>
               </div>
@@ -49,7 +49,7 @@ const NoticeDetail = () => {
                 <span>다음글</span>
                 <div className="next_tit">
                   <Link to={`/notice/${parseInt(idx) + 1}`}>
-                    {nextNotice ? nextNotice.subject : "해당 글이 없습니다"}
+                    {nextNotice ? (<div>nextNotice.subject</div>) : (<p>"해당 글이 없습니다"</p>)}
                   </Link>
                 </div>
               </div>

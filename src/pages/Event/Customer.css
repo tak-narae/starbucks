@@ -102,5 +102,70 @@
 
 /*===== STORE */
 
-/*===== NOTICE */
+/*===== DETAIL */
+[class$="_detail"] .heading {
+  margin-bottom: 40px;
+}
+
+[class$="_detail"] .date {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--bk-color2);
+}
+
+[class$="cont"] {
+  padding: 40px 0;
+  color: var(--bk-color1);
+  font-size: 15px;
+  white-space: pre-line;
+  border-top: 1px solid var(--br-color2);
+  border-bottom: 1px solid var(--br-color2);
+}
+
+.post_nav {
+  border-bottom: 1px solid var(--br-color2);
+}
+
+.post_nav>div {
+  padding: 0 26px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.post_nav button {
+  width: 13px;
+  height: 20px;
+  font-size: 0;
+  background: url(../../images/arrow_select.png) no-repeat;
+  background-size: contain;
+}
+
+.post_nav .prev>button{
+  transform: rotate(180deg);
+}
+
+.post_nav span {
+  width: 50px;
+  margin: 0 26px 0 44px;
+  color: var(--Starbucks-bk-color1, #222);
+  font-size: 15px;
+}
+
+.post_nav .prev{
+  border-bottom: 1px solid var(--br-color1);
+}
+
+.post {
+  width: 100%;
+  margin-top: 40px;
+}
+
+.post button {
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #fff;
+  background-color: var(--main-color1);
+}
 

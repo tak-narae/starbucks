@@ -1,17 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "App";
 import { Link, useParams } from "react-router-dom";
 
 const EventDetail = () => {
   let { idx } = useParams();
   const { events } = useContext(DataContext);
-  console.log(events);
   const event = events[parseInt(idx)]; // index를 그대로 사용
-  console.log("events===", events);
+  console.log(event.detailImg);
   const prevEvent = events[parseInt(idx) - 1];
-  console.log(prevEvent);
   const nextEvent = events[parseInt(idx) + 1];
-  console.log(nextEvent);
+
 
   return (
     <>
@@ -21,18 +19,36 @@ const EventDetail = () => {
             <>
               <div className="heading">
                 <div className="event_tit">
-                  <h2 className="tit">{event.subject}</h2>
-                  <p className="date">{event.date}</p>
+                  <h2 className="tit">{event.title}</h2>
+                  <p className="date">{event.startDate} ~ {event.endDate}</p>
                 </div>
               </div>
-              <div className="event_cont">{event.contents}</div>
+              <div className="event_cont">
+                {
+                  event.detailImg && event.detailImg.length > 0 ? (
+                    <div className="detail_img">
+                      {event.detailImg.map((imgUrl, index)=>{
+                        <img key={index} src={`${process.env.PUBLIC_URL}/${imgUrl}`} alt={`detailImg ${index + 1}`}></img>
+                      })}
+                    </div>
+                  ):(
+                    <p>해당 이벤트 상세 내용이</p>
+                  )
+                }
+              </div>
               <div className="post_nav">
                 <div className="prev">
                   <button>prev</button>
                   <span>이전글</span>
                   <div className="prev_tit">
                     <Link to={`/event/${parseInt(idx) - 1}`}>
-                      {prevEvent ? prevEvent.subject : "해당 글이 없습니다"}
+                    {prevEvent ? (
+                      <div>
+                        {prevEvent.title}
+                      </div>
+                      ) : (
+                        <p> 해당 글이 없습니다 </p>
+                      )}
                     </Link>
                   </div>
                 </div>
@@ -41,7 +57,13 @@ const EventDetail = () => {
                   <span>다음글</span>
                   <div className="next_tit">
                     <Link to={`/event/${parseInt(idx) + 1}`}>
-                      {nextEvent ? nextEvent.subject : "해당 글이 없습니다"}
+                      {nextEvent ? (
+                        <div>
+                          {nextEvent.title}
+                        </div>
+                      ) : (
+                        <p> 해당 글이 없습니다 </p>
+                      )}
                     </Link>
                   </div>
                 </div>
