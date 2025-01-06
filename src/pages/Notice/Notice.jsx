@@ -6,7 +6,7 @@ import "pages/Event/Customer.css";
 const Notice = () => {
   const { notice } = useContext(DataContext);
   notice.sort((a, b) => new Date(b.date) - new Date(a.date));
-  console.log(notice)
+  console.log(notice);
 
   const [isActive, setIsActive] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -69,24 +69,31 @@ const Notice = () => {
 
   const [search, setSearch] = useState("");
   const searchAction = (e) => {
-    if (search !== "" && e.target.closest(".search.active"))   {
+    if (
+      search !== "" &&
+      e.target.closest("[class*='search_']:has(.btn_search).active")
+    ) {
       return false;
     }
-    e.target.closest(".notice_search").classList.toggle("active");
-    document.querySelector(".notice_search input").focus();
+    e.target.closest(".search_notice").classList.toggle("active");
+    document.querySelector(".search_notice input").focus();
   };
 
+  // 1. sort_list > li가 2개일 때 ?
+  // 2. sort_list label 클릭 시 (.sort_item.active > 찰나 .dropdown.closing)
+  // 3. sort_list li click 시 검색어 입력 input 액션 ?
+
   return (
-    <div id="container" className="layout_fix notice">
-      <div className="heading">
-        <div className="notice_tit">
+    <div id="container" className="board__notice">
+      <div className="layout_fix">
+        <div className="heading">
           <h2 className="tit">
             <Link to="/notice">공지사항</Link>
           </h2>
           <ul className="sort_list">
-            <li className={`sort_item ${isActive ? "active" : ""}`}>
-              <label onClick={toggleActive}>카테고리</label>
-              <Link onClick={toggleActive}>{selectedCategory}</Link>
+            <li className={`sort_item`}>
+              <label>카테고리</label>
+              <Link className={`${isActive ? "active" : ""}`} onClick={toggleActive}>{selectedCategory}</Link>
               <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
                 {["전체", "공지사항", "문화소식", "사회공헌"].map(
                   (category) => (
@@ -106,7 +113,7 @@ const Notice = () => {
             </li>
           </ul>
         </div>
-        <div className="notice_search">
+        <div className="search_notice">
           <input
             value={search}
             onChange={(e) => {
@@ -144,9 +151,7 @@ const Notice = () => {
               <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
               <td>{notice.category}</td>
               <td className="subject">
-                <Link to={`/notice/${idx}`}>
-                  {notice.subject}
-                </Link>
+                <Link to={`/notice/${idx}`}>{notice.subject}</Link>
               </td>
               <td>관리자</td>
               <td>{notice.date}</td>
