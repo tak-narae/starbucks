@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { DataContext } from "App";
-
 import "pages/Event/Customer.css";
 
 const Notice = () => {
   const { notice } = useContext(DataContext);
   notice.sort((a, b) => new Date(b.date) - new Date(a.date));
+  console.log(notice);
 
   const [isActive, setIsActive] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -18,7 +18,7 @@ const Notice = () => {
     (selectedCategory === "전체"
       ? notice.length
       : notice.filter((n) => n.category === selectedCategory).length) /
-    itemsPerPage
+      itemsPerPage
   );
 
   const toggleActive = () => {
@@ -69,7 +69,10 @@ const Notice = () => {
 
   const [search, setSearch] = useState("");
   const searchAction = (e) => {
-    if (search !== "" && e.target.closest("[class*='search_']:has(.btn_search).active")) {
+    if (
+      search !== "" &&
+      e.target.closest("[class*='search_']:has(.btn_search).active")
+    ) {
       return false;
     }
     e.target.closest(".search_notice").classList.toggle("active");
@@ -84,11 +87,18 @@ const Notice = () => {
     <div id="container" className="board__notice">
       <div className="layout_fix">
         <div className="heading">
-          <h2 className="tit">공지사항</h2>
+          <h2 className="tit">
+            <Link to="/notice">공지사항</Link>
+          </h2>
           <ul className="sort_list">
             <li className={`sort_item`}>
               <label>카테고리</label>
-              <Link className={`${isActive ? "active" : ""}`} onClick={toggleActive}>{selectedCategory}</Link>
+              <Link
+                className={`${isActive ? "active" : ""}`}
+                onClick={toggleActive}
+              >
+                {selectedCategory}
+              </Link>
               <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
                 {["전체", "공지사항", "문화소식", "사회공헌"].map(
                   (category) => (
@@ -107,19 +117,19 @@ const Notice = () => {
               </ul>
             </li>
           </ul>
-          <div className="search_notice">
-            <input
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-              type="text"
-              placeholder="검색어 입력"
-            />
-            <button className="btn_search" onClick={(e) => searchAction(e)}>
-              Search
-            </button>
-          </div>
+        </div>
+        <div className="search_notice">
+          <input
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            type="text"
+            placeholder="검색어 입력"
+          />
+          <button className="btn_search" onClick={(e) => searchAction(e)}>
+            Search
+          </button>
         </div>
 
         <table className="tb_list">
@@ -145,9 +155,7 @@ const Notice = () => {
                 <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
                 <td>{notice.category}</td>
                 <td className="subject">
-                  <Link to={`/notice/${idx}`}>
-                    {notice.subject}
-                  </Link>
+                  <Link to={`/notice/${idx}`}>{notice.subject}</Link>
                 </td>
                 <td>관리자</td>
                 <td>{notice.date}</td>
@@ -180,8 +188,8 @@ const Notice = () => {
             &raquo;
           </button>
         </div>
-        <Outlet />
       </div>
+      <Outlet />
     </div>
   );
 };

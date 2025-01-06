@@ -39,14 +39,18 @@ const NoticeDetail = () => {
                 <button>prev</button>
                 <span>이전글</span>
                 <div className="prev_tit">
-                  {prevNotice ? prevNotice.subject : "해당 글이 없습니다"}
+                  <Link to={`/notice/${parseInt(idx) - 1}`}>
+                    {prevNotice ? prevNotice.subject : "해당 글이 없습니다"}
+                  </Link>
                 </div>
               </div>
               <div className="next">
                 <button>next</button>
                 <span>다음글</span>
                 <div className="next_tit">
-                  {nextNotice ? nextNotice.subject : "해당 글이 없습니다"}
+                  <Link to={`/notice/${parseInt(idx) + 1}`}>
+                    {nextNotice ? nextNotice.subject : "해당 글이 없습니다"}
+                  </Link>
                 </div>
               </div>
             </div>
