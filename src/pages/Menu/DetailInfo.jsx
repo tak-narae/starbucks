@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import "./Detail.css";
 
 const DetailInfo = () => {
-  const productMatch = useProductMatch(); // 커스텀 훅 호출
+  const { productMatch, title, cateKo } = useProductMatch(); // 커스텀 훅 호출
   if (!productMatch) {
-    return <div>Loading...</div>;
+    return <div>Loading!</div>;
   }
 
  return (
@@ -20,10 +20,9 @@ const DetailInfo = () => {
           <li className="home">
             <Link to="/">홈</Link>
           </li>
-          <li>title</li>
-          <li>cate</li>
+          <li>{title}</li>
+          <li>{cateKo}</li>
         </ul>
-        <h2 className="tit">title</h2>
       </div>
 
       <div>

@@ -12,6 +12,10 @@ import "./Detail.css";
     matchingCategory : 매치된 중분류 데이터
     foundProduct : 일치 정보 전달(setProductMatch)
     productMatch : 최종 정보(productMatch)
+
+    productMatch : 최종 정보(productMatch)
+    title : 한글대분류
+    cateKo : 한글중분류
   === */
 
 const Detail = () => {
@@ -36,32 +40,38 @@ const Detail = () => {
           </div>
           <div className="prd_item">
             <div className="thumb_cont">
-              <img
-                src={`${process.env.PUBLIC_URL}/${productMatch.img}`}
-                alt={productMatch.name}
-              />
+              <img src={`${process.env.PUBLIC_URL}/${productMatch.img}`} alt={productMatch.name}/>
             </div>
             <div className="info_cont">
-              <h2 className="name">{productMatch.name}</h2>
-              <h3 className="price">{productMatch.price}</h3>
-              <dl className="benefit">
-                <dt>혜택</dt>
-                <dd>
-                  신규 가입시, 1만원 쿠폰증정
-                  <br />
-                  리뷰 작성시, 최대 3천원 적립금 지급
-                  <br />
-                  회원 구매시, 등급별 최대 10% 즉시할인
-                </dd>
-              </dl>
               <ul className="action">
-                <li>찜</li>
-                <li>공유</li>
+                <li className="like"><button>찜</button></li>
+                <li className="share"><button>공유</button></li>
               </ul>
-              <div className="price"></div>
+              <h2 className="name">{productMatch.name}</h2>
+              <h3 className="price">{productMatch.price.toLocaleString(1)}원</h3>
+              <ul className="shipping">
+                <li>
+                  <span><b>배송방법</b></span>
+                  <div>택배 3,000원</div>
+                </li>
+                <li>
+                  <span><b>혜택</b></span>
+                  <div>
+                    신규 가입시, 1만원 쿠폰증정
+                    <br />
+                    리뷰 작성시, 최대 3천원 적립금 지급
+                    <br />
+                    회원 구매시, 등급별 최대 10% 즉시할인
+                  </div>
+                </li>
+              </ul>
+              <div className="total_price">
+                <b>총 상품 금액</b>
+                <h3>800,000</h3>
+              </div>
               <div className="btn_primary">
-                <Link to="/">장바구니</Link>
-                <Link to="/">구매하기</Link>
+                <Link to="/" className="btn_normal">장바구니</Link>
+                <Link to="/" className="btn_dark">구매하기</Link>
               </div>
             </div>
           </div>
