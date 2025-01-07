@@ -6,7 +6,7 @@ import "pages/Event/Customer.css";
 const Notice = () => {
   const { notice } = useContext(DataContext);
   notice.sort((a, b) => new Date(b.date) - new Date(a.date));
-  console.log(notice);
+  // console.log(notice);
 
   const [isActive, setIsActive] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("전체");
@@ -98,7 +98,7 @@ const Notice = () => {
               >
                 {selectedCategory}
               </Link>
-              <ul className={`dropdown`}>
+              <ul className="dropdown">
                 {["전체", "공지사항", "문화소식", "사회공헌"].map(
                   (category) => (
                     <li key={category}>

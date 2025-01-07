@@ -9,13 +9,19 @@ import axios from "axios";
     categoryData : 중분류 데이터 전체
     matchingCategory : 매치된 중분류 데이터
     foundProduct : 일치 정보 전달(setProductMatch)
+
     productMatch : 최종 정보(productMatch)
+    title : 한글대분류
+    cateKo : 한글중분류
   === */ 
 
 const useProductMatch = () => {
   const { category } = useParams(); // URL에서 category 추출
   const [searchParams] = useSearchParams(); // URL 쿼리 파라미터 추출
+
   const [productMatch, setProductMatch] = useState(null); // 선택된 상품 데이터 저장
+  const [title,setTitle] = useState(""); //대분류
+  const [cateKo,setCateKo] = useState(""); //중분류
 
   const cateIndex = searchParams.get("cate"); // cate 값
   const productId = searchParams.get("id"); // id 값
@@ -51,12 +57,14 @@ const useProductMatch = () => {
               console.log("err==", category); // 잘못된 카테고리 로그
               return;
           }
+          setTitle(categoryLabel);
           // console.log(`${categoryLabel} ${category}`);
           // console.log("중분류전체==", categoryData);
 
           // cate, id에 해당하는 상품 필터
           const matchingCategory = categoryData[cateIndex];
           // console.log("중분류==", matchingCategory);
+          setCateKo(matchingCategory.category);
 
           if (matchingCategory) {
             const foundProduct = matchingCategory.products.find(
@@ -76,7 +84,7 @@ const useProductMatch = () => {
 
   console.log("매치==", productMatch);
 
-  return productMatch;
+  return { productMatch, title, cateKo };
 };
 
 export default useProductMatch;
