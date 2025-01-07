@@ -398,7 +398,7 @@ footer .link b {
   font-size: 15px;
   font-weight: 500;
   color: var(--bk-color1);
-  border: 1px solid var(--br-color1);
+  border: 1px solid var(--br-color2);
   border-radius: 6px;
 }
 
