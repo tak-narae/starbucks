@@ -6,22 +6,19 @@ import "pages/Event/Customer.css";
 
 const Event = () => {
   const { events } = useContext(DataContext);
-  events.sort((a, b) => new Date(b.date) - new Date(a.date));
-  console.log(events);
+  events.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
   const [isActive, setIsActive] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("전체");
   const [activeTab, setActiveTab] = useState("ongoing"); // 기본 탭은 진행 중
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const today = new Date(); //오늘 날짜 받아오기
 
+
   const toggleActive = () => {
     if (isActive) {
-      setIsClosing(true);
       setTimeout(() => {
         setIsActive(false);
-        setIsClosing(false);
-      }, 300);
+      }, 0);
     } else {
       setIsActive(true);
     }
@@ -30,11 +27,9 @@ const Event = () => {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category); // 선택된 카테고리 설정
     setCurrentPage(1);
-    setIsClosing(true);
     setTimeout(() => {
       setIsActive(false);
-      setIsClosing(false);
-    }, 300);
+    }, 0);
   };
 
   const filteredEvents =
@@ -95,7 +90,7 @@ const Event = () => {
             <li className={`sort_item`}>
               <label>카테고리</label>
               <Link className={`${isActive ? "active" : ""}`} onClick={toggleActive}>{selectedCategory}</Link>
-              <ul className={`dropdown ${isClosing ? "closing" : ""}`}>
+              <ul className="dropdown">
                 {["전체", "상품출시", "카드출시"].map((category) => (
                   <li key={category}>
                     <Link
@@ -158,7 +153,7 @@ const Event = () => {
               const isEnded = event.endDate && new Date(event.endDate) < today; //종료 이벤트 확인
               return (
               <li key={idx} className={isEnded ? "li-ended" : ""}>
-                <Link to={`/event/${event.key}`} className="item">
+                <Link to={`/event/${idx}`} className="item">
                   <div className="thumbnail">
                     <img src={event.img} alt={event.title} />
                   </div>

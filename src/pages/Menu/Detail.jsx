@@ -4,10 +4,20 @@ import { Link } from "react-router-dom";
 
 import "./Detail.css";
 
+  /* ===
+    categoryLabel : 한글대분류
+    category : 영문대분류
+    data : 모든 데이터
+    categoryData : 중분류 데이터 전체
+    matchingCategory : 매치된 중분류 데이터
+    foundProduct : 일치 정보 전달(setProductMatch)
+    productMatch : 최종 정보(productMatch)
+  === */
+
 const Detail = () => {
-  const productMatch = useProductMatch(); // 커스텀 훅 호출
+  const { productMatch, title, cateKo } = useProductMatch(); // 커스텀 훅 호출
   if (!productMatch) {
-    return <div>Loading...</div>;
+    return <div>Loading!</div>;
   }
 
   return (
@@ -20,10 +30,9 @@ const Detail = () => {
               <li className="home">
                 <Link to="/">홈</Link>
               </li>
-              <li>title</li>
-              <li>cate</li>
+              <li>{title}</li>
+              <li>{cateKo}</li>
             </ul>
-            <h2 className="tit">title</h2>
           </div>
           <div className="prd_item">
             <div className="thumb_cont">
@@ -34,7 +43,7 @@ const Detail = () => {
             </div>
             <div className="info_cont">
               <h2 className="name">{productMatch.name}</h2>
-              {/* <h3 className="price">{product.price}</h3> */}
+              <h3 className="price">{productMatch.price}</h3>
               <dl className="benefit">
                 <dt>혜택</dt>
                 <dd>
