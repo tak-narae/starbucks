@@ -48,7 +48,8 @@ const Detail = () => {
                 <li className="share"><button>공유</button></li>
               </ul>
               <h2 className="name">{productMatch.name}</h2>
-              <h3 className="price">{productMatch.price.toLocaleString(1)}원</h3>
+              <h3 className="price">800,000원</h3>
+              {/* <h3 className="price">{productMatch.price.toLocaleString(1)}원</h3> */}
               <ul className="shipping">
                 <li>
                   <span><b>배송방법</b></span>

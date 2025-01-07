@@ -32,7 +32,7 @@ const useProductMatch = () => {
         .get("https://raw.githubusercontent.com/deliondane/db/main/db.json")
         .then((res) => {
           const data = res.data; // 서버에서 가져온 전체 데이터
-          // console.log("전체상품==", data);
+          console.log("전체상품==", data);
 
           let categoryData = []; // category에 따라 데이터 선택
           let categoryLabel = ""; // 카테고리 레이블
@@ -58,12 +58,12 @@ const useProductMatch = () => {
               return;
           }
           setTitle(categoryLabel);
-          // console.log(`${categoryLabel} ${category}`);
-          // console.log("중분류전체==", categoryData);
+          console.log(`${categoryLabel} ${category}`);
+          console.log("중분류전체==", categoryData);
 
           // cate, id에 해당하는 상품 필터
           const matchingCategory = categoryData[cateIndex];
-          // console.log("중분류==", matchingCategory);
+          console.log("중분류==", matchingCategory);
           setCateKo(matchingCategory.category);
 
           if (matchingCategory) {

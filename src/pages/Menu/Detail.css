@@ -8,7 +8,7 @@
 .prd_item .info_cont .shipping li + li { margin-top:14px; }
 .prd_item .info_cont .shipping span { min-width:60px; }
 .prd_item .info_cont .shipping div { color:var(--bk-color2); flex:1; }
-.prd_item .info_cont .action { position:absolute; top:0; right:0; }
+.prd_item .info_cont .action { position:absolute; top:2px; right:0; }
 .prd_item .info_cont .action li { margin-right:16px; display:inline-block; }
 .prd_item .info_cont .action li button { width:22px; height:22px; font-size:0; text-indent:-9999px; }
 .prd_item .info_cont .action li.like button { background:transparent url("../../images/icon_like_off.png")no-repeat center/cover; }
