@@ -1,19 +1,15 @@
-import React, { useContext } from "react";
-import { DataContext } from "App";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
+import { useUtilContext } from "hooks/UtilContext";
 
 const NoticeDetail = () => {
-  // let { key } = useParams();
-  //   console.log(key);
   let { idx } = useParams();
   console.log("idx===", idx);
-  const { notice } = useContext(DataContext);
-  // console.log("notice===", notice);
-  const notices = notice[parseInt(idx)]; // index를 그대로 사용
-  // console.log("notices===", notices);
-  const prevNotice = notice[parseInt(idx) - 1];
+  const { paginatedNotices } = useUtilContext();
+  const notices = paginatedNotices[parseInt(idx)]; // index를 그대로 사용
+  const prevNotice = paginatedNotices[parseInt(idx) - 1];
   console.log(prevNotice);
-  const nextNotice = notice[parseInt(idx) + 1];
+  const nextNotice = paginatedNotices[parseInt(idx) + 1];
   console.log(nextNotice);
 
   //key값으로 가져오는 경우
@@ -40,7 +36,7 @@ const NoticeDetail = () => {
                 <span>이전글</span>
                 <div className="prev_tit">
                   <Link to={`/notice/${parseInt(idx) - 1}`}>
-                    {prevNotice ? (<div>prevNotice.subject</div>) : (<p>해당 글이 없습니다</p>)}
+                    {prevNotice ? (<div>{prevNotice.subject}</div>) : (<p>해당 글이 없습니다</p>)}
                   </Link>
                 </div>
               </div>
@@ -49,7 +45,7 @@ const NoticeDetail = () => {
                 <span>다음글</span>
                 <div className="next_tit">
                   <Link to={`/notice/${parseInt(idx) + 1}`}>
-                    {nextNotice ? (<div>nextNotice.subject</div>) : (<p>"해당 글이 없습니다"</p>)}
+                    {nextNotice ? (<div>{nextNotice.subject}</div>) : (<p>"해당 글이 없습니다"</p>)}
                   </Link>
                 </div>
               </div>

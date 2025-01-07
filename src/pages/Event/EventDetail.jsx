@@ -1,20 +1,23 @@
-import React, { useContext, useEffect, useState } from "react";
-import { DataContext } from "App";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
+import { useUtilContext } from "hooks/UtilContext";
 
 const EventDetail = () => {
   let { idx } = useParams();
-  const { events } = useContext(DataContext);
-  const event = events[parseInt(idx)]; // index를 그대로 사용
-  console.log(event.detailImg);
-  const prevEvent = events[parseInt(idx) - 1];
-  const nextEvent = events[parseInt(idx) + 1];
+  console.log("idx===", idx);
+  const {paginatedEvents} = useUtilContext();
+  const event = paginatedEvents[parseInt(idx)]; // index를 그대로 사용
+  console.log(event)
+  // console.log("detailImg length:", event.detailImg.length);
+  // console.log("detailImg:", event.detailImg);
+  const prevEvent = paginatedEvents[parseInt(idx) - 1];
+  const nextEvent = paginatedEvents[parseInt(idx) + 1];
 
   return (
     <>
       <div id="container" className="board__event_detail">
         <div className="layout_fix">
-          {events ? (
+          {event ? (
             <>
               <div className="heading">
                 <div className="event_tit">
@@ -38,7 +41,7 @@ const EventDetail = () => {
                     })}
                   </div>
                 ) : (
-                  <p>해당 이벤트 상세 내용이</p>
+                  <p>해당 이벤트 상세 내용이 없습니다</p>
                 )}
               </div>
               <div className="post_nav">
