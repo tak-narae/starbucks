@@ -24,7 +24,7 @@ const Notice = () => {
     if (isActive) {
       setTimeout(() => {
         setIsActive(false);
-      }, 200);
+      }, 0);
     } else {
       setIsActive(true);
     }
