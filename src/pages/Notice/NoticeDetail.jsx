@@ -11,13 +11,7 @@ const NoticeDetail = () => {
   console.log(prevNotice);
   const nextNotice = paginatedNotices[parseInt(idx) + 1];
   console.log(nextNotice);
-
-  //key값으로 가져오는 경우
-  // const noticeDetail = notice.find((notices) => notices.idx === parseInt(idx));
-  //find 함수
-  //find(function(요소){return 요소 === })
-  //받아온 key값은 문자열이므로 notices.key안의 값을 문자열로 형변환
-
+  
   return (
     <div id="container" className="board__notice_detail">
       <div className="layout_fix">

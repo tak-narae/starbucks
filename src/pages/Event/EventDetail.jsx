@@ -1,41 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 const EventDetail = () => {
   let { idx } = useParams();
-  console.log("idx===", idx);
-  const {paginatedEvents} = useUtilContext();
-  const event = paginatedEvents[parseInt(idx)]; // index를 그대로 사용
-  console.log(event)
-  // console.log("detailImg length:", event.detailImg.length);
-  // console.log("detailImg:", event.detailImg);
-  const prevEvent = paginatedEvents[parseInt(idx) - 1];
-  const nextEvent = paginatedEvents[parseInt(idx) + 1];
+  
+  const { event, paginatedEvents } = useUtilContext();
+
+  useEffect(() => {
+    if (paginatedEvents.length > 0) {
+      localStorage.setItem("paginatedEvents", JSON.stringify(paginatedEvents));
+    }
+  }, [event]);
+
+  const storedPaginatedEvents = JSON.parse(localStorage.getItem("paginatedEvents"));
+
+  // localStorage에서 paginatedEvents 가져오기
+  const EventDetail = storedPaginatedEvents
+    ? storedPaginatedEvents[parseInt(idx)]
+    : "null";
+  const prevEvent = storedPaginatedEvents
+    ? storedPaginatedEvents[parseInt(idx) - 1]
+    : "null";
+  const nextEvent = storedPaginatedEvents
+    ? storedPaginatedEvents[parseInt(idx) + 1]
+    : "null";
 
   return (
     <>
       <div id="container" className="board__event_detail">
         <div className="layout_fix">
-          {event ? (
+          {EventDetail ? (
             <>
               <div className="heading">
                 <div className="event_tit">
-                  <h2 className="tit">{event.title}</h2>
+                  <h2 className="tit">{EventDetail.title}</h2>
                   <p className="date">
-                    {event.startDate} ~ {event.endDate}
+                    {EventDetail.startDate} ~ {EventDetail.endDate}
                   </p>
                 </div>
               </div>
               <div className="event_cont">
-                {event.detailImg && event.detailImg.length > 0 ? (
+                {EventDetail.detailImg && EventDetail.detailImg.length > 0 ? (
                   <div className="detail_img">
-                    {event.detailImg.map((imgUrl, index) => {
+                    {EventDetail.detailImg.map((imgUrl) => {
                       return (
                         <img
-                          key={index}
+                          key={idx}
                           src={`${process.env.PUBLIC_URL}/${imgUrl}`}
-                          alt={`detailImg ${index + 1}`}
+                          alt={`detailImg ${idx + 1}`}
                         ></img>
                       );
                     })}

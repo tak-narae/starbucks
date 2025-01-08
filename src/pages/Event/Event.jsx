@@ -1,98 +1,17 @@
-import { DataContext } from "App";
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 import "pages/Event/Customer.css";
 
 const Event = () => {
-  const { events } = useContext(DataContext);
-  const { setPaginatedEvents } = useUtilContext();
-  // console.log(events);
-  const [isActive, setIsActive] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("전체");
-  const [activeTab, setActiveTab] = useState("ongoing"); // 기본 탭은 진행 중
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
-  const today = new Date(); //오늘 날짜 받아오기
-
-  const toggleActive = () => {
-    if (isActive) {
-      setTimeout(() => {
-        setIsActive(false);
-      }, 0);
-    } else {
-      setIsActive(true);
-    }
-  };
-
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category); // 선택된 카테고리 설정
-    setCurrentPage(1);
-    setTimeout(() => {
-      setIsActive(false);
-    }, 0);
-  };
-
-  const filteredEvents =
-    selectedCategory === "전체"
-      ? events
-      : events.filter((n) => n.category === selectedCategory);
-
-  // 현재 탭에 따른 이벤트 선택
-  const displayedEvents = filteredEvents.filter((event) => {
-    if (activeTab === "ongoing") {
-      //진행 중 이벤트
-      return (
-        new Date(event.startDate) <= today &&
-        (!event.endDate || today <= new Date(event.endDate))
-      );
-    } else if (activeTab === "past") {
-      //종료된 이벤트
-      return event.endDate && new Date(event.endDate) < today;
-    }
-    return false;
-  });
-
-  const itemsPerPage = 16; // 한 페이지당 표시할 항목 수
-  const datefilteredEvents = displayedEvents.sort(
-    (a, b) => new Date(b.startDate) - new Date(a.startDate)
-  );
-  const totalPages = Math.ceil(datefilteredEvents.length / itemsPerPage);
-
-  const paginatedEvents = datefilteredEvents.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  useEffect(() => {
-    setPaginatedEvents(paginatedEvents);
-  }, [paginatedEvents, setPaginatedEvents]);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  // Pagination 표시 범위 계산
-  const maxVisiblePages = 5;
-  const currentBlock = Math.ceil(currentPage / maxVisiblePages); //5개씩 보여질 수 있도록
-  const startPage = (currentBlock - 1) * maxVisiblePages + 1; //현재 페이지 계산
-  const endPage = Math.min(currentBlock * maxVisiblePages, totalPages); //페이지네이션 마지막 번호
-  const pages = Array.from(
-    { length: endPage - startPage + 1 },
-    (_, i) => startPage + i
-  ); //start부터 end 페이지 계산(있는 페이지까지만 나오게)
-
-  const [search, setSearch] = useState("");
-  const searchAction = (e) => {
-    if (
-      search !== "" &&
-      e.target.closest("[class*='search_']:has(.btn_search).active")
-    ) {
-      return false;
-    }
-    e.target.closest(".search_event").classList.toggle("active");
-    document.querySelector(".heading_tab input").focus();
-  };
+  const {
+    isActive, selectedCategory, currentPage, setCurrentPage,
+    toggleActive, handleCategoryClick, handlePageChange, 
+    search, setSearch, searchAction,
+    eventPages,
+    activeTab, setActiveTab, today,eventtotalPages, paginatedEvents, 
+  } = useUtilContext();
 
   return (
     <div id="container" className="board__event">
@@ -201,7 +120,7 @@ const Event = () => {
           >
             &laquo;
           </button>
-          {pages.map((page) => (
+          {eventPages.map((page) => (
             <button
               key={page}
               className={`page ${currentPage === page ? "active" : ""}`}
@@ -213,7 +132,7 @@ const Event = () => {
           <button
             className="next"
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
+            disabled={currentPage === eventtotalPages}
           >
             &raquo;
           </button>
