@@ -1,16 +1,25 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 const NoticeDetail = () => {
   let { idx } = useParams();
-  console.log("idx===", idx);
-  const { paginatedNotices } = useUtilContext();
+  const { paginatedNotices, datefilteredNotice } = useUtilContext();
   const notices = paginatedNotices[parseInt(idx)]; // index를 그대로 사용
-  const prevNotice = paginatedNotices[parseInt(idx) - 1];
-  console.log(prevNotice);
-  const nextNotice = paginatedNotices[parseInt(idx) + 1];
-  console.log(nextNotice);
+  console.log(paginatedNotices)
+  const prevNotice = datefilteredNotice[parseInt(idx) - 1];
+  const nextNotice = datefilteredNotice[parseInt(idx) + 1];
+  
+  const [reqData, setReqData] = useState(``);
+
+  // useEffect(()=>{
+  //   const getData = async () => {
+  //     await axios({
+  //       method: 'get',
+  //       url: `${process.env.REACT_APP_API_URL}/notice/list?size={}`
+  //     })
+  //   }
+  // })
   
   return (
     <div id="container" className="board__notice_detail">
@@ -18,6 +27,9 @@ const NoticeDetail = () => {
         {notices ? (
           <>
             <div className="heading">
+                <div className="path">
+                  <Link to="/notice">{notices.category}</Link>
+                </div>
               <div className="notice_tit">
                 <h2 className="tit">{notices.subject}</h2>
                 <p className="date">{notices.date}</p>

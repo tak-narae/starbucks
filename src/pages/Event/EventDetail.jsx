@@ -33,6 +33,9 @@ const EventDetail = () => {
           {EventDetail ? (
             <>
               <div className="heading">
+                <div className="path">
+                  <Link to="/">{EventDetail.category}</Link>
+                </div>
                 <div className="event_tit">
                   <h2 className="tit">{EventDetail.title}</h2>
                   <p className="date">

@@ -176,7 +176,7 @@ export const UtilProvider = ({ children }) => {
         notice, setNotice, event, setEvent, 
         isActive, setIsActive, selectedCategory, setSelectedCategory, currentPage, setCurrentPage,
         toggleActive, handleCategoryClick, categoryNoticeFiltered, categoryEventFiltered,  handlePageChange, 
-        search, setSearch, searchAction, 
+        search, setSearch, searchAction,
         maxVisiblePages, currentBlock, startPage, noticeEndPage, noticePages, eventEndPage, eventPages, 
         noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
         activeTab, setActiveTab, today, displayedEvents, datefilteredEvents, eventitemsPerPage, eventtotalPages, paginatedEvents, 
