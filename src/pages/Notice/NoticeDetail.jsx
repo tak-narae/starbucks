@@ -1,22 +1,18 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 const NoticeDetail = () => {
   let { idx } = useParams();
-  console.log("idx===", idx);
-  const { paginatedNotices } = useUtilContext();
-  const notices = paginatedNotices[parseInt(idx)]; // index를 그대로 사용
-  const prevNotice = paginatedNotices[parseInt(idx) - 1];
-  console.log(prevNotice);
-  const nextNotice = paginatedNotices[parseInt(idx) + 1];
-  console.log(nextNotice);
+  const { paginatedNotices, datefilteredNotice } = useUtilContext();
+  const noticeIndex = parseInt(idx);
+  const notices = paginatedNotices[noticeIndex];
 
-  //key값으로 가져오는 경우
-  // const noticeDetail = notice.find((notices) => notices.idx === parseInt(idx));
-  //find 함수
-  //find(function(요소){return 요소 === })
-  //받아온 key값은 문자열이므로 notices.key안의 값을 문자열로 형변환
+  const filteredNotices = notices ? datefilteredNotice.filter(notice => notice.category === notices.category) : [];
+  const currentFilteredIndex = filteredNotices.findIndex(notice => notice === notices); 
+
+  const prevNotice = currentFilteredIndex > 0 ? filteredNotices[currentFilteredIndex - 1] : null;
+  const nextNotice = currentFilteredIndex < filteredNotices.length ? filteredNotices[currentFilteredIndex + 1] : null;
 
   return (
     <div id="container" className="board__notice_detail">
@@ -24,6 +20,9 @@ const NoticeDetail = () => {
         {notices ? (
           <>
             <div className="heading">
+                <div className="path">
+                  <Link to="/notice">{notices.category}</Link>
+                </div>
               <div className="notice_tit">
                 <h2 className="tit">{notices.subject}</h2>
                 <p className="date">{notices.date}</p>
@@ -45,7 +44,7 @@ const NoticeDetail = () => {
                 <span>다음글</span>
                 <div className="next_tit">
                   <Link to={`/notice/${parseInt(idx) + 1}`}>
-                    {nextNotice ? (<div>{nextNotice.subject}</div>) : (<p>"해당 글이 없습니다"</p>)}
+                    {nextNotice ? (<div>{nextNotice.subject}</div>) : (<p>해당 글이 없습니다</p>)}
                   </Link>
                 </div>
               </div>

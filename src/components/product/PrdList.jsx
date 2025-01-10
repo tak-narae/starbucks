@@ -86,7 +86,7 @@ const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, current
                   state={{ title, cateKo, product }}
                   >
                   <div className="image">
-                      <img src={`${process.env.PUBLIC_URL}/${product.img}`} alt={product.name} />
+                      <img src={product.img} alt={product.name} />
                   </div>
                 </Link>
                 <div className="desc">

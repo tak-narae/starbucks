@@ -28,7 +28,7 @@ const DataContext = createContext();
 function App() {
   const [loading, setLoading] = useState(true);
   // const [menuTit, setMenuTit] = useState([]);
-  const [coffee, setCoffee] = useState([]);
+  const [coffee, setCoffee] = useState([]); 
   const [beverage, setBeverage] = useState([]);
   const [product, setProduct] = useState([]);
   const [food, setFood] = useState([]);
@@ -47,6 +47,7 @@ function App() {
       setNotice(response.data.notice);
       // console.log(response.data.notice);
       setEvents(response.data.events);
+
     } catch (err) {
       console.error("Error:", err);
     }

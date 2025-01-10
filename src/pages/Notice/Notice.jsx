@@ -1,86 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import { DataContext } from "App";
 import { useUtilContext } from "hooks/UtilContext";
 import "pages/Event/Customer.css";
 
 const Notice = () => {
-  const { notice } = useContext(DataContext);
-  const {setPaginatedNotices} = useUtilContext();
-  const [isActive, setIsActive] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("전체");
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
-
-  const itemsPerPage = 10; // 한 페이지당 표시할 항목 수
-  const totalPages = Math.ceil(
-    (selectedCategory === "전체"
-      ? notice.length
-      : notice.filter((n) => n.category === selectedCategory).length) /
-      itemsPerPage
-  );
-
-  const toggleActive = () => {
-    if (isActive) {
-      setTimeout(() => {
-        setIsActive(false);
-      }, 0);
-    } else {
-      setIsActive(true);
-    }
-  };
-
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category); // 선택된 카테고리 설정
-    setCurrentPage(1); //카테고리 변경 시 페이지 초기화
-    setTimeout(() => {
-      setIsActive(false);
-    }, 0);
-  };
-
-  const filteredNotices =
-    selectedCategory === "전체"
-      ? notice
-      : notice.filter((n) => n.category === selectedCategory);
-
-  const datefilteredNotice = filteredNotices.sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
-  // console.log(datefilteredNotice);
-
-  const paginatedNotices = datefilteredNotice.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-  console.log(paginatedNotices);
-  useEffect(()=>{
-    setPaginatedNotices(paginatedNotices);
-  },[paginatedNotices, setPaginatedNotices])
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  // //pagination 표시 범위 계산
-  const maxVisiblePages = 5;
-  const currentBlock = Math.ceil(currentPage / maxVisiblePages);
-  const startPage = (currentBlock - 1) * maxVisiblePages + 1;
-  const endPage = Math.min(currentBlock * maxVisiblePages, totalPages);
-  const pages = Array.from(
-    { length: endPage - startPage + 1 },
-    (_, i) => startPage + i
-  );
-
-  const [search, setSearch] = useState("");
-  const searchAction = (e) => {
-    if (
-      search !== "" &&
-      e.target.closest("[class*='search_']:has(.btn_search).active")
-    ) {
-      return false;
-    }
-    e.target.closest(".search_notice").classList.toggle("active");
-    document.querySelector(".search_notice input").focus();
-  };
+  const {
+    isActive, selectedCategory, currentPage, 
+    toggleActive, handleCategoryClick, handlePageChange, 
+    search, setSearch, searchAction, 
+    noticePages,
+    noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
+  } = useUtilContext();
 
   return (
     <>
@@ -158,7 +88,7 @@ const Notice = () => {
             <tbody>
               {paginatedNotices.map((notice, idx) => (
                 <tr key={idx}>
-                  <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
+                  <td>{(currentPage - 1) * noticeitemsPerPage + idx + 1}</td>
                   <td>{notice.category}</td>
                   <td className="subject">
                     <Link to={`/notice/${idx}`}>{notice.subject}</Link>
@@ -177,7 +107,7 @@ const Notice = () => {
             >
               &laquo;
             </button>
-            {pages.map((page) => (
+            {noticePages.map((page) => (
               <button
                 key={page}
                 className={`page ${currentPage === page ? "active" : ""}`}
@@ -189,7 +119,7 @@ const Notice = () => {
             <button
               className="next"
               onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
+              disabled={currentPage === noticetotalPages}
             >
               &raquo;
             </button>
