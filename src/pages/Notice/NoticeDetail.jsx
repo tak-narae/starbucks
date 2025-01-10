@@ -5,22 +5,15 @@ import { useUtilContext } from "hooks/UtilContext";
 const NoticeDetail = () => {
   let { idx } = useParams();
   const { paginatedNotices, datefilteredNotice } = useUtilContext();
-  const notices = paginatedNotices[parseInt(idx)]; // index를 그대로 사용
-  console.log(paginatedNotices)
-  const prevNotice = datefilteredNotice[parseInt(idx) - 1];
-  const nextNotice = datefilteredNotice[parseInt(idx) + 1];
-  
-  const [reqData, setReqData] = useState(``);
+  const noticeIndex = parseInt(idx);
+  const notices = paginatedNotices[noticeIndex];
 
-  // useEffect(()=>{
-  //   const getData = async () => {
-  //     await axios({
-  //       method: 'get',
-  //       url: `${process.env.REACT_APP_API_URL}/notice/list?size={}`
-  //     })
-  //   }
-  // })
-  
+  const filteredNotices = notices ? datefilteredNotice.filter(notice => notice.category === notices.category) : [];
+  const currentFilteredIndex = filteredNotices.findIndex(notice => notice === notices); 
+
+  const prevNotice = currentFilteredIndex > 0 ? filteredNotices[currentFilteredIndex - 1] : null;
+  const nextNotice = currentFilteredIndex < filteredNotices.length ? filteredNotices[currentFilteredIndex + 1] : null;
+
   return (
     <div id="container" className="board__notice_detail">
       <div className="layout_fix">
@@ -51,7 +44,7 @@ const NoticeDetail = () => {
                 <span>다음글</span>
                 <div className="next_tit">
                   <Link to={`/notice/${parseInt(idx) + 1}`}>
-                    {nextNotice ? (<div>{nextNotice.subject}</div>) : (<p>"해당 글이 없습니다"</p>)}
+                    {nextNotice ? (<div>{nextNotice.subject}</div>) : (<p>해당 글이 없습니다</p>)}
                   </Link>
                 </div>
               </div>
