@@ -93,6 +93,39 @@ const Main = () => {
             <div className="heading">
               <h2 className="tit">이벤트</h2>
             </div>
+            <div className="loop_event">
+              <ul className="event_list">
+                <Swiper className="swiper_event"
+                  modules={[Autoplay]}
+                  loop={true}
+                  slidesPerView="auto"
+                  spaceBetween={40}
+                  freeMode={true}
+                  touchRatio={0}
+                  allowTouchMove={false}
+                  speed={4000}
+                  autoplay={{
+                    delay: 1,
+                    disableOnInteraction: false,
+                  }}
+                >
+                  <SwiperSlide>
+                    <Link to="/">
+                      <div className="thumb">
+                        <img src={require("../images/bear_search1.png")} alt=""/>
+                      </div>
+                      <div className="info">
+                        <p className="tit">조선델리 노엘 트리 케이크 사전 예약 혜택</p>
+                        <span className="date">2024-11-27~ 2024-12-25</span>
+                      </div>
+                    </Link>
+                  </SwiperSlide>
+                  <SwiperSlide><Link to="/">2</Link></SwiperSlide>
+                  <SwiperSlide><Link to="/">3</Link></SwiperSlide>
+                  <SwiperSlide><Link to="/">4</Link></SwiperSlide>
+                </Swiper>
+              </ul>
+            </div>
           </div>
         </section>
         <section className="main__promo">

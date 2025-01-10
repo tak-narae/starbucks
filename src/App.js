@@ -13,6 +13,7 @@ import Coffee from "pages/Menu/Coffee/Coffee";
 import Product from "pages/Menu/Product/Product";
 import Beverage from "pages/Menu/Beverage/Beverage";
 import Food from "pages/Menu/Food/Food";
+import Cart from "pages/Order/Cart";
 import Event from "pages/Event/Event";
 import EventDetail from "pages/Event/EventDetail";
 import Notice from "pages/Notice/Notice";
@@ -57,23 +58,7 @@ function App() {
   return (
     <>
       <Header />
-      <DataContext.Provider
-        value={{
-          loading,
-          coffee,
-          setCoffee,
-          beverage,
-          setBeverage,
-          product,
-          setProduct,
-          food,
-          setFood,
-          notice,
-          setNotice,
-          events,
-          setEvents,
-        }}
-      >
+      <DataContext.Provider value={{ loading, coffee, setCoffee, beverage, setBeverage, product, setProduct, food, setFood, notice, setNotice, events, setEvents }}>
         <UtilProvider>
           <Routes>
             <Route path="/" element={<Main />}></Route>
@@ -85,6 +70,9 @@ function App() {
             </Route>
             <Route path="/menu/detail/:category" element={<Detail />}></Route>
             <Route path="/menu/info/:category" element={<DetailInfo />}></Route>
+            <Route path="/order/">
+              <Route path="cart" element={<Cart/>}></Route>
+            </Route>
             <Route path="/event" element={<Event />}></Route>
             <Route path="/event/:idx" element={<EventDetail />}></Route>
             <Route path="/notice" element={<Notice />}></Route>
