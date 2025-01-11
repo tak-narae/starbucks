@@ -11,13 +11,12 @@ const Notice = () => {
     noticePages,
     noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
   } = useUtilContext();
-  console.log(datefilteredNotice)
 
   const navigate = useNavigate();
 
   const handleCategoryChange = (e) => {
     handleCategoryClick(selectedCategory);
-    navigate(`/notice?cate=${e}`)
+    navigate(`/notice?cate=${e}`);
   }
 
   return (
@@ -43,23 +42,22 @@ const Notice = () => {
                   {selectedCategory}
                 </Link>
                 <ul className="dropdown">
-                  {["전체", "공지사항", "문화소식", "사회공헌"].map(
-                    (category) => (
-                      <li key={category}>
-                        <Link to={{
-                          pathname: `/notice/${datefilteredNotice.idx}`, search: `?cate=${category}`
+                  {["전체", "공지사항", "문화소식", "사회공헌"].map((category) => (
+                    <li key={category}>
+                      <Link to={{
+                        pathname: `/notice/${datefilteredNotice.idx}`, search: `?cate=${category}`
+                      }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleCategoryChange(category);
+                          handleCategoryClick(category);
                         }}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            handleCategoryChange(category);
-                            handleCategoryClick(category);
-                          }}
-                        >
-                          {category}
-                        </Link>
-                      </li>
-                    )
+                      >
+                        {category}
+                      </Link>
+                    </li>
+                  )
                   )}
                 </ul>
               </li>

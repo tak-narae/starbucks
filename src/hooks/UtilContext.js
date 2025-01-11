@@ -40,14 +40,20 @@ export const UtilProvider = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("전체");
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
-  const [categoryFilteredData, setCategoryFilteredData] = useState([]); // 필터링된 카테고리 데이터
+  const [noticeCategoryFilteredData, setNoticeCategoryFilteredData] = useState([]); // 필터링된 카테고리 데이터
+  const [eventCategoryFilteredData, setEventCategoryFilteredData] = useState([]);
 
   useEffect(() => {
-    const NewfilteredData = selectedCategory === "전체"
+    const categoryNoticeFiltered = selectedCategory === "전체"
       ? notice
       : notice.filter((n) => n.category === selectedCategory);
-    setCategoryFilteredData(NewfilteredData);
-  }, [selectedCategory, notice]);
+    setNoticeCategoryFilteredData(categoryNoticeFiltered);
+
+    const categoryEventFiltered = selectedCategory === "전체"
+      ? event
+      : event.filter((n) => n.category === selectedCategory);
+    setEventCategoryFilteredData(categoryEventFiltered);
+  }, [selectedCategory, notice, event]);
 
   const toggleActive = () => {
     if (isActive) {
@@ -67,12 +73,6 @@ export const UtilProvider = ({ children }) => {
     }, 0);
   };
 
-  const categoryEventFiltered =
-    selectedCategory === "전체"
-      ? event
-      : event.filter((n) => n.category === selectedCategory);
-
-  //
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -101,7 +101,7 @@ export const UtilProvider = ({ children }) => {
   /* ===== Notice에 사용하는 변수 및 설정  ===== */
   const noticeitemsPerPage = 10; // 한 페이지당 표시할 항목 수
   const noticetotalPages = Math.ceil(
-    categoryFilteredData.length / noticeitemsPerPage
+    noticeCategoryFilteredData.length / noticeitemsPerPage
   );
   const noticeEndPage = Math.min(
     currentBlock * maxVisiblePages,
@@ -112,7 +112,7 @@ export const UtilProvider = ({ children }) => {
     (_, i) => startPage + i
   );
 
-  const datefilteredNotice = categoryFilteredData.sort(
+  const datefilteredNotice = noticeCategoryFilteredData.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
 
@@ -125,7 +125,7 @@ export const UtilProvider = ({ children }) => {
   // 현재 탭에 따른 이벤트 선택[진행중|종료된]
   const [activeTab, setActiveTab] = useState("ongoing"); // 기본 탭은 진행 중
   const today = new Date(); //오늘 날짜 받아오기
-  const displayedEvents = categoryEventFiltered.filter((event) => {
+  const displayedEvents = eventCategoryFilteredData.filter((event) => {
     if (activeTab === "ongoing") {
       //진행 중 이벤트
       return (
@@ -158,18 +158,13 @@ export const UtilProvider = ({ children }) => {
     (currentPage - 1) * eventitemsPerPage,
     currentPage * eventitemsPerPage
   );
-  useEffect(() => {
-    if (paginatedEvents.length > 0) {
-      localStorage.setItem("paginatedEvents", JSON.stringify(paginatedEvents));
-    }
-  }, []);
 
   return (
     <UtilContext.Provider
       value={{
         notice, setNotice, event, setEvent,
         isActive, setIsActive, selectedCategory, setSelectedCategory, currentPage, setCurrentPage,
-        toggleActive, handleCategoryClick, categoryFilteredData, categoryEventFiltered, handlePageChange,
+        toggleActive, handleCategoryClick, noticeCategoryFilteredData, eventCategoryFilteredData, handlePageChange,
         search, setSearch, searchAction,
         maxVisiblePages, currentBlock, startPage, noticeEndPage, noticePages, eventEndPage, eventPages,
         noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,

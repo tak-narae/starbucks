@@ -45,8 +45,7 @@ function App() {
       setProduct(response.data.product);
       setFood(response.data.food);
       setNotice(response.data.notice);
-      console.log(response.data.events);
-      // setEvents(response.data.events);
+      setEvents(response.data.events);
 
     } catch (err) {
       console.error("Error:", err);
@@ -75,7 +74,7 @@ function App() {
               <Route path="cart" element={<Cart />}></Route>
             </Route>
             <Route path="/event" element={<Event />}></Route>
-            <Route path="/event/:category/:idx" element={<EventDetail />}></Route>
+            <Route path="/event/:idx" element={<EventDetail />}></Route>
             <Route path="/notice" element={<Notice />}></Route>
             <Route path="/notice/:idx" element={<NoticeDetail />}></Route>
             <Route path="/store" element={<Store />}></Route>
