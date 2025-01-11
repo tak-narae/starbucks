@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, use } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UtilContext = createContext();
 
@@ -10,37 +11,26 @@ export const UtilProvider = ({ children }) => {
   const [notice, setNotice] = useState([]);
   const [event, setEvent] = useState([]);
 
-  /* ===== 데이터 불러오기 및 localStorage 저장[Notice, Events]  ===== */
+  // console.log(event);
+
+  /* ===== 데이터 불러오기 [Notice, Events]  ===== */
   const getData = async () => {
-    // localStorage에서 기존 데이터를 확인
-    const savedNotices = localStorage.getItem("notices");
-    const savedEvents = localStorage.getItem("events");
+    try {
+      const response = await axios.get(
+        `https://raw.githubusercontent.com/deliondane/db/main/db.json`
+      );
+      const fetchedNotices = response.data.notice;
+      const fetchedEvents = response.data.events;
 
-    if (savedNotices && savedEvents) {
-      // localStorage에 데이터가 있으면 그 데이터를 사용
-      setNotice(JSON.parse(savedNotices));
-      setEvent(JSON.parse(savedEvents));
-    } else {
-      // 데이터가 없으면 API로 데이터를 불러옴
-      try {
-        const response = await axios.get(
-          `https://raw.githubusercontent.com/deliondane/db/main/db.json`
-        );
-        const fetchedNotices = response.data.notice;
-        const fetchedEvents = response.data.events;
+      // API에서 받은 데이터를 상태에 저장
+      setNotice(fetchedNotices);
+      setEvent(fetchedEvents);
 
-        // API에서 받은 데이터를 상태에 저장
-        setNotice(fetchedNotices);
-        setEvent(fetchedEvents);
-
-        // 데이터를 localStorage에 저장
-        localStorage.setItem("notices", JSON.stringify(fetchedNotices));
-        localStorage.setItem("events", JSON.stringify(fetchedEvents));
-      } catch (err) {
-        console.error("데이터를 가져오는 중 오류가 발생했습니다:", err);
-      }
+    } catch (err) {
+      console.error("데이터를 가져오는 중 오류가 발생했습니다:", err);
     }
-  };
+  }
+  // };
   useEffect(() => {
     getData();
   }, []);
@@ -50,6 +40,14 @@ export const UtilProvider = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("전체");
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
+  const [categoryFilteredData, setCategoryFilteredData] = useState([]); // 필터링된 카테고리 데이터
+
+  useEffect(() => {
+    const NewfilteredData = selectedCategory === "전체"
+      ? notice
+      : notice.filter((n) => n.category === selectedCategory);
+    setCategoryFilteredData(NewfilteredData);
+  }, [selectedCategory, notice]);
 
   const toggleActive = () => {
     if (isActive) {
@@ -69,15 +67,15 @@ export const UtilProvider = ({ children }) => {
     }, 0);
   };
   //카테고리 분류
-  const categoryNoticeFiltered =
-    selectedCategory === "전체"
-      ? notice
-      : notice.filter((n) => n.category === selectedCategory);
+  // const categoryNoticeFiltered =
+  //   selectedCategory === "전체"
+  //     ? notice
+  //     : notice.filter((n) => n.category === selectedCategory);
   const categoryEventFiltered =
     selectedCategory === "전체"
       ? event
       : event.filter((n) => n.category === selectedCategory);
-  
+
   //
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -107,7 +105,7 @@ export const UtilProvider = ({ children }) => {
   /* ===== Notice에 사용하는 변수 및 설정  ===== */
   const noticeitemsPerPage = 10; // 한 페이지당 표시할 항목 수
   const noticetotalPages = Math.ceil(
-    categoryNoticeFiltered.length / noticeitemsPerPage
+    categoryFilteredData.length / noticeitemsPerPage
   );
   const noticeEndPage = Math.min(
     currentBlock * maxVisiblePages,
@@ -118,7 +116,7 @@ export const UtilProvider = ({ children }) => {
     (_, i) => startPage + i
   );
 
-  const datefilteredNotice = categoryNoticeFiltered.sort(
+  const datefilteredNotice = categoryFilteredData.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
 
@@ -173,13 +171,13 @@ export const UtilProvider = ({ children }) => {
   return (
     <UtilContext.Provider
       value={{
-        notice, setNotice, event, setEvent, 
+        notice, setNotice, event, setEvent,
         isActive, setIsActive, selectedCategory, setSelectedCategory, currentPage, setCurrentPage,
-        toggleActive, handleCategoryClick, categoryNoticeFiltered, categoryEventFiltered,  handlePageChange, 
+        toggleActive, handleCategoryClick, categoryFilteredData, categoryEventFiltered, handlePageChange,
         search, setSearch, searchAction,
-        maxVisiblePages, currentBlock, startPage, noticeEndPage, noticePages, eventEndPage, eventPages, 
+        maxVisiblePages, currentBlock, startPage, noticeEndPage, noticePages, eventEndPage, eventPages,
         noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
-        activeTab, setActiveTab, today, displayedEvents, datefilteredEvents, eventitemsPerPage, eventtotalPages, paginatedEvents, 
+        activeTab, setActiveTab, today, displayedEvents, datefilteredEvents, eventitemsPerPage, eventtotalPages, paginatedEvents,
       }}
     >
       {children}

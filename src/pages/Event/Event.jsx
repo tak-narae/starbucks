@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 import "pages/Event/Customer.css";
 
 const Event = () => {
+  const [key, setKey] = useState(0);
+
+  const onClick = () => {
+    setKey(key + 1);
+  }
   const {
     isActive, selectedCategory, currentPage, setCurrentPage,
-    toggleActive, handleCategoryClick, handlePageChange, 
+    toggleActive, handleCategoryClick, handlePageChange,
     search, setSearch, searchAction,
     eventPages,
-    activeTab, setActiveTab, today,eventtotalPages, paginatedEvents, 
+    activeTab, setActiveTab, today, eventtotalPages, paginatedEvents,
   } = useUtilContext();
 
   return (
@@ -31,6 +36,7 @@ const Event = () => {
                 {["전체", "상품출시", "카드출시"].map((category) => (
                   <li key={category}>
                     <Link
+                      to={`/event/${category}`}
                       onClick={(e) => {
                         e.preventDefault();
                         handleCategoryClick(category);
@@ -90,7 +96,7 @@ const Event = () => {
               const isEnded = event.endDate && new Date(event.endDate) < today; //종료 이벤트 확인
               return (
                 <li key={idx} className={isEnded ? "li-ended" : ""}>
-                  <Link to={`/event/${idx}`} className="item">
+                  <Link to={`/event/${event.category}/${idx}`} className="item">
                     <div className="thumbnail">
                       <img src={event.img} alt={event.title} />
                     </div>

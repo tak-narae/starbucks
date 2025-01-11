@@ -4,27 +4,12 @@ import { useUtilContext } from "hooks/UtilContext";
 
 const EventDetail = () => {
   let { idx } = useParams();
-  
+
   const { event, paginatedEvents } = useUtilContext();
 
-  useEffect(() => {
-    if (paginatedEvents.length > 0) {
-      localStorage.setItem("paginatedEvents", JSON.stringify(paginatedEvents));
-    }
-  }, [event]);
-
-  const storedPaginatedEvents = JSON.parse(localStorage.getItem("paginatedEvents"));
-
-  // localStorage에서 paginatedEvents 가져오기
-  const EventDetail = storedPaginatedEvents
-    ? storedPaginatedEvents[parseInt(idx)]
-    : "null";
-  const prevEvent = storedPaginatedEvents
-    ? storedPaginatedEvents[parseInt(idx) - 1]
-    : "null";
-  const nextEvent = storedPaginatedEvents
-    ? storedPaginatedEvents[parseInt(idx) + 1]
-    : "null";
+  const EventDetail = paginatedEvents ? paginatedEvents[parseInt(idx)] : "null";
+  const prevEvent = paginatedEvents ? paginatedEvents[parseInt(idx) - 1] : "null";
+  const nextEvent = paginatedEvents ? paginatedEvents[parseInt(idx) + 1] : "null";
 
   return (
     <>
@@ -34,7 +19,7 @@ const EventDetail = () => {
             <>
               <div className="heading">
                 <div className="path">
-                  <Link to="/">{EventDetail.category}</Link>
+                  <Link to={`/event`}> {EventDetail.category}</Link>
                 </div>
                 <div className="event_tit">
                   <h2 className="tit">{EventDetail.title}</h2>
@@ -98,7 +83,7 @@ const EventDetail = () => {
             <p>이벤트를 찾을 수 없습니다.</p>
           )}
         </div>
-      </div>
+      </div >
     </>
   );
 };

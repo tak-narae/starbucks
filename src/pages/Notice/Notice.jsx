@@ -5,12 +5,13 @@ import "pages/Event/Customer.css";
 
 const Notice = () => {
   const {
-    isActive, selectedCategory, currentPage, 
-    toggleActive, handleCategoryClick, handlePageChange, 
-    search, setSearch, searchAction, 
+    isActive, selectedCategory, currentPage,
+    toggleActive, handleCategoryClick, handlePageChange,
+    search, setSearch, searchAction,
     noticePages,
     noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
   } = useUtilContext();
+  console.log(datefilteredNotice)
 
   return (
     <>
@@ -91,7 +92,9 @@ const Notice = () => {
                   <td>{(currentPage - 1) * noticeitemsPerPage + idx + 1}</td>
                   <td>{notice.category}</td>
                   <td className="subject">
-                    <Link to={`/notice/${idx}`}>{notice.subject}</Link>
+                    <Link
+                      to={{ pathname: `/notice/${idx}`, search: `?cate=${notice.category}` }}
+                    >{notice.subject}</Link>
                   </td>
                   <td>관리자</td>
                   <td>{notice.date}</td>
@@ -124,8 +127,8 @@ const Notice = () => {
               &raquo;
             </button>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
     </>
   );
 };
