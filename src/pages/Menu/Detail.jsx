@@ -29,12 +29,12 @@ const Detail = () => {
     localStorage.setItem("cartQty", JSON.stringify(cartItem));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setTimeout(() => {
       QtyCalc();
     }, 300);
-  },[])
-  
+  }, [])
+
 
   if (!productMatch) {
     return <div>Loading!</div>;
@@ -54,7 +54,7 @@ const Detail = () => {
           </div>
           <div className="prd_item">
             <div className="thumb_cont">
-              <img className="thumb_img" src={`${process.env.PUBLIC_URL}/${productMatch.img}`} alt={productMatch.name}/>
+              <img className="thumb_img" src={`${process.env.PUBLIC_URL}/${productMatch.img}`} alt={productMatch.name} />
               <div className="content">
                 <ul className="tab_underline">
                   <li>상세정보</li>
@@ -89,7 +89,7 @@ const Detail = () => {
               <div className="total_item">
                 <div className="btn_qty">
                   <button className="minus">-</button>
-                  <input type="tel" className="qty" value="1" readOnly/>
+                  <input type="tel" className="qty" value="1" readOnly />
                   <button className="plus">+</button>
                 </div>
                 <h3 className="total_price">{productMatch.price.toLocaleString(1)}원</h3>

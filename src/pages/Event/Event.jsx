@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 import "pages/Event/Customer.css";
@@ -7,11 +7,18 @@ import "pages/Event/Customer.css";
 const Event = () => {
   const {
     isActive, selectedCategory, currentPage, setCurrentPage,
-    toggleActive, handleCategoryClick, handlePageChange, 
+    toggleActive, handleCategoryClick, handlePageChange,
     search, setSearch, searchAction,
     eventPages,
-    activeTab, setActiveTab, today,eventtotalPages, paginatedEvents, 
+    activeTab, setActiveTab, today, eventtotalPages, paginatedEvents, datefilteredEvents,
   } = useUtilContext();
+
+  const navigate = useNavigate();
+
+  const handleCategoryChange = (e) => {
+    handleCategoryClick(selectedCategory);
+    navigate(`/event?cate=${e}`);
+  }
 
   return (
     <div id="container" className="board__event">
@@ -31,8 +38,11 @@ const Event = () => {
                 {["전체", "상품출시", "카드출시"].map((category) => (
                   <li key={category}>
                     <Link
+                      to={{ pathname: `/event/${datefilteredEvents.idx}`, search: `?cate=${category}` }}
                       onClick={(e) => {
                         e.preventDefault();
+                        e.stopPropagation();
+                        handleCategoryChange(category);
                         handleCategoryClick(category);
                       }}
                     >
@@ -90,7 +100,7 @@ const Event = () => {
               const isEnded = event.endDate && new Date(event.endDate) < today; //종료 이벤트 확인
               return (
                 <li key={idx} className={isEnded ? "li-ended" : ""}>
-                  <Link to={`/event/${idx}`} className="item">
+                  <Link to={{ pathname: `/event/${idx}`, search: `?cate=${event.category}` }} className="item">
                     <div className="thumbnail">
                       <img src={event.img} alt={event.title} />
                     </div>

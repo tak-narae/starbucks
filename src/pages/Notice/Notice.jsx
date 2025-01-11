@@ -1,16 +1,23 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 import "pages/Event/Customer.css";
 
 const Notice = () => {
   const {
-    isActive, selectedCategory, currentPage, 
-    toggleActive, handleCategoryClick, handlePageChange, 
-    search, setSearch, searchAction, 
+    isActive, selectedCategory, currentPage,
+    toggleActive, handleCategoryClick, handlePageChange,
+    search, setSearch, searchAction,
     noticePages,
     noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
   } = useUtilContext();
+
+  const navigate = useNavigate();
+
+  const handleCategoryChange = (e) => {
+    handleCategoryClick(selectedCategory);
+    navigate(`/notice?cate=${e}`);
+  }
 
   return (
     <>
@@ -35,20 +42,22 @@ const Notice = () => {
                   {selectedCategory}
                 </Link>
                 <ul className="dropdown">
-                  {["전체", "공지사항", "문화소식", "사회공헌"].map(
-                    (category) => (
-                      <li key={category}>
-                        <Link
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            handleCategoryClick(category);
-                          }}
-                        >
-                          {category}
-                        </Link>
-                      </li>
-                    )
+                  {["전체", "공지사항", "문화소식", "사회공헌"].map((category) => (
+                    <li key={category}>
+                      <Link to={{
+                        pathname: `/notice/${datefilteredNotice.idx}`, search: `?cate=${category}`
+                      }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleCategoryChange(category);
+                          handleCategoryClick(category);
+                        }}
+                      >
+                        {category}
+                      </Link>
+                    </li>
+                  )
                   )}
                 </ul>
               </li>
@@ -91,7 +100,9 @@ const Notice = () => {
                   <td>{(currentPage - 1) * noticeitemsPerPage + idx + 1}</td>
                   <td>{notice.category}</td>
                   <td className="subject">
-                    <Link to={`/notice/${idx}`}>{notice.subject}</Link>
+                    <Link
+                      to={{ pathname: `/notice/${idx}`, search: `?cate=${notice.category}` }}
+                    >{notice.subject}</Link>
                   </td>
                   <td>관리자</td>
                   <td>{notice.date}</td>
@@ -124,8 +135,8 @@ const Notice = () => {
               &raquo;
             </button>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
     </>
   );
 };

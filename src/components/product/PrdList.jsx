@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-  /* ===
-    title : 한글대분류
-    pathName : 영문대분류
-    cateKo : 한글중분류
-    selectedCate : 중분류카테고리번호
-    selectedDepth : 한글소분류(커피)
-    currentData : 해당리스트정보
-    prdSeason : 홀리데이정보(메인)
-  === */ 
+/* ===
+  title : 한글대분류
+  pathName : 영문대분류
+  cateKo : 한글중분류
+  selectedCate : 중분류카테고리번호
+  selectedDepth : 한글소분류(커피)
+  currentData : 해당리스트정보
+  prdSeason : 홀리데이정보(메인)
+=== */
 
-const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, currentData, prdSeason=[], search} ) => {
+const PrdList = ({ title, cateKo, pathName, selectedCate, selectedDepth, currentData, prdSeason = [], search }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
@@ -47,17 +47,17 @@ const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, current
                 <div className="item">
                   {/* <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`} className="thumbnail"> */}
                   <Link className="thumbnail"
-                  to={{
-                    pathname : `/menu/${pathName=="beverage"||pathName=="food" ? "info" : "detail"}/${pathName}`,
-                    search: `?cate=${selectedCate}&id=${product.id}`,
-                  }}
-                  state={{ title, cateKo, product }}
+                    to={{
+                      pathname: `/menu/${pathName == "beverage" || pathName == "food" ? "info" : "detail"}/${pathName}`,
+                      search: `?cate=${selectedCate}&id=${product.id}`,
+                    }}
+                    state={{ title, cateKo, product }}
                   >
                     <div className="image">
-                        <img
-                          src={`${process.env.PUBLIC_URL}/${product.img}`}
-                          alt={product.name}
-                          />
+                      <img
+                        src={`${process.env.PUBLIC_URL}/${product.img}`}
+                        alt={product.name}
+                      />
                     </div>
                   </Link>
                   <div className="desc">
@@ -80,13 +80,13 @@ const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, current
                 {/* <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`} className="thumbnail"> */}
                 <Link className="thumbnail"
                   to={{
-                    pathname : `/menu/detail/${pathName}`,
+                    pathname: `/menu/detail/${pathName}`,
                     search: `?cate=${selectedCate}&id=${product.id}`,
                   }}
                   state={{ title, cateKo, product }}
-                  >
+                >
                   <div className="image">
-                      <img src={product.img} alt={product.name} />
+                    <img src={product.img} alt={product.name} />
                   </div>
                 </Link>
                 <div className="desc">

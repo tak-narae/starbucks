@@ -112,24 +112,24 @@ const Main = () => {
                     disableOnInteraction: false,
                   }}
                 >
-                  {events.slice(0,10).map((event, idx)=>(
-                  <SwiperSlide>
-                    <Link to="/event">
-                      <div className="thumb">
-                        <img
-                          src={event.img}
-                          alt={event.title}
-                          style={{width: "100%", borderRadius: "8px"}}
-                        />
-                      </div>
-                      <div className="info">
-                        <p className="tit">
-                          {event.title}
-                        </p>
-                        <span className="date">{event.startDate} ~ {event.endDate}</span>
-                      </div>
-                    </Link>
-                  </SwiperSlide>
+                  {events.slice(0, 10).map((event, idx) => (
+                    <SwiperSlide>
+                      <Link to="/event">
+                        <div className="thumb">
+                          <img
+                            src={event.img}
+                            alt={event.title}
+                            style={{ width: "100%", borderRadius: "8px" }}
+                          />
+                        </div>
+                        <div className="info">
+                          <p className="tit">
+                            {event.title}
+                          </p>
+                          <span className="date">{event.startDate} ~ {event.endDate}</span>
+                        </div>
+                      </Link>
+                    </SwiperSlide>
                   ))}
                 </Swiper>
               </ul>
@@ -165,19 +165,19 @@ const Main = () => {
                 }}
               >
                 {
-                notice && notice.length > 0 ? (
-                  notice.slice(0, 10).map((noticeItem, idx) => (
-                    <SwiperSlide key={idx}>
-                      <Link to="/notice">
-                        <p className="tit">{noticeItem.subject}</p>
-                        <span className="date">{noticeItem.date}</span>
-                      </Link>
-                    </SwiperSlide>
-                  ))
-                ) : (
-                  <p>공지사항이 없습니다.</p>
-                )
-              }
+                  notice && notice.length > 0 ? (
+                    notice.slice(0, 10).map((noticeItem, idx) => (
+                      <SwiperSlide key={idx}>
+                        <Link to="/notice">
+                          <p className="tit">{noticeItem.subject}</p>
+                          <span className="date">{noticeItem.date}</span>
+                        </Link>
+                      </SwiperSlide>
+                    ))
+                  ) : (
+                    <p>공지사항이 없습니다.</p>
+                  )
+                }
               </Swiper>
               <Link to="/notice" className="btn_link">
                 더보기 +

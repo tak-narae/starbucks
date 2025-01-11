@@ -28,7 +28,7 @@ const DataContext = createContext();
 function App() {
   const [loading, setLoading] = useState(true);
   // const [menuTit, setMenuTit] = useState([]);
-  const [coffee, setCoffee] = useState([]); 
+  const [coffee, setCoffee] = useState([]);
   const [beverage, setBeverage] = useState([]);
   const [product, setProduct] = useState([]);
   const [food, setFood] = useState([]);
@@ -45,7 +45,6 @@ function App() {
       setProduct(response.data.product);
       setFood(response.data.food);
       setNotice(response.data.notice);
-      // console.log(response.data.notice);
       setEvents(response.data.events);
 
     } catch (err) {
@@ -72,7 +71,7 @@ function App() {
             <Route path="/menu/detail/:category" element={<Detail />}></Route>
             <Route path="/menu/info/:category" element={<DetailInfo />}></Route>
             <Route path="/order/">
-              <Route path="cart" element={<Cart/>}></Route>
+              <Route path="cart" element={<Cart />}></Route>
             </Route>
             <Route path="/event" element={<Event />}></Route>
             <Route path="/event/:idx" element={<EventDetail />}></Route>
