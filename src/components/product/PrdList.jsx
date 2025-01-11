@@ -48,7 +48,7 @@ const PrdList = ({ title, cateKo, pathName, selectedCate, selectedDepth, current
                   {/* <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`} className="thumbnail"> */}
                   <Link className="thumbnail"
                     to={{
-                      pathname: `/menu/${pathName == "beverage" || pathName == "food" ? "info" : "detail"}/${pathName}`,
+                      pathname: `/menu/${pathName === "beverage" || pathName === "food" ? "info" : "detail"}/${pathName}`,
                       search: `?cate=${selectedCate}&id=${product.id}`,
                     }}
                     state={{ title, cateKo, product }}

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DataContext } from "App";
 import useQueryParams from "hooks/useQueryParams";
+import { useUtilContext } from "hooks/UtilContext";
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,8 +20,10 @@ import PrdList from "components/product/PrdList";
 import "components/product/PrdList.css";
 
 const Main = () => {
-  const { product, notice, events } = useContext(DataContext);
+  const { product } = useContext(DataContext);
   const { selectedCate, selectedDepth, pathName } = useQueryParams();
+
+  const { datefilteredNotice, datefilteredEvents } = useUtilContext();
 
   const [prdSeason, setPrdSeason] = useState([]); // 홀리데이 상품
   useEffect(() => {
@@ -112,9 +115,9 @@ const Main = () => {
                     disableOnInteraction: false,
                   }}
                 >
-                  {events.slice(0, 10).map((event, idx) => (
+                  {datefilteredEvents.slice(0, 10).map((event, idx) => (
                     <SwiperSlide>
-                      <Link to="/event">
+                      <Link to={`/event/${idx}?cate=${event.category}`}>
                         <div className="thumb">
                           <img
                             src={event.img}
@@ -141,12 +144,12 @@ const Main = () => {
             <ul className="banner">
               <li>
                 <Link to="/">
-                  <img src={require("../images/main_promo_banner1.png")} />
+                  <img src={require("../images/main_promo_banner1.png")} alt="" />
                 </Link>
               </li>
               <li>
                 <Link to="/">
-                  <img src={require("../images/main_promo_banner2.png")} />
+                  <img src={require("../images/main_promo_banner2.png")} alt="" />
                 </Link>
               </li>
             </ul>
@@ -165,10 +168,11 @@ const Main = () => {
                 }}
               >
                 {
-                  notice && notice.length > 0 ? (
-                    notice.slice(0, 10).map((noticeItem, idx) => (
-                      <SwiperSlide key={idx}>
-                        <Link to="/notice">
+                  datefilteredNotice && datefilteredNotice.length > 0 ? (
+                    datefilteredNotice.slice(0, 10).map((noticeItem, idx) => (
+                      <SwiperSlide key={idx} >
+                        <Link to={`/notice/${idx}?cate=${noticeItem.category}`}>
+                          {console.log(idx)}
                           <p className="tit">{noticeItem.subject}</p>
                           <span className="date">{noticeItem.date}</span>
                         </Link>
@@ -185,7 +189,7 @@ const Main = () => {
             </div>
           </div>
         </section>
-      </main>
+      </main >
     </>
   );
 };

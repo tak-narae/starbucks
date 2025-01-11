@@ -765,7 +765,9 @@
           "name": "의암호의 초록빛 자몽 피지오",
           "price": "T9,5",
           "img": "db/images/[9200000005588]_20241017130009134.jpg",
-          "tag": ["NEW"]
+          "tag": [
+            "NEW"
+          ]
         },
         {
           "id": 2,
@@ -773,7 +775,9 @@
           "name": "라이트 핑크 자몽 피지오",
           "price": "T6,3  G6,8  V7,3",
           "img": "db/images/[9200000005168]_20240812152235363.jpg",
-          "tag": ["시즌한정"]
+          "tag": [
+            "시즌한정"
+          ]
         },
         {
           "id": 3,
@@ -834,7 +838,9 @@
           "name": "논알코올 홀리데이 패션 티 뱅쇼",
           "price": "T6,7  G7,5  V8,3",
           "img": "db/images/[9200000005582]_20241023093211884.jpg",
-          "tag": ["NEW"]
+          "tag": [
+            "NEW"
+          ]
         },
         {
           "id": 2,
@@ -842,7 +848,9 @@
           "name": "아이스 의암호의 보랏빛 라벤더 티 라떼",
           "price": "T9,5",
           "img": "db/images/[9200000005590]_20241017130203194.jpg",
-          "tag": ["NEW"]
+          "tag": [
+            "NEW"
+          ]
         },
         {
           "id": 3,
@@ -850,7 +858,9 @@
           "name": "의암호의 보랏빛 라벤더 티 라떼",
           "price": "T9,5",
           "img": "db/images/[9200000005589]_20241017130107685.jpg",
-          "tag": ["NEW"]
+          "tag": [
+            "NEW"
+          ]
         },
         {
           "id": 4,
@@ -1380,7 +1390,10 @@
           "name": "크리스마스 블론드 로스트 250g",
           "price": 18000,
           "img": "db/images/[11031517]_20241023094906411.jpg",
-          "tag": ["NEW", "시즌한정"]
+          "tag": [
+            "NEW",
+            "시즌한정"
+          ]
         },
         {
           "id": 2,
@@ -1453,7 +1466,10 @@
           "name": "크리스마스 블렌드 250g",
           "price": 18000,
           "img": "db/images/[250041]_20241023094504866.jpg",
-          "tag": ["NEW", "시즌한정"]
+          "tag": [
+            "NEW",
+            "시즌한정"
+          ]
         },
         {
           "id": 11,
@@ -1462,7 +1478,10 @@
           "name": "크리스마스 블렌드 에스프레소 로스트 250g",
           "price": 19000,
           "img": "db/images/[11025559]_20241023094740959.jpg",
-          "tag": ["NEW", "시즌한정"]
+          "tag": [
+            "NEW",
+            "시즌한정"
+          ]
         },
         {
           "id": 12,
@@ -1495,7 +1514,9 @@
           "name": "리저브 크리스마스 2024",
           "price": 40000,
           "img": "db/images/[11080493]_20241017132256880.jpg",
-          "tag": ["NEW"]
+          "tag": [
+            "NEW"
+          ]
         },
         {
           "id": 16,
@@ -1714,7 +1735,9 @@
         {
           "id": 1,
           "key": 9300000005663,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "잉글리쉬 스콘",
           "price": 3900,
           "img": "db/images/[9300000005663]_20241106163602619.jpg"
@@ -1722,7 +1745,9 @@
         {
           "id": 2,
           "key": 9300000005644,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "플랫 퀸아망 솔티드 카라멜",
           "price": 5500,
           "img": "db/images/[9300000005644]_20241108112353400.jpg"
@@ -1730,7 +1755,9 @@
         {
           "id": 3,
           "key": 9300000005645,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "플랫 퀸아망 초코칩",
           "price": 5500,
           "img": "db/images/[9300000005645]_20241108112513320.jpg"
@@ -1802,7 +1829,9 @@
         {
           "id": 12,
           "key": 9300000002431,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "뺑 오 쇼콜라",
           "price": 5100,
           "img": "db/images/[9300000002431]_20210421164613125.jpg"
@@ -1810,7 +1839,9 @@
         {
           "id": 13,
           "key": 9300000005143,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "소금빵",
           "price": 3400,
           "img": "db/images/[9300000005143]_20240327145828945.jpg"
@@ -1818,7 +1849,9 @@
         {
           "id": 14,
           "key": 9300000005262,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "소시지 프레첼 소금빵",
           "price": 5800,
           "img": "db/images/[9300000005262]_20240424133619080.jpg"
@@ -1826,7 +1859,9 @@
         {
           "id": 15,
           "key": 9300000003520,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "오름 치즈 케이츄리",
           "price": 5900,
           "img": "db/images/[9300000003520]_20210727081330163.jpg"
@@ -1834,7 +1869,9 @@
         {
           "id": 16,
           "key": 9300000002489,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "주상절리 파이",
           "price": 4700,
           "img": "db/images/[9300000002489]_20210421134243043.jpg"
@@ -1842,7 +1879,9 @@
         {
           "id": 17,
           "key": 9300000002931,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "크림치즈 브리오슈 보스톡",
           "price": 4900,
           "img": "db/images/[9300000002931]_20210325161934333.jpg"
@@ -1850,7 +1889,9 @@
         {
           "id": 18,
           "key": 5110006070,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "하트 파이",
           "price": 3200,
           "img": "db/images/[5110006070]_20210422111451589.jpg"
@@ -1863,7 +1904,9 @@
         {
           "id": 1,
           "key": 9300000005594,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "딸기 촉촉 초코 생크림 케이크",
           "price": 6900,
           "img": "db/images/[9300000005594]_20241121093827190.jpg"
@@ -1871,7 +1914,9 @@
         {
           "id": 2,
           "key": 9300000005592,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "부쉬 드 노엘 초코 크레이프 롤",
           "price": 7900,
           "img": "db/images/[9300000005592]_20241108111522319.jpg"
@@ -1879,7 +1924,9 @@
         {
           "id": 3,
           "key": 9300000005593,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "스노우맨 바움쿠헨",
           "price": 9500,
           "img": "db/images/[9300000005593]_20241121093645969.jpg"
@@ -1887,7 +1934,9 @@
         {
           "id": 4,
           "key": 9300000005678,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "딸기 촉촉 초코 생크림 케이크",
           "price": 6900,
           "img": "db/images/[9300000005678]_20241106160808144.jpg"
@@ -1895,7 +1944,9 @@
         {
           "id": 5,
           "key": 9300000005676,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "밀레앙 딸기 프렌치 플랑",
           "price": 65000,
           "img": "db/images/[9300000005676]_20241106160328732.jpg"
@@ -1903,7 +1954,9 @@
         {
           "id": 6,
           "key": 9300000005677,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "산타 베어리스타 딸기 케이크",
           "price": 65000,
           "img": "db/images/[9300000005677]_20241106160544643.jpg"
@@ -1911,7 +1964,9 @@
         {
           "id": 7,
           "key": 9300000005680,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "스노우 크레이프 부쉬 드 노엘",
           "price": 43000,
           "img": "db/images/[9300000005680]_20241106161356455.jpg"
@@ -1919,7 +1974,9 @@
         {
           "id": 8,
           "key": 9300000005675,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "조선델리 노엘 트리 케이크",
           "price": 89000,
           "img": "db/images/[9300000005675]_20241106160109320.jpg"
@@ -1927,7 +1984,9 @@
         {
           "id": 9,
           "key": 9300000005679,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "홀리데이 더블 크림 트리 바움쿠헨",
           "price": 51000,
           "img": "db/images/[9300000005679]_20241106161100626.jpg"
@@ -2115,7 +2174,9 @@
         {
           "id": 1,
           "key": 9300000005697,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "더블 에그 브렉퍼스트 & 체다 샌드위치",
           "price": 5700,
           "img": "db/images/[9300000005697]_20241120104432369.jpg"
@@ -2123,7 +2184,9 @@
         {
           "id": 2,
           "key": 9300000005665,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "메리 베리 베이글 샌드",
           "price": 6900,
           "img": "db/images/[9300000005665]_20241108111600369.jpg"
@@ -2370,7 +2433,9 @@
         {
           "id": 1,
           "key": 9300000005690,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "삐아프 어드벤트 캘린더",
           "price": 90000,
           "img": "db/images/[9300000005690]_20241120104404980.jpg"
@@ -2378,7 +2443,9 @@
         {
           "id": 2,
           "key": 9300000005556,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "홀리데이 강아지 쿠키 카드",
           "price": 6300,
           "img": "db/images/[9300000005556]_20241115164644698.jpg"
@@ -2386,7 +2453,9 @@
         {
           "id": 3,
           "key": 9300000005557,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "홀리데이 너티 쿠키 틴 세트",
           "price": 12900,
           "img": "db/images/[9300000005557]_20241115164812624.jpg"
@@ -2394,7 +2463,9 @@
         {
           "id": 4,
           "key": 9300000005555,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "홀리데이 눈사람 쿠키 카드",
           "price": 6300,
           "img": "db/images/[9300000005555]_20241115164528435.jpg"
@@ -2402,7 +2473,9 @@
         {
           "id": 5,
           "key": 9300000005554,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "홀리데이 버터 쿠키 틴 세트",
           "price": 23000,
           "img": "db/images/[9300000005554]_20241115164339083.jpg"
@@ -2410,7 +2483,9 @@
         {
           "id": 6,
           "key": 9300000004821,
-          "tag": ["NEW"],
+          "tag": [
+            "NEW"
+          ],
           "name": "비스코티 크래커",
           "price": 17500,
           "img": "db/images/[9300000004821]_20230823152548984.jpg"
@@ -2748,7 +2823,9 @@
           "name": "홀리데이 딜라이트 네이비 머그 473ml",
           "price": 31000,
           "img": "db/images/[9300000005590]_20241023094906411.jpg",
-          "tag": ["NEW"]
+          "tag": [
+            "NEW"
+          ]
         },
         {
           "id": 2,
@@ -2756,7 +2833,9 @@
           "name": "홀리데이 딜라이트 베이비 블루 머그 473ml",
           "price": 31000,
           "img": "db/images/[9300000005591]_20241023094906411.jpg",
-          "tag": ["NEW"]
+          "tag": [
+            "NEW"
+          ]
         },
         {
           "id": 3,
@@ -2932,7 +3011,9 @@
           "name": "코리아 단청 머그 355ml",
           "price": 29000,
           "img": "db/images/[9300000005363]_20241023094906411.jpg",
-          "tag": ["시즌한정"]
+          "tag": [
+            "시즌한정"
+          ]
         },
         {
           "id": 28,
@@ -2940,7 +3021,9 @@
           "name": "홀리데이 프렌즈 강아지 머그 237ml",
           "price": 29000,
           "img": "db/images/[9300000005333]_20241023094906411.jpg",
-          "tag": ["시즌한정"]
+          "tag": [
+            "시즌한정"
+          ]
         },
         {
           "id": 29,
@@ -2948,7 +3031,9 @@
           "name": "홀리데이 프렌즈 머그 300ml",
           "price": 39000,
           "img": "db/images/[9300000005332]_20241023094906411.jpg",
-          "tag": ["시즌한정"]
+          "tag": [
+            "시즌한정"
+          ]
         },
         {
           "id": 30,
@@ -2956,7 +3041,9 @@
           "name": "홀리데이 프렌즈 스노우맨 리드 머그 355ml",
           "price": 43000,
           "img": "db/images/[9300000005334]_20241023094906411.png",
-          "tag": ["시즌한정"]
+          "tag": [
+            "시즌한정"
+          ]
         }
       ]
     },
@@ -2969,7 +3056,9 @@
           "name": "(c)스타벅스 고블렛 잔 세트(2P)",
           "price": 30000,
           "img": "db/images/[9300000005655]_20241023094906412.jpg",
-          "tag": ["NEW"]
+          "tag": [
+            "NEW"
+          ]
         },
         {
           "id": 2,
@@ -4156,8 +4245,8 @@
     },
     {
       "key": 41,
-      "category": "문화소식",
-      "subject": "원두는 어떤 걸로 하시겠어요?",
+      "category": "공지사항",
+      "subject": "시스템 개선 및 서비스 점검 안내",
       "name": "관리자",
       "date": "2024-12-19"
     },
@@ -4651,7 +4740,9 @@
       "img": "db/images/5.png",
       "startDate": "2024.12.02",
       "endDate": "",
-      "detailImg": ["db/images/wn_decokit_241203.jpg"]
+      "detailImg": [
+        "db/images/wn_decokit_241203.jpg"
+      ]
     },
     {
       "key": 6,
@@ -4660,7 +4751,9 @@
       "img": "db/images/6.png",
       "startDate": "2024.11.28",
       "endDate": "2024.12.15",
-      "detailImg": ["db/images/wn_christmas_cake_instore_241216.jpg"]
+      "detailImg": [
+        "db/images/wn_christmas_cake_instore_241216.jpg"
+      ]
     },
     {
       "key": 7,
@@ -4669,7 +4762,9 @@
       "img": "db/images/7.png",
       "startDate": "2024.11.28",
       "endDate": "",
-      "detailImg": ["db/images/wn_popupstoreevent_241219.jpg"]
+      "detailImg": [
+        "db/images/wn_popupstoreevent_241219.jpg"
+      ]
     },
     {
       "key": 8,
@@ -4678,7 +4773,9 @@
       "img": "db/images/8.png",
       "startDate": "2024.11.25",
       "endDate": "2024.11.27",
-      "detailImg": ["db/images/wn_christmas_cake_instore_241216.jpg"]
+      "detailImg": [
+        "db/images/wn_christmas_cake_instore_241216.jpg"
+      ]
     },
     {
       "key": 9,
@@ -4687,7 +4784,9 @@
       "img": "db/images/9.png",
       "startDate": "2024.11.22",
       "endDate": "",
-      "detailImg": ["db/images/wn_12promotion_01_241121.jpg"]
+      "detailImg": [
+        "db/images/wn_12promotion_01_241121.jpg"
+      ]
     },
     {
       "key": 10,
@@ -4696,7 +4795,9 @@
       "img": "db/images/10.png",
       "startDate": "2024.11.22",
       "endDate": "",
-      "detailImg": ["db/images/wn_12promotion_01_241121.jpg"]
+      "detailImg": [
+        "db/images/wn_12promotion_01_241121.jpg"
+      ]
     },
     {
       "key": 11,
@@ -4705,7 +4806,9 @@
       "img": "db/images/11.png",
       "startDate": "2024.11.22",
       "endDate": "",
-      "detailImg": ["db/images/"]
+      "detailImg": [
+        "db/images/"
+      ]
     },
     {
       "key": 12,
@@ -4725,7 +4828,9 @@
       "img": "db/images/13.png",
       "startDate": "2024.11.16",
       "endDate": "2024.12.29",
-      "detailImg": ["db/images/wn_yeoju_christmas_md_popup_01_241114.jpg"]
+      "detailImg": [
+        "db/images/wn_yeoju_christmas_md_popup_01_241114.jpg"
+      ]
     },
     {
       "key": 14,
@@ -4745,7 +4850,9 @@
       "img": "db/images/15.png",
       "startDate": "2024.09.13",
       "endDate": "",
-      "detailImg": ["db/images/wn_morning_set_event__240911.jpg"]
+      "detailImg": [
+        "db/images/wn_morning_set_event__240911.jpg"
+      ]
     },
     {
       "key": 16,
@@ -4754,7 +4861,9 @@
       "img": "db/images/16.png",
       "startDate": "2025-01-02",
       "endDate": "2025-03-31",
-      "detailImg": ["db/images/wn_deliverspetitcanele_250102.png"]
+      "detailImg": [
+        "db/images/wn_deliverspetitcanele_250102.png"
+      ]
     },
     {
       "key": 17,
@@ -4777,7 +4886,9 @@
       "img": "db/images/18.jpg",
       "startDate": "2024-12-21",
       "endDate": "2024-12-29",
-      "detailImg": ["db/images/wn_popupstoreevent_241219.jpg"]
+      "detailImg": [
+        "db/images/wn_popupstoreevent_241219.jpg"
+      ]
     },
     {
       "key": 19,
@@ -4786,7 +4897,9 @@
       "img": "db/images/19.jpg",
       "startDate": "2024-12-23",
       "endDate": "2024-12-25",
-      "detailImg": ["db/images/wn_christmas_cake_instore_241216.jpg"]
+      "detailImg": [
+        "db/images/wn_christmas_cake_instore_241216.jpg"
+      ]
     },
     {
       "key": 20,
@@ -4795,7 +4908,9 @@
       "img": "db/images/20.jpg",
       "startDate": "2024-12-20",
       "endDate": "",
-      "detailImg": ["db/images/wn_santabearistapen_241218.jpg"]
+      "detailImg": [
+        "db/images/wn_santabearistapen_241218.jpg"
+      ]
     },
     {
       "key": 21,
@@ -4840,7 +4955,9 @@
       "img": "db/images/23.jpg",
       "startDate": "2024-12-10",
       "endDate": "2024-12-14",
-      "detailImg": ["db/images/24WinterFrequency_Event_241206.jpg"]
+      "detailImg": [
+        "db/images/24WinterFrequency_Event_241206.jpg"
+      ]
     },
     {
       "key": 24,
@@ -4849,7 +4966,9 @@
       "img": "db/images/24.jpg",
       "startDate": "2024-12-02",
       "endDate": "2024-12-08",
-      "detailImg": ["db/images/wn_12_tri_star_dash_241127.jpg"]
+      "detailImg": [
+        "db/images/wn_12_tri_star_dash_241127.jpg"
+      ]
     },
     {
       "key": 25,
@@ -4920,7 +5039,9 @@
       "img": "db/images/WEB_THUM_20250103093320653.jpg",
       "startDate": "2025-01-01",
       "endDate": "2025-02-05",
-      "detailImg": ["db/images/wn_tastyjourney_lepain_250103.jpg"]
+      "detailImg": [
+        "db/images/wn_tastyjourney_lepain_250103.jpg"
+      ]
     },
     {
       "key": 30,
@@ -4929,7 +5050,9 @@
       "img": "db/images/30.jpg",
       "startDate": "2024-11-20",
       "endDate": "",
-      "detailImg": ["db/images/wn_dtcellphonenumer_241118.jpg"]
+      "detailImg": [
+        "db/images/wn_dtcellphonenumer_241118.jpg"
+      ]
     },
     {
       "key": 31,
@@ -4938,7 +5061,9 @@
       "img": "db/images/31.jpg",
       "startDate": "2025-01-01",
       "endDate": "2025-02-05",
-      "detailImg": ["db/images/241230_wn_Magical8_01.jpg"]
+      "detailImg": [
+        "db/images/241230_wn_Magical8_01.jpg"
+      ]
     },
     {
       "key": 32,
@@ -4947,7 +5072,9 @@
       "img": "db/images/WEB_THUM_20241227153715632.jpg",
       "startDate": "2024-12-31",
       "endDate": "2025-12-31",
-      "detailImg": ["db/images/wn_starbucks_kt_event_241227.jpg"]
+      "detailImg": [
+        "db/images/wn_starbucks_kt_event_241227.jpg"
+      ]
     },
     {
       "key": 33,
@@ -4996,7 +5123,9 @@
       "img": "db/images/36.jpg",
       "startDate": "2024-10-23",
       "endDate": "2024-11-12",
-      "detailImg": ["db/images/wn_mini_dt_event_web_241022.jpg"]
+      "detailImg": [
+        "db/images/wn_mini_dt_event_web_241022.jpg"
+      ]
     },
     {
       "key": 37,
@@ -5005,7 +5134,9 @@
       "img": "db/images/37.jpg",
       "startDate": "2024-11-01",
       "endDate": "2024-11-07",
-      "detailImg": ["db/images/wn_11tristardash_241031.jpg"]
+      "detailImg": [
+        "db/images/wn_11tristardash_241031.jpg"
+      ]
     },
     {
       "key": 38,
@@ -5014,7 +5145,9 @@
       "img": "db/images/38.jpg",
       "startDate": "2024-10-16",
       "endDate": "",
-      "detailImg": ["db/images/wn_reservepremiumclass_christmas_241011.jpg"]
+      "detailImg": [
+        "db/images/wn_reservepremiumclass_christmas_241011.jpg"
+      ]
     },
     {
       "key": 39,
@@ -5034,7 +5167,9 @@
       "img": "db/images/40.jpg",
       "startDate": "2024-10-25",
       "endDate": "2024-11-15",
-      "detailImg": ["db/images/wn_reservepremiumclass_christmas_241011.jpg"]
+      "detailImg": [
+        "db/images/wn_reservepremiumclass_christmas_241011.jpg"
+      ]
     },
     {
       "key": 41,
@@ -5058,7 +5193,9 @@
       "img": "db/images/42.jpg",
       "startDate": "2024-10-25",
       "endDate": "",
-      "detailImg": ["db/images/wn_bearistapenevent_241024.jpg"]
+      "detailImg": [
+        "db/images/wn_bearistapenevent_241024.jpg"
+      ]
     },
     {
       "key": 43,
@@ -5067,7 +5204,9 @@
       "img": "db/images/43.jpg",
       "startDate": "2024-10-23",
       "endDate": "",
-      "detailImg": ["db/images/wn_1stpurchasecoupon_01_241004.jpg"]
+      "detailImg": [
+        "db/images/wn_1stpurchasecoupon_01_241004.jpg"
+      ]
     },
     {
       "key": 44,

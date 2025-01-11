@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, use } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const UtilContext = createContext();
 
@@ -34,6 +33,7 @@ export const UtilProvider = ({ children }) => {
   useEffect(() => {
     getData();
   }, []);
+
   /* ================================================================== */
 
   /* ===== Notice와 Event 동시에 사용하는 변수 및 설정  ===== */
@@ -159,6 +159,11 @@ export const UtilProvider = ({ children }) => {
     currentPage * eventitemsPerPage
   );
 
+  /* ================================================================== */
+
+  // "공지사항" 카테고리 필터링
+  const noticeMain = datefilteredNotice.filter(notice => notice.category === "공지사항");
+
   return (
     <UtilContext.Provider
       value={{
@@ -169,6 +174,7 @@ export const UtilProvider = ({ children }) => {
         maxVisiblePages, currentBlock, startPage, noticeEndPage, noticePages, eventEndPage, eventPages,
         noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
         activeTab, setActiveTab, today, displayedEvents, datefilteredEvents, eventitemsPerPage, eventtotalPages, paginatedEvents,
+        noticeMain
       }}
     >
       {children}

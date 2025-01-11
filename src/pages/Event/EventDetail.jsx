@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 const EventDetail = () => {
   let { idx } = useParams();
 
-  const { event, paginatedEvents } = useUtilContext();
+  const { paginatedEvents } = useUtilContext();
 
   const EventDetail = paginatedEvents ? paginatedEvents[parseInt(idx)] : "null";
   const prevEvent = paginatedEvents ? paginatedEvents[parseInt(idx) - 1] : "null";

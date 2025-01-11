@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { DataContext } from "App";
 import PrdList from "components/product/PrdList";
 import useQueryParams from 'hooks/useQueryParams';
 
 import "./Menu.css";
 
-  /* ===
-    title : 한글대분류
-    pathName : 영문대분류
-    cateKo : 한글중분류
-    selectedCate : 중분류카테고리번호
-    selectedDepth : 한글소분류(커피)
-    currentData : 해당리스트정보
-  === */ 
+/* ===
+  title : 한글대분류
+  pathName : 영문대분류
+  cateKo : 한글중분류
+  selectedCate : 중분류카테고리번호
+  selectedDepth : 한글소분류(커피)
+  currentData : 해당리스트정보
+=== */
 
 const Menu = () => {
   const { coffee, beverage, product, food } = useContext(DataContext);
@@ -60,7 +60,7 @@ const Menu = () => {
 
 
   useEffect(() => {
-    window.scrollTo({ top:0 }); //메인진입
+    window.scrollTo({ top: 0 }); //메인진입
     const newLabels = getLabels(currentData);
     setLabels(newLabels);
   }, [currentData]);
@@ -68,18 +68,18 @@ const Menu = () => {
 
   //중분류
   // cate번호확인(new URLSearchParams(location.search).get('cate');)
-  const [cateKo,setCateKo] = useState();
-  useEffect(()=>{
-    {categories.map((el,idx)=>{
-      if(selectedCate == String(idx)) setCateKo(el);
-    })}
+  const [cateKo, setCateKo] = useState();
+  useEffect(() => {
+    categories.map((el, idx) => {
+      if (selectedCate === String(idx)) setCateKo(el);
+    })
     // console.log(title,cateKo,selectedDepth);
   })
 
   //=== btn_search .active
-  const [search,setSearch] = useState("");
-  const searchAction = (e)=>{
-    if ((search !== "") && (e.target.closest(".search_prd.active"))){
+  const [search, setSearch] = useState("");
+  const searchAction = (e) => {
+    if ((search !== "") && (e.target.closest(".search_prd.active"))) {
       return false;
     }
     e.target.closest(".search_prd").classList.toggle("active");
@@ -111,9 +111,9 @@ const Menu = () => {
               })}
             </ul>
             <div className="search_prd">
-              <input value={search} onChange={(e)=>{ setSearch(e.target.value); }}
-              type="text" placeholder="검색어 입력"/>
-              <button className="btn_search" onClick={(e)=> searchAction(e) }>Search</button>
+              <input value={search} onChange={(e) => { setSearch(e.target.value); }}
+                type="text" placeholder="검색어 입력" />
+              <button className="btn_search" onClick={(e) => searchAction(e)}>Search</button>
             </div>
           </div>
         </div>

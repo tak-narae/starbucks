@@ -1,13 +1,13 @@
-import React from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 import "pages/Event/Customer.css";
 
 const Notice = () => {
   const {
+    notice,
     isActive, selectedCategory, currentPage,
     toggleActive, handleCategoryClick, handlePageChange,
-    search, setSearch, searchAction,
     noticePages,
     noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
   } = useUtilContext();
@@ -19,9 +19,30 @@ const Notice = () => {
     navigate(`/notice?cate=${e}`);
   }
 
+  const [search, setSearch] = useState("");
+  const [filteredNotices, setFilteredNotices] = useState(notice);
+
+  const searchAction = (e) => {
+    if (
+      search !== "" &&
+      e.target.closest("[class*='search_']:has(.btn_search).active")
+    ) {
+      return false;
+    }
+    e.target.closest(".search_notice").classList.toggle("active");
+  };
+
+  useEffect(() => {
+    const filtered = notice.filter(notice =>
+      notice.subject.includes(search) &&
+      (selectedCategory === "전체" || notice.category === selectedCategory)
+    );
+    setFilteredNotices(filtered);
+  }, [search, selectedCategory, notice]);
+
+
   return (
     <>
-      <Outlet context={{ datefilteredNotice }} />
       <div id="container" className="board__notice">
         <div className="layout_fix">
           <div className="heading">
