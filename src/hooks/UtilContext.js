@@ -66,11 +66,7 @@ export const UtilProvider = ({ children }) => {
       setIsActive(false);
     }, 0);
   };
-  //카테고리 분류
-  // const categoryNoticeFiltered =
-  //   selectedCategory === "전체"
-  //     ? notice
-  //     : notice.filter((n) => n.category === selectedCategory);
+
   const categoryEventFiltered =
     selectedCategory === "전체"
       ? event

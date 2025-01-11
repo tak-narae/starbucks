@@ -65,7 +65,7 @@ const NoticeDetail = () => {
                   // to={{ pathname: `/notice`, search: `?cate=${notices.category}` }}
                   to={`/notice?cate=${category}`}
                   onClick={(e) => {
-                    handleCategoryClick(notices.Lcategory);
+                    handleCategoryClick(notices.category);
                   }}
                 >목록으로</Link>
               </button>

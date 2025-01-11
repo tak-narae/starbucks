@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 import "pages/Event/Customer.css";
 
@@ -12,6 +12,13 @@ const Notice = () => {
     noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
   } = useUtilContext();
   console.log(datefilteredNotice)
+
+  const navigate = useNavigate();
+
+  const handleCategoryChange = (e) => {
+    handleCategoryClick(selectedCategory);
+    navigate(`/notice?cate=${e}`)
+  }
 
   return (
     <>
@@ -39,10 +46,13 @@ const Notice = () => {
                   {["전체", "공지사항", "문화소식", "사회공헌"].map(
                     (category) => (
                       <li key={category}>
-                        <Link
+                        <Link to={{
+                          pathname: `/notice/${datefilteredNotice.idx}`, search: `?cate=${category}`
+                        }}
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
+                            handleCategoryChange(category);
                             handleCategoryClick(category);
                           }}
                         >
