@@ -24,7 +24,6 @@
 /* [class^="prd__detail"] .prd_item .content { position:relative; }
 [class^="prd__detail"] .prd_item .content::before { content:''; height:40px; background-color:#fff; position:sticky; top:75px; right:0; left:0; display:block; } */
 [class^="prd__detail"] .prd_item .tab_underline { margin:40px -1px 0; position:sticky; top:77px; z-index:2; }
-[class^="prd__detail"] .prd_item li:active:not(.no-match){ color:red; }
 
 
 
