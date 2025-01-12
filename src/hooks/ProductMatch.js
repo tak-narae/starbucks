@@ -13,6 +13,7 @@ import axios from "axios";
     productMatch : 최종 정보(productMatch)
     title : 한글대분류
     cateKo : 한글중분류
+    cateList : 중분류 전체 리스트
   === */ 
 
 const useProductMatch = () => {
@@ -22,6 +23,7 @@ const useProductMatch = () => {
   const [productMatch, setProductMatch] = useState(null); // 선택된 상품 데이터 저장
   const [title,setTitle] = useState(""); //대분류
   const [cateKo,setCateKo] = useState(""); //중분류
+  const [cateList, setCateList] = useState([]); //중분류리스트(추천상품 사용)
 
   const cateIndex = searchParams.get("cate"); // cate 값
   const productId = searchParams.get("id"); // id 값
@@ -65,6 +67,7 @@ const useProductMatch = () => {
           const matchingCategory = categoryData[cateIndex];
           console.log("중분류==", matchingCategory);
           setCateKo(matchingCategory.category);
+          setCateList(matchingCategory.products);
 
           if (matchingCategory) {
             const foundProduct = matchingCategory.products.find(
@@ -84,7 +87,7 @@ const useProductMatch = () => {
 
   console.log("매치==", productMatch);
 
-  return { productMatch, title, cateKo };
+  return { productMatch, title, cateKo, cateList };
 };
 
 export default useProductMatch;

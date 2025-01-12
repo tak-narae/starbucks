@@ -7,14 +7,17 @@ import useQueryParams from "hooks/useQueryParams";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
 
 // css/js
 import "./Main.scss";
 
 // components
-import SplitEffect from "./MainSplit";
+// import MainGsap from "./MainGsap.js";
+import { MainPrd } from "./MainGsap.js"
+
+import SplitEffect from "./MainSplit.js";
 import PrdList from "components/product/PrdList";
 import "components/product/PrdList.css";
 
@@ -34,6 +37,7 @@ const Main = () => {
   }, [product]);
 
   useEffect(() => {
+    MainPrd();
     SplitEffect(); //.split
   }, []);
 
@@ -91,15 +95,18 @@ const Main = () => {
           </div>
         </section>
         <section className="main__event">
-          <div className="layout_fix">
-            <div className="heading">
-              <h2 className="tit">이벤트</h2>
+        <div className="heading">
+              <div className="layout_fix">
+                <h2 className="tit">이벤트</h2>
+              </div>
             </div>
             <div className="loop_event">
               <ul className="event_list">
                 <Swiper
                   className="swiper_event"
                   modules={[Autoplay]}
+                  observer={true}
+                  observeParents={true}
                   loop={true}
                   slidesPerView="auto"
                   spaceBetween={40}
@@ -113,7 +120,7 @@ const Main = () => {
                   }}
                 >
                   {events.slice(0,10).map((event, idx)=>(
-                  <SwiperSlide>
+                  <SwiperSlide key={idx}>
                     <Link to="/event">
                       <div className="thumb">
                         <img
@@ -134,7 +141,6 @@ const Main = () => {
                 </Swiper>
               </ul>
             </div>
-          </div>
         </section>
         <section className="main__promo">
           <div className="layout_fix">

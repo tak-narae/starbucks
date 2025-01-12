@@ -21,6 +21,7 @@
   --br-color2: #ccc;
   --bg-color1: #fafafa;
   --bg-color2: #f9f9f9;
+  --bg-color3: #f4f4f4;
   --err-color: #db0632;
   --font-mont: "Montserrat", sans-serif;
 }
@@ -472,7 +473,8 @@ footer .link b {
   align-items: center;
 }
 
-[class^="heading"]:has(.path) {
+[class^="heading"]:has(.path),
+[class^="heading"]:not(:has(h2)) {
   align-items: baseline;
   flex-direction: column;
 }
@@ -482,6 +484,18 @@ footer .link b {
   font-size: 30px;
   font-weight: 400;
   color: var(--bk-color1);
+}
+
+.heading h2[class^="tit"] {
+  font-size: 30px;
+}
+
+.heading h3[class^="tit"] {
+  font-size: 30px;
+}
+
+.heading h4[class^="tit"] {
+  font-size: 18px;
 }
 
 .heading [class^="tit"][class$="-em"] {
@@ -498,6 +512,11 @@ footer .link b {
 
 .heading [class^="desc"] {
   color: var(--bk-color1);
+}
+
+.heading h5[class^="desc"] {
+  margin-top: 8px;
+  font-size: 15px;
 }
 
 .heading [class^="desc"][class$="-light"] {
@@ -588,11 +607,12 @@ footer .link b {
 .tab_rect p {
   padding: 10px 15px 12px;
   margin-right: 8px;
-  display: inline-block;
-  border-radius: 8px;
+  text-align: center;
   color: var(--bk-color2);
   font-size: 16px;
-  text-align: center;
+  white-space: nowrap;
+  border-radius: 8px;
+  display: inline-block;
   cursor: pointer;
 }
 
@@ -602,13 +622,49 @@ footer .link b {
   font-weight: 500;
 }
 
+.tab_include {
+  padding:8px;
+  background-color:var(--bg-color3);
+  border-radius:6px;
+  position: sticky;
+  top:87px;
+  display:flex;
+}
+
+.tab_include > li {
+  padding:12px 0 14px;
+  text-align:center;
+  font-size:16px;
+  color:var(--bk-color3);
+  border-radius:4px;
+  flex:1;
+}
+
+.tab_include > li.active {
+  background-color:#fff;
+  font-weight:500;
+  color:var(--bk-color1);
+}
+
 .tab_underline {
   display:flex;
 }
 
 .tab_underline > li {
+  line-height:60px;
   text-align:center;
+  background-color:#fff;
+  font-size:16px;
+  color:var(--bk-color3);
+  border-bottom:1px solid var(--br-color1);
   flex:1;
+  cursor:pointer;
+}
+
+.tab_underline > li.active {
+  font-weight:500;
+  color:var(--main-color1);
+  border-color:var(--main-color1);
 }
 
 /* ===== LIST */
@@ -625,6 +681,7 @@ footer .link b {
 .sort_list>li {
   font-size: 16px;
   position: relative;
+  white-space: nowrap;
 }
 
 .sort_list label {
@@ -724,6 +781,17 @@ footer .link b {
   text-decoration: underline;
 }
 
+
+/* SWIPER */
+.swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
+  margin-top:32px;
+  position:relative;
+  bottom:auto;
+}
+
+.swiper-pagination.swiper-pagination-bullets [class*="-bullet-active"]{
+  background:var(--bk-color1);
+}
 
 /* SELECTION/SCROLLBAR */
 ::selection {

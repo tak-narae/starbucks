@@ -61,7 +61,6 @@ const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, current
                     </div>
                   </Link>
                   <div className="desc">
-                    <p>{pathName}</p>
                     <div className="name">{product.name}</div>
                     {/* <div className="review">4.9</div> */}
                     <div className="price">39,000원</div>

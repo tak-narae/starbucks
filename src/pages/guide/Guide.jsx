@@ -20,6 +20,20 @@ const Guide = () => {
             </div>
           </div>
           <div className="guideItem">
+            <p className="guideTitle">.tab_rect</p>
+            <div className="tab_rect">
+              <p className="active">tab1</p>
+              <p>tab2</p>
+            </div>
+          </div>
+          <div className="guideItem">
+            <p className="guideTitle">.tab_underline</p>
+            <ul className="tab_underline">
+                <li className="active">tab1</li>
+                <li>tab2</li>
+              </ul>
+          </div>
+          <div className="guideItem">
             <p className="guideTitle">.heading + .sort_list</p>
             <div className="heading">
               <h2 className="tit">커피</h2>
