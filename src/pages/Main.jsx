@@ -49,7 +49,9 @@ const Main = () => {
           </div>
           <div className="split">STARBUCKS</div>
         </section>
-        <section className="main__banner">banner-img</section>
+        <section className="main__banner">
+          <img src={`${process.env.PUBLIC_URL}/db/images/2025_january_pick_bg.jpg`} alt="" />
+        </section>
         <section className="main__prd">
           <div className="layout_fix">
             <div className="heading">
@@ -96,7 +98,7 @@ const Main = () => {
         <section className="main__event">
           <div className="layout_fix">
             <div className="heading">
-              <h2 className="tit">이벤트</h2>
+              <h2 className="tit">  이벤트</h2>
             </div>
             <div className="loop_event">
               <ul className="event_list">
@@ -143,7 +145,7 @@ const Main = () => {
           <div className="layout_fix">
             <ul className="banner">
               <li>
-                <Link to="/">
+                <Link to={`/event/15?cate=카드출시`}>
                   <img src={require("../images/main_promo_banner1.png")} alt="" />
                 </Link>
               </li>
@@ -162,6 +164,7 @@ const Main = () => {
                 touchRatio={0}
                 direction={"vertical"}
                 autoHeight={true}
+                loop
                 autoplay={{
                   delay: 2000,
                   disableOnInteraction: false,

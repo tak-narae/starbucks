@@ -9,7 +9,7 @@ const Notice = () => {
     isActive, selectedCategory, currentPage,
     toggleActive, handleCategoryClick, handlePageChange,
     noticePages,
-    noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
+    noticeitemsPerPage, noticetotalPages, datefilteredNotice,
   } = useUtilContext();
 
   const navigate = useNavigate();
@@ -33,12 +33,16 @@ const Notice = () => {
   };
 
   useEffect(() => {
-    const filtered = notice.filter(notice =>
-      notice.subject.includes(search) &&
-      (selectedCategory === "전체" || notice.category === selectedCategory)
+    const filtered = datefilteredNotice.filter(notice =>
+      notice.subject.includes(search)
     );
     setFilteredNotices(filtered);
-  }, [search, selectedCategory, notice]);
+  }, [search, selectedCategory, datefilteredNotice]);
+
+  const paginatedNotices = filteredNotices.slice(
+    (currentPage - 1) * noticeitemsPerPage,
+    currentPage * noticeitemsPerPage
+  );
 
 
   return (

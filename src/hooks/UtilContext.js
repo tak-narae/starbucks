@@ -77,19 +77,6 @@ export const UtilProvider = ({ children }) => {
     setCurrentPage(pageNumber);
   };
 
-  //검색 버튼
-  const [search, setSearch] = useState("");
-  const searchAction = (e) => {
-    if (
-      search !== "" &&
-      e.target.closest("[class*='search_']:has(.btn_search).active")
-    ) {
-      return false;
-    }
-    e.target.closest(".search_event").classList.toggle("active");
-    document.querySelector(".heading_tab input").focus();
-  };
-
   //pagination
   const maxVisiblePages = 5;
   const currentBlock = Math.ceil(currentPage / maxVisiblePages);
@@ -159,22 +146,15 @@ export const UtilProvider = ({ children }) => {
     currentPage * eventitemsPerPage
   );
 
-  /* ================================================================== */
-
-  // "공지사항" 카테고리 필터링
-  const noticeMain = datefilteredNotice.filter(notice => notice.category === "공지사항");
-
   return (
     <UtilContext.Provider
       value={{
         notice, setNotice, event, setEvent,
         isActive, setIsActive, selectedCategory, setSelectedCategory, currentPage, setCurrentPage,
         toggleActive, handleCategoryClick, noticeCategoryFilteredData, eventCategoryFilteredData, handlePageChange,
-        search, setSearch, searchAction,
         maxVisiblePages, currentBlock, startPage, noticeEndPage, noticePages, eventEndPage, eventPages,
         noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
         activeTab, setActiveTab, today, displayedEvents, datefilteredEvents, eventitemsPerPage, eventtotalPages, paginatedEvents,
-        noticeMain
       }}
     >
       {children}
