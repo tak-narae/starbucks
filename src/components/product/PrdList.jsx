@@ -62,8 +62,9 @@ const PrdList = ( {title, cateKo, pathName, selectedCate, selectedDepth, current
                   </Link>
                   <div className="desc">
                     <div className="name">{product.name}</div>
+                    <div className="price">{typeof product.price === "number" ? `${product.price.toLocaleString()}원` : product.price}</div>
                     {/* <div className="review">4.9</div> */}
-                    <div className="price">39,000원</div>
+                    {/* <div className="price">{product.price}</div> */}
                   </div>
                 </div>
               </li>
