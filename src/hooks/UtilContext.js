@@ -77,6 +77,9 @@ export const UtilProvider = ({ children }) => {
     setCurrentPage(pageNumber);
   };
 
+  //검색 기능
+  const [search, setSearch] = useState("");
+
   //pagination
   const maxVisiblePages = 5;
   const currentBlock = Math.ceil(currentPage / maxVisiblePages);
@@ -152,6 +155,7 @@ export const UtilProvider = ({ children }) => {
         notice, setNotice, event, setEvent,
         isActive, setIsActive, selectedCategory, setSelectedCategory, currentPage, setCurrentPage,
         toggleActive, handleCategoryClick, noticeCategoryFilteredData, eventCategoryFilteredData, handlePageChange,
+        search, setSearch,
         maxVisiblePages, currentBlock, startPage, noticeEndPage, noticePages, eventEndPage, eventPages,
         noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
         activeTab, setActiveTab, today, displayedEvents, datefilteredEvents, eventitemsPerPage, eventtotalPages, paginatedEvents,

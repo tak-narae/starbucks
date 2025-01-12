@@ -5,11 +5,10 @@ import "pages/Event/Customer.css";
 
 const Notice = () => {
   const {
-    notice,
     isActive, selectedCategory, currentPage,
     toggleActive, handleCategoryClick, handlePageChange,
-    noticePages,
-    noticeitemsPerPage, noticetotalPages, datefilteredNotice,
+    search, setSearch,
+    noticePages, noticeitemsPerPage, noticetotalPages, datefilteredNotice,
   } = useUtilContext();
 
   const navigate = useNavigate();
@@ -18,23 +17,14 @@ const Notice = () => {
     handleCategoryClick(selectedCategory);
     navigate(`/notice?cate=${e}`);
   }
-
-  const [search, setSearch] = useState("");
-  const [filteredNotices, setFilteredNotices] = useState(notice);
-
+  const [filteredNotices, setFilteredNotices] = useState(datefilteredNotice);
   const searchAction = (e) => {
-    if (
-      search !== "" &&
-      e.target.closest("[class*='search_']:has(.btn_search).active")
-    ) {
-      return false;
-    }
     e.target.closest(".search_notice").classList.toggle("active");
   };
 
   useEffect(() => {
     const filtered = datefilteredNotice.filter(notice =>
-      notice.subject.includes(search)
+      notice.subject.toLowerCase().includes(search.toLowerCase())
     );
     setFilteredNotices(filtered);
   }, [search, selectedCategory, datefilteredNotice]);
@@ -51,7 +41,7 @@ const Notice = () => {
         <div className="layout_fix">
           <div className="heading">
             <h2 className="tit">
-              <Link to="/notice">공지사항</Link>
+              <Link to="/notice?cate">공지사항</Link>
             </h2>
             <ul className="sort_list">
               <li className={`sort_item`}>
