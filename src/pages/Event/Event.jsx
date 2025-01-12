@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
@@ -8,9 +8,9 @@ const Event = () => {
   const {
     isActive, selectedCategory, currentPage, setCurrentPage,
     toggleActive, handleCategoryClick, handlePageChange,
-    search, setSearch, searchAction,
-    eventPages,
-    activeTab, setActiveTab, today, eventtotalPages, paginatedEvents, datefilteredEvents,
+    search, setSearch,
+    eventPages, eventitemsPerPage,
+    activeTab, setActiveTab, today, eventtotalPages, datefilteredEvents,
   } = useUtilContext();
 
   const navigate = useNavigate();
@@ -19,6 +19,24 @@ const Event = () => {
     handleCategoryClick(selectedCategory);
     navigate(`/event?cate=${e}`);
   }
+
+  const [filteredEvents, setFilteredEvents] = useState(datefilteredEvents);
+  const searchAction = (e) => {
+    e.target.closest(".search_event").classList.toggle("active");
+  };
+
+  useEffect(() => {
+    const filtered = datefilteredEvents.filter(event =>
+      event.title.toLowerCase().includes(search.toLowerCase())
+      || event.title2.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredEvents(filtered);
+  }, [search, selectedCategory, datefilteredEvents])
+
+  const paginatedEvents = filteredEvents.slice(
+    (currentPage - 1) * eventitemsPerPage,
+    currentPage * eventitemsPerPage
+  );
 
   return (
     <div id="container" className="board__event">

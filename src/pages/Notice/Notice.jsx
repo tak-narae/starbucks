@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 import "pages/Event/Customer.css";
 
@@ -7,9 +7,8 @@ const Notice = () => {
   const {
     isActive, selectedCategory, currentPage,
     toggleActive, handleCategoryClick, handlePageChange,
-    search, setSearch, searchAction,
-    noticePages,
-    noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
+    search, setSearch,
+    noticePages, noticeitemsPerPage, noticetotalPages, datefilteredNotice,
   } = useUtilContext();
 
   const navigate = useNavigate();
@@ -18,15 +17,31 @@ const Notice = () => {
     handleCategoryClick(selectedCategory);
     navigate(`/notice?cate=${e}`);
   }
+  const [filteredNotices, setFilteredNotices] = useState(datefilteredNotice);
+  const searchAction = (e) => {
+    e.target.closest(".search_notice").classList.toggle("active");
+  };
+
+  useEffect(() => {
+    const filtered = datefilteredNotice.filter(notice =>
+      notice.subject.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredNotices(filtered);
+  }, [search, selectedCategory, datefilteredNotice]);
+
+  const paginatedNotices = filteredNotices.slice(
+    (currentPage - 1) * noticeitemsPerPage,
+    currentPage * noticeitemsPerPage
+  );
+
 
   return (
     <>
-      <Outlet context={{ datefilteredNotice }} />
       <div id="container" className="board__notice">
         <div className="layout_fix">
           <div className="heading">
             <h2 className="tit">
-              <Link to="/notice">공지사항</Link>
+              <Link to="/notice?cate">공지사항</Link>
             </h2>
             <ul className="sort_list">
               <li className={`sort_item`}>

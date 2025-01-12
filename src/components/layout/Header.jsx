@@ -8,8 +8,8 @@ import { useEffect } from "react";
 
 const Header = () => {
     const location = useLocation();
-    useEffect(()=>{
-        if (location.pathname !== '/'){
+    useEffect(() => {
+        if (location.pathname !== '/') {
             document.querySelectorAll("header .btn_hamburger i").forEach(i => {
                 i.style.transition = "none";
                 setTimeout(() => i.removeAttribute("style"), 0);
@@ -17,21 +17,21 @@ const Header = () => {
             document.querySelector("header .btn_hamburger").classList.remove("active");
             document.querySelector("header .header_nav").classList.remove("active");
         };
-    },[location])
-    useEffect(()=>{
-        document.querySelector("header .btn_hamburger").addEventListener("click", (e)=>{
+    }, [location])
+    useEffect(() => {
+        document.querySelector("header .btn_hamburger").addEventListener("click", (e) => {
             e.currentTarget.classList.toggle("active");
             document.querySelector("header .header_nav").classList.toggle("active");
         })
         document.querySelectorAll(".header_nav .gnb ul").forEach(el => {
-            el.addEventListener("mouseenter", (item)=>{
+            el.addEventListener("mouseenter", (item) => {
                 item.target.closest('li').classList.add("active");
             })
-            el.addEventListener("mouseleave", (item)=>{
+            el.addEventListener("mouseleave", (item) => {
                 item.target.closest('li').classList.remove("active");
             })
         })
-    },[])
+    }, [])
 
 
     return (
@@ -110,17 +110,17 @@ const Header = () => {
                         </ul>
                     </nav>
                     <ul className="banner">
-                    <li><Link to="/"><img src={require("../../images/header_banner1.png")} alt="이벤트 배너"/></Link></li>
-                    <li><Link to="/"><img src={require("../../images/header_banner2.png")} alt="이벤트 배너"/></Link></li>
-                    <li><Link to="/"><img src={require("../../images/header_banner3.png")} alt="이벤트 배너"/></Link></li>
+                        <li><Link to="/event?cate=상품출시"><img src={require("../../images/header_banner1.png")} alt="이벤트 배너" /></Link></li>
+                        <li><Link to="/event/12?cate=상품출시"><img src={require("../../images/header_banner2.png")} alt="이벤트 배너" /></Link></li>
+                        <li><Link to="/event"><img src={require("../../images/header_banner3.png")} alt="이벤트 배너" /></Link></li>
                     </ul>
                 </div>
                 <div className="customer">
                     <ul className="menu_util">
-                        <li><Link to="/event"><img src={require('../../images/header_util1.png')} alt="이벤트"/><span>이벤트</span></Link></li>
-                        <li><Link to="/notice"><img src={require('../../images/header_util2.png')} alt="공지사항"/><span>공지사항</span></Link></li>
-                        <li><Link to="/store"><img src={require('../../images/header_util3.png')} alt="매장안내"/><span>매장안내</span></Link></li>
-                        <li><Link to="/"><img src={require('../../images/header_util4.png')} alt="고객센터"/><span>고객센터</span></Link></li>
+                        <li><Link to="/event"><img src={require('../../images/header_util1.png')} alt="이벤트" /><span>이벤트</span></Link></li>
+                        <li><Link to="/notice"><img src={require('../../images/header_util2.png')} alt="공지사항" /><span>공지사항</span></Link></li>
+                        <li><Link to="/store"><img src={require('../../images/header_util3.png')} alt="매장안내" /><span>매장안내</span></Link></li>
+                        <li><Link to="/"><img src={require('../../images/header_util4.png')} alt="고객센터" /><span>고객센터</span></Link></li>
                     </ul>
                 </div>
             </div>

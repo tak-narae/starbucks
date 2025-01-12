@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DataContext } from "App";
 import useQueryParams from "hooks/useQueryParams";
+import { useUtilContext } from "hooks/UtilContext";
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,8 +20,10 @@ import PrdList from "components/product/PrdList";
 import "components/product/PrdList.css";
 
 const Main = () => {
-  const { product, notice, events } = useContext(DataContext);
+  const { product } = useContext(DataContext);
   const { selectedCate, selectedDepth, pathName } = useQueryParams();
+
+  const { datefilteredNotice, datefilteredEvents } = useUtilContext();
 
   const [prdSeason, setPrdSeason] = useState([]); // 홀리데이 상품
   useEffect(() => {
@@ -46,7 +49,9 @@ const Main = () => {
           </div>
           <div className="split">STARBUCKS</div>
         </section>
-        <section className="main__banner">banner-img</section>
+        <section className="main__banner">
+          <img src={`${process.env.PUBLIC_URL}/db/images/2025_january_pick_bg.jpg`} alt="" />
+        </section>
         <section className="main__prd">
           <div className="layout_fix">
             <div className="heading">
@@ -93,7 +98,7 @@ const Main = () => {
         <section className="main__event">
           <div className="layout_fix">
             <div className="heading">
-              <h2 className="tit">이벤트</h2>
+              <h2 className="tit">  이벤트</h2>
             </div>
             <div className="loop_event">
               <ul className="event_list">
@@ -112,9 +117,9 @@ const Main = () => {
                     disableOnInteraction: false,
                   }}
                 >
-                  {events.slice(0, 10).map((event, idx) => (
+                  {datefilteredEvents.slice(0, 10).map((event, idx) => (
                     <SwiperSlide>
-                      <Link to="/event">
+                      <Link to={`/event/${idx}?cate=${event.category}`}>
                         <div className="thumb">
                           <img
                             src={event.img}
@@ -140,13 +145,13 @@ const Main = () => {
           <div className="layout_fix">
             <ul className="banner">
               <li>
-                <Link to="/">
-                  <img src={require("../images/main_promo_banner1.png")} />
+                <Link to={`/event/15?cate=카드출시`}>
+                  <img src={require("../images/main_promo_banner1.png")} alt="" />
                 </Link>
               </li>
               <li>
                 <Link to="/">
-                  <img src={require("../images/main_promo_banner2.png")} />
+                  <img src={require("../images/main_promo_banner2.png")} alt="" />
                 </Link>
               </li>
             </ul>
@@ -159,16 +164,18 @@ const Main = () => {
                 touchRatio={0}
                 direction={"vertical"}
                 autoHeight={true}
+                loop
                 autoplay={{
                   delay: 2000,
                   disableOnInteraction: false,
                 }}
               >
                 {
-                  notice && notice.length > 0 ? (
-                    notice.slice(0, 10).map((noticeItem, idx) => (
-                      <SwiperSlide key={idx}>
-                        <Link to="/notice">
+                  datefilteredNotice && datefilteredNotice.length > 0 ? (
+                    datefilteredNotice.slice(0, 10).map((noticeItem, idx) => (
+                      <SwiperSlide key={idx} >
+                        <Link to={`/notice/${idx}?cate=${noticeItem.category}`}>
+                          {console.log(idx)}
                           <p className="tit">{noticeItem.subject}</p>
                           <span className="date">{noticeItem.date}</span>
                         </Link>
@@ -185,7 +192,7 @@ const Main = () => {
             </div>
           </div>
         </section>
-      </main>
+      </main >
     </>
   );
 };

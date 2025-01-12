@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, use } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const UtilContext = createContext();
 
@@ -34,6 +33,7 @@ export const UtilProvider = ({ children }) => {
   useEffect(() => {
     getData();
   }, []);
+
   /* ================================================================== */
 
   /* ===== Notice와 Event 동시에 사용하는 변수 및 설정  ===== */
@@ -77,18 +77,8 @@ export const UtilProvider = ({ children }) => {
     setCurrentPage(pageNumber);
   };
 
-  //검색 버튼
+  //검색 기능
   const [search, setSearch] = useState("");
-  const searchAction = (e) => {
-    if (
-      search !== "" &&
-      e.target.closest("[class*='search_']:has(.btn_search).active")
-    ) {
-      return false;
-    }
-    e.target.closest(".search_event").classList.toggle("active");
-    document.querySelector(".heading_tab input").focus();
-  };
 
   //pagination
   const maxVisiblePages = 5;
@@ -165,7 +155,7 @@ export const UtilProvider = ({ children }) => {
         notice, setNotice, event, setEvent,
         isActive, setIsActive, selectedCategory, setSelectedCategory, currentPage, setCurrentPage,
         toggleActive, handleCategoryClick, noticeCategoryFilteredData, eventCategoryFilteredData, handlePageChange,
-        search, setSearch, searchAction,
+        search, setSearch,
         maxVisiblePages, currentBlock, startPage, noticeEndPage, noticePages, eventEndPage, eventPages,
         noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
         activeTab, setActiveTab, today, displayedEvents, datefilteredEvents, eventitemsPerPage, eventtotalPages, paginatedEvents,

@@ -8,7 +8,7 @@ const NoticeDetail = () => {
   const category = new URLSearchParams(search).get('cate'); // 카테고리 쿼리 파라미터 가져오기
   console.log(category)
 
-  const { paginatedNotices, datefilteredNotice, handleCategoryClick } = useUtilContext();
+  const { paginatedNotices, datefilteredNotice, handleCategoryClick, noticeMain } = useUtilContext();
 
   const noticeIndex = parseInt(idx, 10);
   const notices = paginatedNotices[noticeIndex];
