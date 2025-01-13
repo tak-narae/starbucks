@@ -84,6 +84,7 @@ const useProductMatch = () => {
 
     fetchData();
   }, [category, cateIndex, productId]);
+  // category, cateIndex, productId
 
   console.log("매치==", productMatch);
 
