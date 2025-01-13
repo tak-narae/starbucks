@@ -16,14 +16,14 @@ import "./Main.scss";
 
 // components
 // import MainGsap from "./MainGsap.js";
-import { MainPrd } from "./MainGsap.js"
+import { MainPrd } from "./MainGsap.js";
 
 import SplitEffect from "./MainSplit.js";
 import PrdList from "components/product/PrdList";
 import "components/product/PrdList.css";
 
 const Main = () => {
-  const { product } = useContext(DataContext);
+  const { product, resMz } = useContext(DataContext);
   const { selectedCate, selectedDepth, pathName } = useQueryParams();
 
   const { datefilteredNotice, datefilteredEvents } = useUtilContext();
@@ -54,7 +54,9 @@ const Main = () => {
           <div className="split">STARBUCKS</div>
         </section>
         <section className="main__banner">
-          <img src={`${process.env.PUBLIC_URL}/db/images/2025_january_pick_bg.jpg`} alt="" />
+          <Link to="/menu/detail/coffee?cate=0&id=15">
+            <img src={require("../images/main_banner.png")} alt="main_banner" />
+          </Link>
         </section>
         <section className="main__prd">
           <div className="layout_fix">
@@ -85,6 +87,17 @@ const Main = () => {
               </p>
             </div>
           </div>
+          <div className="res_mz">
+            <ul>
+              {resMz.slice(0,5).map((item) => (
+                <li className="mzImg" key={item.key}>
+                  <Link to="#">
+                      <img src={item.img} alt={item.title} />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
         <section className="main__res_store">
           <div className="layout_fix">
@@ -100,64 +113,70 @@ const Main = () => {
           </div>
         </section>
         <section className="main__event">
-        <div className="heading">
-              <div className="layout_fix">
-                <h2 className="tit">이벤트</h2>
-              </div>
+          <div className="heading">
+            <div className="layout_fix">
+              <h2 className="tit">이벤트</h2>
             </div>
-            <div className="loop_event">
-              <ul className="event_list">
-                <Swiper
-                  className="swiper_event"
-                  modules={[Autoplay]}
-                  observer={true}
-                  observeParents={true}
-                  loop={true}
-                  slidesPerView="auto"
-                  spaceBetween={40}
-                  freeMode={true}
-                  touchRatio={0}
-                  allowTouchMove={false}
-                  speed={4000}
-                  autoplay={{
-                    delay: 1,
-                    disableOnInteraction: false,
-                  }}
-                >
-                  {datefilteredEvents.slice(0, 10).map((event, idx) => (
-                    <SwiperSlide>
-                      <Link to={`/event/${idx}?cate=${event.category}`}>
-                        <div className="thumb">
-                          <img
-                            src={event.img}
-                            alt={event.title}
-                            style={{ width: "100%", borderRadius: "8px" }}
-                          />
-                        </div>
-                        <div className="info">
-                          <p className="tit">
-                            {event.title}
-                          </p>
-                          <span className="date">{event.startDate} ~ {event.endDate}</span>
-                        </div>
-                      </Link>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </ul>
-            </div>
+          </div>
+          <div className="loop_event">
+            <ul className="event_list">
+              <Swiper
+                className="swiper_event"
+                modules={[Autoplay]}
+                observer={true}
+                observeParents={true}
+                loop={true}
+                slidesPerView="auto"
+                spaceBetween={40}
+                freeMode={true}
+                touchRatio={0}
+                allowTouchMove={false}
+                speed={4000}
+                autoplay={{
+                  delay: 1,
+                  disableOnInteraction: false,
+                }}
+              >
+                {datefilteredEvents.slice(0, 8).map((event, idx) => (
+                  <SwiperSlide key={idx}>
+                    <Link to={`/event/${idx}?cate=${event.category}`}>
+                      <div className="thumb">
+                        <img
+                          src={event.img}
+                          alt={event.title}
+                          style={{ width: "100%", borderRadius: "8px" }}
+                        />
+                      </div>
+                      <div className="info">
+                        <p className="tit">{event.title}</p>
+                        <span className="date">
+                          {event.startDate} ~ {event.endDate}
+                        </span>
+                      </div>
+                    </Link>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </ul>
+          </div>
         </section>
         <section className="main__promo">
           <div className="layout_fix">
             <ul className="banner">
               <li>
-                <Link to={`/event/15?cate=카드출시`}>
-                  <img src={require("../images/main_promo_banner1.png")} alt="" />
+                <Link to={`/event/3?cate="카드출시"`}>
+                  <img
+                    src={require("../images/main_promo_banner3.png")}
+                    alt=""
+                  />
                 </Link>
               </li>
               <li>
-                <Link to="/">
-                  <img src={require("../images/main_promo_banner2.png")} alt="" />
+                <Link to={`/event/4?cate="전체"`}>
+                  <img
+                    src={require("../images/main_promo_banner4.png")}
+                    alt=""
+                  />
                 </Link>
               </li>
             </ul>
@@ -176,21 +195,18 @@ const Main = () => {
                   disableOnInteraction: false,
                 }}
               >
-                {
-                  datefilteredNotice && datefilteredNotice.length > 0 ? (
-                    datefilteredNotice.slice(0, 10).map((noticeItem, idx) => (
-                      <SwiperSlide key={idx} >
-                        <Link to={`/notice/${idx}?cate=${noticeItem.category}`}>
-                          {console.log(idx)}
-                          <p className="tit">{noticeItem.subject}</p>
-                          <span className="date">{noticeItem.date}</span>
-                        </Link>
-                      </SwiperSlide>
-                    ))
-                  ) : (
-                    <p>공지사항이 없습니다.</p>
-                  )
-                }
+                {datefilteredNotice && datefilteredNotice.length > 0 ? (
+                  datefilteredNotice.slice(0, 10).map((noticeItem, idx) => (
+                    <SwiperSlide key={idx}>
+                      <Link to={`/notice/${idx}?cate=${noticeItem.category}`}>
+                        <p className="tit">{noticeItem.subject}</p>
+                        <span className="date">{noticeItem.date}</span>
+                      </Link>
+                    </SwiperSlide>
+                  ))
+                ) : (
+                  <p>공지사항이 없습니다.</p>
+                )}
               </Swiper>
               <Link to="/notice" className="btn_link">
                 더보기 +
@@ -198,7 +214,7 @@ const Main = () => {
             </div>
           </div>
         </section>
-      </main >
+      </main>
     </>
   );
 };

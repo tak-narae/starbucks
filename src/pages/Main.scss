@@ -37,7 +37,7 @@
     white-space: nowrap;
     user-select: none;
 
-    >.line {
+    > .line {
       text-align: center !important;
     }
   }
@@ -57,7 +57,8 @@
   width: 40px;
   line-height: 40px;
   margin: 20px auto 0;
-  background: transparent url("../images/btn_more.png") no-repeat (center / contain);
+  background: transparent url("../images/btn_more.png") no-repeat
+    (center / contain);
   font-size: 0;
   border-radius: 50px;
   overflow: hidden;
@@ -65,7 +66,7 @@
 
   &:hover {
     background-image: url("../images/btn_more_active.png");
-    transition: .35s ease;
+    transition: 0.35s ease;
   }
 }
 
@@ -116,6 +117,31 @@
               font-size: 13px;
               color: var(--bk-color2);
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+.main__res_mz {
+  .res_mz {
+    width: auto;
+    height: 400px;
+    ul {
+      .mzImg {
+        width: 350px;
+        height: 350px;
+        display: flex;
+        overflow-y: scroll;
+        border-radius: 10px;
+        a {
+          width: 100%;
+          height: 100%;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
           }
         }
       }

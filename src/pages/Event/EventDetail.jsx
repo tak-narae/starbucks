@@ -46,32 +46,32 @@ const EventDetail = () => {
                 )}
               </div>
               <div className="post_nav">
-                <div className="prev">
-                  <button>prev</button>
-                  <span>이전글</span>
-                  <div className="prev_tit">
-                    <Link to={`/event/${parseInt(idx) - 1}?cate=${EventDetail.category}`}>
-                      {prevEvent ? (
+                {prevEvent ? (
+                  <div className="prev">
+                    <button>prev</button>
+                    <span>이전글</span>
+                    <div className="prev_tit">
+                      <Link to={`/event/${parseInt(idx) - 1}?cate=${EventDetail.category}`}>
                         <div>{prevEvent.title}</div>
-                      ) : (
-                        <p> 해당 글이 없습니다 </p>
-                      )}
-                    </Link>
+                      </Link>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="prev" style={{display: "none"}}></div>
+                )}
+                {nextEvent ? (
                 <div className="next">
                   <button>next</button>
                   <span>다음글</span>
                   <div className="next_tit">
                     <Link to={`/event/${parseInt(idx) + 1}?cate=${EventDetail.category}`}>
-                      {nextEvent ? (
                         <div>{nextEvent.title}</div>
-                      ) : (
-                        <p> 해당 글이 없습니다 </p>
-                      )}
                     </Link>
                   </div>
                 </div>
+                ) : (
+                  <div className="next" style={{display: "none"}}></div>
+                )}
               </div>
               <div className="post">
                 <button>

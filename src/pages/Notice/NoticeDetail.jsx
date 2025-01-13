@@ -5,19 +5,30 @@ import { useUtilContext } from "hooks/UtilContext";
 const NoticeDetail = () => {
   let { idx } = useParams();
   const { search } = useLocation();
-  const category = new URLSearchParams(search).get('cate'); // 카테고리 쿼리 파라미터 가져오기
-  console.log(category)
+  const category = new URLSearchParams(search).get("cate"); // 카테고리 쿼리 파라미터 가져오기
+  // console.log(category);
 
-  const { paginatedNotices, datefilteredNotice, handleCategoryClick, noticeMain } = useUtilContext();
+  const { paginatedNotices, datefilteredNotice, handleCategoryClick } =
+    useUtilContext();
 
   const noticeIndex = parseInt(idx, 10);
   const notices = paginatedNotices[noticeIndex];
 
-  const filteredNotices = notices ? datefilteredNotice.filter(notice => notice.category === notices.category) : [];
-  const currentFilteredIndex = filteredNotices.findIndex(notice => notice === notices);
+  const filteredNotices = notices
+    ? datefilteredNotice.filter(
+        (notice) => notice.category === notices.category
+      )
+    : [];
+  const currentFilteredIndex = filteredNotices.findIndex(
+    (notice) => notice === notices
+  );
 
-  const prevNotice = currentFilteredIndex > 0 ? filteredNotices[currentFilteredIndex - 1] : null;
-  const nextNotice = currentFilteredIndex < filteredNotices.length ? filteredNotices[currentFilteredIndex + 1] : null;
+  const prevNotice =
+    currentFilteredIndex > 0 ? filteredNotices[currentFilteredIndex - 1] : null;
+  const nextNotice =
+    currentFilteredIndex < filteredNotices.length
+      ? filteredNotices[currentFilteredIndex + 1]
+      : null;
 
   return (
     <div id="container" className="board__notice_detail">
@@ -38,26 +49,42 @@ const NoticeDetail = () => {
                 <p className="date">{notices.date}</p>
               </div>
             </div>
-            <div className="notice_cont">{notices.contents}</div>
+            <div className="notice_cont">{notices.contents}
+              {notices.img ? (
+              <div className="detail_img">
+                <img src={`${process.env.PUBLIC_URL}/${notices.img}`} alt={notices.subject} />
+              </div>
+              ) : (
+                null
+              )}
+            </div>
             <div className="post_nav">
-              <div className="prev">
-                <button>prev</button>
-                <span>이전글</span>
-                <div className="prev_tit">
-                  <Link to={`/notice/${parseInt(idx) - 1}?cate=${category}`}>
-                    {prevNotice ? (<div>{prevNotice.subject}</div>) : (<p>해당 글이 없습니다</p>)}
-                  </Link>
+              {prevNotice ? (
+                <div className="prev">
+                  <button>prev</button>
+                  <span>이전글</span>
+                  <div className="prev_tit">
+                    <Link to={`/notice/${parseInt(idx) - 1}?cate=${category}`}>
+                        <div>{prevNotice.subject}</div>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <div className="next">
-                <button>next</button>
-                <span>다음글</span>
-                <div className="next_tit">
-                  <Link to={`/notice/${parseInt(idx) + 1}?cate=${category}`}>
-                    {nextNotice ? (<div>{nextNotice.subject}</div>) : (<p>해당 글이 없습니다</p>)}
-                  </Link>
+              ) : (
+                <div className="prev" style={{ display: "none" }}></div>
+              )}
+              {nextNotice ? (
+                <div className="next">
+                  <button>next</button>
+                  <span>다음글</span>
+                  <div className="next_tit">
+                    <Link to={`/notice/${parseInt(idx) + 1}?cate=${category}`}>
+                      <div>{nextNotice.subject}</div>
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="next" style={{ display: "none" }}></div>
+              )}
             </div>
             <div className="post">
               <button>
@@ -67,7 +94,9 @@ const NoticeDetail = () => {
                   onClick={(e) => {
                     handleCategoryClick(notices.category);
                   }}
-                >목록으로</Link>
+                >
+                  목록으로
+                </Link>
               </button>
             </div>
           </>
