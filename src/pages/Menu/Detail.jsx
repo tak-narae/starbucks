@@ -12,7 +12,6 @@ import "./Detail.css";
 
 import QtyCalc from "./../../hooks/QtyCalc.js";
 
-
 /* ===
   categoryLabel : 한글대분류
   category : 영문대분류
@@ -30,7 +29,6 @@ import QtyCalc from "./../../hooks/QtyCalc.js";
 
 const Detail = () => {
   const { productMatch, title, cateKo, cateList } = useProductMatch(); // 커스텀 훅 호출
-
   // const handleAddToCart = () => {
   //   const qty = document.querySelector(".btn_qty .qty").value;
   //   const cartItem = { productId: productMatch.id, qty: parseInt(qty) };
@@ -47,6 +45,7 @@ const Detail = () => {
   const refDelv = useRef();
   const refRecommended = useRef();
   const [tabActive, setTabActive] = useState("detail");
+  
   const tabScrollTo = (e, tabClick)=>{
     window.scrollTo({ top: e.current.offsetTop + 118});
     setTabActive(tabClick);
@@ -54,7 +53,7 @@ const Detail = () => {
 
   useEffect(() => {
     if (productMatch && productMatch.imgDetail) {
-      const handleScroll = () => {
+      const handleScroll = () => { 
         const pinPosition = window.scrollY;
         // pinPosition >= refDelv.current.offsetTop + 118 ? setTabActive("delv") : setTabActive("detail");
         pinPosition < refDelv.current.offsetTop + 117 ? setTabActive("detail")
