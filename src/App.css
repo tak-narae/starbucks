@@ -623,48 +623,48 @@ footer .link b {
 }
 
 .tab_include {
-  padding:8px;
-  background-color:var(--bg-color3);
-  border-radius:6px;
+  padding: 8px;
+  background-color: var(--bg-color3);
+  border-radius: 6px;
   position: sticky;
-  top:87px;
-  display:flex;
+  top: 87px;
+  display: flex;
 }
 
-.tab_include > li {
-  padding:12px 0 14px;
-  text-align:center;
-  font-size:16px;
-  color:var(--bk-color3);
-  border-radius:4px;
-  flex:1;
+.tab_include>li {
+  padding: 12px 0 14px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--bk-color3);
+  border-radius: 4px;
+  flex: 1;
 }
 
-.tab_include > li.active {
-  background-color:#fff;
-  font-weight:500;
-  color:var(--bk-color1);
+.tab_include>li.active {
+  background-color: #fff;
+  font-weight: 500;
+  color: var(--bk-color1);
 }
 
 .tab_underline {
-  display:flex;
+  display: flex;
 }
 
-.tab_underline > li {
-  line-height:60px;
-  text-align:center;
-  background-color:#fff;
-  font-size:16px;
-  color:var(--bk-color3);
-  border-bottom:1px solid var(--br-color1);
-  flex:1;
-  cursor:pointer;
+.tab_underline>li {
+  line-height: 60px;
+  text-align: center;
+  background-color: #fff;
+  font-size: 16px;
+  color: var(--bk-color3);
+  border-bottom: 1px solid var(--br-color1);
+  flex: 1;
+  cursor: pointer;
 }
 
-.tab_underline > li.active {
-  font-weight:500;
-  color:var(--main-color1);
-  border-color:var(--main-color1);
+.tab_underline>li.active {
+  font-weight: 500;
+  color: var(--main-color1);
+  border-color: var(--main-color1);
 }
 
 /* ===== LIST */
@@ -784,13 +784,13 @@ footer .link b {
 
 /* SWIPER */
 .swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
-  margin-top:32px;
-  position:relative;
-  bottom:auto;
+  margin-top: 32px;
+  position: relative;
+  bottom: auto;
 }
 
-.swiper-pagination.swiper-pagination-bullets [class*="-bullet-active"]{
-  background:var(--bk-color1);
+.swiper-pagination.swiper-pagination-bullets [class*="-bullet-active"] {
+  background: var(--bk-color1);
 }
 
 /* SELECTION/SCROLLBAR */

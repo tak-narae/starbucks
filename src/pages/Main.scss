@@ -37,7 +37,7 @@
     white-space: nowrap;
     user-select: none;
 
-    > .line {
+    >.line {
       text-align: center !important;
     }
   }
@@ -57,8 +57,7 @@
   width: 40px;
   line-height: 40px;
   margin: 20px auto 0;
-  background: transparent url("../images/btn_more.png") no-repeat
-    (center / contain);
+  background: transparent url("../images/btn_more.png") no-repeat (center / contain);
   font-size: 0;
   border-radius: 50px;
   overflow: hidden;
@@ -124,20 +123,98 @@
   }
 }
 
+// .main__res_mz {
+//   display: flex;
+
+//   >.layout_fix {
+//     display: flex;
+//   }
+
+//   >.heading {
+//     width: 100%;
+//   }
+
+//   .res_mz {
+//     width: auto;
+//     height: 400px;
+//     overflow: hidden;
+
+//     ul {
+//       .mzImg {
+//         width: 350px;
+//         height: 350px;
+//         display: flex;
+//         overflow: hidden;
+//         border-radius: 10px;
+
+//         a {
+//           width: 100%;
+//           height: 100%;
+
+//           img {
+//             width: 100%;
+//             height: 100%;
+//             border-radius: 10px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
 .main__res_mz {
+  position: relative;
+
+  .reserve_star_img {
+    width: 122px;
+    height: 145.9px;
+    margin-bottom: 94px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   .res_mz {
-    width: auto;
-    height: 400px;
-    ul {
+    height: 100%;
+    padding: 100px 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-20%, -50%);
+
+    ::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #fff;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--main-color4);
+      border-radius: 4px;
+    }
+
+    .megazine {
+      height: 100%;
+      display: flex;
+      gap: 14px;
+      overflow-x: scroll;
+      max-width: 1082px;
+
       .mzImg {
         width: 350px;
         height: 350px;
-        display: flex;
-        overflow-y: scroll;
         border-radius: 10px;
+
         a {
+          display: block;
           width: 100%;
           height: 100%;
+          aspect-ratio: 1/1;
+
           img {
             width: 100%;
             height: 100%;
@@ -146,6 +223,7 @@
         }
       }
     }
+
   }
 }
 

@@ -79,6 +79,9 @@ const Main = () => {
         </section>
         <section className="main__res_mz">
           <div className="layout_fix">
+            <div className="reserve_star_img">
+              <img src={require("../images/reserve_star.png")} alt="" />
+            </div>
             <div className="heading">
               <span className="sub">Reserve Magazine</span>
               <h2 className="tit">리저브 매거진</h2>
@@ -88,11 +91,11 @@ const Main = () => {
             </div>
           </div>
           <div className="res_mz">
-            <ul>
-              {resMz.slice(0,5).map((item) => (
+            <ul className="megazine">
+              {resMz.slice(0, 5).map((item) => (
                 <li className="mzImg" key={item.key}>
                   <Link to="#">
-                      <img src={item.img} alt={item.title} />
+                    <img src={item.img} alt={item.title} />
                   </Link>
                 </li>
               ))}
