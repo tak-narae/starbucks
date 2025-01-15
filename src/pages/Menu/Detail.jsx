@@ -43,16 +43,13 @@ const Detail = () => {
   useEffect(() => {
     setTimeout(() => {
       QtyCalc();
-      // document.querySelectorAll(".tab_underline > li").forEach(el =>
-      //   el.addEventListener("click", () => {
-      //     document.querySelector(".tab_underline li.active")?.classList.remove("active");
-      //     el.classList.add("active");
-      //   })
-      // );
 
       const handleScroll = () => {
         const pinY = window.scrollY - 117;
         // console.log("pin--", pinY, "Delv--", refDelv.current.offsetTop);
+
+        if (!refDelv.current) return;
+
         document.querySelectorAll(".tab_underline > li").forEach(el => el.classList.remove("active"));
         
         if (pinY >= refDelv.current.offsetTop && pinY < refDelv.current.offsetTop + refDelv.current.offsetHeight) {
@@ -69,10 +66,9 @@ const Detail = () => {
           document.querySelector("[data-ref='tabRecommended']").classList.add("active");
         }
       };
-      handleScroll();
       window.addEventListener("scroll", handleScroll);
       return () => window.removeEventListener("scroll", handleScroll);
-      
+
     }, 1000);
   }, [])
 
