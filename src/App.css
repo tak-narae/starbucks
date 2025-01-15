@@ -194,6 +194,10 @@ strong {
   margin: 0 auto;
 }
 
+[class^="member__"] .layout_fix {
+  width: 816px;
+}
+
 footer {
   background-color: #fff;
   border-top: 1px solid var(--br-color1);

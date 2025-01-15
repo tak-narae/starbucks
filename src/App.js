@@ -22,6 +22,7 @@ import Store from "pages/Store/Store";
 import Footer from "components/layout/Footer";
 import Guide from "pages/guide/Guide";
 import UtilProvider from "hooks/UtilContext";
+import SignUp from "pages/Member/SignUp";
 
 const DataContext = createContext();
 
@@ -81,6 +82,7 @@ function App() {
             <Route path="/notice/:idx" element={<NoticeDetail />}></Route>
             <Route path="/store" element={<Store />}></Route>
             <Route path="/guide" element={<Guide />}></Route>
+            <Route path="/signup" element={<SignUp />}></Route>
           </Routes>
           <Footer />
         </UtilProvider>
