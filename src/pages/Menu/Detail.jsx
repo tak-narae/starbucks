@@ -45,7 +45,7 @@ const Detail = () => {
       QtyCalc();
 
       const handleScroll = () => {
-        const pinY = window.scrollY - 117;
+        const pinY = window.scrollY - 118;
         // console.log("pin--", pinY, "Delv--", refDelv.current.offsetTop);
 
         if (!refDelv.current) return;
@@ -86,7 +86,7 @@ const Detail = () => {
     }
     const targetRef = refs[tabRef];
     if (targetRef && targetRef.current) {
-      window.scrollTo({ top: targetRef.current.offsetTop + 117 });
+      window.scrollTo({ top: targetRef.current.offsetTop + 118 });
     }
   }
 

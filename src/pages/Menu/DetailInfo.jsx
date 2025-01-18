@@ -13,8 +13,6 @@ const DetailInfo = () => {
   return (
     <div id="container" className="prd__detail_info">
       <div className="layout_fix">
-        DetailInfo.jsx
-
         <div className="heading">
           <ul className="path">
             <li className="home">
@@ -25,15 +23,21 @@ const DetailInfo = () => {
           </ul>
         </div>
 
-        <div>
+        <div className="prd_panel">
           <img src={`${process.env.PUBLIC_URL}/${productMatch.img}`} alt={productMatch.name} />
-          <h2>상품명: {productMatch.name}</h2>
-          <h3>Nitro Vanilla Cream</h3>
-          <h4>부드러운 목넘김의 나이트로 커피와 바닐라 크림의 매력을 한번에 느껴보세요!</h4>
-
+            <div className="prd_item">
+            <div className="info_cont">
+              <h3 className="name-en">{productMatch.nameEn}</h3>
+              <h2 className="name">{productMatch.name}</h2>
+              <h4 className="desc">{productMatch.desc}</h4>
+              <h4 className="price">{productMatch.price}</h4>
+            </div>
+          </div>
+        </div>
+        <div className="fact_cont">
           <div className="tb_heading">
             <h3 className="tit">제품 영양 정보</h3>
-            <p className="txt">Tall(톨) / 355ml</p>
+            <p className="txt">{productMatch.facts}</p>
           </div>
           <table>
             <thead>
@@ -57,7 +61,7 @@ const DetailInfo = () => {
               </tr>
             </tbody>
           </table>
-          <p className="help_factor">알레르기 유발요인 : 뭐다!</p>
+          {productMatch.factor && ( <p className="help_factor">알레르기 유발요인 : {productMatch.factor}</p> )}
         </div>
       </div> {/* .layoutfix */}
     </div>
