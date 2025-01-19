@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
   prdSeason : 홀리데이정보(메인)
 === */
 
-const PrdList = ({ title, cateKo, pathName, selectedCate, selectedDepth, currentData, prdSeason = [], search }) => {
+const PrdList = ({ title, cateKo, pathName, selectedCate, selectedDepth, currentData, prdSeason = [], prdSeasonMatch,seasonData, search }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
@@ -32,8 +32,8 @@ const PrdList = ({ title, cateKo, pathName, selectedCate, selectedDepth, current
       );
     }
     setFilteredProducts(filtered);
-
   }, [selectedCate, selectedDepth, currentData, search]);
+
 
   return (
     <>
@@ -51,7 +51,8 @@ const PrdList = ({ title, cateKo, pathName, selectedCate, selectedDepth, current
                       pathname: `/menu/${pathName === "beverage" || pathName === "food" ? "info" : "detail"}/${pathName}`,
                       search: `?cate=${selectedCate}&id=${product.id}`,
                     }}
-                    state={{ title, cateKo, product }}
+                    state={{ title, cateKo }}
+                    // state={{ title, cateKo, product }} origin
                   >
                     <div className="image">
                       <img
@@ -74,14 +75,19 @@ const PrdList = ({ title, cateKo, pathName, selectedCate, selectedDepth, current
           )
         ) : (
           // selectedCate나 selectedDepth가 없을 때 "홀리데이" 제품 목록 렌더링
-          prdSeason.map((product) => (
-            <li key={product.key}>
+          prdSeason.map((product) => {
+            const matchedItem = seasonData.find((item) => Object.values(item)[0] === product.name);
+            const matchedKey = matchedItem ? Object.keys(matchedItem)[0] : null;
+
+            return (
+              <li key={product.key}>
               <div className="item">
-                {/* <Link to={`/menu/${pathName}?cate=${selectedCate}&id=${product.id}`} className="thumbnail"> */}
                 <Link className="thumbnail"
                   to={{
-                    pathname: `/menu/detail/${pathName}`,
-                    search: `?cate=${selectedCate}&id=${product.id}`,
+                    pathname: `/menu/detail/product`,
+                    search: `?cate=${matchedKey}&id=${product.id}`,
+                    // pathname: `/menu/detail/${pathName}`,
+                    // search: `?cate=${selectedCate}&id=${product.id}`,
                   }}
                   state={{ title, cateKo, product }}
                 >
@@ -95,9 +101,9 @@ const PrdList = ({ title, cateKo, pathName, selectedCate, selectedDepth, current
                   <div className="price">39,000원</div>
                 </div>
               </div>
-
             </li>
-          ))
+            )
+          })
         )
         }
       </ul >
