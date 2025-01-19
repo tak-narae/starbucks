@@ -48,19 +48,20 @@
 .prd__detail_info .fact_cont table td { text-align:center; font-size:16px; color:var(--main-color1); border:0; }
 .prd__detail_info .fact_cont .help_factor { padding:16px 24px 18px; margin-top:40px; text-align:left; background-color:var(--bg-color2); color:var(--bk-color2); border-radius:6px; grid-area:factor; }
 
-.prd__detail_info .navigate { width:1280px; margin:0 auto; position:absolute; top:338px; right:20px; left:20px; display:flex; justify-content:space-between; user-select:none; }
-.prd__detail_info .navigate > div { padding-top:32px; position:relative; }
+.prd__detail_info .navigate { width:1280px; margin:0 auto; position:absolute; top:336px; right:20px; left:20px;  display:flex; justify-content:space-between; user-select:none; } {/*top:338px; top:calc(50% - 80px); transform:translate(0,-50%); */}
+.prd__detail_info .navigate > div { max-width:200px; padding-top:36px; position:relative; }
 .prd__detail_info .navigate .prev { margin-right:auto; text-align:left; }
 .prd__detail_info .navigate .next { margin-left:auto; text-align:right; }
+.prd__detail_info .navigate a { display:block; }
 .prd__detail_info .navigate a::before { content:''; width:24px; height:24px; background:var(--main-color1) url("../../images/arrow_item_wt.png")no-repeat center/6px auto; position:absolute; top:0; border-radius:50px; filter:grayscale(1); transform:translateY(0); transition:.25s ease; display:inline-block; }
 .prd__detail_info .navigate a:hover::before { filter:grayscale(0); transform:translateY(-2px); box-shadow:0 0 8px rgba(0,112,66,.25); }
 .prd__detail_info .navigate .prev a::before { left:0; transform:rotate(180deg); }
 .prd__detail_info .navigate .prev a:hover::before { transform:rotate(180deg) translateY(2px); }
 .prd__detail_info .navigate .next a::before { right:0; }
 .prd__detail_info .navigate .next a:hover::before { right:0; }
-.prd__detail_info .navigate .en { font-size:11px; color:var(--bk-color2); }
+.prd__detail_info .navigate .en { margin-bottom:4px; line-height:1.4; font-size:11px; color:var(--bk-color2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block; }
 .prd__detail_info .navigate a:hover .en { color:var(--bk-color1); }
-.prd__detail_info .navigate .tit { font-size:13px; }
+.prd__detail_info .navigate .tit { font-size:13px; word-break:keep-all; letter-spacing:-.8px; }
 .prd__detail_info .navigate a:hover .tit { color:var(--main-color1); }
 
 
