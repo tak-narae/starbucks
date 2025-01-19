@@ -28,7 +28,7 @@
 .prd__detail_info .prd_item { text-align:left; position:relative; z-index:1; border-radius:8px; align-items:center; gap:40px; flex-wrap:wrap; } /* padding:40px; background-color:#e7F2ec; */
 .prd__detail_info .zoom_cont { width:320px; min-width:320px; position:relative; }
 .prd__detail_info .zoom_cont .img { width:320px; height:320px; aspect-ratio:1/1; object-fit:cover; border-radius:8px; }
-.prd__detail_info .zoom_cont:hover .over { width:100px; height:100px; background-color:rgba(255, 255, 255, 0.5); position:absolute; z-index:10; border:2px solid #fff; pointer-events:none; }
+.prd__detail_info .zoom_cont:hover .over { width:100px; height:100px; background-color:rgba(255, 255, 255, 0.5); position:absolute; z-index:10; border:1px solid #fff; pointer-events:none; }
 .prd__detail_info .zoom_cont:hover .view { width:416px; height:320px; background-repeat:no-repeat; background-size:800px 800px; position:absolute; top:0; right:-456px; border-radius:8px; }
 .prd__detail_info .info_cont { flex:1; }
 .prd__detail_info .info_cont .name-en { margin-bottom:4px; font-size:13px; color:var(--bk-color3); }
