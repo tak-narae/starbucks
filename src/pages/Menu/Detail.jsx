@@ -88,10 +88,16 @@ const Detail = () => {
     }
   }
 
-
   if (!productMatch) {
-    return <div>Loading!</div>;
+    return (
+      <div id="container" className="prd__detail_info">
+        <div className="layout_fix">
+          <p className="empty">조회 불가능한 상품입니다!</p>
+        </div>
+      </div>
+    );
   }
+
   return (
     <>
       <div id="container" className="prd__detail">
