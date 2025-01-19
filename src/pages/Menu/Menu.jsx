@@ -122,7 +122,7 @@ const Menu = () => {
             <div className="layout_fix">
               <ul className="cate_list">
                 <li className={!selectedDepth ? "active" : ""}>
-                  <Link to={`/menu/coffee?cate=전체`}>전체</Link>
+                  <Link to={`/menu/coffee?cate=${selectedCate}`}>전체</Link>
                 </li>
                 {labels.map((label, idx) => {
                   const isActive = selectedDepth === label; // 선택된 depth 확인
