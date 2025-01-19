@@ -29,20 +29,61 @@ const Main = () => {
   const { datefilteredNotice, datefilteredEvents } = useUtilContext();
 
   const [prdSeason, setPrdSeason] = useState([]); // 홀리데이 상품
+  const [prdSeasonMatch, setPrdSeasonMatch] = useState([]); //홀리데이 display 상품
+  const [prdSeasonCateIdx, setPrdSeasonCateIdx] = useState([]); //홀리데이 display 부모카테고리 인덱스
+  const [seasonData, setSeasonData] = useState([]);
+
   useEffect(() => {
     const seasonAll = product.flatMap((el) => {
       const seasonCate = el.products.filter((prd) =>
         prd.name.includes("홀리데이")
       );
+
+      setTimeout(() => { //display 상품 active추가하고 배열 담기
+        if (seasonCate.length > 0) {
+          document.querySelectorAll('.prd_list > li').forEach(li => {
+            if (getComputedStyle(li).display !== 'none' && !li.classList.contains("active")) {
+              li.classList.add("active");
+              const itemName = li.querySelector(".name").innerText;
+              setPrdSeasonMatch(el => [...el, itemName]);
+            }
+          });
+        }
+      }, 500);
+
       return seasonCate;
     });
     setPrdSeason(seasonAll); // "홀리데이" 제품만 추출
-  }, [product]);
+
+    product.forEach((category, categoryIndex) => {
+      category.products.forEach((el) => {
+        if (prdSeasonMatch.includes(el.name)) { //display 상품 찾아서 부모 idx값 담기
+          setPrdSeasonCateIdx(item => [...item, categoryIndex]);
+          if (prdSeasonMatch.length){
+            setSeasonData(data => {
+              if(data.length < prdSeasonMatch.length){ //새로고침시 배열 쌓이는 이슈때문에 prdSeasonMatch.length 체크
+                return [...data, { [categoryIndex]:prdSeasonMatch[data.length] } ];
+              }
+              return data;
+            })
+          }
+        }
+      });
+    });
+    // console.log(prdSeasonMatch, prdSeasonCateIdx,seasonData);
+
+    // const seasonMerge = prdSeasonCateIdx.map((el,idx) => { //배열 합치기
+    //   return { [el] : prdSeasonMatch[idx] };
+    // })
+    // setSeasonData(seasonMerge);
+
+  }, [product, prdSeasonMatch, seasonData]);
 
   useEffect(() => {
     MainPrd();
     SplitEffect(); //.split
   }, []);
+
 
   return (
     <>
@@ -70,6 +111,8 @@ const Main = () => {
               currentData={product} // 현재 데이터 전달
               pathName={pathName}
               prdSeason={prdSeason} // 시즌 상품 (홀리데이 제품) 전달
+              prdSeasonMatch={prdSeasonMatch}
+              seasonData={seasonData}
             />
             {/* selectedCate 확인하기 */}
             <Link to="/menu/product?cate=0" className="btn_link">
