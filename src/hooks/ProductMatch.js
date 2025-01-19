@@ -35,7 +35,6 @@ const useProductMatch = () => {
         .then((res) => {
           const data = res.data; // 서버에서 가져온 전체 데이터
           console.log("전체상품==", data);
-
           let categoryData = []; // category에 따라 데이터 선택
           let categoryLabel = ""; // 카테고리 레이블
           switch (category) {
@@ -88,7 +87,17 @@ const useProductMatch = () => {
 
   console.log("매치==", productMatch);
 
-  return { productMatch, title, cateKo, cateList };
+
+  // prev,next 찾기
+  if(!productMatch){
+    return { prev:null, next:null };
+  }
+  const itemIdx = cateList.findIndex((el)=> el.id === productMatch.id);
+  const itemPrev = cateList[itemIdx - 1] !== undefined ? cateList[itemIdx - 1] : null;
+  const itemNext = cateList[itemIdx + 1] !== undefined ? cateList[itemIdx + 1] : null;
+
+
+  return { productMatch, title, cateKo, cateList, itemPrev, itemNext };
 };
 
 export default useProductMatch;

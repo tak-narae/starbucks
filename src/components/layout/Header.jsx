@@ -76,8 +76,8 @@ const Header = () => {
                                     <li><Link to="/menu/beverage?cate=5">리프레셔</Link></li>
                                     <li><Link to="/menu/beverage?cate=6">피지오</Link></li>
                                     <li><Link to="/menu/beverage?cate=7">티(티바나)</Link></li>
-                                    <li><Link to="/menu/beverage?cate=8">주스(병음료)</Link></li>
-                                    <li><Link to="/menu/beverage?cate=9">기타 제조 음료</Link></li>
+                                    <li><Link to="/menu/beverage?cate=8">기타 제조 음료</Link></li>
+                                    <li><Link to="/menu/beverage?cate=9">주스(병음료)</Link></li>
                                 </ul>
                             </li>
                             <li>
