@@ -97,7 +97,6 @@ const Detail = () => {
       </div>
     );
   }
-
   return (
     <>
       <div id="container" className="prd__detail">
