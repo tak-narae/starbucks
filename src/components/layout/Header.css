@@ -32,11 +32,13 @@ header:has(.btn_hamburger.active)::before{
 }
 
 header .header_shop {
+  height: 77px;
   padding: 13px 0;
   background-color: #fff;
   position: relative;
   z-index: 1;
   border-bottom: 1px solid var(--br-color1);
+  overflow: hidden;
 }
 
 header .layout_fix {

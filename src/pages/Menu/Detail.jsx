@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import useProductMatch from "hooks/ProductMatch.js";
 import { Link } from "react-router-dom";
 
@@ -26,7 +26,6 @@ import QtyCalc from "./../../hooks/QtyCalc.js";
   cateKo : 한글중분류
   cateList : 중분류 전체 리스트
 === */
-
 const Detail = () => {
   const { productMatch, title, cateKo, cateList } = useProductMatch(); // 커스텀 훅 호출
   // const handleAddToCart = () => {
@@ -35,36 +34,60 @@ const Detail = () => {
   //   localStorage.setItem("cartQty", JSON.stringify(cartItem));
   // };
 
+  const refDetail = useRef(null);
+  const refDelv = useRef(null);
+  const refRecommended = useRef(null);
+
   useEffect(() => {
     setTimeout(() => {
       QtyCalc();
-    }, 1000);
-  },[])
 
-  const refDetail = useRef();
-  const refDelv = useRef();
-  const refRecommended = useRef();
-  const [tabActive, setTabActive] = useState("detail");
-  
-  const tabScrollTo = (e, tabClick)=>{
-    window.scrollTo({ top: e.current.offsetTop + 118});
-    setTabActive(tabClick);
-  }
+      const handleScroll = () => {
+        const pinY = window.scrollY - 118;
+        // console.log("pin--", pinY, "Delv--", refDelv.current.offsetTop);
 
-  useEffect(() => {
-    if (productMatch && productMatch.imgDetail) {
-      const handleScroll = () => { 
-        const pinPosition = window.scrollY;
-        // pinPosition >= refDelv.current.offsetTop + 118 ? setTabActive("delv") : setTabActive("detail");
-        pinPosition < refDelv.current.offsetTop + 117 ? setTabActive("detail")
-         : pinPosition > refDelv.current.offsetTop + refDelv.current.offsetHeight + 117 ? setTabActive("recommended") : setTabActive("delv");
+        if (!refDelv.current) return;
+
+        document.querySelectorAll(".tab_underline > li").forEach(el => el.classList.remove("active"));
+        
+        if (pinY >= refDelv.current.offsetTop && pinY < refDelv.current.offsetTop + refDelv.current.offsetHeight) {
+          console.log("교환/반품");
+          document.querySelector("[data-ref='tabDelv']").classList.add("active");
+        } else if(!refDetail.current && pinY < refDelv.current.offsetTop){
+          console.log("상세정보없음");
+          document.querySelector("[data-ref='tabDelv']").classList.add("active");
+        } else if (refDetail.current && pinY < refDelv.current.offsetTop) {
+          console.log("상세정보");
+          document.querySelector("[data-ref='tabDetail']").classList.add("active");
+        } else if (pinY >= refDelv.current.offsetTop + refDelv.current.offsetHeight) {
+          console.log("추천상품");
+          document.querySelector("[data-ref='tabRecommended']").classList.add("active");
+        }
       };
       window.addEventListener("scroll", handleScroll);
       return () => window.removeEventListener("scroll", handleScroll);
-    }
-  }, []);
 
-  //tab2 이상 및 정보 리렌더링 확인하기
+    }, 1000);
+  }, [])
+
+  useEffect(()=>{
+
+  },[refRecommended])
+  
+  const handleTabScroll = (e) => {
+    const tabRef = e.target.getAttribute("data-ref");
+    console.log(tabRef);
+    const refs = {
+      tabDetail: refDetail,
+      tabDelv: refDelv,
+      tabRecommended: refRecommended,
+    }
+    const targetRef = refs[tabRef];
+    if (targetRef && targetRef.current) {
+      window.scrollTo({ top: targetRef.current.offsetTop + 118 });
+    }
+  }
+
 
   if (!productMatch) {
     return <div>Loading!</div>;
@@ -84,20 +107,18 @@ const Detail = () => {
           </div>
           <div className="prd_item">
             <div className="thumb_cont">
-              <img className="thumb_img" src={`${process.env.PUBLIC_URL}/${productMatch.img}`} alt={productMatch.name}/>
+              <img className="thumb_img" src={`${process.env.PUBLIC_URL}/${productMatch.img}`} alt={productMatch.name} />
               <div className="contents">
+
                 <ul className="tab_underline">
-                  {
-                    productMatch.imgDetail && (
-                      <li className={tabActive === "detail" ? "active" : ""} onClick={()=> tabScrollTo(refDetail, "detail") }>상세정보</li>
-                    )
-                  }
-                  <li className={tabActive === "delv" || !productMatch.imgDetail ? "active" : ""} onClick={()=> tabScrollTo(refDelv, "delv") }>배송/교환/반품</li>
-                  <li className={tabActive === "recommended" ? "active" : ""} onClick={()=> tabScrollTo(refRecommended, "recommended") }>추천상품</li>
+                  {productMatch.imgDetail && (<li className="active" data-ref="tabDetail" onClick={handleTabScroll}>상세정보</li>)}
+                  <li className={!productMatch.imgDetail ? "active" : ""} data-ref="tabDelv" onClick={handleTabScroll}>배송/교환/반품</li>
+                  <li data-ref="tabRecommended" onClick={handleTabScroll}>추천상품</li>
                 </ul>
-                { productMatch.imgDetail && ( <div className="detail_img" ref={refDetail}><img src={`${process.env.PUBLIC_URL}/${productMatch.imgDetail}`} alt={productMatch.name}/></div>) }
+
+                {productMatch.imgDetail && (<div className="detail_img" ref={refDetail}><img src={`${process.env.PUBLIC_URL}/${productMatch.imgDetail}`} alt={productMatch.name} /></div>)}
                 <div className="detail_delv" ref={refDelv}>
-                  <img src={require("../../images/prd_detail_delv.jpg")} alt="배송/교환/반품 안내"/>
+                  <img src={require("../../images/prd_detail_delv.jpg")} alt="배송/교환/반품 안내" />
                 </div>
                 <div className="detail_recommended" ref={refRecommended}>
                   <div className="heading">
@@ -110,15 +131,15 @@ const Detail = () => {
                     slidesPerView={2}
                     slidesPerGroup={2}
                     spaceBetween={20}
-                    onDestroy={(e)=>{ console.log(e,"???") }}
-                    pagination={{ type:'bullets', clickable: true }}
+                    onDestroy={(e) => { console.log(e, "???") }}
+                    pagination={{ type: 'bullets', clickable: true }}
                   >
-                    { cateList.sort(()=>Math.random()-0.5).slice(0, 10).map((el,idx)=> (
+                    {cateList.sort(() => Math.random() - 0.5).slice(0, 10).map((el, idx) => (
                       <SwiperSlide key={idx}>
                         <div className="item">
                           <Link to="/" className="thumbnail">
                             <div className="image">
-                              <img src={`${process.env.PUBLIC_URL}/${el.img}`} alt={el.name}/>
+                              <img src={`${process.env.PUBLIC_URL}/${el.img}`} alt={el.name} />
                             </div>
                           </Link>
                           <div className="desc">
@@ -128,8 +149,8 @@ const Detail = () => {
                         </div>
                       </SwiperSlide>
                     ))}
-                </Swiper>
-              </div>
+                  </Swiper>
+                </div>
               </div>
             </div>
             <div className="info_cont">
