@@ -24,7 +24,7 @@ const DetailInfo = () => {
         const x = event.clientX - left;
         const y = event.clientY - top;
 
-        // .zoomLens limit
+        // .over limit
         let lensX = Math.min(Math.max(x - 85, 0), 220);
         let lensY = Math.min(Math.max(y - 85, 0), 220);
         zoomOver.style.left = `${lensX}px`;
