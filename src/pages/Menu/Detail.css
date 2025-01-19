@@ -22,12 +22,11 @@
 [class^="prd__detail"] .prd_item .btn_primary { margin-top:60px; }
 
 
-
 .prd__detail_info { text-align:center; }
 .prd__detail_info .layout_fix { width:816px; }
 .prd__detail_info .heading { margin-bottom:20px; }
 .prd__detail_info .prd_panel { text-align:left; border-radius:8px; display:flex; align-items:center; gap:40px; } /* padding:40px; background-color:#e7F2ec; */
-.prd__detail_info .prd_panel > img { width:320px; height:320px; aspect-ratio:1/1; object-fit:cover; border-radius:8px; }
+.prd__detail_info .prd_panel .zoom_img { width:320px; height:320px; aspect-ratio:1/1; object-fit:cover; border-radius:8px; }
 .prd__detail_info .prd_panel .info_cont .name-en { margin-bottom:4px; font-size:13px; color:var(--bk-color3); }
 .prd__detail_info .prd_panel .info_cont .desc { max-width:85%; }
 .prd__detail_info .prd_panel .info_cont .price { margin-bottom:0; color:var(--main-color1); }
@@ -36,6 +35,10 @@
 .prd__detail_info .fact_cont .tb_heading .tit { margin-bottom:6px; font-size:15px; color:var(--bk-color3); }
 .prd__detail_info .fact_cont .tb_heading .txt { font-size:18px; font-weight:500; }
 .prd__detail_info .fact_cont table { grid-area:table; }
-.prd__detail_info .fact_cont table th { line-height:1.42; text-align:center; font-size:14px; color:var(--bk-color2); border:0; }
+.prd__detail_info .fact_cont table th { width:16.6%; line-height:1.42; text-align:center; font-size:14px; color:var(--bk-color2); border:0; }
 .prd__detail_info .fact_cont table td { font-size:16px; color:var(--main-color1); border:0; }
 .prd__detail_info .fact_cont .help_factor { padding:16px 24px 18px; margin-top:40px; text-align:left; background-color:var(--bg-color2); color:var(--bk-color2); border-radius:6px; grid-area:factor; }
+
+.prd__detail_info .zoomContainer { min-width:320px; position:relative; }
+.prd__detail_info .zoomContainer:hover .zoom_over { width:100px; height:100px; background-color:rgba(255, 255, 255, 0.5); position:absolute; z-index:10; border:2px solid #fff; pointer-events:none; }
+.prd__detail_info .zoomContainer:hover .zoom_view { width:416px; height:320px; background-repeat:no-repeat; background-size:800px 800px; position:absolute; top:0; right:-456px; border-radius:8px; }
