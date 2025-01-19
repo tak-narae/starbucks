@@ -1,3 +1,8 @@
+[class^="prd__detail"]:has(p.empty) { opacity:0; animation:emptyDelay 1s .25s forwards; }
+[class^="prd__detail"] p.empty { padding:120px 0; text-align:center; font-size:20px; position:relative; color:var(--bk-color1); opacity:.5; }
+[class^="prd__detail"] p.empty::before { content:''; width:80px; height:80px; margin: 0 auto 24px; background:transparent url("../../images/bear_search1.png")no-repeat center/contain; display:block; }
+@keyframes emptyDelay { 0%{ opacity:0; } 100%{ opacity:100%; } }
+
 [class^="prd__detail"] .prd_item { position:relative; display:flex; }
 .prd__detail .thumb_cont { width:700px; min-width:700px; padding-right:80px; }
 .prd__detail .thumb_cont .thumb_img { width:100%; aspect-ratio:1/1; object-fit:cover; }
