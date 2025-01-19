@@ -39,7 +39,7 @@ const Header = () => {
             <div className="header_shop">
                 <div className="layout_fix">
                     <div className="shop_logo">
-                        <Link to="/" className="btn_hamburger">
+                        <Link to="/" className="btn_hamburger" onClick={e => e.preventDefault()}>
                             <i className="i1"></i><i className="i2"></i><i className="i3"></i>
                         </Link>
                         <h1 className="starbucks_logo"><Link to="/">스타벅스 로고</Link></h1>
