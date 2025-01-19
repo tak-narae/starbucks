@@ -144,7 +144,8 @@ const Detail = () => {
                           </Link>
                           <div className="desc">
                             <div className="name">{el.name}</div>
-                            <div className="price">{el.price.toLocaleString(1)}원</div>
+                            <div className="price">{el.price.toLocaleString()}원</div>
+                            {/* <div className="price">{el.price.toLocaleString(1)}원</div> */}
                           </div>
                         </div>
                       </SwiperSlide>
@@ -162,7 +163,8 @@ const Detail = () => {
               {title === "커피" && (
                 <h3 className="desc">{productMatch.desc}</h3>
               )}
-              <h3 className="price">{productMatch.price.toLocaleString(1)}원</h3>
+              <h3 className="price">{productMatch.price.toLocaleString()}원</h3>
+              {/* <h3 className="price">{productMatch.price.toLocaleString(1)}원</h3> */}
               {/* <h3 className="price">{productMatch.price}원</h3> */}
               <ul className="shipping">
                 <li>
@@ -186,7 +188,8 @@ const Detail = () => {
                   <input type="tel" className="qty" value="1" readOnly />
                   <button className="plus">+</button>
                 </div>
-                <h3 className="total_price">{productMatch.price.toLocaleString(1)}원</h3>
+                <h3 className="total_price">{productMatch.price.toLocaleString()}원</h3>
+                {/* <h3 className="total_price">{productMatch.price.toLocaleString(1)}원</h3> */}
                 {/* <h3 className="total_price">{productMatch.price}원</h3> */}
               </div>
               <div className="btn_primary">
