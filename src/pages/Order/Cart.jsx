@@ -2,22 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // import useProductMatch from "hooks/ProductMatch.js";
+import QtyCalc from "./../../hooks/QtyCalc.js";
 
 const Cart = () => {
   // const { productMatch } = useProductMatch(); // 커스텀 훅 호출
-
   const [cartList, setCartList] = useState([]);
   useEffect(() => {
     const localCartData = JSON.parse(localStorage.getItem("cartData")) || [];
     setCartList(localCartData);
   }, []);
   // localStorage.removeItem("cartData"); //삭제
-  
+
+  useEffect(()=>{
+    QtyCalc();
+  },[cartList])
   console.log("장바구니리스트===",cartList);
-  console.log("장바구니리스트===",cartList.length);
+
   return (
     <>
-      <div id="container" className="cart">
+      <div id="container" className="order__cart">
         <div className="layout_fix">
           <div className="heading">
             <h2 className="tit">장바구니</h2>

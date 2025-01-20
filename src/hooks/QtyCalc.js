@@ -1,9 +1,10 @@
+
 const QtyCalc = () => {
   const spinners = document.querySelectorAll('.btn_qty');
-  console.log(`.btn_qty 요소 수: ${spinners.length}`);
+  console.log(`.btn_qty 몇개 ??? ${spinners.length}`);
 
   if (spinners.length === 0) {
-    console.warn(".btn_qty 요소를 찾을 수 없습니다.");
+    console.warn(".btn_qty 없음");
     return;
   }
 
@@ -12,19 +13,22 @@ const QtyCalc = () => {
     const minus = spinner.querySelector('.minus');
     const plus = spinner.querySelector('.plus');
     const qtyEl = spinner.querySelector('.qty');
-    const originPrice = parseInt(document.querySelector('[class^="prd__detail"] .prd_item .info_cont .price').textContent.replaceAll(',', ''), 10);
-    const totalPriceEl = spinner.closest('.total_item').querySelector('.total_price');
-
-
+    
+    
     if (parseInt(qtyEl.value) <= 1) {
       minus.classList.add("disabled");
     }
-
+    
     const updatePrice = () => {
-      console.log("원래가격==", originPrice);
-      console.log("최종가격==", totalPriceEl);
-      console.log("수량==", qtyEl.value);
-      totalPriceEl.textContent = (originPrice * qtyEl.value).toLocaleString(1) + "원";
+      if(document.querySelector("#container").classList.contains("prd__detail")){
+        const totalPriceEl = spinner.closest('.total_item').querySelector('.total_price');
+        const originPrice = parseInt(document.querySelector('[class^="prd__detail"] .prd_item .info_cont .price').textContent.replaceAll(',', ''));
+        console.log(originPrice, "*" ,qtyEl.value, "=" ,totalPriceEl.textContent);
+        totalPriceEl.textContent = (originPrice * qtyEl.value).toLocaleString(1) + "원";
+      } 
+      if(document.querySelector("#container").classList.contains("order__cart")){
+        console.log("CART_PLUS")
+      }
     }
 
     minus.addEventListener('click', () => {

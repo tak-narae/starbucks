@@ -44,7 +44,7 @@ const Detail = () => {
   useEffect(() => {
     setTimeout(() => {
       QtyCalc();
-
+      
       const handleScroll = () => { //scroll 위치찾아서 적용
         const pinY = window.scrollY - 117;
         // console.log("pin--", pinY, "Delv--", refDelv.current.offsetTop);
@@ -95,10 +95,10 @@ const Detail = () => {
     let cartData = JSON.parse(localStorage.getItem("cartData")) || [];
     const addCover = cartData.findIndex(el => el.key === addItem.key); //기존상품 찾기
 
-    if (addCover !== -1) {
-      cartData[addCover].qty += addItem.qty; //기존상품 업데이트
-    } else {
-      cartData = [...cartData, addItem]; //추가상품
+    if (addCover !== -1) { //기존상품 업데이트
+      cartData[addCover].qty += addItem.qty;
+    } else { //추가상품
+      cartData = [...cartData, addItem];
     }
 
     localStorage.setItem("cartData", JSON.stringify(cartData));
