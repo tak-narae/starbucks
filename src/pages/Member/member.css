@@ -170,6 +170,12 @@
   color: var(--bk-color2);
 }
 
+.member__join .page_btn_wrap{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .member__join button.wid40{
   width: 40%;
 }
@@ -180,3 +186,96 @@
   margin: 40px 0;
 }
 
+.member__join .input_form{
+  width: 100%;
+  padding: 40px;
+}
+
+.member__join .input_form{
+  width: 100%;
+}
+
+.member__join .area_style .label_style{
+  display: block;
+  color: var(--bk-color2);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.member__join .area_style .label_style.required::after{
+  content: "*";
+  margin-left: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--main-color1);
+}
+
+.member__join .mes_style{
+  display: inline-block;
+  font-size: 13px;
+  color: var(--bk-color2);
+  margin-top: 10px;
+}
+
+.member__join .id_check_button{
+  display: inline-block;
+  margin: 10px 10px 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bk-color3);
+}
+
+.member__join .id_check_button:hover{
+  color: var(--bk-color1);
+}
+
+.member__join .help_style{
+  margin: 10px 0 40px 0;
+  font-size: 13px;
+  color: var(--bk-color1);
+}
+
+.member__join .sex_section .select{
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.member__join .sex_section .select label{
+  font-size: 14px;
+  line-height: 2rem;
+  padding: 0.2em 0.4em;
+}
+
+.member__join .sex_section .select .input_radio{
+  width: 1.25em;
+  height: 1.25em;
+  margin-right: 10px;
+  vertical-align: middle;
+  appearance: none;
+  border: max(1px, 0.1em) solid var(--br-color2);
+  border-radius: 50%;
+}
+
+.member__join .sex_section .select .input_radio:checked{
+  border: 0.4em solid var(--main-color1);
+}
+
+.member__join .sex_section .select .input_radio:focus-visible{
+  outline: max(2px, 0.1em) dotted var(--main-color1);
+  outline-offset: max(2px, 0.1em);
+}
+
+.member__join .sex_section .select span{
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.member__join .success_color{
+  color: var(--main-color1);
+}
+
+.member__join .error_color{
+  color: var(--err-color);
+}

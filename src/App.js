@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Routes, Route, Navigate} from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate} from "react-router-dom";
 import axios from "axios";
 
 import "./App.css";
@@ -23,6 +23,9 @@ import Footer from "components/layout/Footer";
 import Guide from "pages/guide/Guide";
 import UtilProvider from "hooks/UtilContext";
 import SignUp from "pages/Member/SignUp";
+import SignUpStep from "pages/Member/SignUpStep";
+import Login from "pages/Member/Login";
+import { AccessTokenProvider } from "pages/Member/AccessTokenContext";
 
 const DataContext = createContext();
 
@@ -59,7 +62,7 @@ function App() {
     setLoading(false);
   }, []);
   return (
-    <>
+    <AccessTokenProvider>
       <Header />
       <DataContext.Provider value={{ loading, coffee, setCoffee, beverage, setBeverage, product, setProduct, food, setFood, notice, setNotice, events, setEvents, resMz, setResMz }}>
         <UtilProvider>
@@ -82,13 +85,14 @@ function App() {
             <Route path="/notice/:idx" element={<NoticeDetail />}></Route>
             <Route path="/store" element={<Store />}></Route>
             <Route path="/guide" element={<Guide />}></Route>
-            {/* <Route path="/signup" element={<Navigate to="/signup?step=1" />}></Route> */}
-            <Route path="/signup/step=1" element={<SignUp />}></Route>
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup/step" element={<SignUpStep />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
           <Footer />
         </UtilProvider>
       </DataContext.Provider>
-    </>
+    </AccessTokenProvider>
   );
 }
 
