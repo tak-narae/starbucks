@@ -1,18 +1,298 @@
-import React from "react";
-import SignUpStep from "./SignUpStep";
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { API_URL } from 'config/constants.js';
 
 import './member.css';
 
-const SignUp = () => {
+const SignUpStep = () => {
+      //signup 단계
+      const [step, setStep] = useState(1);
+
+      const navigate = useNavigate();
+    
+        //약관동의
+      const [allChecked, setAllChecked] = useState(false);
+      const [termsChecked, setTermsChecked] = useState(false);
+      const [privacyChecked, setPrivacyChecked] = useState(false);
+      const [cardChecked, setCardChecked] = useState(false);
+      const [marketingChecked, setMarketingChecked] = useState(false);
+
+      //정보입력
+      const idInputRef = useRef(null);
+      const pwInputRef = useRef(null);
+      const nameInputRef = useRef(null);
+      const phoneInputRef = useRef(null);
+      const emailInputRef = useRef(null);
+
+      const [id, setId] = useState("");
+      const [isIdChecked, setIsIdChecked] = useState(false); //아이디 중복 체크
+      const [pw, setPw] = useState("");
+      const [pw2, setPw2] = useState("");
+      const [name, setName] = useState("");
+      const [phone, setPhone] = useState("");
+      const [phoneFirst, setPhoneFirst] = useState("");
+      const [phoneMiddle, setPhoneMiddle] = useState("");
+      const [phoneLast, setPhoneLast] = useState("");
+      const [email, setEmail] = useState("");
+      const [emailFront, setEmailFront] = useState("");
+      const [emailBack, setEmailBack] = useState("");
+      const [birth, setBirth] = useState("");
+      const [year, setYear] = useState("");
+      const [month, setMonth] = useState("");
+      const [day, setDay] = useState("");
+      const [sex, setSex] = useState("");
+      const [store, setStore] = useState("");
+
+        //회원가입 제출 여부
+        const [isSubmitted, setIsSubmitted] = useState(false);
+        //회원가입완료
+        const [isRegistered, setIsRegistered] = useState(false);
+
+        const idRule = /^[a-z0-9]{6,16}$/;
+        const pwRule = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$&^*])[a-zA-Z\d!@#$&^*]{8,16}$/;
+        const nameRule = /^[a-zA-Z가-힣]{1,20}$/;
+        const phoneRule = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+        const emailRule = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[a-zA-Z]{2,4}$/i;
+
+        const [messages, setMessages] = useState({
+          id: { text: "", color: "" },
+          pw: { text: "", color: "" },
+          pw2: { text: "", color: "" },
+          name: { text: "", color: "" },
+          phone: { text: "", color: "" },
+          email: { text: "", color: "" },
+        })
+
+        useEffect(()=>{
+          if(isSubmitted){
+            if(isRegistered){
+              alert('회원가입이 완료되었습니다.')
+            }else{
+              alert('회원가입에 실패했습니다.')
+            }
+          }
+        },[isSubmitted, isRegistered])
+    
+        const handleAllChecked = () => {
+          setAllChecked(!allChecked);
+          setTermsChecked(!termsChecked);
+          setPrivacyChecked(!privacyChecked);
+          setCardChecked(!cardChecked);
+          setMarketingChecked(!marketingChecked);
+        };
+    
+      useEffect(()=>{
+        if(termsChecked && privacyChecked && cardChecked && marketingChecked){
+            setAllChecked(true);
+        } else {
+            setAllChecked(false);
+        }
+      },[termsChecked, privacyChecked, cardChecked, marketingChecked]);
+
+      const handleMessageChange = (key, text, color) => {
+        setMessages((prevMessages) => ({
+          ...prevMessages,
+          [key]: { text, color },
+        }));
+      };
+
+      const handleId = (e) => {
+        const newValue = e.target.value;
+        setId(newValue);
+        if (idRule.test(newValue)) {
+          handleMessageChange("id", "사용 가능한 아이디 입니다.", "success_color");
+        } else if (newValue === "") {
+          handleMessageChange("id", "아이디를 입력해주세요.", "error_color");
+        } else {
+          handleMessageChange("id", "아이디는 영문소문자/숫자 4글자 이상 16글자 미만으로 사용 가능합니다.", "error_color");
+          setId("")
+        }
+      };
+
+      //중복확인
+      const handleIdCheck = async () =>{
+        if(!idRule.test(id)){
+          alert("유효안 아이디를 입력하세요");
+          return;
+        }
+        try{
+          const response = await axios.get(`${API_URL}/users/check-id`, {
+            params: {user_id: id},
+          });
+          if(response.data.success){
+            handleMessageChange('id', '사용 가능한 아이디입니다.', 'success_color');
+            setIsIdChecked(true); //중복확인완료
+          } else{
+            handleMessageChange('id', '이미 사용중인 아이디입니다.', 'error_color');
+            setIsIdChecked(false);
+          }
+        }catch(err){
+          console.error(err);
+          alert('중복 확인에 실패했습니다. 잠시 후 다시 시도해주세요.')
+        }
+      }
+
+      const handlePw = (e) => {
+        const newPwValue = e.target.value;
+        setPw(newPwValue);
+        if (pwRule.test(newPwValue)) {
+          handleMessageChange("pw", "사용 가능한 비밀번호입니다.", "success_color");
+        } else if (newPwValue === "") {
+          handleMessageChange("pw", "비밀번호를 입력해주세요.", "error_color")
+        } else {
+          handleMessageChange("pw", "비밀번호는 영문 대소문자/숫자/특수문자 조합, 8글자 이상 16글자 미만으로 사용 가능합니다.", "error_color");
+        }
+      }
+
+      const handlePw2 = (e) => {
+        const newPw2Value = e.target.value;
+        setPw2(newPw2Value);
+        if (pw === "") {
+          handleMessageChange("pw", "비밀번호를 입력해주세요", "error_color");
+        } else if (newPw2Value === pw) {
+          handleMessageChange("pw2", "비밀번호가 일치합니다", "success_color");
+        } else if (newPw2Value === "") {
+          handleMessageChange("pw2", "비밀번호를 입력해주세요", "error_color");
+        } else {
+          handleMessageChange("pw2", "비밀번호가 일치하지 않습니다", "error_color");
+        }
+      };
+
+      const handleName = (e) => {
+        const newNameValue = e.target.value;
+        setName(newNameValue);
+        if (nameRule.test(newNameValue)) {
+          handleMessageChange("name", "사용가능한 이름입니다.", "success_color");
+        } else if (newNameValue === "") {
+          handleMessageChange("name", "이름을 입력해주세요", "error_color");
+        } else {
+          handleMessageChange("name", "올바른 이름이 아닙니다", "error_color");
+          setName("");
+        }
+      };
+      
+      const handlePhone = (e) => {
+        const phoneNumber = `${phoneFirst}-${phoneMiddle}-${phoneLast}`;
+        setPhone(phoneNumber);
+        if (phoneRule.test(phoneNumber)) {
+          handleMessageChange(
+            "phone",
+            "사용가능한 휴대전화 번호입니다.",
+            "success_color"
+          );
+        } else if (phoneNumber === "") {
+          handleMessageChange(
+            "phone",
+            "휴대전화 번호를 입력해주세요",
+            "error_color"
+          );
+        } else {
+          handleMessageChange(
+            "phone",
+            "휴대전화 번호를 확인해주세요",
+            "error_color"
+          );
+          setPhone("");
+        }
+      };
+
+      const handleEmail = (e) => {
+        const newEmailValue = `${emailFront}@${emailBack}`;
+        setEmail(newEmailValue);
+        if (emailRule.test(newEmailValue)) {
+          handleMessageChange("email", "사용가능한 이메일입니다.", "success_color");
+        } else if (newEmailValue === "") {
+          handleMessageChange("email", "이메일을 입력해주세요", "error_color");
+        } else {
+          handleMessageChange("email", "이메일을 확인해주세요", "error_color");
+          setEmail("");
+        }
+      };
+
+      const handleYearChange = (e) => {
+        const value = e.target.value;
+        setYear(value);
+        updateBirth(value, month, day);
+      };
+    
+      const handleMonthChange = (e) => {
+        const value = e.target.value;
+        setMonth(value);
+        updateBirth(year, value, day);
+      };
+    
+      const handleDayChange = (e) => {
+        const value = e.target.value;
+        setDay(value);
+        updateBirth(year, month, value);
+      };
+
+      const updateBirth = (year, month, day) => {
+        // month와 day가 한 자리 숫자인 경우 두 자리로 맞춤
+        const formattedMonth = month.padStart(2, '0');
+        const formattedDay = day.padStart(2, '0');
+        setBirth(`${year}-${formattedMonth}-${formattedDay}`);
+      };
+
+      const handleSex = (e) => {
+        setSex(e.target.value);
+      }
+    
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        if (step === 1) {
+          if (termsChecked && privacyChecked && cardChecked) {
+            setStep(prevStep => Math.min(prevStep + 1, 2));
+            navigate(`/signup?step=${step + 1}`);
+          } else {
+            console.log('약관 동의가 필요합니다');
+          }
+        } else if (step === 2) {
+          if (!isIdChecked) {
+            alert('아이디 중복확인을 진행해주세요.');
+            return;
+          }
+      
+          if (idRule.test(id) &&
+              pwRule.test(pw) &&
+              pw2 === pw &&
+              nameRule.test(name) &&
+              phoneRule.test(phone) &&
+              emailRule.test(email)) {
+            try {
+              const result = await axios.post(`${API_URL}/users`, {
+                user_id: id,
+                pw: pw,
+                name: name,
+                phone: phone,
+                email: email,
+                birth: birth,
+                sex: sex,
+                marketingChecked: allChecked ? "True" : "False"
+              });
+              console.log(result);
+              setIsSubmitted(true);
+              setIsRegistered(true);
+              setStep(prevStep => {
+                const nextStep = Math.min(prevStep + 1, 2);
+                navigate(`/signup?step=${nextStep}`);
+                return nextStep;
+              });
+              console.log('회원가입을 축하합니다.');
+            } catch (err) {
+              console.error(err);
+              setIsSubmitted(true);
+              setIsRegistered(false);
+            }
+          } else {
+            console.log('회원정보를 모두 입력해주세요');
+          }
+        }
+      };
   return (
-    <div id="container" className="member__join">
-      <div className="layout_fix">
-            <div className="heading">
-                <h2 className="tit">회원가입</h2>
-                {/* <h5 className="desc">회원가입 정보입력 단계입니다.</h5> */}
-            </div>
-            <SignUpStep />
-            {/* <div className="signupContainer">
+    <div className="signupContainer">
                 <ul className="step_bar">
                     <li className={`step step1 ${step === 1 ? "on" : ""}`}>
                         <div className="step_circle">
@@ -1867,15 +2147,164 @@ const SignUp = () => {
                     </form>
                 )}
                 {step === 2 && (
-                    <></>
+                    <div className="input_form">
+                      <ul id="info_section">
+                        <li className="id_section">
+                          <div className="area_style">
+                            <label htmlFor="idArea" className="label_style required">아이디(E-mail)</label>
+                            <input ref={idInputRef} type="text" required size={20} value={id}
+                              className="line_box mb_10"
+                              placeholder="4~13자리 이내"
+                              onChange={(e) => { setId(e.target.value); }}
+                              onBlur={handleId} />
+                            <span className={`mes_style ${messages.id.color} m0`}>
+                              {messages.id.text}
+                            </span>
+                            <button type="button" onClick={handleIdCheck} className='id_check_button'>중복확인</button>
+                          </div>
+                        </li>
+                        <hr />
+                        <li className="pw_section">
+                          <div className="area_style">
+                            <label htmlFor="pwArea" className="label_style required">비밀번호</label>
+                            <input ref={pwInputRef} type="password" id="pwArea" required size={20} value={pw}
+                              className="line_box"
+                              placeholder="10~20자리 이내"
+                              onChange={(e) => { setPw(e.target.value); }}
+                              onBlur={handlePw} />
+                            <span className={`mes_style ${messages.pw.color}`}>
+                              {messages.pw.text}
+                            </span>
+                            <p className="help_style">
+                              영문 대소문자/숫자/특수문자 조합, 8자 ~ 16자
+                            </p>
+                          </div>
+                        </li>
+                        <li className="pw_section">
+                          <div className="area_style">
+                            <label htmlFor="pwArea" className="label_style required">비밀번호 확인</label>
+                            <input ref={pwInputRef} type="password" id="pwArea" required size={20} value={pw2}
+                              className="line_box"
+                              placeholder="비밀번호를 입력해주세요"
+                              onChange={(e) => { setPw2(e.target.value); }}
+                              onBlur={handlePw2} />
+                            <span className={`mes_style ${messages.pw2.color} mb_10`}>
+                              {messages.pw2.text}
+                            </span>
+                          </div>
+                        </li>
+                        <hr />
+                        <li className="name_section">
+                          <div className="area_style">
+                            <label htmlFor="nameArea" className="label_style required">이름</label>
+                            <input ref={nameInputRef} type="text" id="nameArea" required size={20} value={name}
+                              className="line_box"
+                              onChange={(e) => { setName(e.target.value); }}
+                              onBlur={handleName} />
+                            <span className={`mes_style ${messages.name.color} mb_10`}>
+                              {messages.name.text}
+                            </span>
+                          </div>
+                        </li>
+                        <hr />
+                        <li className="phone_section">
+                          <div className="area_style">
+                            <label htmlFor="phoneArea" className="label_style required">휴대전화</label>
+                            <div class="flex_items">
+                            <select
+                              value={phoneFirst}
+                              onChange={(e) => setPhoneFirst(e.target.value)}
+                            >
+                              <option value="">선택</option>
+                              <option value="010">010</option>
+                              <option value="011">011</option>
+                              <option value="016">016</option>
+                              <option value="018">018</option>
+                              <option value="019">019</option>
+                            </select>
+                              - 
+                              <input type="text" value={phoneMiddle} requiredsize={4}
+                                onChange={(e) => setPhoneMiddle(e.target.value)}
+                                onBlur={handlePhone}
+                              />
+                              -
+                              <input type="text" value={phoneLast} required size={4}
+                                onChange={(e) => setPhoneLast(e.target.value)}
+                                onBlur={handlePhone}
+                              />
+                            </div>
+                            <span className={`mes_style ${messages.phone.color}`}>
+                              {messages.phone.text}
+                            </span>
+                          </div>
+                        </li>
+                        <hr />
+                        <li className="email-section">
+                          <div className="area_style">
+                            <label htmlFor="emailArea" className="label_style required">이메일</label>
+                            <div class="flex_items">
+                              <input type="text" value={emailFront} required size={20}
+                                onChange={(e) => setEmailFront(e.target.value)}
+                                onBlur={handleEmail}
+                              />
+                              @
+                              <select value={emailBack} onChange={(e) => setEmailBack(e.target.value)}>
+                                <option value="">선택</option>
+                                <option value="naver.com">naver.com</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="daum.net">daum.net</option>
+                                <option value="hanmail.net">hanmail.net</option>
+                                <option value="yahoo.com">yahoo.com</option>
+                                <option value="outlook.com">outlook.com</option>
+                                <option value="nate.com">nate.com</option>
+                                <option value="kakao.com">kakao.com</option>
+                              </select>
+                            </div>
+                            <span className={`mes_style ${messages.email.color}`}>
+                              {messages.email.text}
+                            </span>
+                          </div>
+                        </li>
+                        <hr />
+                        <li className="birth_section">
+                          <div className="area_style">
+                            <label htmlFor="birthArea" className="label_style">생년월일</label>
+                            <div class="flex_items">
+                              <input type="text" placeholder="년도(4자)" value={year} onChange={handleYearChange}/>
+                              <input type="text" placeholder="월" value={month} onChange={handleMonthChange}/>
+                              <input type="text" placeholder="일" value={day} onChange={handleDayChange}/>
+                            </div>
+                          </div>
+                        </li>
+                        <hr />
+                        <li className="sex_section">
+                          <div className="area_style">
+                            <label htmlFor="sexArea" className="label_style">성별</label>
+                            <div className="select">
+                              <label>
+                                <input className="input_radio" id="male" type="radio" name="sex" value="male" checked onChange={handleSex} />
+                                <span htmlFor="male" >남성</span>
+                              </label>
+                              <label>
+                                <input className="input_radio" type="radio" name="sex" value="female" onChange={handleSex} />
+                                <span htmlFor="female">여성</span>
+                              </label>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                )}
+                {step === 3 && (
+                  <div>
+                    회원가입 완료
+                  </div>
                 )}
                 <div className="page_btn_wrap">
                     <button className="btn_dark wid40" type="submit" disabled={step === 3 || !allChecked} onClick={handleSubmit}>다음</button>
                 </div>
-            </div> */}
-        </div>
-    </div>
+            </div>
   );
 };
 
-export default SignUp;
+export default SignUpStep;
