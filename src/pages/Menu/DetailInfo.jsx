@@ -101,7 +101,6 @@ const DetailInfo = () => {
                 </thead>
                 <tbody>
                   <tr>
-                    { console.log("영양==",productMatch.facts_tb) }
                     { productMatch.facts_tb.map((el,idx) => (
                       <td key={idx}>{Object.values(el)[0]}</td>
                     )) }

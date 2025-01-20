@@ -58,7 +58,7 @@ const Cart = () => {
                       <td>
                         <div className="btn_qty">
                           <button className="minus">-</button>
-                          <input type="tel" className="qty" value={el.qty} maxLength="4"/>
+                          <input type="tel" className="qty" value={el.qty} maxLength="4" readOnly/>
                           <button className="plus">+</button>
                         </div>
                       </td>
