@@ -96,7 +96,7 @@ const Main = () => {
         </section>
         <section className="main__banner">
           <Link to="/menu/detail/coffee?cate=0&id=15">
-            <img src={require("../images/main_banner.png")} alt="main_banner" />
+            {/* <img src={require("../images/main_banner.png")} alt="main_banner" /> */}
           </Link>
         </section>
         <section className="main__prd">

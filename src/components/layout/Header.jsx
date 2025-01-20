@@ -9,7 +9,8 @@ import { useEffect } from "react";
 const Header = () => {
     const location = useLocation();
     useEffect(() => {
-        if (location.pathname !== '/') {
+        if (location.pathname) {
+        // if (location.pathname !== '/') {
             document.querySelectorAll("header .btn_hamburger i").forEach(i => {
                 i.style.transition = "none";
                 setTimeout(() => i.removeAttribute("style"), 0);

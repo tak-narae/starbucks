@@ -44,13 +44,17 @@
 }
 
 .main__banner {
-  width: 100%;
-  height: 496px;
-
-  img {
+  a {
     width: 100%;
-    object-fit: cover;
+    height: 496px;
+    background: transparent url("../images/main_banner.png") no-repeat center/cover;
+    display:block;
   }
+
+  // img {
+  //   width: 100%;
+  //   object-fit: cover;
+  // }
 }
 
 .main__prd .btn_link {
@@ -69,62 +73,15 @@
   }
 }
 
+
 .main__res_mz {
   background-color: #deddd9;
+  position: relative;
+  overflow: hidden;
 
   .heading .sub {
     margin-bottom: 30px;
   }
-}
-
-.main__event {
-  .swiper_event {
-    width: 100%;
-
-    .swiper-wrapper {
-      transition-timing-function: linear;
-
-      .swiper-slide {
-        width: 290px;
-
-        a {
-          display: block;
-
-          .thumb {
-            width: 290px;
-            height: 290px;
-            background-color: #f9f9f9;
-
-            img {
-              aspect-ratio: 1/1;
-              object-fit: cover;
-            }
-          }
-
-          .info {
-            margin-top: 20px;
-
-            .tit {
-              font-size: 18px;
-              font-weight: 400;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
-
-            .date {
-              font-size: 13px;
-              color: var(--bk-color2);
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.main__res_mz {
-  position: relative;
 
   .reserve_star_img {
     width: 122px;
@@ -190,6 +147,52 @@
 
 .main__res_store {
   background-color: #f6f6f7;
+}
+
+.main__event {
+  .swiper_event {
+    width: 100%;
+
+    .swiper-wrapper {
+      transition-timing-function: linear;
+
+      .swiper-slide {
+        width: 290px;
+
+        a {
+          display: block;
+
+          .thumb {
+            width: 290px;
+            height: 290px;
+            background-color: #f9f9f9;
+
+            img {
+              aspect-ratio: 1/1;
+              object-fit: cover;
+            }
+          }
+
+          .info {
+            margin-top: 20px;
+
+            .tit {
+              font-size: 18px;
+              font-weight: 400;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+
+            .date {
+              font-size: 13px;
+              color: var(--bk-color2);
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .main__promo {
