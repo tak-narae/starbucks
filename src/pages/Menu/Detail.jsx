@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import useProductMatch from "hooks/ProductMatch.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,9 +8,10 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import "./Detail.css";
-
 import QtyCalc from "./../../hooks/QtyCalc.js";
+import usePathMatch from "../../hooks/pathMatch.js";
+
+import "./Detail.css";
 
 /* ===
   categoryLabel : 한글대분류
@@ -28,6 +29,8 @@ import QtyCalc from "./../../hooks/QtyCalc.js";
 === */
 const Detail = () => {
   const { productMatch, title, cateKo, cateList } = useProductMatch(); // 커스텀 훅 호출
+  const { itemPath } = usePathMatch(); // 패스 훅 호출
+
   // const handleAddToCart = () => {
   //   const qty = document.querySelector(".btn_qty .qty").value;
   //   const cartItem = { productId: productMatch.id, qty: parseInt(qty) };
@@ -42,7 +45,7 @@ const Detail = () => {
     setTimeout(() => {
       QtyCalc();
 
-      const handleScroll = () => {
+      const handleScroll = () => { //scroll 위치찾아서 적용
         const pinY = window.scrollY - 117;
         // console.log("pin--", pinY, "Delv--", refDelv.current.offsetTop);
 
@@ -51,16 +54,16 @@ const Detail = () => {
         document.querySelectorAll(".tab_underline > li").forEach(el => el.classList.remove("active"));
         
         if (pinY >= refDelv.current.offsetTop && pinY < refDelv.current.offsetTop + refDelv.current.offsetHeight) {
-          console.log("교환/반품");
+          // console.log("교환/반품");
           document.querySelector("[data-ref='tabDelv']").classList.add("active");
         } else if(!refDetail.current && pinY < refDelv.current.offsetTop){
-          console.log("상세정보없음");
+          // console.log("상세정보없음");
           document.querySelector("[data-ref='tabDelv']").classList.add("active");
         } else if (refDetail.current && pinY < refDelv.current.offsetTop) {
-          console.log("상세정보");
+          // console.log("상세정보");
           document.querySelector("[data-ref='tabDetail']").classList.add("active");
         } else if (pinY >= refDelv.current.offsetTop + refDelv.current.offsetHeight) {
-          console.log("추천상품");
+          // console.log("추천상품");
           document.querySelector("[data-ref='tabRecommended']").classList.add("active");
         }
       };
@@ -69,14 +72,9 @@ const Detail = () => {
 
     }, 1000);
   }, [])
-
-  useEffect(()=>{
-
-  },[refRecommended])
   
-  const handleTabScroll = (e) => {
+  const handleTabScroll = (e) => { //scroll 위치찾기
     const tabRef = e.target.getAttribute("data-ref");
-    console.log(tabRef);
     const refs = {
       tabDetail: refDetail,
       tabDelv: refDelv,
@@ -87,6 +85,26 @@ const Detail = () => {
       window.scrollTo({ top: targetRef.current.offsetTop + 118 });
     }
   }
+
+  const navigate = useNavigate(); //장바구니 담기
+  const addToCart = ()=>{ 
+    const itemQty = parseInt(document.querySelector("input.qty").value); //숫자변환
+    const addItem = { ...productMatch, qty:itemQty };
+    console.log("담긴qty확인++", itemQty);
+    
+    let cartData = JSON.parse(localStorage.getItem("cartData")) || [];
+    const addCover = cartData.findIndex(el => el.key === addItem.key); //기존상품 찾기
+
+    if (addCover !== -1) {
+      cartData[addCover].qty += addItem.qty; //기존상품 업데이트
+    } else {
+      cartData = [...cartData, addItem]; //추가상품
+    }
+
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+    navigate("/order/cart");
+  }
+  
 
   if (!productMatch) {
     return (
@@ -106,8 +124,8 @@ const Detail = () => {
               <li className="home">
                 <Link to="/">홈</Link>
               </li>
-              <li>{title}</li>
-              <li>{cateKo}</li>
+              <li><Link to={itemPath}>{title}</Link></li>
+              <li><Link to={itemPath}>{cateKo}</Link></li>
             </ul>
           </div>
           <div className="prd_item">
@@ -136,7 +154,7 @@ const Detail = () => {
                     slidesPerView={2}
                     slidesPerGroup={2}
                     spaceBetween={20}
-                    onDestroy={(e) => { console.log(e, "???") }}
+                    // onDestroy={(e) => { console.log(e, "???") }}
                     pagination={{ type: 'bullets', clickable: true }}
                   >
                     {cateList.sort(() => Math.random() - 0.5).slice(0, 10).map((el, idx) => (
@@ -198,7 +216,8 @@ const Detail = () => {
                 {/* <h3 className="total_price">{productMatch.price}원</h3> */}
               </div>
               <div className="btn_primary">
-                <Link to="/order/cart" className="btn_normal">장바구니</Link>
+                <button className="btn_normal" onClick={addToCart}>장바구니</button>
+                {/* <Link to="/order/cart" className="btn_normal"></Link> */}
                 <Link to="/" className="btn_dark">구매하기</Link>
               </div>
             </div>

@@ -603,6 +603,10 @@ footer .link b {
   display: inline-block;
 }
 
+.heading .path li:not(.home) a:hover {
+  color:var(--bk-color2);
+}
+
 /* ===== TAB */
 .heading_tab {
   margin-bottom: 40px;

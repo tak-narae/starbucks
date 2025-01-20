@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import useProductMatch from "hooks/ProductMatch.js";
+// import useProductMatch from "hooks/ProductMatch.js";
 
 const Cart = () => {
-  const { productMatch } = useProductMatch(); // 커스텀 훅 호출
+  // const { productMatch } = useProductMatch(); // 커스텀 훅 호출
 
-  console.log(productMatch)
-
-  const [cartQty, setCartQty] = useState(1);
+  const [cartList, setCartList] = useState([]);
   useEffect(() => {
-    const cartData = JSON.parse(localStorage.getItem("cartQty"));
-    if (cartData) {
-      setCartQty(cartData.qty);
-    }
+    const localCartData = JSON.parse(localStorage.getItem("cartData")) || [];
+    setCartList(localCartData);
   }, []);
-
+  // localStorage.removeItem("cartData"); //삭제
+  
+  console.log("장바구니리스트===",cartList);
+  console.log("장바구니리스트===",cartList.length);
   return (
     <>
       <div id="container" className="cart">
@@ -27,46 +26,54 @@ const Cart = () => {
             <caption>장바구니</caption>
             <thead>
               <tr>
-                <th>선택 chk</th>
+                <th>
+                  <div className="chk_item">
+                    <input type="checkbox"/>
+                    <label><span className="chk"></span></label>
+                  </div>
+                </th>
                 <th>상품정보</th>
                 <th>수량</th>
                 <th>상품금액</th>
-                <th>진행상태</th>
+                <th>주문금액</th>
                 <th>처리</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="chk">chk</td>
-                <td>
-                  <Link onClick={e => e.preventDefault()}
-                    style={{ display: "inline-flex", alignItems: "center", gap: "20px", }}>
-                    <div style={{ width: "80px", height: "80px", background: "#222", }}></div>
-                    <span>홀리데이 프렌즈 플레이트 커트러리 세트</span>
-                  </Link>
-                </td>
-                <td>
-                  <div className="btn_qty">
-                    <button className="minus">-</button>
-                    <input type="tel" className="qty" value={cartQty} maxLength="4" readOnly />
-                    <button className="plus">+</button>
-                  </div>
-                </td>
-                <td>
-                  {/* <div className="total_price">{productMatch}</div> */}
-                </td>
-                <td>
-                  <b>상품준비중</b>
-                </td>
-                <td>-</td>
-              </tr>
+              { cartList.length !== 0 ? (
+                  cartList.map((el,idx)=>(
+                    <tr key={idx}>
+                      <td className="chk">
+                        <div className="chk_item">
+                          <input type="checkbox"/>
+                          <label><span className="chk"></span></label>
+                        </div>
+                      </td>
+                      <td>
+                        <Link onClick={e => e.preventDefault()}>
+                          <img style={{width:"80px"}} src={`${process.env.PUBLIC_URL}/${el.img}`} alt={el.name}/>
+                          <span>{el.name}</span>
+                        </Link>
+                      </td>
+                      <td>
+                        <div className="btn_qty">
+                          <button className="minus">-</button>
+                          <input type="tel" className="qty" value={el.qty} maxLength="4" readOnly/>
+                          <button className="plus">+</button>
+                        </div>
+                      </td>
+                      <td>{el.price}</td>
+                      <td className="total_price">{el.price}합산</td>
+                      <td><button>삭제</button></td>
+                    </tr>
+                  )) 
+              ) : (
+                <tr className="empty"><td colSpan="6">장바구니에 담긴 상품이 없습니다</td></tr>
+              ) }
+               
             </tbody>
           </table>
-          <ul>
-            <li>
-              
-            </li>
-          </ul>
+
         </div>
       </div>
     </>
