@@ -88,12 +88,18 @@ const Detail = () => {
 
   const navigate = useNavigate(); //장바구니 담기
   const addToCart = ()=>{ 
-    const itemQty = document.querySelector("input.qty").value;
+    const itemQty = parseInt(document.querySelector("input.qty").value); //숫자변환
     const addItem = { ...productMatch, qty:itemQty };
-
+    console.log("담긴qty확인++", itemQty);
+    
     let cartData = JSON.parse(localStorage.getItem("cartData")) || [];
-    cartData = [...cartData, addItem];
-    // cartData.push(addItem);
+    const addCover = cartData.findIndex(el => el.key === addItem.key); //기존상품 찾기
+
+    if (addCover !== -1) {
+      cartData[addCover].qty += addItem.qty; //기존상품 업데이트
+    } else {
+      cartData = [...cartData, addItem]; //추가상품
+    }
 
     localStorage.setItem("cartData", JSON.stringify(cartData));
     navigate("/order/cart");

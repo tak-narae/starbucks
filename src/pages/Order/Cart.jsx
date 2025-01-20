@@ -8,8 +8,8 @@ const Cart = () => {
 
   const [cartList, setCartList] = useState([]);
   useEffect(() => {
-    const storedCartData = JSON.parse(localStorage.getItem("cartData")) || [];
-    setCartList(storedCartData);
+    const localCartData = JSON.parse(localStorage.getItem("cartData")) || [];
+    setCartList(localCartData);
   }, []);
   // localStorage.removeItem("cartData"); //삭제
   
