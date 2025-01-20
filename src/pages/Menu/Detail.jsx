@@ -43,7 +43,7 @@ const Detail = () => {
       QtyCalc();
 
       const handleScroll = () => {
-        const pinY = window.scrollY - 118;
+        const pinY = window.scrollY - 117;
         // console.log("pin--", pinY, "Delv--", refDelv.current.offsetTop);
 
         if (!refDelv.current) return;
