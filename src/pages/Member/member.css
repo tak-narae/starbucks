@@ -1,0 +1,182 @@
+.member__join .signupContainer{
+  padding: 40px 20px;
+  border-radius: 20px;
+  background: #FFF;
+  box-shadow: 0px 30px 60px 0px rgba(20, 20, 21, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.member__join .step_bar {
+  display: flex;
+  justify-content: center;
+  gap: 78px;
+}
+
+.member__join .step_bar .step {
+  width: 85px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.member__join .step_circle {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  border: 1px solid var(--br-color2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.member__join .step_circle svg{
+  width: 24px;
+  height: 24px;
+  fill: var(--br-color2);
+}
+
+.member__join .step_circle p{
+  color: var(--br-color2);
+}
+
+.member__join .step_name{
+  color: var(--br-color2);
+}
+
+.member__join .step.on .step_circle{
+  background-color: var(--main-color3);
+  border: none;
+}
+
+.member__join .step.on .step_circle svg{
+  fill: #fff;
+}
+
+.member__join .step.on .step_circle p{
+  color: #fff;
+}
+
+.member__join .step.on .step_name{
+  color: var(--main-color3);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.member__join form{
+  margin: 40px 20px;
+  border: none;
+}
+.member__join fieldset{
+  border: none;
+}
+
+.member__join .terms{
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.member__join .terms input[type="checkbox"] {
+  display:none;
+}
+
+.member__join .terms input[type="checkbox"] + label .chk {
+  width:20px;
+  height:20px;
+  border-radius: 5px;
+  background: url(../../images/ico_check.png) 50% 50% no-repeat;
+  background-size: 20px;
+  display: inline-block;
+  position: absolute;
+}
+
+.member__join .terms input[type="checkbox"]:checked + label .chk {
+  background:url(../../images/ico_checked.png) 50% 50% no-repeat;
+  background-size: 20px;
+}
+
+.member__join .terms .terms_title{
+  margin-left: 30px;
+  font-size: 15px;
+  color: var(--bk-color2);
+  word-break: break-word;
+}
+
+.member__join .terms .terms_title strong{
+  color: var(--main-color4);
+}
+
+.member__join .terms label span.checkAll{
+  color: var(--bk-color2);
+  font-weight: 500;
+  display: inline-block;
+}
+
+.member__join .terms_scroll_box{
+  width: 100%;
+  height: 180px;
+  margin-top: 16px;
+  padding: 15px 20px;
+  background-color: var(--bg-color2);
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+
+.member__join .select_cont{
+  height: auto;
+}
+
+.member__join .pri_terms_wrap{
+  font-size: 14px;
+  color: var(--bk-color2);
+  line-height: 30px;
+  display: block;
+}
+
+.member__join .pri_terms_wrap .pri_tit{
+  text-indent: 5px;
+}
+
+.member__join .pri_terms_wrap .sub_tit{
+  text-indent: 8px;
+}
+
+.member__join .pri_terms_wrap .pri_con{
+  text-indent: 10px;
+}
+
+.member__join th,
+.member__join td{
+  background-color: transparent;
+  font-size:  13px;
+}
+
+.member__join .terms .terms_title.desc{
+  margin: 0;
+  font-weight: 500;
+}
+
+.member__join .terms .terms_desc{
+  margin-top: 12px;
+}
+
+.member__join .terms .terms_desc p{
+  font-size: 14px;
+  color: var(--bk-color2);
+}
+
+.member__join button.wid40{
+  width: 40%;
+}
+
+.member__join hr{
+  border: 1px solid var(--br-color2);
+  border-top: 0;
+  margin: 40px 0;
+}
+

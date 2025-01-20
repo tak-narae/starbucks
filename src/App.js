@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import axios from "axios";
 
 import "./App.css";
@@ -82,7 +82,8 @@ function App() {
             <Route path="/notice/:idx" element={<NoticeDetail />}></Route>
             <Route path="/store" element={<Store />}></Route>
             <Route path="/guide" element={<Guide />}></Route>
-            <Route path="/signup" element={<SignUp />}></Route>
+            {/* <Route path="/signup" element={<Navigate to="/signup?step=1" />}></Route> */}
+            <Route path="/signup/step=1" element={<SignUp />}></Route>
           </Routes>
           <Footer />
         </UtilProvider>
