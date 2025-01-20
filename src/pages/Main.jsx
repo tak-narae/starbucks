@@ -135,7 +135,7 @@ const Main = () => {
           </div>
           <div className="res_mz">
             <ul className="megazine">
-              {resMz.slice(0, 5).map((item) => (
+              {resMz.slice(0, 6).map((item) => (
                 <li className="mzImg" key={item.key}>
                   <Link to="#">
                     <img src={item.img} alt={item.title} />
