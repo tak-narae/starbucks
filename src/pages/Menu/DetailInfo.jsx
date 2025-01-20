@@ -4,10 +4,14 @@ import { Link, useLocation } from "react-router-dom";
 
 import { useEffect } from 'react';
 
+import usePathMatch from "../../hooks/pathMatch.js";
+
 import "./Detail.css";
 
 const DetailInfo = () => {
   const { productMatch, title, cateKo, itemPrev, itemNext } = useProductMatch(); // 커스텀 훅 호출
+  const { itemPath } = usePathMatch(); // 패스 훅 호출
+
   const location = useLocation();
 
   useEffect(() => {
@@ -61,8 +65,8 @@ const DetailInfo = () => {
             <li className="home">
               <Link to="/">홈</Link>
             </li>
-            <li>{title}</li>
-            <li>{cateKo}</li>
+            <li><Link to={itemPath}>{title}</Link></li>
+            <li><Link to={itemPath}>{cateKo}</Link></li>
           </ul>
         </div>
         <div className="prd_item">

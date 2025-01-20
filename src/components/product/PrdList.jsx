@@ -89,7 +89,8 @@ const PrdList = ({ title, cateKo, pathName, selectedCate, selectedDepth, current
                     // pathname: `/menu/detail/${pathName}`,
                     // search: `?cate=${selectedCate}&id=${product.id}`,
                   }}
-                  state={{ title, cateKo, product }}
+                  state={{ title, cateKo }}
+                  // state={{ title, cateKo, product }} origin
                 >
                   <div className="image">
                     <img src={product.img} alt={product.name} />
@@ -98,7 +99,7 @@ const PrdList = ({ title, cateKo, pathName, selectedCate, selectedDepth, current
                 <div className="desc">
                   <div className="name">{product.name}</div>
                   {/* <div className="review">4.9</div> */}
-                  <div className="price">39,000원</div>
+                  <div className="price">{product.price.toLocaleString()}원</div>
                 </div>
               </div>
             </li>
