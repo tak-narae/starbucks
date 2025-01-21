@@ -23,18 +23,19 @@ const QtyCalc = () => {
       // console.log(new Date().toLocaleDateString())
       // console.log(Date.now())
       
-      if(document.querySelector("#container").classList.contains("prd__detail")){
+      if(document.querySelector("#container").classList.contains("prd__detail")) {
         const totalPriceEl = spinner.closest('.total_item').querySelector('.total_price');
         const originPrice = parseInt(document.querySelector('[class^="prd__detail"] .prd_item .info_cont .price').textContent.replaceAll(',', ''));
         console.log(originPrice, "*" ,qtyEl.value, "=" ,totalPriceEl.textContent);
         totalPriceEl.textContent = (originPrice * qtyEl.value).toLocaleString(1) + "원";
-      } 
-      if(document.querySelector("#container").classList.contains("order__cart")){
+      }
+
+      if(document.querySelector("#container").classList.contains("order__cart")) {
         const cartData = JSON.parse(localStorage.getItem("cartData")) || [];
         const trID = spinner.closest("tr").dataset.id; //typeof string
         const item = cartData.find(el => el.key == trID); //el.key number
 
-        item.qty = qtyEl.value; //해당리스트에 수량 업데이트
+        item.qty = parseInt(qtyEl.value); //해당리스트에 수량 업데이트
 
         const totalPriceEl = spinner.closest('tr').querySelector('.total_price');
         totalPriceEl.textContent = (item.price * parseInt(qtyEl.value)).toLocaleString() + "원";
