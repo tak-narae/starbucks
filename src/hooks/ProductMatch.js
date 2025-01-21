@@ -18,7 +18,7 @@ import axios from "axios";
 
 const useProductMatch = () => {
   const { category } = useParams(); // URL에서 category 추출
-  const [searchParams] = useSearchParams(); // URL 쿼리 파라미터 추출
+  const [ searchParams ] = useSearchParams(); // URL 쿼리 파라미터 추출
 
   const [productMatch, setProductMatch] = useState(null); // 선택된 상품 데이터 저장
   const [title,setTitle] = useState(""); //대분류

@@ -25,7 +25,7 @@
   gap: 18px;
 }
 
-.menu_category .cate_list a[href="/menu/coffee?cate=3"]::before{
+.menu_category:not(.depth) .cate_list a[href="/menu/coffee?cate=3"]::before{
   content:'앳홈 by ';
 }
 

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import useProductMatch from "hooks/ProductMatch.js";
 import { Link, useNavigate } from "react-router-dom";
 
 // swiper
@@ -8,6 +7,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
+import useProductMatch from "hooks/ProductMatch.js";
 import QtyCalc from "./../../hooks/QtyCalc.js";
 import usePathMatch from "../../hooks/pathMatch.js";
 
