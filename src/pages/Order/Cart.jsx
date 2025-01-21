@@ -45,7 +45,7 @@ const Cart = () => {
             <tbody>
               { cartList.length !== 0 ? (
                   cartList.map((el,idx)=>(
-                    <tr key={idx}>
+                    <tr key={idx} data-id={el.key}>
                       <td className="chk">
                         <div className="chk_item">
                           <input type="checkbox"/>
@@ -65,8 +65,8 @@ const Cart = () => {
                           <button className="plus">+</button>
                         </div>
                       </td>
-                      <td>{el.price}</td>
-                      <td className="total_price">{el.price}합산</td>
+                      <td className="price">{el.price.toLocaleString()}원</td>
+                      <td className="total_price">{(el.price * el.qty).toLocaleString()}원</td>
                       <td><button>삭제</button></td>
                     </tr>
                   )) 
