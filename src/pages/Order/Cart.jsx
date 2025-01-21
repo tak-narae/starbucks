@@ -59,7 +59,7 @@ const Cart = () => {
                           </div>
                         </td>
                         <td>
-                          <Link onClick={e => e.preventDefault()}>
+                          <Link>
                             <img style={{width:"80px"}} src={`${process.env.PUBLIC_URL}/${el.img}`} alt={el.name}/>
                             <p className="name">{el.name}</p>
                           </Link>
