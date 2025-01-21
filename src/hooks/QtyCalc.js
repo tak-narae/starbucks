@@ -1,7 +1,7 @@
 
 const QtyCalc = () => {
   const spinners = document.querySelectorAll('.btn_qty');
-  console.log(`.btn_qty 몇개 ??? ${spinners.length}`);
+  // console.log(`.btn_qty 몇개 ??? ${spinners.length}`);
 
   if (spinners.length === 0) {
     // console.warn(".btn_qty 없음");
@@ -27,7 +27,7 @@ const QtyCalc = () => {
         const totalPriceEl = spinner.closest('.total_item').querySelector('.total_price');
         const originPrice = parseInt(document.querySelector('[class^="prd__detail"] .prd_item .info_cont .price').textContent.replaceAll(',', ''));
         console.log(originPrice, "*" ,qtyEl.value, "=" ,totalPriceEl.textContent);
-        totalPriceEl.textContent = (originPrice * qtyEl.value).toLocaleString(1) + "원";
+        totalPriceEl.textContent = (originPrice * qtyEl.value).toLocaleString() + "원";
       }
 
       if(document.querySelector("#container").classList.contains("order__cart")) {
