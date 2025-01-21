@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ProductLinkMatch = () => {
-  // const useProductLinkMatch = () => {
-  const [productLink, setProductLink] = useState();
-
-  // const [ productArr, setProductArr ] = useState([]);
-  // setProductArr(el => [...el, ...coffee, ...beverage, ...product, ...food])
-
-  // const [coffeeData, setCoffeeData] = useState([]);
-  // const [beverageData, setBeverageData] = useState([]);
-  // const [productData, setProductData] = useState([]);
-  // const [foodData, setFoodData] = useState([]);
-
+  const navigate = useNavigate();
   const [data, setData] = useState({
     dataCoffee: [],
     dataBeverage: [],
@@ -24,6 +15,7 @@ const ProductLinkMatch = () => {
     const fetchData = () => {
       axios.get("https://raw.githubusercontent.com/deliondane/db/main/db.json")
         .then((res) => {
+          console.log("++res++", res);
           const { coffee, beverage, product, food } = res.data; //객체 구조 분해 할당
           setData({
             dataCoffee: coffee.map((el, idx) => ({
@@ -67,10 +59,14 @@ const ProductLinkMatch = () => {
           cateNum: el.cateNum,
           ...data,
         }))).find(item => item.name === prdName);
+
+        console.log(nameEl.closest("a"));
+        console.log(itemMatch);
       
         nameEl.closest("a").setAttribute("href",`/menu/detail/${itemMatch.categoryEn}?cate=${itemMatch.cateNum}&id=${itemMatch.id}`);
-        nameEl.closest("a").addEventListener("click",function(){
-          console.log("click");
+        nameEl.closest("a").addEventListener("click",function(e){
+          e.preventDefault();
+          navigate(`/menu/detail/${itemMatch.categoryEn}?cate=${itemMatch.cateNum}&id=${itemMatch.id}`);
         })
 
   
@@ -78,9 +74,6 @@ const ProductLinkMatch = () => {
     }
   }, [data]);
 
-  return;
-  // return { productLink };
 };
 
 export default ProductLinkMatch;
-// export default useProductLinkMatch;
