@@ -47,7 +47,8 @@ const Header = () => {
                     </div>
                     <ul className="shop_util">
                         <li className="search"><Link to="/">검색</Link></li>
-                        <li className="mypage"><Link to="/mypage">마이페이지</Link></li>
+                        <li className="mypage"><Link to="/signup?step=1">마이페이지</Link></li>
+                        {/* <li className="mypage"><Link to="/mypage">마이페이지</Link></li> */}
                         <li className="cart"><Link to="/order/cart">장바구니</Link></li>
                         <li className="card"><Link to="/">카드</Link></li>
                     </ul>
