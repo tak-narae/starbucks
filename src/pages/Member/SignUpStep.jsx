@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from 'config/constants.js';
 
@@ -10,6 +10,18 @@ const SignUpStep = () => {
       const [step, setStep] = useState(1);
 
       const navigate = useNavigate();
+      const location = useLocation();
+
+      useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const queryStep = params.get('step');
+        if (queryStep) {
+          setStep(Number(queryStep));
+        } else {
+          setStep(1); // 기본값을 1로 설정
+          navigate('/signup?step=1'); // URL이 없을 경우, step=1로 자동 이동
+        }
+      }, [location.search, navigate]); // location.search가 변경될 때마다 실행
     
         //약관동의
       const [allChecked, setAllChecked] = useState(false);
@@ -25,6 +37,7 @@ const SignUpStep = () => {
       const phoneInputRef = useRef(null);
       const emailInputRef = useRef(null);
 
+      const [type, setType] = useState("individual");
       const [id, setId] = useState("");
       const [isIdChecked, setIsIdChecked] = useState(false); //아이디 중복 체크
       const [pw, setPw] = useState("");
@@ -41,7 +54,7 @@ const SignUpStep = () => {
       const [year, setYear] = useState("");
       const [month, setMonth] = useState("");
       const [day, setDay] = useState("");
-      const [sex, setSex] = useState("");
+      const [sex, setSex] = useState("male");
       const [store, setStore] = useState("");
 
         //회원가입 제출 여부
@@ -97,11 +110,15 @@ const SignUpStep = () => {
         }));
       };
 
+      const handleType = (e) => {
+        setType(e.target.value);
+      }
+
       const handleId = (e) => {
         const newValue = e.target.value;
         setId(newValue);
         if (idRule.test(newValue)) {
-          handleMessageChange("id", "사용 가능한 아이디 입니다.", "success_color");
+          handleMessageChange("id", "사용 가능한 아이디입니다.", "success_color");
         } else if (newValue === "") {
           handleMessageChange("id", "아이디를 입력해주세요.", "error_color");
         } else {
@@ -238,10 +255,22 @@ const SignUpStep = () => {
       const handleSex = (e) => {
         setSex(e.target.value);
       }
+
+      const handleBack = () => {
+        setStep(1);
+        navigate('/signup?step=1');
+      }
+
+      const handleMain = () => {
+        navigate('/');
+      }
+
+      const handleLogin = () => {
+        navigate('/login');
+      }
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        
         if (step === 1) {
           if (termsChecked && privacyChecked && cardChecked) {
             setStep(prevStep => Math.min(prevStep + 1, 2));
@@ -263,6 +292,7 @@ const SignUpStep = () => {
               emailRule.test(email)) {
             try {
               const result = await axios.post(`${API_URL}/users`, {
+                type: type,
                 user_id: id,
                 pw: pw,
                 name: name,
@@ -270,13 +300,13 @@ const SignUpStep = () => {
                 email: email,
                 birth: birth,
                 sex: sex,
-                marketingChecked: allChecked ? "True" : "False"
+                allTermsChecked: allChecked ? "True" : "False"
               });
               console.log(result);
               setIsSubmitted(true);
               setIsRegistered(true);
               setStep(prevStep => {
-                const nextStep = Math.min(prevStep + 1, 2);
+                const nextStep = Math.min(prevStep + 1, 3);
                 navigate(`/signup?step=${nextStep}`);
                 return nextStep;
               });
@@ -293,8 +323,9 @@ const SignUpStep = () => {
       };
   return (
     <div className="signupContainer">
+            {step !== 3 && (
                 <ul className="step_bar">
-                    <li className={`step step1 ${step === 1 ? "on" : ""}`}>
+                        <li className={`step step1 ${step === 1 ? "on" : ""}`}>
                         <div className="step_circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
                             <path d="M1.33194 8.60033C1.76135 8.60033 1.99607 8.3494 1.99607 7.9207V4.66639C1.99607 3.12797 2.80132 2.33457 4.31818 2.33457H7.61557C8.04499 2.33457 8.29631 2.09651 8.29631 1.67458C8.29631 1.24587 8.04499 1.00781 7.61557 1.00781H4.28191C1.8943 1.00781 0.664062 2.22246 0.664062 4.59257V7.9207C0.664062 8.3494 0.90252 8.60033 1.33194 8.60033ZM23.9963 8.60033C24.4325 8.60033 24.6641 8.3494 24.6641 7.9207V4.59257C24.6641 2.24818 23.4407 1.00781 21.0462 1.00781H17.7126C17.2832 1.00781 17.0319 1.24587 17.0319 1.67458C17.0319 2.09651 17.2832 2.33457 17.7126 2.33457H21.0099C22.4821 2.33457 23.3321 3.12797 23.3321 4.66639V7.9207C23.3321 8.3494 23.5736 8.60033 23.9963 8.60033ZM4.28191 24.9681H7.61557C8.04499 24.9681 8.29631 24.727 8.29631 24.2984C8.29631 23.8763 8.04499 23.6383 7.61557 23.6383H4.31818C2.80132 23.6383 1.99607 22.845 1.99607 21.3065V18.0522C1.99607 17.6234 1.75762 17.3725 1.33194 17.3725C0.898782 17.3725 0.664062 17.6234 0.664062 18.0522V21.3803C0.664062 23.7505 1.8943 24.9681 4.28191 24.9681ZM17.7126 24.9681H21.0462C23.4407 24.9681 24.6641 23.7278 24.6641 21.3803V18.0522C24.6641 17.6234 24.4256 17.3725 23.9963 17.3725C23.5669 17.3725 23.3321 17.6234 23.3321 18.0522V21.3065C23.3321 22.845 22.4821 23.6383 21.0099 23.6383H17.7126C17.2832 23.6383 17.0319 23.8763 17.0319 24.2984C17.0319 24.727 17.2832 24.9681 17.7126 24.9681Z"/>
@@ -323,6 +354,7 @@ const SignUpStep = () => {
                         <p className="step_name">가입완료</p>
                     </li>
                 </ul>
+            )}
                 {step === 1 && (
                     <form id="input_form" action="#" method="post" name="signup" onSubmit={handleSubmit}>
                     <fieldset className="signup__area">
@@ -2149,6 +2181,22 @@ const SignUpStep = () => {
                 {step === 2 && (
                     <div className="input_form">
                       <ul id="info_section">
+                      <li className="type_section">
+                          <div className="area_style">
+                            <label htmlFor="typeArea" className="label_style required">회원 정보</label>
+                            <div className="select">
+                              <label>
+                                <input className="input_radio" id="individual" type="radio" name="type" value="individual" onChange={handleType} checked={type === 'individual'}/>
+                                <span htmlFor="individual" >개인회원</span>
+                              </label>
+                              <label>
+                                <input className="input_radio" id="business" type="radio" name="type" value="business" onChange={handleType} checked={type === 'business'}/>
+                                <span htmlFor="business">사업자회원</span>
+                              </label>
+                            </div>
+                          </div>
+                        </li>
+                        <hr />
                         <li className="id_section">
                           <div className="area_style">
                             <label htmlFor="idArea" className="label_style required">아이디(E-mail)</label>
@@ -2282,11 +2330,11 @@ const SignUpStep = () => {
                             <label htmlFor="sexArea" className="label_style">성별</label>
                             <div className="select">
                               <label>
-                                <input className="input_radio" id="male" type="radio" name="sex" value="male" checked onChange={handleSex} />
+                                <input className="input_radio" id="male" type="radio" name="sex" value="male" onChange={handleSex} checked={sex === 'male'}/>
                                 <span htmlFor="male" >남성</span>
                               </label>
                               <label>
-                                <input className="input_radio" type="radio" name="sex" value="female" onChange={handleSex} />
+                                <input className="input_radio" type="radio" name="sex" value="female" onChange={handleSex} checked={sex === 'female'} />
                                 <span htmlFor="female">여성</span>
                               </label>
                             </div>
@@ -2296,12 +2344,36 @@ const SignUpStep = () => {
                     </div>
                 )}
                 {step === 3 && (
-                  <div>
-                    회원가입 완료
+                  <div className="signup_success">
+                    <div className="signup_greeting">
+                        <span className="signup_name"><strong>{name}</strong> 님은 <strong>[Green]</strong> 회원입니다</span>
+                        <h1 className="title">Welcome To Starbucks Korea!</h1>
+                    </div>
+                    <div className="signup_info">
+                        <p className="signup_id">아이디<span className="id">{id}</span></p>
+                        <p className="signup_email">이메일<span className="email">{email}</span></p>
+                    </div>
+                    <div className="signup_img">
+                        <img src={process.env.PUBLIC_URL + "/db/images/signup_kakao.png"} alt="" />
+                    </div>
                   </div>
                 )}
-                <div className="page_btn_wrap">
-                    <button className="btn_dark wid40" type="submit" disabled={step === 3 || !allChecked} onClick={handleSubmit}>다음</button>
+                <div className="step_btn_wrap">
+                    {step === 1 && (
+                        <button className="btn_dark" type="submit" disabled={step === 3 || !allChecked} onClick={handleSubmit}>다음</button>
+                    )}
+                    {step === 2 && (
+                        <>
+                        <button className="btn_light" onClick={handleBack}>이전</button>
+                        <button className="btn_dark" type="submit" disabled={step === 3 || !allChecked} onClick={handleSubmit}>가입하기</button>
+                        </>
+                    )}
+                    {step === 3 && (
+                        <>
+                        <button className="btn_light" onClick={handleMain}>메인으로이동</button>
+                        <button className="btn_dark" onClick={handleLogin}>로그인</button>
+                        </>
+                    )}
                 </div>
             </div>
   );

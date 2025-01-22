@@ -8,14 +8,13 @@ import QtyCalc from "hooks/QtyCalc.js";
 const Cart = () => {
   // const { productLink } = useProductLinkMatch(); // 커스텀 훅 호출
   const [cartList, setCartList] = useState([]);
+  // const links = ProductLinkMatch();
 
   useEffect(() => {
     const localCartData = JSON.parse(localStorage.getItem("cartData")) || [];
     setCartList(localCartData);
   }, []);
   // localStorage.removeItem("cartData"); //삭제
-
-  ProductLinkMatch();
   
   useEffect(()=>{
     QtyCalc();
@@ -25,6 +24,7 @@ const Cart = () => {
 
   return (
     <>
+      <ProductLinkMatch />
       <div id="container" className="order__cart">
         <div className="layout_fix">
           <div className="heading">
@@ -59,7 +59,7 @@ const Cart = () => {
                           </div>
                         </td>
                         <td>
-                          <Link onClick={e => e.preventDefault()}>
+                        <Link to="#" onClick={(e) => e.preventDefault()}>
                             <img style={{width:"80px"}} src={`${process.env.PUBLIC_URL}/${el.img}`} alt={el.name}/>
                             <p className="name">{el.name}</p>
                           </Link>
