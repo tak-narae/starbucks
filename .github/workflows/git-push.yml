@@ -1,28 +1,41 @@
-name: git push into another repo to deploy to vercel
+name: Push to Repository and Deploy to Vercel
 
 on:
   push:
-    branches: [develop]
+    branches:
+      - develop
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
-    container: pandoc/latex
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Install mustache (to update the date)
-        run: apk add ruby && gem install mustache
-      - name: creates output
-        run: sh ./build.sh
-      - name: Pushes to another repository
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@main
+      # 1. GitHub Repository 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # 2. Node.js 환경 설정
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          source-directory: 'output'
-          destination-github-username: tak-narae
-          destination-repository-name: starbucks
-          user-email: dddddum@naver.com
-          commit-message: ${{ github.event.commits[0].message }}
-          target-branch: develop
-      - name: Test get variable exported by push-to-another-repository
-        run: echo $DESTINATION_CLONED_DIRECTORY
+          node-version: '20'
+
+      # 3. 의존성 설치
+      - name: Install dependencies
+        run: npm install
+
+      # 4. 프로젝트 빌드
+      - name: Build application
+        run: npm run build
+
+      # 5. 변경사항을 커밋하고 Push
+      - name: Commit and Push changes
+        run: |
+          git config user.name "tak-narae"
+          git config user.email "dddddum@naver.com"
+          git add .
+          git commit -m "Project Update"
+          git push origin develop
+      # 6. Vercel에 배포
+      - name: Deploy to Vercel
+        run: npx vercel —prod
