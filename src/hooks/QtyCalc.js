@@ -1,15 +1,12 @@
 
-const QtyCalc = () => {
+const QtyCalc = (cartList,setCartList) => {
   const spinners = document.querySelectorAll('.btn_qty');
   // console.log(`.btn_qty 몇개 ??? ${spinners.length}`);
 
-  if (spinners.length === 0) {
-    // console.warn(".btn_qty 없음");
-    return;
-  }
+  if (spinners.length === 0) return;
 
   spinners.forEach(spinner => {
-    console.log("spinner===", spinner);
+    // console.log("spinner===", spinner);
     const minus = spinner.querySelector('.minus');
     const plus = spinner.querySelector('.plus');
     const qtyEl = spinner.querySelector('.qty');
@@ -18,7 +15,7 @@ const QtyCalc = () => {
     if (parseInt(qtyEl.value) <= 1) {
       minus.classList.add("disabled");
     }
-    
+
     const updatePrice = () => {
       // console.log(new Date().toLocaleDateString())
       // console.log(Date.now())
@@ -26,7 +23,7 @@ const QtyCalc = () => {
       if(document.querySelector("#container").classList.contains("prd__detail")) {
         const totalPriceEl = spinner.closest('.total_item').querySelector('.total_price');
         const originPrice = parseInt(document.querySelector('[class^="prd__detail"] .prd_item .info_cont .price').textContent.replaceAll(',', ''));
-        console.log(originPrice, "*" ,qtyEl.value, "=" ,totalPriceEl.textContent);
+        // console.log(originPrice, "*" ,qtyEl.value, "=" ,totalPriceEl.textContent);
         totalPriceEl.textContent = (originPrice * qtyEl.value).toLocaleString() + "원";
       }
 
@@ -40,11 +37,16 @@ const QtyCalc = () => {
         const totalPriceEl = spinner.closest('tr').querySelector('.total_price');
         totalPriceEl.textContent = (item.price * parseInt(qtyEl.value)).toLocaleString() + "원";
 
+        // setCartList(cartData);
+
+        console.log(item.qty)
+        
+        // console.log(cartList, "====" ,cartData);
         localStorage.setItem("cartData", JSON.stringify(cartData));
       }
     }
 
-    minus.addEventListener('click', () => {
+    minus.addEventListener('click', () => { //(((((())))))      
       let qtyValue = parseInt(qtyEl.value) || 0;
       if (qtyValue > 1) {
         qtyValue -= 1;
@@ -54,6 +56,17 @@ const QtyCalc = () => {
         }
         updatePrice();
       }
+
+  
+      // let qtyValue = parseInt(qtyEl.value) || 0;
+      // if (qtyValue > 1) {
+      //   qtyValue -= 1;
+      //   qtyEl.value = qtyValue;
+      //   if (qtyValue <= 1) {
+      //     minus.classList.add("disabled");
+      //   }
+      //   updatePrice();
+      // }
     });
 
     plus.addEventListener('click', () => {
@@ -68,5 +81,6 @@ const QtyCalc = () => {
 
   });
 };
+
 
 export default QtyCalc;

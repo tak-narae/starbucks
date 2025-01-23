@@ -15,7 +15,7 @@ const ProductLinkMatch = () => {
     const fetchData = () => {
       axios.get("https://raw.githubusercontent.com/deliondane/db/main/db.json")
         .then((res) => {
-          console.log("++res++", res);
+          // console.log("++res++", res);
           const { coffee, beverage, product, food } = res.data; //객체 구조 분해 할당
           setData({
             dataCoffee: coffee.map((el, idx) => ({
@@ -58,18 +58,16 @@ const ProductLinkMatch = () => {
           categoryEn: el.categoryEn,
           cateNum: el.cateNum,
           ...data,
-        }))).find(item => item.name === prdName);
+        }) )).find(item => item.name === prdName);
 
-        console.log(nameEl.closest("a"));
-        console.log(itemMatch);
+        // console.log(nameEl.closest("a"));
+        // console.log(itemMatch);
       
         nameEl.closest("a").setAttribute("href",`/menu/detail/${itemMatch.categoryEn}?cate=${itemMatch.cateNum}&id=${itemMatch.id}`);
         nameEl.closest("a").addEventListener("click",function(e){
           e.preventDefault();
           navigate(`/menu/detail/${itemMatch.categoryEn}?cate=${itemMatch.cateNum}&id=${itemMatch.id}`);
         })
-
-  
       });
     }
   }, [data]);

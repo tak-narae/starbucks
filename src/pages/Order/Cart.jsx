@@ -1,27 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+
 import ProductLinkMatch from "hooks/ProductLinkMatch.js";
-// import useProductLinkMatch from  "hooks/ProductLinkMatch.js";
 import QtyCalc from "hooks/QtyCalc.js";
 
 const Cart = () => {
-  // const { productLink } = useProductLinkMatch(); // 커스텀 훅 호출
   const [cartList, setCartList] = useState([]);
-
+  
   useEffect(() => {
     const localCartData = JSON.parse(localStorage.getItem("cartData")) || [];
     setCartList(localCartData);
   }, []);
-  // localStorage.removeItem("cartData"); //삭제
-
-  ProductLinkMatch();
+  // localStorage.removeItem("cartData"); // 삭제
+  
   
   useEffect(()=>{
-    QtyCalc();
-    
-    // console.log("cart++",productLink);
+    QtyCalc(cartList, setCartList);
   },[cartList])
+
+
+  // document.querySelectorAll("input[type='checkbox']").forEach(function(el){
+  //   el.addEventListener("change", function(){
+  //     console.log(el)
+  //   })
+  // })
+
+  
+  const [isChecked, setIsChecked] = useState([]);
+  const chkChange = (key)=>{
+    console.log(key, isChecked.includes(key));
+  }
+
+
+  // useEffect(()=>{
+  //   document.querySelectorAll("input[type='checkbox']").forEach(el => {
+  //     el.checked = isChecked;
+  //   })
+  // },[isChecked])
+
+  const localCartDelete = (key)=>{
+    // console.log(key);
+    const localCartUpdate = cartList.filter((el) => el.key !== key);
+    setCartList(localCartUpdate);
+    localStorage.setItem("cartData", JSON.stringify(localCartUpdate));
+  }
+  
+  ProductLinkMatch();
 
   return (
     <>
@@ -37,7 +62,7 @@ const Cart = () => {
                 <tr>
                   <th>
                     <div className="chk_item">
-                      <input type="checkbox"/>
+                      <input type="checkbox" name="chk_all"/>
                       <label><span className="chk"></span></label>
                     </div>
                   </th>
@@ -54,7 +79,7 @@ const Cart = () => {
                       <tr key={idx} data-id={el.key}>
                         <td className="chk">
                           <div className="chk_item">
-                            <input type="checkbox"/>
+                            <input type="checkbox" name={el.key} checked={isChecked.includes(el.key) ? true : false} onChange={()=>chkChange(el.key)}/>
                             <label><span className="chk"></span></label>
                           </div>
                         </td>
@@ -73,7 +98,7 @@ const Cart = () => {
                         </td>
                         <td className="price">{el.price.toLocaleString()}원</td>
                         <td className="total_price">{(el.price * el.qty).toLocaleString()}원</td>
-                        <td><button>삭제</button></td>
+                        <td onClick={()=> localCartDelete(el.key) }><button>삭제</button></td>
                       </tr>
                     )) 
                 ) : (

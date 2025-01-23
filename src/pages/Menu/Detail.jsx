@@ -70,7 +70,7 @@ const Detail = () => {
       window.addEventListener("scroll", handleScroll);
       return () => window.removeEventListener("scroll", handleScroll);
 
-    }, 1000);
+    }, 800);
   }, [])
   
   const handleTabScroll = (e) => { //scroll 위치찾기
