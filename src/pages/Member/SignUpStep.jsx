@@ -2315,6 +2315,7 @@ const SignUpStep = () => {
                         <hr />
                         <li className="birth_section">
                           <div className="area_style">
+                            
                             <label htmlFor="birthArea" className="label_style">생년월일</label>
                             <div class="flex_items">
                               <input type="text" placeholder="년도(4자)" value={year} onChange={handleYearChange}/>
