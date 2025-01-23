@@ -2292,11 +2292,10 @@ const SignUpStep = () => {
                             <label htmlFor="emailArea" className="label_style required">이메일</label>
                             <div class="flex_items">
                               <input type="text" value={emailFront} required size={20}
-                                onChange={(e) => setEmailFront(e.target.value)}
-                                onBlur={handleEmail}
+                                onChange={(e) => setEmailFront(e.target.value)} 
                               />
                               @
-                              <select value={emailBack} onChange={(e) => setEmailBack(e.target.value)}>
+                              <select value={emailBack} onChange={(e) => setEmailBack(e.target.value)} onBlur={handleEmail}>
                                 <option value="">선택</option>
                                 <option value="naver.com">naver.com</option>
                                 <option value="gmail.com">gmail.com</option>
