@@ -10,32 +10,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. GitHub Repository 체크아웃
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # 2. Node.js 환경 설정
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20'
 
-      # 3. 의존성 설치
       - name: Install dependencies
         run: npm install
 
-      # 4. 프로젝트 빌드
       - name: Build application
         run: npm run build
 
-      # 5. 변경사항을 커밋하고 Push
       - name: Commit and Push changes
         run: |
-          git config user.name "tak-narae"
-          git config user.email "dddddum@naver.com"
+          git config user.name "deliondane"
+          git config user.email "hynnk0@gmail.com" 
           git add .
           git commit -m "Project Update"
           git push origin develop
+        env:
+          STARBUCKS_GITHUB_KEY: ${{ secrets.STARBUCKS_GITHUB_KEY }}
+
       # 6. Vercel에 배포
       - name: Deploy to Vercel
         run: npx vercel —prod
+        env:
+          STARBUCKS_VERCEL_TOKEN: ${{ secrets.STARBUCKS_VERCEL_TOKEN }}
