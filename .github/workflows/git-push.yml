@@ -38,5 +38,5 @@ jobs:
         env:
           STARBUCKS_GITHUB_KEY: ${{ secrets.STARBUCKS_GITHUB_KEY }}
 
-      # - name: Deploy to Vercel
-      #   run: npx vercel --prod --token ${{ secrets.STARBUCKS_VERCEL_TOKEN }}
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
