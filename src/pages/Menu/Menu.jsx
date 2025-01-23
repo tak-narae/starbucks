@@ -60,7 +60,7 @@ const Menu = () => {
 
 
   useEffect(() => {
-    window.scrollTo({ top: 0 }); //메인진입
+    // window.scrollTo({ top: 0 }); //메인진입
     const newLabels = getLabels(currentData);
     setLabels(newLabels);
   }, [currentData]);

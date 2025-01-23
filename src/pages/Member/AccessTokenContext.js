@@ -44,9 +44,9 @@ export const AccessTokenProvider = ({ children }) => {
     verifyToken();
   }, [accessToken]);
 
-  if (loading) {
-    return <div>Loading...</div>; // 로딩 중일 때 처리
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>; // 로딩 중일 때 처리
+  // }
 
   return (
     <AccessTokenContext.Provider value={{ accessToken, setAccessToken, accessResult, user_id, loading }}>
