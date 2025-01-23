@@ -38,5 +38,6 @@ jobs:
         env:
           STARBUCKS_GITHUB_KEY: ${{ secrets.STARBUCKS_GITHUB_KEY }}
 
+      # starbucks-vercel 자동 fork 
       - name: Test get variable exported by push-to-another-repository
         run: echo $DESTINATION_CLONED_DIRECTORY
