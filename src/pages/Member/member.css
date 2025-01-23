@@ -170,14 +170,16 @@
   color: var(--bk-color2);
 }
 
-.member__join .page_btn_wrap{
+.member__join .step_btn_wrap{
   width: 100%;
   display: flex;
   justify-content: center;
+  gap: 20px;
 }
 
-.member__join button.wid40{
-  width: 40%;
+.member__join .step_btn_wrap button{
+  display: inline-block;
+  width: 28%;
 }
 
 .member__join hr{
@@ -186,7 +188,8 @@
   margin: 40px 0;
 }
 
-.member__join .input_form{
+.member__join .input_form,
+.member__join .signup_success{
   width: 100%;
   padding: 40px;
 }
@@ -236,18 +239,21 @@
   color: var(--bk-color1);
 }
 
+.member__join .type_section .select,
 .member__join .sex_section .select{
   display: flex;
   align-items: center;
   gap: 25px;
 }
 
+.member__join .type_section .select label,
 .member__join .sex_section .select label{
   font-size: 14px;
   line-height: 2rem;
   padding: 0.2em 0.4em;
 }
 
+.member__join .type_section .select .input_radio,
 .member__join .sex_section .select .input_radio{
   width: 1.25em;
   height: 1.25em;
@@ -256,17 +262,21 @@
   appearance: none;
   border: max(1px, 0.1em) solid var(--br-color2);
   border-radius: 50%;
+  transition: none;
 }
 
+.member__join .type_section .select .input_radio:checked,
 .member__join .sex_section .select .input_radio:checked{
   border: 0.4em solid var(--main-color1);
 }
 
+.member__join .type_section .select .input_radio:focus-visible,
 .member__join .sex_section .select .input_radio:focus-visible{
   outline: max(2px, 0.1em) dotted var(--main-color1);
   outline-offset: max(2px, 0.1em);
 }
 
+.member__join .type_section .select span,
 .member__join .sex_section .select span{
   vertical-align: middle;
   cursor: pointer;
@@ -278,4 +288,52 @@
 
 .member__join .error_color{
   color: var(--err-color);
+}
+
+.member__join .signup_success{
+  padding: 40px 90px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.member__join .signup_greeting .signup_name{
+  font-size: 16px;
+  color: var(--bk-color3);
+}
+
+.member__join .signup_greeting .signup_name strong{
+  color: var(--bk-color1);
+}
+
+.member__join .signup_greeting .title{
+  margin-top: 12px;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--bk-color1);
+}
+
+.member__join .signup_info{
+  margin: 40px 0;
+}
+
+.member__join .signup_info p{
+  font-size: 14px;
+  color: var(--bk-color2);
+  margin-bottom: 16px;
+}
+
+.member__join .signup_info span{
+  display: inline-block;
+  margin-left: 32px;
+  font-weight: 500;
+  color: var(--bk-color1);
+}
+
+.member__join .signup_img img{
+  width: 138px;
+  position: absolute;
+  top: 50%;
+  right: 90px;
+  transform: translateY(-60%);
 }
