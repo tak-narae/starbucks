@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
   /* ===
@@ -17,6 +17,7 @@ import axios from "axios";
   === */ 
 
 const useProductMatch = () => {
+  const navigate = useNavigate();
   const { category } = useParams(); // URL에서 category 추출
   const [ searchParams ] = useSearchParams(); // URL 쿼리 파라미터 추출
 
@@ -62,6 +63,7 @@ const useProductMatch = () => {
           console.log(`${categoryLabel} ${category}`);
           console.log("중분류전체==", categoryData);
 
+          
           // cate, id에 해당하는 상품 필터
           const matchingCategory = categoryData[cateIndex];
           console.log("중분류==", matchingCategory);
@@ -72,9 +74,10 @@ const useProductMatch = () => {
             const foundProduct = matchingCategory.products.find(
               (item) => item.id.toString() === productId
             );
-            // console.log("매치==", foundProduct);
+            // console.log("확인==", foundProduct);
             setProductMatch(foundProduct);
           }
+
         })
         .catch((err) => {
           console.error("Error fetching data:", err);
@@ -83,11 +86,36 @@ const useProductMatch = () => {
 
     fetchData();
   }, [category, cateIndex, productId]);
-  // category, cateIndex, productId
-
-  console.log("매치==", productMatch);
 
 
+  useEffect(()=>{
+    const recommended = document.querySelector(".detail_recommended");
+    if(recommended){
+      setTimeout(() => {
+        recommended.querySelectorAll(".prd_list .name").forEach(nameEl => {
+          const prdName = nameEl.textContent;
+          const nameLink = nameEl.closest(".item").querySelector("a");
+
+          const recommendedItem = cateList.map(items => ({
+            categoryEn: cateIndex,
+            cateNum: items.id,
+            ...items
+          })).find(item => item.name === prdName);
+          
+          // console.log(nameEl, nameEl.closest(".item").querySelector("a"));
+          nameLink.setAttribute("href", `/menu/detail/${category}?cate=${recommendedItem.categoryEn}&id=${recommendedItem.cateNum}`);
+          nameLink.addEventListener("click",function(e){
+            e.preventDefault();
+            navigate(`/menu/detail/${category}?cate=${recommendedItem.categoryEn}&id=${recommendedItem.cateNum}`);
+          })
+
+        })
+      }, 500);
+    }
+  },[cateList])
+
+  // console.log("매치==", productMatch);
+  
   // prev,next 찾기
   if(!productMatch){
     return { prev:null, next:null };

@@ -29,7 +29,7 @@ jobs:
 
       - name: Commit and Push changes
         run: |
-          git config user.name "deliondane"
+          git config user.name "Bessy-kim"
           git config user.email "hynnk0@gmail.com"
           if [ -n "$(git status --porcelain)" ]; then
             git add .

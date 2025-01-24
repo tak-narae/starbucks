@@ -74,10 +74,11 @@ function App() {
         if(time >= 100){
           clearTimeout(timeout);
           clearInterval(interval);
+          console.log("##로딩사라짐##");
           setLoading(false);
           return 100;
         }
-        return time + 2; //비율 증가
+        return time + 4; //비율 증가
       });
     }, 40)
     return ()=> {

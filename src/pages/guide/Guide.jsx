@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./guide.css";
+import "./guide.scss";
 import "../../App";
 
 const Guide = () => {
@@ -89,9 +89,9 @@ const Guide = () => {
             </div>
           </div>
 
-          <div class="guideItem">
-            <p class="guideTitle">.tb_prd</p>
-            <table class="tb_prd">
+          <div className="guideItem">
+            <p className="guideTitle">.tb_prd</p>
+            <table className="tb_prd">
               <caption>주문내역조회</caption>
               <thead>
                 <tr>
@@ -105,9 +105,9 @@ const Guide = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td class="number">
-                    <span class="date">2024-12-04</span>
-                    <Link onClick={e => e.preventDefault()} class="underline">
+                  <td className="order">
+                    <span className="date">2024-12-04</span>
+                    <Link onClick={e => e.preventDefault()} className="underline">
                       O2024120123375331114
                     </Link>
                   </td>
@@ -130,8 +130,8 @@ const Guide = () => {
               </tbody>
             </table>
 
-            <p class="guideTitle">.tb_list</p>
-            <table class="tb_list">
+            <p className="guideTitle">.tb_list</p>
+            <table className="tb_list">
               <colgroup>
                 <col style={{ width: "100px" }} />
                 <col style={{ width: "160px" }} />
@@ -152,7 +152,7 @@ const Guide = () => {
                 <tr>
                   <td>2</td>
                   <td>문화소식</td>
-                  <td class="subject">
+                  <td className="subject">
                     <Link onClick={e => e.preventDefault()}>나의 오감을 깨워요</Link>
                   </td>
                   <td>관리자</td>
@@ -161,7 +161,7 @@ const Guide = () => {
                 <tr>
                   <td>1</td>
                   <td>공지사항</td>
-                  <td class="subject">
+                  <td className="subject">
                     <Link onClick={e => e.preventDefault()}>
                       단체 대량 구매 문의 (CONTACT FOR GROUP-BULK ORDER CONTACT
                       FOR GROUP-BULK ORDER)
@@ -173,8 +173,8 @@ const Guide = () => {
               </tbody>
             </table>
 
-            <p class="guideTitle">.tb_grid</p>
-            <table class="tb_grid">
+            <p className="guideTitle">.tb_grid</p>
+            <table className="tb_grid">
               <caption>주문상세조회</caption>
               <colgroup>
                 <col style={{ width: "160px" }} />
@@ -201,11 +201,11 @@ const Guide = () => {
               </tbody>
             </table>
 
-            <p class="guideTitle">.tb_block</p>
-            <table class="tb_block">
+            <p className="guideTitle">.tb_block</p>
+            <table className="tb_block">
               <tbody>
                 <tr>
-                  <th class="required">회원구분</th>
+                  <th className="required">회원구분</th>
                   <td>
                     <input type="text" />
                   </td>
