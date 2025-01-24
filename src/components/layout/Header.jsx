@@ -2,11 +2,14 @@ import React from 'react';
 import '../../App.css';
 import './Header.css';
 
-import { Link, useLocation } from 'react-router-dom';
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { DataContext } from 'App';
 
 
 const Header = () => {
+
+    //===header
     const location = useLocation();
     useEffect(() => {
         if (location.pathname) {
@@ -21,6 +24,7 @@ const Header = () => {
     }, [location])
     useEffect(() => {
         document.querySelector("header .btn_hamburger").addEventListener("click", (e) => {
+            document.querySelector("header .search_form").style.display = "none";
             e.currentTarget.classList.toggle("active");
             document.querySelector("header .header_nav").classList.toggle("active");
         })
@@ -34,6 +38,11 @@ const Header = () => {
         })
     }, [])
 
+    
+    //===search
+    const navigate = useNavigate();
+    const { setSearchData } = useContext(DataContext);
+
 
     return (
         <header>
@@ -46,7 +55,17 @@ const Header = () => {
                         <h1 className="starbucks_logo"><Link to="/">스타벅스 로고</Link></h1>
                     </div>
                     <ul className="shop_util">
-                        <li className="search"><Link to="/">검색</Link></li>
+                        <li className="search">
+                            <Link to="/">검색</Link>
+                            <div className="search_form">
+                                <form>
+                                    <fieldset>
+                                        <input type="text" placeholder="검색어 입력"/>
+                                        <button>검색하기</button>
+                                    </fieldset>    
+                                </form>
+                            </div>
+                        </li>
                         <li className="mypage"><Link to="/signup?step=1">마이페이지</Link></li>
                         {/* <li className="mypage"><Link to="/mypage">마이페이지</Link></li> */}
                         <li className="cart"><Link to="/order/cart">장바구니</Link></li>

@@ -25,11 +25,13 @@ import UtilProvider from "hooks/UtilContext";
 import SignUp from "pages/Member/SignUp";
 import SignUpStep from "pages/Member/SignUpStep";
 import Login from "pages/Member/Login";
+import Search from "pages/Member/Login";
 import { AccessTokenProvider } from "pages/Member/AccessTokenContext";
 
 const DataContext = createContext();
 
 function App() {
+  const [searchData, setSearchData] = useState("");
   const [coffee, setCoffee] = useState([]);
   const [beverage, setBeverage] = useState([]);
   const [product, setProduct] = useState([]);
@@ -99,8 +101,8 @@ function App() {
           </div>
         </div>
       ) }
-      <Header />
-      <DataContext.Provider value={{ loading, coffee, setCoffee, beverage, setBeverage, product, setProduct, food, setFood, notice, setNotice, events, setEvents, resMz, setResMz }}>
+      <DataContext.Provider value={{ loading, searchData, setSearchData, coffee, setCoffee, beverage, setBeverage, product, setProduct, food, setFood, notice, setNotice, events, setEvents, resMz, setResMz }}>
+        <Header />
         <UtilProvider>
           <Routes>
             <Route path="/" element={<Main />}></Route>
@@ -124,6 +126,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signup/step" element={<SignUpStep />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
           <Footer />
         </UtilProvider>
