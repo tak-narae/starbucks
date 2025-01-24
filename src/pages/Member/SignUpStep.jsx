@@ -10,7 +10,6 @@ import './member.css';
 const SignUpStep = () => {
       //signup 단계
       const [step, setStep] = useState(1);
-
       const navigate = useNavigate();
       const location = useLocation();
 
