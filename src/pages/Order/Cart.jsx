@@ -16,7 +16,7 @@ const Cart = () => {
   
   
   useEffect(()=>{
-    QtyCalc(cartList, setCartList);
+    QtyCalc();
   },[cartList])
 
 

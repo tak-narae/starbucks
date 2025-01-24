@@ -30,7 +30,7 @@ const QtyCalc = (cartList,setCartList) => {
       if(document.querySelector("#container").classList.contains("order__cart")) {
         const cartData = JSON.parse(localStorage.getItem("cartData")) || [];
         const trID = spinner.closest("tr").dataset.id; //typeof string
-        const item = cartData.find(el => el.key == trID); //el.key number
+        const item = cartData.find(el => el.key === parseInt(trID)); //el.key number
 
         item.qty = parseInt(qtyEl.value); //로컬 해당정보 수량 업데이트
 

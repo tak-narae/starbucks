@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { createRoot } from "react-dom/client";
 import axios from 'axios';
 import { API_URL } from 'config/constants.js';
+import DaumPostcode from 'react-daum-postcode';
 
 import './member.css';
 
@@ -43,6 +45,9 @@ const SignUpStep = () => {
       const [pw, setPw] = useState("");
       const [pw2, setPw2] = useState("");
       const [name, setName] = useState("");
+      const [zonecode, setZoneCode] = useState("");
+      const [address, setAddress] = useState("");
+      const [detailedAddress, setDetailedAddress] = useState("");
       const [phone, setPhone] = useState("");
       const [phoneFirst, setPhoneFirst] = useState("");
       const [phoneMiddle, setPhoneMiddle] = useState("");
@@ -67,14 +72,17 @@ const SignUpStep = () => {
         const nameRule = /^[a-zA-Z가-힣]{1,20}$/;
         const phoneRule = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
         const emailRule = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[a-zA-Z]{2,4}$/i;
+        const birthRule = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
 
         const [messages, setMessages] = useState({
           id: { text: "", color: "" },
           pw: { text: "", color: "" },
           pw2: { text: "", color: "" },
           name: { text: "", color: "" },
+          address: {text: "", color: ""},
           phone: { text: "", color: "" },
           email: { text: "", color: "" },
+          birth: { text: "", color: ""},
         })
 
         useEffect(()=>{
@@ -188,6 +196,79 @@ const SignUpStep = () => {
           setName("");
         }
       };
+
+      const completeHandler = (data) => {
+        const {address, zonecode} = data;
+        setZoneCode(zonecode || data.zonecode);
+        setAddress(address);
+        console.log(address, zonecode);
+
+        setTimeout(() => {
+            handleAddress();
+          }, 0);
+        if(window.addressPopup){
+            window.addressPopup.close();
+        }
+      };
+
+      const toggleHandler = () => {
+        // 팝업 창 생성
+        const popupWidth = 500;
+        const popupHeight = 600;
+        const popupX = window.screen.width / 2 - popupWidth / 2;
+        const popupY = window.screen.height / 2 - popupHeight / 2;
+
+        window.addressPopup = window.open(
+        "",
+        "주소 검색",
+        `width=${popupWidth},height=${popupHeight},left=${popupX},top=${popupY},scrollbars=yes`
+        );
+
+        // 팝업에 React 컴포넌트를 렌더링하기 위한 HTML 삽입
+        window.addressPopup.document.write(`
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>주소 검색</title>
+            </head>
+            <body>
+            <div id="postcode"></div>
+            <script>
+                window.addEventListener('beforeunload', function () {
+                window.opener.completeHandler = null;
+                });
+            </script>
+            </body>
+            </html>
+        `);
+
+        // 팝업에 React 컴포넌트 렌더링
+        setTimeout(() => {
+            const container = window.addressPopup.document.getElementById("postcode");
+            const root = createRoot(container); // createRoot 사용
+            root.render(<DaumPostcode onComplete={completeHandler} />);
+        }, 0);
+      };
+
+      const inputChangeHandler = (e) => {
+        setDetailedAddress(e.target.value);
+      };
+
+      const handleAddress = (e) => {
+        if(zonecode && address){
+            handleMessageChange("address", "주소 정보가 확인되었습니다.", "success_color")
+        } else if(zonecode || address){
+            handleMessageChange("address", "주소 정보를 모두 입력해주세요.", "error_color")
+        } else{
+            handleMessageChange("address", "주소 정보를 확인해주세요.", "error_color")
+        }
+      }
+
+      useEffect(() => {
+        handleAddress();
+      }, [zonecode, address]);
       
       const handlePhone = (e) => {
         const phoneNumber = `${phoneFirst}-${phoneMiddle}-${phoneLast}`;
@@ -250,10 +331,24 @@ const SignUpStep = () => {
         const formattedMonth = month.padStart(2, '0');
         const formattedDay = day.padStart(2, '0');
         setBirth(`${year}-${formattedMonth}-${formattedDay}`);
-      };
+    };
+    
+    const handleBirth = (e) => {
+        if(birthRule.test(birth)){
+            handleMessageChange("birth", "생년월일 정보가 확인되었습니다.", "success_color")
+        } else if(birth === ""){
+            handleMessageChange("birth", "생년월일을 입력해주세요", "error_color");
+        } else {
+            handleMessageChange("birth", "생년월일을 확인해주세요", "error_color");
+        }
+      }
 
       const handleSex = (e) => {
         setSex(e.target.value);
+      }
+
+      const handleStore = (e) => {
+        setStore(e.target.value);
       }
 
       const handleBack = () => {
@@ -289,17 +384,21 @@ const SignUpStep = () => {
               pw2 === pw &&
               nameRule.test(name) &&
               phoneRule.test(phone) &&
-              emailRule.test(email)) {
+              emailRule.test(email) &&
+              birthRule.test(birth) ){
             try {
               const result = await axios.post(`${API_URL}/users`, {
                 type: type,
                 user_id: id,
                 pw: pw,
                 name: name,
+                address: address,
+                zonecode: zonecode,
                 phone: phone,
                 email: email,
                 birth: birth,
                 sex: sex,
+                store: store,
                 allTermsChecked: allChecked ? "True" : "False"
               });
               console.log(result);
@@ -2199,7 +2298,7 @@ const SignUpStep = () => {
                         <hr />
                         <li className="id_section">
                           <div className="area_style">
-                            <label htmlFor="idArea" className="label_style required">아이디(E-mail)</label>
+                            <label htmlFor="idArea" className="label_style required">아이디</label>
                             <input ref={idInputRef} type="text" required size={20} value={id}
                               className="line_box mb_10"
                               placeholder="4~13자리 이내"
@@ -2255,6 +2354,23 @@ const SignUpStep = () => {
                           </div>
                         </li>
                         <hr />
+                        <li className="address_section">
+                            <div className="area_style">
+                                <label htmlFor="addressArea" className="label_style required">주소</label>
+                                <div className="address_input">
+                                    <div className="flex_items">
+                                        <input type="text" placeholder="우편번호" value={zonecode} disabled/>
+                                        <button className="btn_strong address_button" type="button" onClick={toggleHandler}>주소검색</button>
+                                    </div>
+                                    <input type="text" placeholder="기본주소" value={address} disabled/>
+                                    <input type="text" placeholder="나머지 주소(선택 입력 가능)" value={detailedAddress} onChange={inputChangeHandler}/>
+                                </div>
+                            </div>
+                            <span className={`mes_style ${messages.address.color} mb_10`}>
+                              {messages.address.text}
+                            </span>
+                        </li>
+                        <hr />
                         <li className="phone_section">
                           <div className="area_style">
                             <label htmlFor="phoneArea" className="label_style required">휴대전화</label>
@@ -2262,6 +2378,7 @@ const SignUpStep = () => {
                             <select
                               value={phoneFirst}
                               onChange={(e) => setPhoneFirst(e.target.value)}
+                              ref={phoneInputRef}
                             >
                               <option value="">선택</option>
                               <option value="010">010</option>
@@ -2273,12 +2390,12 @@ const SignUpStep = () => {
                               - 
                               <input type="text" value={phoneMiddle} requiredsize={4}
                                 onChange={(e) => setPhoneMiddle(e.target.value)}
-                                onBlur={handlePhone}
+                                onBlur={handlePhone} ref={phoneInputRef}
                               />
                               -
                               <input type="text" value={phoneLast} required size={4}
                                 onChange={(e) => setPhoneLast(e.target.value)}
-                                onBlur={handlePhone}
+                                onBlur={handlePhone} ref={phoneInputRef}
                               />
                             </div>
                             <span className={`mes_style ${messages.phone.color}`}>
@@ -2292,10 +2409,11 @@ const SignUpStep = () => {
                             <label htmlFor="emailArea" className="label_style required">이메일</label>
                             <div class="flex_items">
                               <input type="text" value={emailFront} required size={20}
-                                onChange={(e) => setEmailFront(e.target.value)} 
+                                onChange={(e) => setEmailFront(e.target.value)}
+                                ref={emailInputRef} onBlur={handleEmail}
                               />
                               @
-                              <select value={emailBack} onChange={(e) => setEmailBack(e.target.value)} onBlur={handleEmail}>
+                              <select value={emailBack} onChange={(e) => setEmailBack(e.target.value)} ref={emailInputRef} onBlur={handleEmail}>
                                 <option value="">선택</option>
                                 <option value="naver.com">naver.com</option>
                                 <option value="gmail.com">gmail.com</option>
@@ -2315,13 +2433,15 @@ const SignUpStep = () => {
                         <hr />
                         <li className="birth_section">
                           <div className="area_style">
-                            
-                            <label htmlFor="birthArea" className="label_style">생년월일</label>
+                            <label htmlFor="birthArea" className="label_style required">생년월일</label>
                             <div class="flex_items">
-                              <input type="text" placeholder="년도(4자)" value={year} onChange={handleYearChange}/>
-                              <input type="text" placeholder="월" value={month} onChange={handleMonthChange}/>
-                              <input type="text" placeholder="일" value={day} onChange={handleDayChange}/>
+                              <input type="text" placeholder="년도(4자)" value={year} onChange={handleYearChange} onBlur={handleBirth}/>
+                              <input type="text" placeholder="월" value={month} onChange={handleMonthChange} onBlur={handleBirth}/>
+                              <input type="text" placeholder="일" value={day} onChange={handleDayChange} onBlur={handleBirth}/>
                             </div>
+                            <span className={`mes_style ${messages.birth.color}`}>
+                              {messages.birth.text}
+                            </span>
                           </div>
                         </li>
                         <hr />
@@ -2339,6 +2459,13 @@ const SignUpStep = () => {
                               </label>
                             </div>
                           </div>
+                        </li>
+                        <hr />
+                        <li className="store_section">
+                            <div className="area_style">
+                                <label htmlFor="storeArea" className="label_style">자주가는매장</label>
+                                <input type="text" value={store} id="storeArea" className="line_box" onChange={handleStore}/>
+                            </div>
                         </li>
                       </ul>
                     </div>
