@@ -29,13 +29,13 @@ jobs:
 
       - name: Commit and Push changes
         run: |
-          git config user.name "deliondane"
+          git config user.name "Bessy-kim"
           git config user.email "hynnk0@gmail.com"
           if [ -n "$(git status --porcelain)" ]; then
             git add .
             git commit -m "Project Update"
             git push origin develop
-            
+
             git remote add fork https://github.com/Bessy-kim/starbucks-vercel.git
 
             git push https://x-access-token:${{ secrets.STARBUCKS_GITHUB_KEY }}@github.com/Bessy-kim/starbucks-vercel.git develop
