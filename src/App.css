@@ -203,6 +203,10 @@ footer {
   border-top: 1px solid var(--br-color1);
 }
 
+footer .starbucks_logo {
+  filter: grayscale(1);
+}
+
 footer .menu_corp .layout_fix {
   display: flex;
 }
@@ -789,6 +793,143 @@ footer .link b {
   text-decoration: underline;
 }
 
+/* ===== TABLE */
+caption {
+  font-size: 0;
+  text-indent: -999px;
+  visibility: hidden;
+}
+
+table th {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 400;
+  background-color: #fff;
+  border-bottom: 1px solid var(--br-color1);
+}
+
+table tbody td {
+  font-size: 15px;
+  border-bottom: 1px solid var(--br-color1);
+}
+
+table .underline {
+  text-decoration: underline;
+}
+
+.tb_prd thead th {
+  padding-bottom: 16px;
+  font-size: 15px;
+  color: var(--bk-color2);
+}
+
+.tb_prd tbody td {
+  height: 130px;
+  padding: 22px 8px 22px 0;
+  font-size: 14px;
+}
+
+.tb_prd tbody td.chk {  }
+.tb_prd tbody td.product a { display:inline-flex; align-items:center; gap:20px; }
+.tb_prd tbody td.product img  { width:80px; min-width:80px; height:80px; border:1px solid var(--br-color1); border-radius:8px; overflow:hidden; }
+.tb_prd tbody td.product .group { margin-bottom:6px; line-height:1; font-size:12px; color:var(--bk-color3); display:block; }
+.tb_prd tbody td.product .name { max-width:480px; font-size:15px; color:var(--bk-color1); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tb_prd tbody td.num {  }
+.tb_prd tbody td.price {  }
+.tb_prd tbody td.total_price {  }
+
+.tb_prd tbody .number .date {
+  font-size: 14px;
+  display: block;
+}
+
+.tb_prd tbody .number .underline {
+  margin-top: 2px;
+  font-size: 14px;
+}
+
+.tb_list {
+  border-top: 1px solid var(--bk-color2);
+  table-layout: fixed;
+}
+
+.tb_list thead th {
+  height: 62px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--bk-color2);
+}
+
+.tb_list tbody td {
+  height: 64px;
+  text-align: center;
+}
+
+.tb_list tbody td.subject {
+  padding-left: 32px;
+  text-align: left;
+}
+
+.tb_list tbody td.subject a {
+  max-width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tb_list tbody tr:last-child td {
+  border-color: var(--bk-color2);
+}
+
+.tb_grid {
+  border-top: 1px solid var(--br-color1);
+}
+
+.tb_grid tbody th {
+  /* padding-top: 16px;
+  vertical-align:top; */
+}
+
+.tb_grid tbody td {
+  height: 56px;
+  /* padding-top: 14px;
+  padding-bottom:16px; */
+}
+
+.tb_block,
+.tb_block tbody,
+.tb_block tr,
+.tb_block th,
+.tb_block td {
+  display: block;
+  border: 0;
+}
+
+.tb_block tr+tr {
+  margin-top: 20px;
+}
+
+.tb_block th {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--bk-color2);
+}
+
+.tb_block th.required::after {
+  content: "*";
+  margin-left: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--main-color1);
+}
+
+.tb_block td {
+  position: relative;
+  word-break: keep-all;
+}
+
 
 /* SWIPER */
 .swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
@@ -801,7 +942,7 @@ footer .link b {
   background: var(--bk-color1);
 }
 
-/* MODAL */
+/* ===== MODAL */
 #modal {
   background-color:rgba(0,0,0,.5);
   position: fixed;
@@ -820,6 +961,7 @@ footer .link b {
   overflow:hidden;
 }
 
+/* LOADING */
 #modal.modal_load {
   background-color: var(--bg-color3);
 }
@@ -850,7 +992,7 @@ footer .link b {
 
 .modal_load .load_cont .cover_fill .fill {
   width: 100%;
-  height:0px;
+  height: 0px;
   background-color:var(--bk-color2);
   position: absolute;
   bottom: 0;

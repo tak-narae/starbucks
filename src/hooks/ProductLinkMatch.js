@@ -61,13 +61,16 @@ const ProductLinkMatch = () => {
         }) )).find(item => item.name === prdName);
 
         // console.log(nameEl.closest("a"));
-        // console.log(itemMatch);
-      
-        nameEl.closest("a").setAttribute("href",`/menu/detail/${itemMatch.categoryEn}?cate=${itemMatch.cateNum}&id=${itemMatch.id}`);
-        nameEl.closest("a").addEventListener("click",function(e){
-          e.preventDefault();
-          navigate(`/menu/detail/${itemMatch.categoryEn}?cate=${itemMatch.cateNum}&id=${itemMatch.id}`);
-        })
+        console.log(itemMatch);
+        if(nameEl.closest("a")){ //장바구니
+          nameEl.closest("a").setAttribute("href",`/menu/detail/${itemMatch.categoryEn}?cate=${itemMatch.cateNum}&id=${itemMatch.id}`);
+          nameEl.closest("a").addEventListener("click",function(e){
+            e.preventDefault();
+            navigate(`/menu/detail/${itemMatch.categoryEn}?cate=${itemMatch.cateNum}&id=${itemMatch.id}`);
+          })
+        }
+
+
       });
     }
   }, [data]);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // swiper
@@ -7,6 +7,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
+//##### import ProductLinkMatch from "hooks/ProductLinkMatch.js";
 import useProductMatch from "hooks/ProductMatch.js";
 import QtyCalc from "./../../hooks/QtyCalc.js";
 import usePathMatch from "../../hooks/pathMatch.js";
@@ -30,17 +31,11 @@ import "./Detail.css";
 const Detail = () => {
   const { productMatch, title, cateKo, cateList } = useProductMatch(); // 커스텀 훅 호출
   const { itemPath } = usePathMatch(); // 패스 훅 호출
-
-  // const handleAddToCart = () => {
-  //   const qty = document.querySelector(".btn_qty .qty").value;
-  //   const cartItem = { productId: productMatch.id, qty: parseInt(qty) };
-  //   localStorage.setItem("cartQty", JSON.stringify(cartItem));
-  // };
+  
 
   const refDetail = useRef(null);
   const refDelv = useRef(null);
   const refRecommended = useRef(null);
-
   useEffect(() => {
     setTimeout(() => {
       QtyCalc();
@@ -72,7 +67,6 @@ const Detail = () => {
 
     }, 800);
   }, [])
-  
   const handleTabScroll = (e) => { //scroll 위치찾기
     const tabRef = e.target.getAttribute("data-ref");
     const refs = {
@@ -86,10 +80,26 @@ const Detail = () => {
     }
   }
 
+  
+  
+  const [randomList, setRandomList] = useState([]);
+  useEffect(()=>{
+    if(Array.isArray(cateList) && cateList.length > 0){
+      const recommendedList = [...cateList].sort(() => Math.random() - 0.5).slice(0, 10);
+      setRandomList(recommendedList);
+    }
+  },[cateList])
+  // console.log(randomList);
+
+
+  //#####c ProductLinkMatch();
+  
+
+
   const navigate = useNavigate(); //장바구니 담기
   const addToCart = ()=>{ 
     const itemQty = parseInt(document.querySelector("input.qty").value); //숫자변환
-    const addItem = { ...productMatch, qty:itemQty };
+    const addItem = { ...productMatch, qty:itemQty, group:title };
     console.log("담긴qty확인++", itemQty);
     
     let cartData = JSON.parse(localStorage.getItem("cartData")) || [];
@@ -149,31 +159,31 @@ const Detail = () => {
                     <h5 className="desc-light">다른 컬러 & 디자인을 골라 담아 구매해 보세요!</h5>
                   </div>
                   <Swiper className="swiper_recommended prd_list"
-                    modules={[Autoplay, Pagination]}
-                    loop={true}
-                    slidesPerView={2}
-                    slidesPerGroup={2}
-                    spaceBetween={20}
-                    // onDestroy={(e) => { console.log(e, "???") }}
-                    pagination={{ type: 'bullets', clickable: true }}
-                  >
-                    {cateList.sort(() => Math.random() - 0.5).slice(0, 10).map((el, idx) => (
-                      <SwiperSlide key={idx}>
-                        <div className="item">
-                          <Link to="/" className="thumbnail">
-                            <div className="image">
-                              <img src={`${process.env.PUBLIC_URL}/${el.img}`} alt={el.name} />
+                      modules={[Autoplay, Pagination]}
+                      loop={randomList.length > 2 ? true : false}
+                      slidesPerView={2}
+                      slidesPerGroup={randomList.length > 3 ? 2 : 1}
+                      spaceBetween={20}
+                      // onDestroy={(e) => { console.log(e, "???") }}
+                      pagination={{ type: 'bullets', clickable: true }}
+                    >
+                      {randomList.map((el, idx) => (
+                        <SwiperSlide key={idx}>
+                          <div className="item">
+                            <Link className="thumbnail">
+                              <div className="image">
+                                <img src={`${process.env.PUBLIC_URL}/${el.img}`} alt={el.name} />
+                              </div>
+                            </Link>
+                            <div className="desc">
+                              <div className="name">{el.name}</div>
+                              <div className="price">{el.price.toLocaleString()}원</div>
+                              {/* <div className="price">{el.price.toLocaleString(1)}원</div> */}
                             </div>
-                          </Link>
-                          <div className="desc">
-                            <div className="name">{el.name}</div>
-                            <div className="price">{el.price.toLocaleString()}원</div>
-                            {/* <div className="price">{el.price.toLocaleString(1)}원</div> */}
                           </div>
-                        </div>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
                 </div>
               </div>
             </div>
@@ -182,7 +192,7 @@ const Detail = () => {
                 <li className="like"><button>찜</button></li>
                 <li className="share"><button>공유</button></li>
               </ul>
-              <h2 className="name">{productMatch.name}</h2>
+              <h2 className="tit">{productMatch.name}</h2>
               {title === "커피" && (
                 <h3 className="desc">{productMatch.desc}</h3>
               )}
