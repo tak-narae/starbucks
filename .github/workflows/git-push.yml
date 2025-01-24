@@ -35,8 +35,10 @@ jobs:
             git add .
             git commit -m "Project Update"
             git push origin develop
+            
             git remote add fork https://github.com/Bessy-kim/starbucks-vercel.git
-            git push fork develop
+
+            git push https://x-access-token:${{ secrets.STARBUCKS_GITHUB_KEY }}@github.com/Bessy-kim/starbucks-vercel.git develop
           else
             echo "No changes to commit"
           fi
