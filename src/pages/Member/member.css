@@ -239,6 +239,17 @@
   color: var(--bk-color1);
 }
 
+.member__join .address_input{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.member__join .address_button{
+  width: 100%;
+  height: 46px;
+  padding: 0 24px;
+}
+
 .member__join .type_section .select,
 .member__join .sex_section .select{
   display: flex;
