@@ -392,7 +392,7 @@ const SignUpStep = () => {
             console.log('약관 동의가 필요합니다');
           }
         } else if (step === 2) {
-          if (!isIdChecked) {
+            if (!isIdChecked) {
             alert('아이디 중복확인을 진행해주세요.');
             return;
           }
