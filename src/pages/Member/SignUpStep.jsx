@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef,  } from 'react';
+import { useLocation, useNavigate, } from 'react-router-dom';
 import { createRoot } from "react-dom/client";
 import axios from 'axios';
 import { API_URL } from 'config/constants.js';
 import DaumPostcode from 'react-daum-postcode';
-
 import './member.css';
+
 
 const SignUpStep = () => {
       //signup 단계
@@ -24,6 +24,7 @@ const SignUpStep = () => {
         }
       }, [location.search, navigate]); // location.search가 변경될 때마다 실행
     
+      
         //약관동의
       const [allChecked, setAllChecked] = useState(false);
       const [termsChecked, setTermsChecked] = useState(false);
@@ -362,13 +363,31 @@ const SignUpStep = () => {
       const handleLogin = () => {
         navigate('/login');
       }
+
+      useEffect(() => {
+        // 뒤로가기를 막기 위한 이벤트 등록
+        const handleBeforeUnload = (event) => {
+          // 이 메시지는 사용자에게 경고를 띄움
+          const message = "이 페이지를 떠나시겠습니까?";
+          event.returnValue = message; // 대부분의 브라우저에서 동작
+          return message;
+        };
+    
+        window.addEventListener('beforeunload', handleBeforeUnload);
+    
+        // 컴포넌트가 언마운트 될 때 이벤트 제거
+        return () => {
+          window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+      }, []);
     
       const handleSubmit = async (e) => {
         e.preventDefault();
+        
         if (step === 1) {
           if (termsChecked && privacyChecked && cardChecked) {
             setStep(prevStep => Math.min(prevStep + 1, 2));
-            navigate(`/signup?step=${step + 1}`);
+            navigate(`/signup?step=${step + 1}`, { replace: true });
           } else {
             console.log('약관 동의가 필요합니다');
           }
@@ -405,7 +424,7 @@ const SignUpStep = () => {
               setIsRegistered(true);
               setStep(prevStep => {
                 const nextStep = Math.min(prevStep + 1, 3);
-                navigate(`/signup?step=${nextStep}`);
+                navigate(`/signup?step=${nextStep}`, { replace: true });
                 return nextStep;
               });
               console.log('회원가입을 축하합니다.');
@@ -2491,7 +2510,7 @@ const SignUpStep = () => {
                     {step === 2 && (
                         <>
                         <button className="btn_light" onClick={handleBack}>이전</button>
-                        <button className="btn_dark" type="submit" disabled={step === 3 || !allChecked} onClick={handleSubmit}>가입하기</button>
+                        <button className="btn_dark" type="submit" disabled={step === 3 || !allChecked} onClick={handleSubmit} >가입하기</button>
                         </>
                     )}
                     {step === 3 && (

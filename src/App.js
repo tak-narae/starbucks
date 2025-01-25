@@ -122,7 +122,7 @@ function App() {
             <Route path="/store" element={<Store />}></Route>
             <Route path="/guide" element={<Guide />}></Route>
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/signup/step" element={<SignUpStep />} />
+            <Route path="/signup?step?reload=true" element={<SignUpStep />} />
             <Route path="/login" element={<Login />} />
           </Routes>
           <Footer />
