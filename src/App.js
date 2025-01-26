@@ -64,7 +64,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [loadPercentage, setLoadPercentage] = useState(0);
   useEffect(()=>{
-    console.log("###LoadTest###",location);
+    // console.log("###LoadTest###",location);
     window.scrollTo({ top: 0 });
     let timeout = null;
     let interval = null;
