@@ -65,7 +65,7 @@ const Detail = () => {
       window.addEventListener("scroll", handleScroll);
       return () => window.removeEventListener("scroll", handleScroll);
 
-    }, 800);
+    }, 600);
   }, [])
   const handleTabScroll = (e) => { //scroll 위치찾기
     const tabRef = e.target.getAttribute("data-ref");

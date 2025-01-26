@@ -23,7 +23,7 @@ import PrdList from "components/product/PrdList";
 import "components/product/PrdList.css";
 
 const Main = () => {
-  const { product, resMz } = useContext(DataContext);
+  const { loading, product, resMz } = useContext(DataContext);
   const { selectedCate, selectedDepth, pathName } = useQueryParams();
 
   const { datefilteredNotice, datefilteredEvents } = useUtilContext();
@@ -81,8 +81,13 @@ const Main = () => {
 
   useEffect(() => {
     MainPrd();
-    SplitEffect(); //.split
   }, []);
+  
+  useEffect(()=>{
+    if(!loading){
+      SplitEffect(); //.split
+    }
+  },[loading])
 
 
   return (

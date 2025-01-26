@@ -6,12 +6,14 @@ const Search = () => {
   const { searchData, setSearchData } = useContext(DataContext);
   const location = useLocation();
   const decode = decodeURIComponent(location.search); //url인코딩
-  const searchWord = new URLSearchParams(location.search).get("item");
+  const searchWord = new URLSearchParams(location.search).get("result");
 
   useEffect(() => {
-    console.log("Test");
     if (!searchData) {
       setSearchData(searchWord);
+    }
+    if(!searchData && !searchWord){
+      window.location.href = "/";
     }
   }, []);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import ProductLinkMatch from "hooks/ProductLinkMatch.js";
@@ -7,25 +7,56 @@ import QtyCalc from "hooks/QtyCalc.js";
 import "./Order.css";
 
 const Cart = () => {
-  const [cartList, setCartList] = useState([]);
-  
+  const [ cartList, setCartList ] = useState([]);
   useEffect(() => {
     const localCartData = JSON.parse(localStorage.getItem("cartData")) || [];
     setCartList(localCartData);
   }, []);
   // localStorage.removeItem("cartData"); // 삭제
   
-  useEffect(()=>{
-    QtyCalc();
-  },[cartList])
 
-  const [refresh, setRefresh] = useState(-1);
-  const refresher = () => {
-    setRefresh(refresh * -1);
-  };
+
+
+  // useEffect(()=>{
+  //   QtyCalc();
+  // },[cartList])
+  
+  // console.log(cartList)
+  // console.log(cartList.length)
+  const [isQty, setIsQty] = useState(true);
   useEffect(() => {
+    if (isQty && cartList.length > 0) {
+      setIsQty(false);
+      QtyCalc();
+      // QtyCalc(setIsQty, cartList, setCartList);
+    }
+  }, [cartList, isQty]);
 
-  }, [refresh])
+
+
+
+  const localCartDelete = (key)=>{
+    const localCartUpdate = cartList.filter((el) => el.key !== key);
+    setCartList(localCartUpdate);
+    localStorage.setItem("cartData", JSON.stringify(localCartUpdate));
+    // window.location.reload();
+    console.log("delete!");
+  }
+  
+  ProductLinkMatch();
+
+
+  // ==========
+
+
+ 
+  // useEffect(()=>{
+  //   if(!loadQty){
+  //     QtyCalc();
+  //     setLoadQty(true);
+  //   }
+  // },[cartList, loadQty])
+  
 
   // (1) => useLocation => .cart>a (css)커서 적용
 
@@ -48,14 +79,12 @@ const Cart = () => {
   //   })
   // },[isChecked])
 
-  const localCartDelete = (key)=>{
-    // console.log(key);
-    const localCartUpdate = cartList.filter((el) => el.key !== key);
-    setCartList(localCartUpdate);
-    localStorage.setItem("cartData", JSON.stringify(localCartUpdate));
-  }
-  
-  ProductLinkMatch();
+  // const [refresh, setRefresh] = useState(0);
+  // useEffect(() => {
+  //   console.log(refresh,"Cart==");
+  // });
+
+
 
   return (
     <>
