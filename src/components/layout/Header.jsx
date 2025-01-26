@@ -58,6 +58,12 @@ const Header = () => {
             e.target.value === "" && hasHistory === false ? e.target.nextElementSibling.disabled = true : e.target.nextElementSibling.disabled = false;
         }
     }
+    const actionEnter = (e)=>{
+        if(e.key === "Enter"){
+            e.preventDefault();
+            actionSearch(e);
+        };
+    }
     const actionSearch = (e)=>{ //검색페이지로 값 전달
         e.preventDefault();
         setSearchData(searchValue);
@@ -82,14 +88,16 @@ const Header = () => {
                     </div>
                     <ul className="shop_util">
                         <li className="search">
-                            <Link to="/" onClick={(e)=>searchForm(e)}>검색</Link>
+                            <Link to="/" onClick={searchForm}>검색</Link>
                             <div className="search_form">
                                 <form onSubmit={actionSearch}>
                                     <h3>검색</h3>
-                                    <button className="btn_close" onClick={(e)=>searchForm(e)}>닫기</button>
+                                    <button className="btn_close" onClick={searchForm}>닫기</button>
                                     <fieldset>
                                         <input type="text" placeholder="검색어 입력" value={searchValue}
-                                            onInput={(e)=> { setSearchValue(e.target.value); setHasHistory(false); searchBtnAction(e); } }/>
+                                            onInput={(e)=> { setSearchValue(e.target.value); setHasHistory(false); searchBtnAction(e);} }
+                                            onKeyPress={actionEnter}
+                                        />
                                         { hasHistory === false ? <button type="submit" className="btn_submit">&gt;</button> : "" }
                                     </fieldset>    
                                 </form>
