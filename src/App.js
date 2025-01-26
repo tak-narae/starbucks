@@ -42,9 +42,7 @@ function App() {
 
   const getdata = async () => {
     try {
-      const response = await axios.get(
-        `https://raw.githubusercontent.com/deliondane/db/main/db.json`
-      );
+      const response = await axios.get(`https://raw.githubusercontent.com/deliondane/db/main/db.json`);
       setCoffee(response.data.coffee);
       setBeverage(response.data.beverage);
       setProduct(response.data.product);
