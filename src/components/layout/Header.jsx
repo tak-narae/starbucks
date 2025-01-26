@@ -2,11 +2,14 @@ import React from 'react';
 import '../../App.css';
 import './Header.css';
 
-import { Link, useLocation } from 'react-router-dom';
-import { useEffect } from "react";
+import { useEffect, useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { DataContext } from 'App';
 
 
 const Header = () => {
+
+    //===header
     const location = useLocation();
     useEffect(() => {
         if (location.pathname) {
@@ -21,6 +24,7 @@ const Header = () => {
     }, [location])
     useEffect(() => {
         document.querySelector("header .btn_hamburger").addEventListener("click", (e) => {
+            document.querySelector("header .search_form.active")?.classList.remove("active");
             e.currentTarget.classList.toggle("active");
             document.querySelector("header .header_nav").classList.toggle("active");
         })
@@ -34,6 +38,43 @@ const Header = () => {
         })
     }, [])
 
+    
+    //===search
+    const navigate = useNavigate();
+    const { setSearchData } = useContext(DataContext);
+    const [ searchValue, setSearchValue ] = useState("");
+    const [ hasHistory, setHasHistory ] = useState(true); //입력이력 확인
+
+    const searchForm = (e)=>{
+        e.preventDefault();
+        const searchForm = e.target.closest("li.search").querySelector(".search_form");
+        const searchInput = e.target.closest("li.search").querySelector("input");
+        e.target.textContent === "검색" ? searchForm.classList.toggle("active") : searchForm.classList.remove("active");
+        searchInput.value = ""; //비우기
+        setHasHistory(true); //컬러버튼
+    }
+    const searchBtnAction = (e)=>{ //버튼비활성화
+        if(e.target.nextElementSibling){
+            e.target.value === "" && hasHistory === false ? e.target.nextElementSibling.disabled = true : e.target.nextElementSibling.disabled = false;
+        }
+    }
+    const actionEnter = (e)=>{
+        if(e.key === "Enter"){
+            e.preventDefault();
+            actionSearch(e);
+        };
+    }
+    const actionSearch = (e)=>{ //검색페이지로 값 전달
+        e.preventDefault();
+        setSearchData(searchValue);
+        navigate(`/search?item=${searchValue}`);
+    }
+    useEffect(()=>{ //페이지 이동시 초기화
+        document.querySelector("header .search_form.active")?.classList.remove("active");
+        setSearchValue("");
+        setHasHistory(true);
+    },[location])
+
 
     return (
         <header>
@@ -46,7 +87,22 @@ const Header = () => {
                         <h1 className="starbucks_logo"><Link to="/">스타벅스 로고</Link></h1>
                     </div>
                     <ul className="shop_util">
-                        <li className="search"><Link to="/">검색</Link></li>
+                        <li className="search">
+                            <Link to="/" onClick={searchForm}>검색</Link>
+                            <div className="search_form">
+                                <form onSubmit={actionSearch}>
+                                    <h3>검색</h3>
+                                    <button className="btn_close" onClick={searchForm}>닫기</button>
+                                    <fieldset>
+                                        <input type="text" placeholder="검색어 입력" value={searchValue}
+                                            onInput={(e)=> { setSearchValue(e.target.value); setHasHistory(false); searchBtnAction(e);} }
+                                            onKeyPress={actionEnter}
+                                        />
+                                        { hasHistory === false ? <button type="submit" className="btn_submit">&gt;</button> : "" }
+                                    </fieldset>    
+                                </form>
+                            </div>
+                        </li>
                         <li className="mypage"><Link to="/signup?step=1">마이페이지</Link></li>
                         {/* <li className="mypage"><Link to="/mypage">마이페이지</Link></li> */}
                         <li className="cart"><Link to="/order/cart">장바구니</Link></li>

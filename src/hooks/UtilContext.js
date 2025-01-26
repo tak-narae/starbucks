@@ -1,3 +1,5 @@
+// 공지사항,이벤트 db data 가공 후 전달
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
