@@ -2,7 +2,7 @@ import React from 'react';
 import '../../App.css';
 import './Header.css';
 
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { DataContext } from 'App';
 
@@ -24,7 +24,7 @@ const Header = () => {
     }, [location])
     useEffect(() => {
         document.querySelector("header .btn_hamburger").addEventListener("click", (e) => {
-            document.querySelector("header .search_form").style.display = "none";
+            document.querySelector("header .search_form.active")?.classList.remove("active");
             e.currentTarget.classList.toggle("active");
             document.querySelector("header .header_nav").classList.toggle("active");
         })
@@ -42,6 +42,32 @@ const Header = () => {
     //===search
     const navigate = useNavigate();
     const { setSearchData } = useContext(DataContext);
+    const [ searchValue, setSearchValue ] = useState("");
+    const [ hasHistory, setHasHistory ] = useState(true); //입력이력 확인
+
+    const searchForm = (e)=>{
+        e.preventDefault();
+        const searchForm = e.target.closest("li.search").querySelector(".search_form");
+        const searchInput = e.target.closest("li.search").querySelector("input");
+        e.target.textContent === "검색" ? searchForm.classList.toggle("active") : searchForm.classList.remove("active");
+        searchInput.value = ""; //비우기
+        setHasHistory(true); //컬러버튼
+    }
+    const searchBtnAction = (e)=>{ //버튼비활성화
+        if(e.target.nextElementSibling){
+            e.target.value === "" && hasHistory === false ? e.target.nextElementSibling.disabled = true : e.target.nextElementSibling.disabled = false;
+        }
+    }
+    const actionSearch = (e)=>{ //검색페이지로 값 전달
+        e.preventDefault();
+        setSearchData(searchValue);
+        navigate(`/search?item=${searchValue}`);
+    }
+    useEffect(()=>{ //페이지 이동시 초기화
+        document.querySelector("header .search_form.active")?.classList.remove("active");
+        setSearchValue("");
+        setHasHistory(true);
+    },[location])
 
 
     return (
@@ -56,12 +82,15 @@ const Header = () => {
                     </div>
                     <ul className="shop_util">
                         <li className="search">
-                            <Link to="/">검색</Link>
+                            <Link to="/" onClick={(e)=>searchForm(e)}>검색</Link>
                             <div className="search_form">
-                                <form>
+                                <form onSubmit={actionSearch}>
+                                    <h3>검색</h3>
+                                    <button className="btn_close" onClick={(e)=>searchForm(e)}>닫기</button>
                                     <fieldset>
-                                        <input type="text" placeholder="검색어 입력"/>
-                                        <button>검색하기</button>
+                                        <input type="text" placeholder="검색어 입력" value={searchValue}
+                                            onInput={(e)=> { setSearchValue(e.target.value); setHasHistory(false); searchBtnAction(e); } }/>
+                                        { hasHistory === false ? <button type="submit" className="btn_submit">&gt;</button> : "" }
                                     </fieldset>    
                                 </form>
                             </div>

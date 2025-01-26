@@ -25,13 +25,13 @@ import UtilProvider from "hooks/UtilContext";
 import SignUp from "pages/Member/SignUp";
 import SignUpStep from "pages/Member/SignUpStep";
 import Login from "pages/Member/Login";
-import Search from "pages/Member/Login";
+import Search from "pages/Search/Search";
 import { AccessTokenProvider } from "pages/Member/AccessTokenContext";
 
 const DataContext = createContext();
 
 function App() {
-  const [searchData, setSearchData] = useState("");
+  const [searchData, setSearchData] = useState(null);
   const [coffee, setCoffee] = useState([]);
   const [beverage, setBeverage] = useState([]);
   const [product, setProduct] = useState([]);
@@ -76,7 +76,7 @@ function App() {
         if(time >= 100){
           clearTimeout(timeout);
           clearInterval(interval);
-          console.log("##로딩사라짐##");
+          // console.log("##로딩사라짐##");
           setLoading(false);
           return 100;
         }
