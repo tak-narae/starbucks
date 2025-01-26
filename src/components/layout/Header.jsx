@@ -50,6 +50,7 @@ const Header = () => {
         const searchForm = e.target.closest("li.search").querySelector(".search_form");
         const searchInput = e.target.closest("li.search").querySelector("input");
         e.target.textContent === "검색" ? searchForm.classList.toggle("active") : searchForm.classList.remove("active");
+        if(searchForm.classList.contains("active")) setTimeout(() => { searchInput.focus() }, 50);
         searchInput.value = ""; //비우기
         setHasHistory(true); //컬러버튼
     }
@@ -58,7 +59,7 @@ const Header = () => {
             e.target.value === "" && hasHistory === false ? e.target.nextElementSibling.disabled = true : e.target.nextElementSibling.disabled = false;
         }
     }
-    const actionEnter = (e)=>{
+    const actionEnter = (e)=>{ //검색페이지로 값 전달
         if(e.key === "Enter"){
             e.preventDefault();
             actionSearch(e);
