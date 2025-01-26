@@ -142,6 +142,14 @@ header .shop_util .cart a {
   background-image: url("../../images/header_menu3.png");
 }
 
+:has(.order__cart) header .shop_util .cart {
+  cursor:pointer;
+}
+
+:has(.order__cart) header .shop_util .cart a {
+  pointer-events: none;
+}
+
 header .shop_util .card a {
   background-image: url("../../images/header_menu4.png");
 }
@@ -290,7 +298,7 @@ header .search_form {
   background-color: #fff;
   position: absolute;
   top: 90px;
-  right: 0;
+  right: 20px;
   box-shadow: 4px 0 24px 0 rgba(0,0,0,.1);
   border-radius: 8px;
   opacity: 0;
@@ -310,7 +318,7 @@ header .search_form form::before {
   margin: 0 auto;
   position: absolute;
   top: -14px;
-  right: 160px;
+  right: 140px;
   border-style: solid;
   border-width: 0 12px 16px 12px;
   border-color: transparent transparent #fff transparent;
@@ -362,7 +370,7 @@ header .search_form .btn_submit {
   border-radius:50px;
   text-indent:-9999px;
   transition: .15s ease;
-  animation: scale .15s forwards;
+  animation: scale .25s forwards;
 }
 
 header .search_form .btn_submit[disabled]{

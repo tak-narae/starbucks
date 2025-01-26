@@ -8,7 +8,7 @@ import { DataContext } from 'App';
 
 
 const Header = () => {
-
+    
     //===header
     const location = useLocation();
     useEffect(() => {
@@ -24,7 +24,7 @@ const Header = () => {
     }, [location])
     useEffect(() => {
         document.querySelector("header .btn_hamburger").addEventListener("click", (e) => {
-            document.querySelector("header .search_form.active")?.classList.remove("active");
+            document.querySelector("header .search_form.active")?.classList.toggle("active");
             e.currentTarget.classList.toggle("active");
             document.querySelector("header .header_nav").classList.toggle("active");
         })
@@ -43,15 +43,24 @@ const Header = () => {
     const navigate = useNavigate();
     const { setSearchData } = useContext(DataContext);
     const [ searchValue, setSearchValue ] = useState("");
-    const [ hasHistory, setHasHistory ] = useState(true); //입력이력 확인
+    const [ hasHistory, setHasHistory ] = useState(true); //입력이력 있으면 false
 
     const searchForm = (e)=>{
         e.preventDefault();
         const searchForm = e.target.closest("li.search").querySelector(".search_form");
         const searchInput = e.target.closest("li.search").querySelector("input");
-        e.target.textContent === "검색" ? searchForm.classList.toggle("active") : searchForm.classList.remove("active");
-        if(searchForm.classList.contains("active")) setTimeout(() => { searchInput.focus() }, 50);
-        searchInput.value = ""; //비우기
+        if(e.target.textContent === "검색"){
+            // e.target.textContent === "검색" ? searchForm.classList.toggle("active") : searchForm.classList.remove("active");
+            searchForm.classList.toggle("active");
+            if(document.querySelector("header .btn_hamburger.active")){ //header,search 동시열림 처리
+                document.querySelector("header .btn_hamburger.active")?.classList.remove("active");
+                document.querySelector("header .header_nav.active")?.classList.remove("active");
+            }
+        } else{ //.btn_close
+            searchForm.classList.remove("active");
+        }
+        if(searchForm.classList.contains("active")) setTimeout(() => { searchInput.focus() }, 50); //autofocus
+        setSearchValue("");
         setHasHistory(true); //컬러버튼
     }
     const searchBtnAction = (e)=>{ //버튼비활성화
@@ -67,8 +76,9 @@ const Header = () => {
     }
     const actionSearch = (e)=>{ //검색페이지로 값 전달
         e.preventDefault();
-        setSearchData(searchValue);
-        navigate(`/search?item=${searchValue}`);
+        const trimValue = searchValue.replace(/\s+/g, ""); //공백제거
+        setSearchData(trimValue); //**searchValue
+        navigate(`/search?result=${trimValue}`); //**searchValue
     }
     useEffect(()=>{ //페이지 이동시 초기화
         document.querySelector("header .search_form.active")?.classList.remove("active");
@@ -95,7 +105,7 @@ const Header = () => {
                                     <h3>검색</h3>
                                     <button className="btn_close" onClick={searchForm}>닫기</button>
                                     <fieldset>
-                                        <input type="text" placeholder="검색어 입력" value={searchValue}
+                                        <input type="text" placeholder="검색어 입력" value={hasHistory === false ? searchValue : ""}
                                             onInput={(e)=> { setSearchValue(e.target.value); setHasHistory(false); searchBtnAction(e);} }
                                             onKeyPress={actionEnter}
                                         />

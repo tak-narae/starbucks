@@ -36,10 +36,17 @@
     letter-spacing: 14px;
     white-space: nowrap;
     user-select: none;
+    
+    &:not(:has(.char)){
+      opacity:0;
+      display:none;
+    }
 
     >.line {
       text-align: center !important;
+      display: none;
     }
+
   }
 }
 
