@@ -290,7 +290,7 @@ header .search_form {
   background-color: #fff;
   position: absolute;
   top: 90px;
-  right: 0;
+  right: 20px;
   box-shadow: 4px 0 24px 0 rgba(0,0,0,.1);
   border-radius: 8px;
   opacity: 0;
@@ -310,7 +310,7 @@ header .search_form form::before {
   margin: 0 auto;
   position: absolute;
   top: -14px;
-  right: 160px;
+  right: 140px;
   border-style: solid;
   border-width: 0 12px 16px 12px;
   border-color: transparent transparent #fff transparent;
