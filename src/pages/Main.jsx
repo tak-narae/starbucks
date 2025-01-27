@@ -88,6 +88,7 @@ const Main = () => {
     if(!loading){
       SplitEffect(); //.split
     }
+    console.log(visual);
   },[loading])
 
 
@@ -109,10 +110,10 @@ const Main = () => {
                 speed={850}
                 // touchRatio={0}
                 // allowTouchMove={false}
-                // autoplay={{
-                //   delay: 3000,
-                //   disableOnInteraction: false,
-                // }}
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: false,
+                }}
               >
                 { visual.map(el => (
                   <SwiperSlide key={el.key}>
@@ -121,11 +122,13 @@ const Main = () => {
                           <div className="info">
                             <span className="badge">{el.nameEn}</span>
                             <h3 className="name">{el.name}</h3>
-                            <h4 className="desc"></h4>
-                            <Link to="/event/5?cate=상품출시">READ MORE</Link>
+                            <h4 className="desc">{el.desc}</h4>
+                            <Link to={`/menu/detail/promotion?cate=0&id=${el.id}`}>MORE</Link>
+                            {/* <Link to="/event/5?cate=상품출시">READ MORE</Link> */}
                           </div>
                           <div className="thumb">
                             <img src={el.img} alt={el.name}/>
+                            <span className="idx">0{el.id}</span>
                           </div>
                         </div>
                       </div>                      

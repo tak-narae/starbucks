@@ -7662,6 +7662,7 @@
           "name": "해리포터 스테이셔너리 세트",
           "nameEn": "Harry Potter Stationery Set",
           "price": 26000,
+          "desc": "해리포터의 생일을 축하하기 위한 특별한 케이크 테마의 스테이셔너리 세트",
           "img": "db/images/[9300000005474]_20241210141938241.png",
           "imgDetail": "db/images/[9300000005474]_detail_20241210141938241.jpg"
         },
@@ -7671,6 +7672,7 @@
           "name": "해리포터 베어리스타 키체인",
           "nameEn": "Harry Potter Bearista Keychain",
           "price": 25000,
+          "desc": "베어리스타, 올빼미 참과 스타벅스 사이렌 로고 실버 참으로 구성된 키 체인",
           "img": "db/images/[9300000005476]_20241210144046134.png", 
           "imgDetail": "db/images/[9300000005476]_detail_20241210144046134.jpg"
         },
@@ -7680,6 +7682,7 @@
           "name": "SS 해리포터 리라 텀블러 355ml",
           "nameEn": "SS Harry Potter Lira Tumbler 355ml",
           "price": 45000,
+          "desc": "뱀의 해를 기념하여 슬리데린 머플러를 두른 특별한 리라 텀블러",
           "img": "db/images/[9300000005495]_20241210150546064.png",
           "imgDetail": "db/images/[9300000005495]_detail_20241210150546064.jpg"
         },
@@ -7689,6 +7692,7 @@
           "name": "해리포터 베어리스타 인형",
           "nameEn": "Harry Potter Plush Doll",
           "price": 45000,
+          "desc": "2025년 뱀의 해를 기념해 슬리데린 기숙사 옷을 입은 스타벅스 베어리스타",
           "img": "db/images/[9300000005494]_20241210094212694.png",
           "imgDetail": "db/images/[9300000005494]_detail_20241210094212694.jpg"
         },
@@ -7698,6 +7702,7 @@
           "name": "SS 해리포터 DW 투고 텀블러 473ml",
           "nameEn": "SS Harry Potter DW To Go Tumbler 473ml",
           "price": 45000,
+          "desc": "해리포터의 생일을 축하하기 위한 케이크에서 영감을 받은 특별한 텀블러",
           "img": "db/images/[9300000005487]_20241227140129953.png",
           "imgDetail": "db/images/[9300000005487]_detail_20241227140129953.jpg"
         },
@@ -7707,6 +7712,7 @@
           "name": "해리포터 슬리데린 한정판 세트",
           "nameEn": "Limited Edition Harry Potter Slytherin Set",
           "price": 150000,
+          "desc": "뱀의 해를 기념하여 슬리데린 기숙사를 테마로 한 특별 한정판 컬렉션",
           "img": "db/images/[9300000005741]_20241210150930295.png",
           "imgDetail": "db/images/[9300000005741]_detail_20241210150930295.jpg"
         }

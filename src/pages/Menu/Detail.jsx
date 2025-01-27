@@ -134,8 +134,15 @@ const Detail = () => {
               <li className="home">
                 <Link to="/">홈</Link>
               </li>
-              <li><Link to={itemPath}>{title}</Link></li>
-              <li><Link to={itemPath}>{cateKo}</Link></li>
+              { title !== "프로모션" && (
+                <>
+                  <li><Link to={itemPath}>{title}</Link></li>
+                  <li><Link to={itemPath}>{cateKo}</Link></li>
+                </>
+              ) }
+              { title === "프로모션" && (
+                <li>{title}</li>
+              ) }
             </ul>
           </div>
           <div className="prd_item">

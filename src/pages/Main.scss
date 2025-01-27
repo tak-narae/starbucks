@@ -30,12 +30,13 @@
           .info { text-align:left; position:absolute; top:-80px; left:-212px;
             .badge { line-height:1; font-size:14px; color:var(--bk-color2); display:block; }
             .name { max-width:240px; margin:12px 0 16px; line-height:1.48; font-size:30px; font-weight:600; color:var(--main-color1); word-break:keep-all; }
-            .desc { max-width:190px; line-height:1.52; font-size:18px; color:var(--bk-color2); word-break:keep-all; }
-            a { width:154px; padding:9px 24px 10px; margin-top:60px; background:var(--main-color1) url("../images/arrow_btn.png")no-repeat center right 20px/10px; color:#fff; border-radius:8px; letter-spacing:0; transition:.15s ease; }
+            .desc { max-width:320px; line-height:1.52; font-size:18px; color:var(--bk-color2); word-break:keep-all; }
+            a { width:120px; /*width:154px;*/ padding:9px 24px 10px; margin-top:60px; background:var(--main-color1) url("../images/arrow_btn.png")no-repeat center right 20px/10px; color:#fff; border-radius:8px; letter-spacing:0; transition:.15s ease; }
           }
           .thumb { position:relative;
-            &::before { content:''; width:240px; height:240px; background-color:rgba(255,255,255,.1); background:transparent url("../images/visual_itemBg.png")no-repeat center/contain; backdrop-filter:blur(4px); position:absolute; top:40px; left:40px; z-index:-1; border-radius:50%; display:block; }
+            &::before { content:''; width:220px; height:220px; background-color:rgba(255,255,255,.1); background:#f6f5f0 url("../images/visual_itemBg.png")no-repeat center/contain; backdrop-filter:blur(4px); position:absolute; top:50px; left:50px; z-index:-1; border-radius:50%; display:block; }
             img { width:100%; aspect-ratio:1/1; }
+            .idx { font-size:16px; font-weight:600; color:var(--bk-color2); position:absolute; bottom:40px; left:0; }
           }
         }
       }
@@ -47,6 +48,7 @@
             * { opacity:1; }
             .thumb {
               &::before { opacity:0; }
+              .idx { font-size:22px; color:var(--main-color1); }
             }
           }
         }
