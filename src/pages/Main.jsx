@@ -33,12 +33,14 @@ const Main = () => {
   const [prdSeasonCateIdx, setPrdSeasonCateIdx] = useState([]); //홀리데이 display 부모카테고리 인덱스
   const [seasonData, setSeasonData] = useState([]);
 
+  // console.log("holiday", prdSeasonMatch,  prdSeasonCateIdx,  seasonData);
+  console.log(product)
+
   useEffect(() => {
     const seasonAll = product.flatMap((el) => {
       const seasonCate = el.products.filter((prd) =>
         prd.name.includes("홀리데이")
       );
-
       setTimeout(() => { //display 상품 active추가하고 배열 담기
         if (seasonCate.length > 0) {
           document.querySelectorAll('.prd_list > li').forEach(li => {

@@ -354,6 +354,7 @@ header .search_form input {
   border-radius:0;
 }
 
+
 header .search_form input::placeholder {
   font-weight:300;
 }
