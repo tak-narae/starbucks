@@ -20,8 +20,45 @@
 
 .main__visual {
   height: 100vh;
-  min-height: 820px;
+  min-height: 920px;
   position: relative;
+  .visual_cont {
+    .swiper-slide { height:720px; text-align:right; position:relative;
+      .item { width:320px; height:720px; position:absolute; right:0; bottom:0; transition:.85s ease;
+        .smooth { position:absolute; right:0; bottom:0; left:0;
+          * { opacity:0; transition:.5s ease; }
+          .info { text-align:left; position:absolute; top:-80px; left:-212px;
+            .badge { line-height:1; font-size:14px; color:var(--bk-color2); display:block; }
+            .name { max-width:240px; margin:12px 0 16px; line-height:1.48; font-size:30px; font-weight:600; color:var(--main-color1); word-break:keep-all; }
+            .desc { max-width:190px; line-height:1.52; font-size:18px; color:var(--bk-color2); word-break:keep-all; }
+            a { width:154px; padding:9px 24px 10px; margin-top:60px; background:var(--main-color1) url("../images/arrow_btn.png")no-repeat center right 20px/10px; color:#fff; border-radius:8px; letter-spacing:0; transition:.15s ease; }
+          }
+          .thumb { position:relative;
+            &::before { content:''; width:240px; height:240px; background-color:rgba(255,255,255,.1); background:transparent url("../images/visual_itemBg.png")no-repeat center/contain; backdrop-filter:blur(4px); position:absolute; top:40px; left:40px; z-index:-1; border-radius:50%; display:block; }
+            img { width:100%; aspect-ratio:1/1; }
+          }
+        }
+      }
+
+      &[class*="-active"] {
+        .item { width:640px; right:-300px;
+        // .item { width:640px; right:-212px;
+          .smooth {
+            * { opacity:1; }
+            .thumb {
+              &::before { opacity:0; }
+            }
+          }
+        }
+      }
+
+      &[class*="-next"]{
+        .smooth {
+          *:not(.info) { opacity:1; }
+        }
+      }
+    }
+  }
 
   .split {
     width: 100%;
@@ -49,6 +86,29 @@
 
   }
 }
+
+// body:not(:has(.modal_load)) { background-color:red;
+//   .main__visual {
+//     .swiper-slide {
+//       .info {
+//         * { opacity:0; transform:translateY(-32px); transition:.5s ease; }
+//         .badge { transition-delay: 1s; }
+//         .name { transition-delay: 1.5s; }
+//         .desc { transition-delay: 2s; }
+//         a { transition-delay: 2.5s; }
+//       }
+//       &[class*="-active"] {
+//         .info { 
+//           * { opacity:1; transform:translateY(0); }
+//          }
+//         .smooth {
+//          }
+//         // .smooth { * { opacity:1; transform:none; } }
+//       }
+//     }
+
+//   }
+// }
 
 .main__banner {
   a {
