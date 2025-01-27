@@ -7535,7 +7535,8 @@
           "key": 9300000003606,
           "name": "크림 컴프레소",
           "price": 68000,
-          "img": "db/images/[9300000003606]_20241023094906418.jpg"
+          "img": "db/images/[9300000003606]_20241023094906418.jpg",
+          "imgDetail": "db/images/[9300000003606]_detail_20241023094906418.png"
         },
         {
           "id": 3,
@@ -7549,21 +7550,24 @@
           "key": 9300000003839,
           "name": "사이렌 고케틀",
           "price": 16000,
-          "img": "db/images/[9300000003839]_20241023094906418.jpg"
+          "img": "db/images/[9300000003839]_20241023094906418.jpg",
+          "imgDetail": "db/images/[9300000003839]_detail_20241023094906418.png"
         },
         {
           "id": 5,
           "key": 9300000003605,
           "name": "사이렌 레버 드리퍼",
           "price": 35000,
-          "img": "db/images/[9300000003605]_20241023094906418.jpg"
+          "img": "db/images/[9300000003605]_20241023094906418.jpg",
+          "imgDetail": "db/images/[9300000003605]_detail_20241023094906418.png"
         },
         {
           "id": 6,
           "key": 9300000003603,
           "name": "우드 핸들 글라스 서버 680ml",
           "price": 36000,
-          "img": "db/images/[9300000003603]_20241023094906418.jpg"
+          "img": "db/images/[9300000003603]_20241023094906418.jpg",
+          "imgDetail": "db/images/[9300000003603]_detail_20241023094906418.png"
         },
         {
           "id": 7,
@@ -7644,6 +7648,67 @@
           "name": "스타벅스 헤이즐넛 시럽 280ml",
           "price": 9000,
           "img": "db/images/[9300000003919]_20241023094906420.jpg"
+        }
+      ]
+    }
+  ],
+  "promotion": [
+    {
+      "category": "visual",
+      "products": [
+        {
+          "id": 1,
+          "key": 9300000005474,
+          "name": "해리포터 스테이셔너리 세트",
+          "nameEn": "Harry Potter Stationery Set",
+          "price": 26000,
+          "img": "db/images/[9300000005474]_20241210141938241.png",
+          "imgDetail": "db/images/[9300000005474]_detail_20241210141938241.jpg"
+        },
+        {
+          "id": 2,
+          "key": 9300000005476,
+          "name": "해리포터 베어리스타 키체인",
+          "nameEn": "Harry Potter Bearista Keychain",
+          "price": 25000,
+          "img": "db/images/[9300000005476]_20241210144046134.png", 
+          "imgDetail": "db/images/[9300000005476]_detail_20241210144046134.jpg"
+        },
+        {
+          "id": 3,
+          "key": 9300000005495,
+          "name": "SS 해리포터 리라 텀블러 355ml",
+          "nameEn": "SS Harry Potter Lira Tumbler 355ml",
+          "price": 45000,
+          "img": "db/images/[9300000005495]_20241210150546064.png",
+          "imgDetail": "db/images/[9300000005495]_detail_20241210150546064.jpg"
+        },
+        {
+          "id": 4,
+          "key": 9300000005494,
+          "name": "해리포터 베어리스타 인형",
+          "nameEn": "Harry Potter Plush Doll",
+          "price": 45000,
+          "img": "db/images/[9300000005494]_20241210094212694.png",
+          "imgDetail": "db/images/[9300000005494]_detail_20241210094212694.jpg"
+        },
+        {
+          "id": 5,
+          "key": 9300000005487,
+          "name": "SS 해리포터 DW 투고 텀블러 473ml",
+          "nameEn": "SS Harry Potter DW To Go Tumbler 473ml",
+          "price": 45000,
+          "img": "db/images/[9300000005487]_20241227140129953.png",
+          "imgDetail": "db/images/[9300000005487]_detail_20241227140129953.jpg"
+        },
+        {
+          "id": 6,
+          "key": 9300000005741,
+          "name": "해리포터 슬리데린 한정판 세트",
+          "nameEn": "Limited Edition Harry Potter Slytherin Set",
+          "price": 150000,
+          "img": "db/images/[9300000005741]_20241210150930295.png",
+          "imgDetail": "db/images/[9300000005741]_detail_20241210150930295.jpg"
         }
       ]
     }
