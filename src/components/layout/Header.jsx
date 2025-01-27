@@ -41,7 +41,7 @@ const Header = () => {
     
     //===search
     const navigate = useNavigate();
-    const { setSearchData } = useContext(DataContext);
+    const { setSearchWord } = useContext(DataContext);
     const [ searchValue, setSearchValue ] = useState("");
     const [ hasHistory, setHasHistory ] = useState(true); //입력이력 있으면 false
 
@@ -77,7 +77,7 @@ const Header = () => {
     const actionSearch = (e)=>{ //검색페이지로 값 전달
         e.preventDefault();
         const trimValue = searchValue.replace(/\s+/g, ""); //공백제거
-        setSearchData(trimValue); //**searchValue
+        setSearchWord(trimValue); //**searchValue
         navigate(`/search?result=${trimValue}`); //**searchValue
     }
     useEffect(()=>{ //페이지 이동시 초기화

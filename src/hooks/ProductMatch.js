@@ -55,6 +55,10 @@ const useProductMatch = () => {
               categoryData = data.food;
               categoryLabel = "푸드";
               break;
+            case "promotion":
+              categoryData = data.promotion;
+              categoryLabel = "프로모션";
+              break;
             default:
               console.log("err==", category); // 잘못된 카테고리 로그
               return;

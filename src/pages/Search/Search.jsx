@@ -3,16 +3,16 @@ import { DataContext } from "App";
 import { useLocation } from "react-router-dom";
 
 const Search = () => {
-  const { searchData, setSearchData } = useContext(DataContext);
+  const { searchWord, setSearchWord } = useContext(DataContext);
   const location = useLocation();
   const decode = decodeURIComponent(location.search); //url인코딩
-  const searchWord = new URLSearchParams(location.search).get("result");
+  const searchParams = new URLSearchParams(location.search).get("result");
 
   useEffect(() => {
-    if (!searchData) {
-      setSearchData(searchWord);
+    if (!searchWord) {
+      setSearchWord(searchParams);
     }
-    if(!searchData && !searchWord){
+    if(!searchWord && !searchParams){
       window.location.href = "/";
     }
   }, []);
@@ -22,7 +22,7 @@ const Search = () => {
       <div id="container" className="search__list">
         <div className="layout_fix">
           Search.jsx
-          {searchData}
+          {searchWord}
         </div>
       </div>
     </>

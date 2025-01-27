@@ -23,7 +23,7 @@ import PrdList from "components/product/PrdList";
 import "components/product/PrdList.css";
 
 const Main = () => {
-  const { loading, product, resMz } = useContext(DataContext);
+  const { loading, visual, product, resMz } = useContext(DataContext);
   const { selectedCate, selectedDepth, pathName } = useQueryParams();
 
   const { datefilteredNotice, datefilteredEvents } = useUtilContext();
@@ -34,7 +34,6 @@ const Main = () => {
   const [seasonData, setSeasonData] = useState([]);
 
   // console.log("holiday", prdSeasonMatch,  prdSeasonCateIdx,  seasonData);
-  console.log(product)
 
   useEffect(() => {
     const seasonAll = product.flatMap((el) => {
@@ -89,6 +88,7 @@ const Main = () => {
     if(!loading){
       SplitEffect(); //.split
     }
+    console.log(visual);
   },[loading])
 
 
@@ -97,7 +97,45 @@ const Main = () => {
       <main id="main">
         <section className="main__visual">
           <div className="layout_fix">
-            <div className="swiper-visual">swiper-visual</div>
+            <div className="visual_cont">
+              <Swiper className="swiper_visual"
+                modules={[Autoplay]}
+                // observer={true}
+                // observeParents={true}
+                loop={true}
+                // centeredSlides={true}
+                // freeMode={true}
+                slidesPerView={2}
+                // spaceBetween={100}
+                speed={850}
+                // touchRatio={0}
+                // allowTouchMove={false}
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: false,
+                }}
+              >
+                { visual.map(el => (
+                  <SwiperSlide key={el.key}>
+                      <div className="item">
+                        <div className="smooth">
+                          <div className="info">
+                            <span className="badge">{el.nameEn}</span>
+                            <h3 className="name">{el.name}</h3>
+                            <h4 className="desc">{el.desc}</h4>
+                            <Link to={`/menu/detail/promotion?cate=0&id=${el.id}`}>MORE</Link>
+                            {/* <Link to="/event/5?cate=상품출시">READ MORE</Link> */}
+                          </div>
+                          <div className="thumb">
+                            <img src={el.img} alt={el.name}/>
+                            <span className="idx">0{el.id}</span>
+                          </div>
+                        </div>
+                      </div>                      
+                  </SwiperSlide>
+                )) }
+              </Swiper>
+            </div>
           </div>
           <div className="split">STARBUCKS</div>
         </section>
@@ -173,8 +211,7 @@ const Main = () => {
           </div>
           <div className="loop_event">
             <ul className="event_list">
-              <Swiper
-                className="swiper_event"
+              <Swiper className="swiper_event"
                 modules={[Autoplay]}
                 observer={true}
                 observeParents={true}

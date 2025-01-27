@@ -31,7 +31,8 @@ import { AccessTokenProvider } from "pages/Member/AccessTokenContext";
 const DataContext = createContext();
 
 function App() {
-  const [searchData, setSearchData] = useState(null);
+  const [searchWord, setSearchWord] = useState(null);
+  const [visual, setVisual] = useState([]);
   const [coffee, setCoffee] = useState([]);
   const [beverage, setBeverage] = useState([]);
   const [product, setProduct] = useState([]);
@@ -43,6 +44,7 @@ function App() {
   const getdata = async () => {
     try {
       const response = await axios.get(`https://raw.githubusercontent.com/deliondane/db/main/db.json`);
+      setVisual(response.data.promotion[0].products);
       setCoffee(response.data.coffee);
       setBeverage(response.data.beverage);
       setProduct(response.data.product);
@@ -84,6 +86,7 @@ function App() {
     return ()=> {
       clearTimeout(timeout);
       clearInterval(interval);
+      console.log(visual);
     };
   },[location])
 
@@ -99,7 +102,7 @@ function App() {
           </div>
         </div>
       ) }
-      <DataContext.Provider value={{ loading, searchData, setSearchData, coffee, setCoffee, beverage, setBeverage, product, setProduct, food, setFood, notice, setNotice, events, setEvents, resMz, setResMz }}>
+      <DataContext.Provider value={{ loading, searchWord, setSearchWord, visual, coffee, setCoffee, beverage, setBeverage, product, setProduct, food, setFood, notice, setNotice, events, setEvents, resMz, setResMz }}>
         <Header />
         <UtilProvider>
           <Routes>

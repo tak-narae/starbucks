@@ -9,14 +9,15 @@ const ProductLinkMatch = () => {
     dataBeverage: [],
     dataProduct: [],
     dataFood: [],
+    dataVisual: [],
   });
 
   useEffect(() => {
     const fetchData = () => {
       axios.get("https://raw.githubusercontent.com/deliondane/db/main/db.json")
         .then((res) => {
-          // console.log("++res++", res);
-          const { coffee, beverage, product, food } = res.data; //객체 구조 분해 할당
+          console.log("++res++", res);
+          const { promotion, coffee, beverage, product, food } = res.data; //객체 구조 분해 할당
           setData({
             dataCoffee: coffee.map((el, idx) => ({
               categoryEn: "coffee",
@@ -38,6 +39,11 @@ const ProductLinkMatch = () => {
               cateNum: idx,
               ...el,
             })),
+            dataVisual: promotion.map((el, idx) => ({
+              categoryEn: "promotion",
+              cateNum: idx,
+              ...el,
+            })),
           });
         })
         .catch((err) => console.error(err));
@@ -52,7 +58,7 @@ const ProductLinkMatch = () => {
         const prdName = nameEl.textContent;
         // console.log(prdName);
 
-        const allData = [...data.dataCoffee,...data.dataBeverage,...data.dataProduct,...data.dataFood,];
+        const allData = [...data.dataCoffee,...data.dataBeverage,...data.dataProduct,...data.dataFood,...data.dataVisual];
         // console.log(allData);
         const itemMatch = allData.flatMap(el => el.products.map(data => ({
           categoryEn: el.categoryEn,
