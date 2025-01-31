@@ -75,9 +75,10 @@
       transform:translate(-50%, calc(-50% + 46px));
       display: flex;
       justify-content: space-between;
-      span { width:68px; line-height:68px; background-color:#fff; background-repeat:no-repeat; background-position:center; background-size:auto 56px; font-size:0; border-radius:50%; box-shadow:0 4px 16px rgba(0,0,0,.1); cursor:pointer;
-        &.swiper-prev { background-image:url("../images/arrow_prev.png"); }
-        &.swiper-next { background-image:url("../images/arrow_next.png"); }
+      span { width:68px; line-height:68px; background-color:var(--bk-color2); background-repeat:no-repeat; background-position:center; background-size:auto 56px; font-size:0; border-radius:50%; box-shadow:0 4px 16px rgba(0,0,0,.1); transition:.15s ease; cursor:pointer;
+        &.swiper-prev { background-image:url("../images/arrow_prev_wt.png"); }
+        &.swiper-next { background-image:url("../images/arrow_next_wt.png"); }
+        &:hover { transform:scale(1.1); }
       }
     }
   }
