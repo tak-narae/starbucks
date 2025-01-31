@@ -21,9 +21,10 @@
 .main__visual {
   height: 100vh;
   min-height: 920px;
+  max-height: 1000px;
   position: relative;
   overflow:hidden;
-  .visual_cont {
+  .visual_cont { position:relative;
     .swiper_visual { overflow:visible;
       .swiper-slide { height:720px; text-align:right; position:relative;
         .item { width:320px; height:720px; position:absolute; right:0; bottom:0; transition:.85s ease;
@@ -33,7 +34,9 @@
               .badge { line-height:1; font-size:14px; color:var(--bk-color2); display:block; }
               .name { max-width:240px; margin:12px 0 16px; line-height:1.48; font-size:30px; font-weight:600; color:var(--main-color1); word-break:keep-all; }
               .desc { max-width:320px; line-height:1.52; font-size:18px; color:var(--bk-color2); word-break:keep-all; }
-              a { width:120px; /*width:154px;*/ padding:9px 24px 10px; margin-top:60px; background:var(--main-color1) url("../images/arrow_btn.png")no-repeat center right 20px/10px; color:#fff; border-radius:8px; letter-spacing:0; transition:.15s ease; }
+              a { width:120px; /*width:154px;*/ padding:9px 24px 10px; margin-top:60px; background:var(--main-color1) url("../images/arrow_btn.png")no-repeat center right 20px/10px; color:#fff; border-radius:8px; letter-spacing:0; transition:.15s ease;
+                &:hover { background-position:center right 26px; }
+              }
             }
             .thumb { position:relative;
               &::before { content:''; width:220px; height:220px; background-color:rgba(255,255,255,.1); background:#f6f5f0 url("../images/visual_itemBg.png")no-repeat center/contain; backdrop-filter:blur(4px); position:absolute; top:50px; left:50px; z-index:-1; border-radius:50%; display:block; }
@@ -44,7 +47,7 @@
         }
   
         &[class*="-active"] {
-          .item { width:640px; right:-300px;
+          .item { width:640px; right:-320px; //right:-300px;
           // .item { width:640px; right:-212px;
             .smooth {
               * { opacity:1; }
@@ -61,6 +64,20 @@
             *:not(.info) { opacity:1; }
           }
         }
+      }
+    }
+    .swiper-arrow {
+      width: 520px;
+      position: absolute;
+      top:50%;
+      left:50%;
+      z-index:1;
+      transform:translate(-50%, calc(-50% + 46px));
+      display: flex;
+      justify-content: space-between;
+      span { width:68px; line-height:68px; background-color:#fff; background-repeat:no-repeat; background-position:center; background-size:auto 56px; font-size:0; border-radius:50%; box-shadow:0 4px 16px rgba(0,0,0,.1); cursor:pointer;
+        &.swiper-prev { background-image:url("../images/arrow_prev.png"); }
+        &.swiper-next { background-image:url("../images/arrow_next.png"); }
       }
     }
   }

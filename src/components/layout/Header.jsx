@@ -71,6 +71,10 @@ const Header = () => {
     const actionEnter = (e)=>{ //검색페이지로 값 전달
         if(e.key === "Enter"){
             e.preventDefault();
+            if(searchValue.trim() === ""){
+                alert("검색어를 입력해주세요!");
+                return false;
+            }
             actionSearch(e);
         };
     }
