@@ -16,7 +16,6 @@ const Cart = () => {
   
 
 
-
   // useEffect(()=>{
   //   QtyCalc();
   // },[cartList])
@@ -31,8 +30,6 @@ const Cart = () => {
       // QtyCalc(setIsQty, cartList, setCartList);
     }
   }, [cartList, isQty]);
-
-
 
 
   const localCartDelete = (key)=>{
@@ -121,7 +118,7 @@ const Cart = () => {
               </thead>
               <tbody>
                 { cartList.length !== 0 ? (
-                  cartList.map((el,idx)=>(
+                  cartList.slice().reverse().map((el,idx)=>( //리스트만 내림차순
                     <tr key={idx} data-id={el.key}>
                         <td className="chk">
                           <div className="chk_item">

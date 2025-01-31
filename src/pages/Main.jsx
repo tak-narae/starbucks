@@ -78,6 +78,8 @@ const Main = () => {
     // })
     // setSeasonData(seasonMerge);
 
+    console.log("visual==",visual)
+
   }, [product, prdSeasonMatch, seasonData]);
 
   useEffect(() => {
@@ -88,7 +90,6 @@ const Main = () => {
     if(!loading){
       SplitEffect(); //.split
     }
-    console.log(visual);
   },[loading])
 
 
@@ -97,19 +98,14 @@ const Main = () => {
       <main id="main">
         <section className="main__visual">
           <div className="layout_fix">
-            <div className="visual_cont">
+            <div className="visual_cont" rel="js-main-visual">
               <Swiper className="swiper_visual"
-                modules={[Autoplay]}
-                // observer={true}
-                // observeParents={true}
+                modules={[Autoplay, Navigation]}
                 loop={true}
-                // centeredSlides={true}
-                // freeMode={true}
                 slidesPerView={2}
-                // spaceBetween={100}
                 speed={850}
-                // touchRatio={0}
-                // allowTouchMove={false}
+                allowTouchMove={false}
+                navigation={{ prevEl:'.swiper-prev', nextEl:'.swiper-next' }}
                 autoplay={{
                   delay: 3000,
                   disableOnInteraction: false,
@@ -135,6 +131,10 @@ const Main = () => {
                   </SwiperSlide>
                 )) }
               </Swiper>
+              <div className="swiper-arrow">
+                <span className="swiper-prev">이전</span>
+                <span className="swiper-next">다음</span>
+              </div>
             </div>
           </div>
           <div className="split">STARBUCKS</div>
@@ -274,7 +274,7 @@ const Main = () => {
               <b>공지</b>
               <Swiper
                 className="swiper_notice"
-                modules={[Autoplay, Navigation, Pagination]}
+                modules={[Autoplay, Pagination]}
                 slidesPerView={1}
                 touchRatio={0}
                 direction={"vertical"}

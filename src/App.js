@@ -86,7 +86,6 @@ function App() {
     return ()=> {
       clearTimeout(timeout);
       clearInterval(interval);
-      console.log(visual);
     };
   },[location])
 
