@@ -30,7 +30,7 @@
         .item { width:320px; height:720px; position:absolute; right:0; bottom:0; transition:.85s ease;
           .smooth { position:absolute; right:0; bottom:0; left:0;
             * { opacity:0; transition:.25s ease; }
-            .info { text-align:left; position:absolute; top:-80px; left:-300px; /*left:-212px;*/
+            .info { text-align:left; position:absolute; top:-80px; left:-320px; /*left:-212px;*/
               .badge { line-height:1; font-size:14px; color:var(--bk-color2); display:block; }
               .name { max-width:240px; margin:12px 0 16px; line-height:1.48; font-size:30px; font-weight:600; color:var(--main-color1); word-break:keep-all; }
               .desc { max-width:320px; line-height:1.52; font-size:18px; color:var(--bk-color2); word-break:keep-all; }
