@@ -5,6 +5,10 @@ import { useUtilContext } from "hooks/UtilContext";
 import "pages/Event/Customer.css";
 
 const Event = () => {
+  useEffect(() => {
+    setSearch(""); // 페이지 로드 시 검색어 초기화
+  }, []); // 의존성 배열이 빈 배열이면 컴포넌트가 처음 마운트될 때만 실행됨
+  
   const {
     isActive, selectedCategory, currentPage, setCurrentPage,
     toggleActive, handleCategoryClick, handlePageChange,
@@ -25,37 +29,32 @@ const Event = () => {
   };
 
   useEffect(() => {
-    const filtered = datefilteredEvents.filter(event =>
-      event.title.toLowerCase().includes(search.toLowerCase())
-      || event.title2.toLowerCase().includes(search.toLowerCase())
-    );
-    setFilteredEvents(filtered);
+    if(search.trim() === ""){
+      setFilteredEvents(datefilteredEvents);
+    } else{
+      const filtered = datefilteredEvents.filter(event =>
+        event.title.toLowerCase().includes(search.toLowerCase())
+        || event.title2.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredEvents(filtered);
+    }
     setCurrentPage(1); //검색 시 현재 페이지 초기화
   }, [search, selectedCategory, datefilteredEvents, setCurrentPage])
 
   //검색 여부에 따른 이벤트 목록
   const isSearching = search.trim() !== ""; //검색어 확인
   const displayedEvents = isSearching ? filteredEvents : datefilteredEvents;  // 검색이면 필터링된 데이터 사용
-
-  const paginatedEvents = displayedEvents.slice(
-    (currentPage - 1) * eventitemsPerPage,
-    currentPage * eventitemsPerPage
-  );
-
   const eventSearchTotalPages = Math.ceil(
     filteredEvents.length / eventitemsPerPage
   );
-
   const eventSearchEndPage = Math.min(
     currentBlock * maxVisiblePages,
     eventSearchTotalPages
   );
-
   const searchPages = Array.from(
     {length: eventSearchEndPage - startPage + 1},
     (_, i) => startPage + i
   );
-
   const eventPage = isSearching ? searchPages : eventPages;
 
   return (
@@ -76,7 +75,7 @@ const Event = () => {
                 {["전체", "상품출시", "카드출시"].map((category) => (
                   <li key={category}>
                     <Link
-                      to={{ pathname: `/event/${paginatedEvents.idx}`, search: `?cate=${category}` }}
+                      to={{ pathname: `/event/${datefilteredEvents.idx}`, search: `?cate=${category}` }}
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -133,12 +132,12 @@ const Event = () => {
         </div>
 
         <ul className="event_list">
-          {paginatedEvents.length > 0 ? (
-            paginatedEvents.map((event, idx) => {
+          {displayedEvents.length > 0 ? (
+            displayedEvents.map((event, idx) => {
               const isEnded = event.endDate && new Date(event.endDate) < today; //종료 이벤트 확인
               return (
                 <li key={idx} className={isEnded ? "li-ended" : ""}>
-                  <Link to={{ pathname: `/event/${idx}`, search: `?cate=${event.category}` }} className="item">
+                  <Link to={{ pathname: `/event/${idx}`, search: `?cate=${event.category}` }} className="item" state={{event}}>
                     <div className="thumbnail">
                       <img src={event.img} alt={event.title} />
                     </div>

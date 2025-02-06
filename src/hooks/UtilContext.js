@@ -147,6 +147,7 @@ export const UtilProvider = ({ children }) => {
     (currentPage - 1) * eventitemsPerPage,
     currentPage * eventitemsPerPage
   );
+  const totalFilteredPages = Math.ceil(paginatedEvents.length / eventitemsPerPage);
   const eventPages = Array.from(
     { length: eventEndPage - startPage + 1 },
     (_, i) => startPage + i
@@ -159,7 +160,7 @@ export const UtilProvider = ({ children }) => {
         isActive, setIsActive, selectedCategory, setSelectedCategory, currentPage, setCurrentPage,
         toggleActive, handleCategoryClick, noticeCategoryFilteredData, eventCategoryFilteredData, handlePageChange,
         search, setSearch,
-        maxVisiblePages, currentBlock, startPage, noticeEndPage, noticePages, eventEndPage, eventPages,
+        maxVisiblePages, currentBlock, startPage, noticeEndPage, noticePages, eventEndPage, eventPages, totalFilteredPages,
         noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices,
         activeTab, setActiveTab, today, displayedEvents, datefilteredEvents, eventitemsPerPage, eventtotalPages, paginatedEvents,
       }}
