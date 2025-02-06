@@ -8,12 +8,12 @@ import { DataContext } from 'App';
 
 
 const Header = () => {
-    
+
     //===header
     const location = useLocation();
     useEffect(() => {
         if (location.pathname) {
-        // if (location.pathname !== '/') {
+            // if (location.pathname !== '/') {
             document.querySelectorAll("header .btn_hamburger i").forEach(i => {
                 i.style.transition = "none";
                 setTimeout(() => i.removeAttribute("style"), 0);
@@ -38,58 +38,67 @@ const Header = () => {
         })
     }, [])
 
-    
     //===search
     const navigate = useNavigate();
     const { setSearchWord } = useContext(DataContext);
-    const [ searchValue, setSearchValue ] = useState("");
-    const [ hasHistory, setHasHistory ] = useState(true); //입력이력 있으면 false
+    const [searchValue, setSearchValue] = useState("");
+    const [hasHistory, setHasHistory] = useState(true); //입력이력 있으면 false
 
-    const searchForm = (e)=>{
+    const searchForm = (e) => {
         e.preventDefault();
         const searchForm = e.target.closest("li.search").querySelector(".search_form");
         const searchInput = e.target.closest("li.search").querySelector("input");
-        if(e.target.textContent === "검색"){
+        if (e.target.textContent === "검색") {
             // e.target.textContent === "검색" ? searchForm.classList.toggle("active") : searchForm.classList.remove("active");
             searchForm.classList.toggle("active");
-            if(document.querySelector("header .btn_hamburger.active")){ //header,search 동시열림 처리
+            if (document.querySelector("header .btn_hamburger.active")) { //header,search 동시열림 처리
                 document.querySelector("header .btn_hamburger.active")?.classList.remove("active");
                 document.querySelector("header .header_nav.active")?.classList.remove("active");
             }
-        } else{ //.btn_close
+        } else { //.btn_close
             searchForm.classList.remove("active");
         }
-        if(searchForm.classList.contains("active")) setTimeout(() => { searchInput.focus() }, 50); //autofocus
+        if (searchForm.classList.contains("active")) setTimeout(() => { searchInput.focus() }, 50); //autofocus
         setSearchValue("");
         setHasHistory(true); //컬러버튼
     }
-    const searchBtnAction = (e)=>{ //버튼비활성화
-        if(e.target.nextElementSibling){
+    const searchBtnAction = (e) => { //버튼비활성화
+        if (e.target.nextElementSibling) {
             e.target.value === "" && hasHistory === false ? e.target.nextElementSibling.disabled = true : e.target.nextElementSibling.disabled = false;
         }
     }
-    const actionEnter = (e)=>{ //검색페이지로 값 전달
-        if(e.key === "Enter"){
+    const actionEnter = (e) => { //검색페이지로 값 전달
+        if (e.key === "Enter") {
             e.preventDefault();
-            if(searchValue.trim() === ""){
+            if (searchValue.trim() === "") {
                 alert("검색어를 입력해주세요!");
                 return false;
             }
             actionSearch(e);
         };
     }
-    const actionSearch = (e)=>{ //검색페이지로 값 전달
+    const actionSearch = (e) => { //검색페이지로 값 전달
         e.preventDefault();
         const trimValue = searchValue.replace(/\s+/g, ""); //공백제거
         setSearchWord(trimValue); //**searchValue
         navigate(`/search?result=${trimValue}`); //**searchValue
     }
-    useEffect(()=>{ //페이지 이동시 초기화
+    useEffect(() => { //페이지 이동시 초기화
         document.querySelector("header .search_form.active")?.classList.remove("active");
         setSearchValue("");
         setHasHistory(true);
-    },[location])
+    }, [location])
 
+    //banner
+    const handleEvent = () => {
+        window.location.replace("/event");
+    };
+    const handleNotice = () => {
+        window.location.replace("/notice");
+    }
+    const handleStore = () => {
+        window.location.replace("/store");
+    }
 
     return (
         <header>
@@ -110,11 +119,11 @@ const Header = () => {
                                     <button className="btn_close" onClick={searchForm}>닫기</button>
                                     <fieldset>
                                         <input type="text" placeholder="검색어 입력" value={hasHistory === false ? searchValue : ""}
-                                            onInput={(e)=> { setSearchValue(e.target.value); setHasHistory(false); searchBtnAction(e);} }
+                                            onInput={(e) => { setSearchValue(e.target.value); setHasHistory(false); searchBtnAction(e); }}
                                             onKeyPress={actionEnter}
                                         />
-                                        { hasHistory === false ? <button type="submit" className="btn_submit">&gt;</button> : "" }
-                                    </fieldset>    
+                                        {hasHistory === false ? <button type="submit" className="btn_submit">&gt;</button> : ""}
+                                    </fieldset>
                                 </form>
                             </div>
                         </li>
@@ -190,9 +199,9 @@ const Header = () => {
                 </div>
                 <div className="customer">
                     <ul className="menu_util">
-                        <li><Link to="/event"><img src={require('../../images/header_util1.png')} alt="이벤트" /><span>이벤트</span></Link></li>
-                        <li><Link to="/notice"><img src={require('../../images/header_util2.png')} alt="공지사항" /><span>공지사항</span></Link></li>
-                        <li><Link to="/store"><img src={require('../../images/header_util3.png')} alt="매장안내" /><span>매장안내</span></Link></li>
+                        <li><Link to="/event" onClick={handleEvent}><img src={require('../../images/header_util1.png')} alt="이벤트" /><span>이벤트</span></Link></li>
+                        <li><Link to="/notice" onClick={handleNotice}><img src={require('../../images/header_util2.png')} alt="공지사항" /><span>공지사항</span></Link></li>
+                        <li><Link to="/store" onClick={handleStore}><img src={require('../../images/header_util3.png')} alt="매장안내" /><span>매장안내</span></Link></li>
                         <li><Link to="/"><img src={require('../../images/header_util4.png')} alt="고객센터" /><span>고객센터</span></Link></li>
                     </ul>
                 </div>
