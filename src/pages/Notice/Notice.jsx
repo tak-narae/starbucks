@@ -5,11 +5,15 @@ import { useUtilContext } from "hooks/UtilContext";
 import "pages/Event/Customer.css";
 
 const Notice = () => {
+  useEffect(() => {
+      setSearch(""); // 페이지 로드 시 검색어 초기화
+    }, []); // 의존성 배열이 빈 배열이면 컴포넌트가 처음 마운트될 때만 실행됨
+
   const {
     isActive, selectedCategory, currentPage, setCurrentPage,
     toggleActive, handleCategoryClick, handlePageChange,
     search, setSearch,
-    maxVisiblePages, currentBlock, startPage, noticePages, noticeitemsPerPage, noticetotalPages, datefilteredNotice,
+    maxVisiblePages, currentBlock, startPage, noticePages, noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices
   } = useUtilContext();
 
   const navigate = useNavigate();
@@ -24,22 +28,20 @@ const Notice = () => {
   };
 
   useEffect(() => {
-    const filtered = datefilteredNotice.filter(notice =>
-      notice.subject.toLowerCase().includes(search.toLowerCase())
-    );
-    setFilteredNotices(filtered);
+    if(search.trim === ""){
+      setFilteredNotices(datefilteredNotice);
+    } else{
+      const filtered = datefilteredNotice.filter(notice =>
+        notice.subject.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredNotices(filtered);
+    }
     setCurrentPage(1);
   }, [search, selectedCategory, datefilteredNotice, setCurrentPage]);
 
   //검색 여부에 따른 이벤트 목록
   const isSearching = search.trim() !== ""; //검색어 확인
-  const displayedNotice = isSearching ? filteredNotices : datefilteredNotice;  // 검색이면 필터링된 데이터 사용
-
-  const paginatedNotices = displayedNotice.slice(
-    (currentPage - 1) * noticeitemsPerPage,
-    currentPage * noticeitemsPerPage
-  );
-
+  const displayedNotice = isSearching ? filteredNotices : paginatedNotices;  // 검색이면 필터링된 데이터 사용
   const noticeSearchTotalPages = Math.ceil(
     filteredNotices.length / noticeitemsPerPage
   );
@@ -47,12 +49,10 @@ const Notice = () => {
     currentBlock * maxVisiblePages,
     noticeSearchTotalPages
   );
-
   const searchPages = Array.from(
     {length: noticeSearchEndPage - startPage + 1 }, 
     (_, i) => startPage + i
   );
-
   const noticePage = isSearching ? searchPages : noticePages;
 
 
@@ -113,7 +113,7 @@ const Notice = () => {
             </div>
           </div>
 
-          {paginatedNotices.length > 0 ? (
+          {displayedNotice.length > 0 ? (
             <table className="tb_list">
               <colgroup>
                 <col style={{ width: "100px" }} />
@@ -132,7 +132,7 @@ const Notice = () => {
                 </tr>
               </thead>
                   <tbody>
-                    {paginatedNotices.map((notice, idx) => (
+                    {displayedNotice.map((notice, idx) => (
                       <tr key={idx}>
                         <td>{(currentPage - 1) * noticeitemsPerPage + idx + 1}</td>
                         <td>{notice.category}</td>

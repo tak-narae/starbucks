@@ -20,7 +20,7 @@ const SignUpStep = () => {
           setStep(Number(queryStep));
         } else {
           setStep(1); // 기본값을 1로 설정
-          navigate('/signup?step=1'); // URL이 없을 경우, step=1로 자동 이동
+          navigate("/signup?step=1"); // URL이 없을 경우, step=1로 자동 이동
         }
       }, [location.search, navigate]); // location.search가 변경될 때마다 실행
     
@@ -104,12 +104,12 @@ const SignUpStep = () => {
         };
     
       useEffect(()=>{
-        if(termsChecked && privacyChecked && cardChecked && marketingChecked){
+        if(termsChecked && privacyChecked && cardChecked){
             setAllChecked(true);
         } else {
             setAllChecked(false);
         }
-      },[termsChecked, privacyChecked, cardChecked, marketingChecked]);
+      },[termsChecked, privacyChecked, cardChecked]);
 
       const handleMessageChange = (key, text, color) => {
         setMessages((prevMessages) => ({
@@ -201,11 +201,7 @@ const SignUpStep = () => {
         const {address, zonecode} = data;
         setZoneCode(zonecode || data.zonecode);
         setAddress(address);
-        console.log(address, zonecode);
 
-        setTimeout(() => {
-            handleAddress();
-          }, 0);
         if(window.addressPopup){
             window.addressPopup.close();
         }
@@ -264,11 +260,7 @@ const SignUpStep = () => {
         } else{
             handleMessageChange("address", "주소 정보를 확인해주세요.", "error_color")
         }
-      }
-
-      useEffect(() => {
-        handleAddress();
-      }, [zonecode, address]);
+      };
       
       const handlePhone = (e) => {
         const phoneNumber = `${phoneFirst}-${phoneMiddle}-${phoneLast}`;
@@ -2377,11 +2369,11 @@ const SignUpStep = () => {
                                 <label htmlFor="addressArea" className="label_style required">주소</label>
                                 <div className="address_input">
                                     <div className="flex_items">
-                                        <input type="text" placeholder="우편번호" value={zonecode} disabled/>
+                                        <input type="text" placeholder="우편번호" value={zonecode} onChange={handleAddress}/>
                                         <button className="btn_strong address_button" type="button" onClick={toggleHandler}>주소검색</button>
                                     </div>
-                                    <input type="text" placeholder="기본주소" value={address} disabled/>
-                                    <input type="text" placeholder="나머지 주소(선택 입력 가능)" value={detailedAddress} onChange={inputChangeHandler}/>
+                                    <input type="text" placeholder="기본주소" value={address} onChange={handleAddress} onBlur={handleAddress}/>
+                                    <input type="text" placeholder="나머지 주소(선택 입력 가능)" value={detailedAddress} onChange={inputChangeHandler} onBlur={handleAddress}/>
                                 </div>
                             </div>
                             <span className={`mes_style ${messages.address.color} mb_10`}>
