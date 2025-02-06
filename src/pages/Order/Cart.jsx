@@ -5,15 +5,16 @@ import ProductLinkMatch from "hooks/ProductLinkMatch.js";
 import QtyCalc from "hooks/QtyCalc.js";
 
 import "./Order.css";
+import { isCancel } from "axios";
 
 const Cart = () => {
   const [ cartList, setCartList ] = useState([]);
+  const [ deleteItem, setDeleteItem ] = useState([]);
   useEffect(() => {
     const localCartData = JSON.parse(localStorage.getItem("cartData")) || [];
     setCartList(localCartData);
   }, []);
   // localStorage.removeItem("cartData"); // 삭제
-  
 
 
   // useEffect(()=>{
@@ -34,52 +35,30 @@ const Cart = () => {
 
   const localCartDelete = (key)=>{
     const localCartUpdate = cartList.filter((el) => el.key !== key);
+    const localCartdelete = cartList.find((el) => el.key === key);
+    setDeleteItem(localCartdelete);
     setCartList(localCartUpdate);
     localStorage.setItem("cartData", JSON.stringify(localCartUpdate));
     // window.location.reload();
-    console.log("delete!");
+    console.log("delete!", localCartdelete);
   }
-  
+
   ProductLinkMatch();
 
 
-  // ==========
+  const [isCheckedAll, setIsCheckedAll] = useState(true);
+  const [isChecked, setIsChecked] = useState(JSON.parse(localStorage.getItem("cartData"))?.map(item=>item.key));
+  const chkChange = (key) => {
+    setIsChecked(prev => prev.includes(key) ? prev.filter((item) => item !== key) : [...prev, key] );
+  };
+  useEffect(()=>{
+    cartList.length === isChecked.length ? setIsCheckedAll(true) : setIsCheckedAll(false);
+  },[isChecked])
+  useEffect(()=>{
+    setIsChecked(prev => prev.filter(el => el !== deleteItem.key));
+  },[deleteItem])
 
-
- 
-  // useEffect(()=>{
-  //   if(!loadQty){
-  //     QtyCalc();
-  //     setLoadQty(true);
-  //   }
-  // },[cartList, loadQty])
-  
-
-  // (1) => useLocation => .cart>a (css)커서 적용
-
-  // document.querySelectorAll("input[type='checkbox']").forEach(function(el){
-  //   el.addEventListener("change", function(){
-  //     console.log(el)
-  //   })
-  // })
-
-  
-  // const [isChecked, setIsChecked] = useState([]);
-  // const chkChange = (key)=>{
-  //   console.log(key, isChecked.includes(key));
-  // }
-
-
-  // useEffect(()=>{
-  //   document.querySelectorAll("input[type='checkbox']").forEach(el => {
-  //     el.checked = isChecked;
-  //   })
-  // },[isChecked])
-
-  // const [refresh, setRefresh] = useState(0);
-  // useEffect(() => {
-  //   console.log(refresh,"Cart==");
-  // });
+  console.log("isChecked",isChecked);
 
 
 
@@ -105,8 +84,8 @@ const Cart = () => {
                 <tr>
                   <th>
                     <div className="chk_item">
-                      <input type="checkbox" name="chk_all"/>
-                      <label><span className="chk"></span></label>
+                      <input id="chk_all" type="checkbox" name="chk_all" checked={isCheckedAll} onChange={()=>{ setIsCheckedAll(state => !state); setIsChecked(prev => (isCheckedAll ? [] : cartList.map(el=>el.key))) }}/>
+                      <label htmlFor="chk_all"><span className="chk"></span></label>
                     </div>
                   </th>
                   <th>상품정보</th>
@@ -122,9 +101,9 @@ const Cart = () => {
                     <tr key={idx} data-id={el.key}>
                         <td className="chk">
                           <div className="chk_item">
-                            <input type="checkbox" name={el.key}/>
-                            {/* <input type="checkbox" name={el.key} checked={isChecked.includes(el.key) ? true : false} onChange={()=>chkChange(el.key)}/> */}
-                            <label><span className="chk"></span></label>
+                            {/* <input type="checkbox" name={el.key}/> */}
+                            <input id={el.key} type="checkbox" name={el.key} checked={isChecked.includes(el.key)} onChange={()=>chkChange(el.key)}/>
+                            <label htmlFor={el.key}><span className="chk"></span></label>
                           </div>
                         </td>
                         <td className="product">
