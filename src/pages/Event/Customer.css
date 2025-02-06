@@ -100,6 +100,14 @@
   align-items: center;
 }
 
+.board__notice .tb_list + div.empty {
+  height: 64px;
+  padding-left: 32px;
+  font-size: 15px;
+  line-height: 64px;
+  border-bottom: 1px solid var(--bk-color2);
+}
+
 /*===== STORE */
 
 /*===== DETAIL */

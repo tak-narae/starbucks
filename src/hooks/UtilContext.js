@@ -99,19 +99,19 @@ export const UtilProvider = ({ children }) => {
     currentBlock * maxVisiblePages,
     noticetotalPages
   );
+  const datefilteredNotice = noticeCategoryFilteredData.sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+  const paginatedNotices = datefilteredNotice.slice(
+    (currentPage - 1) * noticeitemsPerPage,
+    currentPage * noticeitemsPerPage
+  );
   const noticePages = Array.from(
     { length: noticeEndPage - startPage + 1 },
     (_, i) => startPage + i
   );
 
-  const datefilteredNotice = noticeCategoryFilteredData.sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
 
-  const paginatedNotices = datefilteredNotice.slice(
-    (currentPage - 1) * noticeitemsPerPage,
-    currentPage * noticeitemsPerPage
-  );
 
   /* ===== Event에 사용하는 변수 및 설정  ===== */
   // 현재 탭에 따른 이벤트 선택[진행중|종료된]
@@ -130,6 +130,7 @@ export const UtilProvider = ({ children }) => {
     }
     return false;
   });
+
   //탭 정보 -> 날짜 순서대로 정렬
   const datefilteredEvents = displayedEvents.sort(
     (a, b) => new Date(b.startDate) - new Date(a.startDate)
@@ -142,13 +143,13 @@ export const UtilProvider = ({ children }) => {
     currentBlock * maxVisiblePages,
     eventtotalPages
   );
-  const eventPages = Array.from(
-    { length: eventEndPage - startPage + 1 },
-    (_, i) => startPage + i
-  );
   const paginatedEvents = datefilteredEvents.slice(
     (currentPage - 1) * eventitemsPerPage,
     currentPage * eventitemsPerPage
+  );
+  const eventPages = Array.from(
+    { length: eventEndPage - startPage + 1 },
+    (_, i) => startPage + i
   );
 
   return (

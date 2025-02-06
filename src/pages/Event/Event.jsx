@@ -9,10 +9,9 @@ const Event = () => {
     isActive, selectedCategory, currentPage, setCurrentPage,
     toggleActive, handleCategoryClick, handlePageChange,
     search, setSearch,
-    eventPages, eventitemsPerPage,
-    activeTab, setActiveTab, today, eventtotalPages, datefilteredEvents,
+    eventPages, eventitemsPerPage, currentBlock, maxVisiblePages, startPage,
+    activeTab, setActiveTab, today, datefilteredEvents,totalFilteredPages
   } = useUtilContext();
-
   const navigate = useNavigate();
 
   const handleCategoryChange = (e) => {
@@ -31,12 +30,33 @@ const Event = () => {
       || event.title2.toLowerCase().includes(search.toLowerCase())
     );
     setFilteredEvents(filtered);
-  }, [search, selectedCategory, datefilteredEvents])
+    setCurrentPage(1); //검색 시 현재 페이지 초기화
+  }, [search, selectedCategory, datefilteredEvents, setCurrentPage])
 
-  const paginatedEvents = filteredEvents.slice(
+  //검색 여부에 따른 이벤트 목록
+  const isSearching = search.trim() !== ""; //검색어 확인
+  const displayedEvents = isSearching ? filteredEvents : datefilteredEvents;  // 검색이면 필터링된 데이터 사용
+
+  const paginatedEvents = displayedEvents.slice(
     (currentPage - 1) * eventitemsPerPage,
     currentPage * eventitemsPerPage
   );
+
+  const eventSearchTotalPages = Math.ceil(
+    filteredEvents.length / eventitemsPerPage
+  );
+
+  const eventSearchEndPage = Math.min(
+    currentBlock * maxVisiblePages,
+    eventSearchTotalPages
+  );
+
+  const searchPages = Array.from(
+    {length: eventSearchEndPage - startPage + 1},
+    (_, i) => startPage + i
+  );
+
+  const eventPage = isSearching ? searchPages : eventPages;
 
   return (
     <div id="container" className="board__event">
@@ -56,7 +76,7 @@ const Event = () => {
                 {["전체", "상품출시", "카드출시"].map((category) => (
                   <li key={category}>
                     <Link
-                      to={{ pathname: `/event/${datefilteredEvents.idx}`, search: `?cate=${category}` }}
+                      to={{ pathname: `/event/${paginatedEvents.idx}`, search: `?cate=${category}` }}
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -148,7 +168,7 @@ const Event = () => {
           >
             &laquo;
           </button>
-          {eventPages.map((page) => (
+          {eventPage.map((page) => (
             <button
               key={page}
               className={`page ${currentPage === page ? "active" : ""}`}
@@ -160,7 +180,7 @@ const Event = () => {
           <button
             className="next"
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === eventtotalPages}
+            disabled={currentPage === totalFilteredPages}
           >
             &raquo;
           </button>
