@@ -107,7 +107,7 @@ const Main = () => {
                 allowTouchMove={false}
                 navigation={{ prevEl:'.swiper-prev', nextEl:'.swiper-next' }}
                 autoplay={{
-                  delay: 3000,
+                  delay: 3500,
                   disableOnInteraction: false,
                 }}
               >
@@ -223,7 +223,7 @@ const Main = () => {
                 allowTouchMove={false}
                 speed={4000}
                 autoplay={{
-                  delay: 1,
+                  delay: 0,
                   disableOnInteraction: false,
                 }}
               >

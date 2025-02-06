@@ -88,6 +88,33 @@ input[type="text"][disabled] {
   border: 0;
 }
 
+.chk_item {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.chk_item input[type="checkbox"] {
+  display:none;
+}
+
+.chk_item input[type="checkbox"]:checked + label {
+  color: #0063ff;
+}
+
+.chk_item input[type="checkbox"] + label .chk {
+  width: 16px;
+  height: 16px;
+  background: url('images/ico_check.png') no-repeat 50% 50%/cover;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.chk_item input[type="checkbox"]:checked + label .chk {
+  background: url('images/ico_checked.png') no-repeat 50% 50%/cover;
+}
+
 input:focus {
   border: 1px solid var(--bk-color2);
   transition: 0.15s ease;
