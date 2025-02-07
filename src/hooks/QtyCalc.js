@@ -58,6 +58,7 @@ const QtyCalc = (setIsQtyCalcRunning, cartList, setCartList) => {
 
         // console.log(item.qty);
 
+
         // console.log(cartList, "====" ,cartData);
         console.log("!!!!!!!!?", cartData);
         localStorage.setItem("cartData", JSON.stringify(cartData));
