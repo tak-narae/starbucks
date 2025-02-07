@@ -1,4 +1,21 @@
 @charset "utf-8";
 
-.order__cart .tb_prd tr.empty td { padding:160px 0; text-align:center; font-size:14px; color:var(--bk-color3); }
-.order__cart .tb_prd tbody td.action button { width:32px; height:32px; background:transparent url("../../images/btn_close.png")no-repeat center/10px; font-size:0; opacity:.8; }
+.order__cart .tb_prd tr.empty td {
+  padding: 160px 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--bk-color3);
+}
+.order__cart .tb_prd tbody td.action button {
+  width: 32px;
+  height: 32px;
+  background: transparent url("../../images/btn_close.png") no-repeat center/10px;
+  font-size: 0;
+  opacity: .8;
+}
+.order__cart .total_cont {
+  padding: 80px;
+  margin-top:60px;
+  background-color: var(--bg-color1);
+  border-radius:8px;
+}

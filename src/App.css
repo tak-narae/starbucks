@@ -89,6 +89,7 @@ input[type="text"][disabled] {
 }
 
 .chk_item {
+  color:var(--bk-color2);
   display:flex;
   flex-wrap:wrap;
   gap:8px;
@@ -99,7 +100,7 @@ input[type="text"][disabled] {
 }
 
 .chk_item input[type="checkbox"]:checked + label {
-  color: #0063ff;
+  color: var(--main-color1);
 }
 
 .chk_item input[type="checkbox"] + label .chk {

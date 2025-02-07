@@ -3,7 +3,7 @@ import { DataContext } from "App";
 import { useLocation } from "react-router-dom";
 
 const Search = () => {
-  const { searchWord, setSearchWord } = useContext(DataContext);
+  const { searchWord, setSearchWord, coffee,beverage,product,food,notice,events } = useContext(DataContext);
   const location = useLocation();
   const decode = decodeURIComponent(location.search); //url인코딩
   const searchParams = new URLSearchParams(location.search).get("result");
@@ -16,6 +16,8 @@ const Search = () => {
       window.location.href = "/";
     }
   }, []);
+
+  console.log(coffee,beverage,product,food,notice,events);
 
   return (
     <>

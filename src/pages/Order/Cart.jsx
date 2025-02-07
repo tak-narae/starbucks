@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef,useLayoutEffect  } from "react";
 import { Link } from "react-router-dom";
 
 import ProductLinkMatch from "hooks/ProductLinkMatch.js";
@@ -10,55 +10,81 @@ import { isCancel } from "axios";
 const Cart = () => {
   const [ cartList, setCartList ] = useState([]);
   const [ deleteItem, setDeleteItem ] = useState([]);
+
   useEffect(() => {
+    //== 로컬스토리지 Detail에서 불러옴
     const localCartData = JSON.parse(localStorage.getItem("cartData")) || [];
     setCartList(localCartData);
   }, []);
   // localStorage.removeItem("cartData"); // 삭제
+ 
 
-
-  // useEffect(()=>{
-  //   QtyCalc();
-  // },[cartList])
-  
-  // console.log(cartList)
-  // console.log(cartList.length)
+  //=== 수량조절
   const [isQty, setIsQty] = useState(true);
   useEffect(() => {
     if (isQty && cartList.length > 0) {
       setIsQty(false);
       QtyCalc();
-      // QtyCalc(setIsQty, cartList, setCartList);
     }
   }, [cartList, isQty]);
 
+  // useEffect(()=>{
+  //   let targets = document.querySelectorAll('td.total_price');
+  //   let observer = new MutationObserver((mutations) => {
+  //     alert('DOM 변경 감지');
+  //     observer.disconnect(); // 한 번 알림 후 observer를 종료하여 계속 실행되지 않도록
+  //   });
+  //   let option = {
+  //     childList: true,  // 자식 노드가 변경되었을 때만 감지
+  //     characterData: true // 텍스트 내용이 변경되었을 때만 감지
+  //   };
+  //   targets.forEach(target => {
+  //     observer.observe(target, option);
+  //   });
+  // },[cartList, isQty])
 
+  //=== 삭제
   const localCartDelete = (key)=>{
-    const localCartUpdate = cartList.filter((el) => el.key !== key);
-    const localCartdelete = cartList.find((el) => el.key === key);
+    const localCartUpdate = cartList.filter((el) => el.key !== key); //삭제 외
+    const localCartdelete = cartList.find((el) => el.key === key);//삭제아이템
     setDeleteItem(localCartdelete);
     setCartList(localCartUpdate);
     localStorage.setItem("cartData", JSON.stringify(localCartUpdate));
-    // window.location.reload();
     console.log("delete!", localCartdelete);
   }
-
   ProductLinkMatch();
 
 
-  const [isCheckedAll, setIsCheckedAll] = useState(true);
-  const [isChecked, setIsChecked] = useState(JSON.parse(localStorage.getItem("cartData"))?.map(item=>item.key));
-  const chkChange = (key) => {
-    setIsChecked(prev => prev.includes(key) ? prev.filter((item) => item !== key) : [...prev, key] );
+  //=== 체크박스
+  const [ isCheckedAll, setIsCheckedAll ] = useState(true); //(처음) 전체true
+  const [ isChecked, setIsChecked ] = useState(JSON.parse(localStorage.getItem("cartData"))?.map(item=>item.key)); //(처음)true
+  const [ isCheckedItem, setIsCheckedItem ] = useState([]);
+
+  const chkChange = (key) => { //선택체크
+    setIsChecked(prev => prev.includes(key) ? prev.filter((item) => item !== key) : [...prev, key] );//키있는지 체크해서 없으면 넣음
   };
-  useEffect(()=>{
-    cartList.length === isChecked.length ? setIsCheckedAll(true) : setIsCheckedAll(false);
-  },[isChecked])
-  useEffect(()=>{
+  useEffect(()=>{ //삭제아이템 발생시 업데이트
     setIsChecked(prev => prev.filter(el => el !== deleteItem.key));
   },[deleteItem])
+  useEffect(()=>{ //전체체크
+    cartList.length === isChecked.length ? setIsCheckedAll(true) : setIsCheckedAll(false);
+    setIsCheckedItem(cartList.filter(item => isChecked.includes(item.key)));
+  },[isChecked])
+  
+  console.log("isCheckedItem",isCheckedItem);
+  
 
-  console.log("isChecked",isChecked);
+  // const [ observerText, setObserverText ] = useState(null);
+  // console.log("observerText1111",observerText);
+  // useEffect(()=>{
+  //   console.log("observerText222",observerText);
+  // },[observerText])
+  // const refPrice = useRef(null);
+  // useLayoutEffect(()=>{
+  //   console.log("변동")
+  // },[refPrice.current?.textContent])
+
+  // console.log("isChecked",isChecked, cartList);
 
 
 
@@ -84,7 +110,7 @@ const Cart = () => {
                 <tr>
                   <th>
                     <div className="chk_item">
-                      <input id="chk_all" type="checkbox" name="chk_all" checked={isCheckedAll} onChange={()=>{ setIsCheckedAll(state => !state); setIsChecked(prev => (isCheckedAll ? [] : cartList.map(el=>el.key))) }}/>
+                      <input id="chk_all" type="checkbox" name="chk_all" checked={isCheckedAll} onChange={()=>{ setIsCheckedAll(state => !state); setIsChecked(isCheckedAll ? [] : cartList.map(el=>el.key)) }}/>
                       <label htmlFor="chk_all"><span className="chk"></span></label>
                     </div>
                   </th>
@@ -133,6 +159,9 @@ const Cart = () => {
                 
               </tbody>
             </table>
+            <div className="total_cont">
+              
+            </div>
           </div>
 
 
