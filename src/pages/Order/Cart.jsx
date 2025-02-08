@@ -24,25 +24,9 @@ const Cart = () => {
   useEffect(() => {
     if (isQty && cartList.length > 0) {
       setIsQty(false);
-      QtyCalc(cartList, setCartList, setSave);
+      QtyCalc(setCartList, setPriceQtyCalc);
     }
   }, [cartList, isQty]);
-
-
-  // useEffect(()=>{
-  //   let targets = document.querySelectorAll('td.total_price');
-  //   let observer = new MutationObserver((mutations) => {
-  //     alert('DOM 변경 감지');
-  //     observer.disconnect(); // 한 번 알림 후 observer를 종료하여 계속 실행되지 않도록
-  //   });
-  //   let option = {
-  //     childList: true,  // 자식 노드가 변경되었을 때만 감지
-  //     characterData: true // 텍스트 내용이 변경되었을 때만 감지
-  //   };
-  //   targets.forEach(target => {
-  //     observer.observe(target, option);
-  //   });
-  // },[cartList, isQty])
 
   //=== 삭제
   const localCartDelete = (key)=>{
@@ -60,6 +44,7 @@ const Cart = () => {
   const [ isCheckedAll, setIsCheckedAll ] = useState(true); //(처음) 전체true
   const [ isCheckedKey, setIsCheckedKey ] = useState(JSON.parse(localStorage.getItem("cartData"))?.map(item=>item.key)); //(처음)true
   const [ isCheckedItem, setIsCheckedItem ] = useState([]);
+  const [ priceQtyCalc, setPriceQtyCalc ] = useState([]); //수량변경체크
   
   const chkChange = (key) => { //선택체크
     setIsCheckedKey(prev => prev.includes(key) ? prev.filter((item) => item !== key) : [...prev, key] );//키있는지 체크해서 없으면 넣음
@@ -70,10 +55,31 @@ const Cart = () => {
   },[deleteItem])
   useEffect(()=>{ //아이템 선택시
     cartList.length === isCheckedKey.length ? setIsCheckedAll(true) : setIsCheckedAll(false); //전체체크
-    setIsCheckedItem(cartList.filter(item => isCheckedKey.includes(item.key))); //선택아이템
-    // setIsCheckedItem(JSON.parse(localStorage.getItem("cartData")).filter(item => isChecked.includes(item.key)));
   },[isCheckedKey])
   
+
+
+  // ==========================================================
+  // 가격만 reduce return
+  // const totalPrice = isCheckedItem.reduce((total,item) => {
+  //   return total + (item.qty * item.price);
+  // }, 0);
+  const priceDelv = 3000;
+  const { totalPrice, totalQty } = isCheckedItem.reduce((total,item) => { //체크아이템 총 가격
+    return {
+      totalPrice: total.totalPrice + (item.qty * item.price),
+      totalQty: total.totalQty + item.qty
+    };
+  }, { totalPrice:0, totalQty:0 } );
+  useEffect(()=>{
+    // console.log("##수량변경##", priceQtyCalc);
+    // console.log("####리스트변동###", cartList, isCheckedKey);
+    // console.log("cartList.filter(item => isCheckedKey.includes(item.key))", cartList.filter(item => isCheckedKey.includes(item.key)));
+    setIsCheckedItem(cartList.filter(item => isCheckedKey.includes(item.key)));
+    console.log("totalPrice==",totalPrice, totalQty)
+    // console.log("isCheckedItem", isCheckedItem);
+  },[isCheckedKey, priceQtyCalc]);
+
   // #### // console.log("isCheckedItem", isCheckedKey, isCheckedItem);
   // console.log("isCheckedItem",isCheckedItem);
 
@@ -99,7 +105,7 @@ const Cart = () => {
       // ===========================================
 
 
-      const [save, setSave] = useState({});
+
       // useEffect(() => {
       //   const calculateTotal = () => {
       //     // const filteredItems = JSON.parse(localStorage.getItem("cartData"))?.filter(item => isCheckedKey.includes(item.key));
@@ -119,9 +125,7 @@ const Cart = () => {
       // useEffect(()=>{
       //   console.log("###수량변동###", );
       // },[save])
-      useEffect(()=>{
-        console.log("####리스트변동###", save, cartList)
-      },[isCheckedKey, save])
+
 
       
   // const [save, setSave] = useState(0);
@@ -158,12 +162,6 @@ const Cart = () => {
   //   console.log("뭔가변경~~")
   // },[isCartListQty])
   // console.log("isCartListQty",isCartListQty)
-
-  
-
-
-
-
 
 
 
@@ -253,21 +251,22 @@ const Cart = () => {
               </tbody>
             </table>
             <div className="total_cont">
-              <ul>
-                { isCheckedItem.map((el,idx) => (
-                  <li key={idx}>
-                    {/* <h2>{save}</h2> */}
-                    {/* <h2><span>총합: {calculateTotal().toLocaleString()}원</span></h2> */}
-                    {/* <h2><span>총합: {calculateTotal()}원</span></h2> */}
-                    {/* <h2><span>총합: {console.log("총합?",save)}원</span></h2> */}
-                    {/* <div>
-                      <div>{el.qty}</div>
-                      <div>{el.price}</div>
-                      <div>{el.qty * el.price}</div>
-                    </div> */}
-                  </li>
-                )) }
-              </ul>
+              <dl>
+                <dt>주문 수량</dt>
+                <dd>{totalQty}</dd>
+              </dl>
+              <dl>
+                <dt>주문 예정 금액</dt>
+                <dd>{totalPrice.toLocaleString()}</dd>
+              </dl>
+              <dl className="mark_plus">
+                <dt>배송비</dt>
+                <dd>{totalPrice ? priceDelv.toLocaleString() : 0}</dd>
+              </dl>
+              <dl className="mark_end">
+                <dt>합계</dt>
+                <dd>{(totalPrice ? totalPrice + priceDelv : 0).toLocaleString()}원</dd>
+              </dl>
             </div>
           </div>
 

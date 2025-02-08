@@ -1,4 +1,4 @@
-const QtyCalc = (cartList, setCartList, setSave) => {
+const QtyCalc = (setCartList, setPriceQtyCalc) => {
   const spinners = document.querySelectorAll(".btn_qty");
   // console.log(`.btn_qty 몇개 ??? ${spinners.length}`);
 
@@ -40,14 +40,15 @@ const QtyCalc = (cartList, setCartList, setSave) => {
         totalPriceEl.textContent = (item.price * parseInt(qtyEl.value)).toLocaleString() + "원";
 
 
-        //##수량변경시 cartList qty*price 계산 전달 및 업데이트
-        const priceItems = cartData.map(item => {
-          return {
-            key: item.key,
-            price: item.qty * item.price
-          }
-        });
-        setSave(priceItems);
+        //##수량변경시 상태 전달 및 업데이트
+        const priceItems = cartData.map(item => item.qty * item.price );
+        // const priceItems = cartData.map(item => {
+        //   return {
+        //     key: item.key,
+        //     price: item.qty * item.price
+        //   }
+        // });
+        setPriceQtyCalc(priceItems);
         setCartList(cartData);
         
 
