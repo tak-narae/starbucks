@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef,useLayoutEffect  } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import ProductLinkMatch from "hooks/ProductLinkMatch.js";
 import QtyCalc from "hooks/QtyCalc.js";
 
 import "./Order.css";
-import { isCancel } from "axios";
 
 const Cart = () => {
   const [ cartList, setCartList ] = useState([]);
@@ -184,7 +183,7 @@ const Cart = () => {
       <div id="container" className="order__cart">
         <div className="layout_fix">
           <div className="heading">
-            <h2 className="tit">장바구니</h2>
+            <h2 className="tit">장바구니 {cartList.length > 0 && `(${cartList.length})`}</h2>
           </div>
           <div className="prd_data">
             <table className="tb_prd">
@@ -195,7 +194,7 @@ const Cart = () => {
                 <col style={{width:"180px"}}/>
                 <col style={{width:"120px"}}/>
                 <col style={{width:"120px"}}/>
-                <col style={{width:"120px"}}/>
+                <col style={{width:"80px"}}/>
               </colgroup>
               <thead>
                 <tr>
