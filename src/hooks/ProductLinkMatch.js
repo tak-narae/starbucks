@@ -16,7 +16,7 @@ const ProductLinkMatch = () => {
     const fetchData = () => {
       axios.get("https://raw.githubusercontent.com/deliondane/db/main/db.json")
         .then((res) => {
-          console.log("++res++", res);
+          // console.log("++res++", res);
           const { promotion, coffee, beverage, product, food } = res.data; //객체 구조 분해 할당
           setData({
             dataCoffee: coffee.map((el, idx) => ({

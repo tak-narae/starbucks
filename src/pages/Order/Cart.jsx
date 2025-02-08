@@ -24,9 +24,10 @@ const Cart = () => {
   useEffect(() => {
     if (isQty && cartList.length > 0) {
       setIsQty(false);
-      QtyCalc();
+      QtyCalc(cartList, setCartList, setSave);
     }
   }, [cartList, isQty]);
+
 
   // useEffect(()=>{
   //   let targets = document.querySelectorAll('td.total_price');
@@ -57,22 +58,114 @@ const Cart = () => {
 
   //=== 체크박스
   const [ isCheckedAll, setIsCheckedAll ] = useState(true); //(처음) 전체true
-  const [ isChecked, setIsChecked ] = useState(JSON.parse(localStorage.getItem("cartData"))?.map(item=>item.key)); //(처음)true
+  const [ isCheckedKey, setIsCheckedKey ] = useState(JSON.parse(localStorage.getItem("cartData"))?.map(item=>item.key)); //(처음)true
   const [ isCheckedItem, setIsCheckedItem ] = useState([]);
-
+  
   const chkChange = (key) => { //선택체크
-    setIsChecked(prev => prev.includes(key) ? prev.filter((item) => item !== key) : [...prev, key] );//키있는지 체크해서 없으면 넣음
+    setIsCheckedKey(prev => prev.includes(key) ? prev.filter((item) => item !== key) : [...prev, key] );//키있는지 체크해서 없으면 넣음
   };
-  useEffect(()=>{ //삭제아이템 발생시 업데이트
-    setIsChecked(prev => prev.filter(el => el !== deleteItem.key));
+
+  useEffect(()=>{ //아이템 삭제시 업데이트
+    setIsCheckedKey(prev => prev.filter(el => el !== deleteItem.key));
   },[deleteItem])
-  useEffect(()=>{ //전체체크
-    cartList.length === isChecked.length ? setIsCheckedAll(true) : setIsCheckedAll(false);
-    setIsCheckedItem(cartList.filter(item => isChecked.includes(item.key)));
-  },[isChecked])
+  useEffect(()=>{ //아이템 선택시
+    cartList.length === isCheckedKey.length ? setIsCheckedAll(true) : setIsCheckedAll(false); //전체체크
+    setIsCheckedItem(cartList.filter(item => isCheckedKey.includes(item.key))); //선택아이템
+    // setIsCheckedItem(JSON.parse(localStorage.getItem("cartData")).filter(item => isChecked.includes(item.key)));
+  },[isCheckedKey])
   
-  console.log("isCheckedItem",isCheckedItem);
+  // #### // console.log("isCheckedItem", isCheckedKey, isCheckedItem);
+  // console.log("isCheckedItem",isCheckedItem);
+
+  // setIsCheckedItem(prev => JSON.parse(localStorage.getItem("cartData"))?.filter(item=>isCheckedKey.includes(item.key)));
+
+  // const handlePrice = ()=>{
+  //   // console.log("+-버튼클릭");
+  //   console.log("&&&test", JSON.parse(localStorage.getItem("cartData"))?.filter(item=>isCheckedKey.includes(item.key)));
+  //   setSave(JSON.parse(localStorage.getItem("cartData"))?.filter(item=>isCheckedKey.includes(item.key)));
+  // }
+
   
+  // const calculateTotal = () => {
+    //   console.log("&&&가격확인&&&")
+    //   const filteredItems = JSON.parse(localStorage.getItem("cartData"))?.filter(item => isCheckedKey.includes(item.key));
+    //   const totalPrice = filteredItems.reduce((total, item) => {
+      //     return total + item.price * item.qty; // 가격 * 수량을 더함
+      //   }, 0);
+      //   return totalPrice;
+      // };
+
+
+      // ===========================================
+
+
+      const [save, setSave] = useState({});
+      // useEffect(() => {
+      //   const calculateTotal = () => {
+      //     // const filteredItems = JSON.parse(localStorage.getItem("cartData"))?.filter(item => isCheckedKey.includes(item.key));
+      //     const filteredItems = cartList.filter(item => isCheckedKey.includes(item.key));
+      //     const totalPrice = filteredItems.reduce((total, item) => {
+      //       return total + (item.qty * item.price);
+      //     }, 0); // 초기값 0설정
+      //     // setSave(totalPrice);
+      //     return totalPrice;
+      //   };
+      //   // calculateTotal();
+      //   setSave(calculateTotal());
+      //   // console.log("체크및계산호출==", save);
+      // }, [isCheckedKey, save]);
+
+      
+      // useEffect(()=>{
+      //   console.log("###수량변동###", );
+      // },[save])
+      useEffect(()=>{
+        console.log("####리스트변동###", save, cartList)
+      },[isCheckedKey, save])
+
+      
+  // const [save, setSave] = useState(0);
+  // const calculateTotal = () => {
+  //   const filteredItems = JSON.parse(localStorage.getItem("cartData"))?.filter(item => isCheckedKey.includes(item.key));
+  //   const totalPrice = filteredItems.reduce((total, item, idx) => {
+  //     console.log("도는중(())", total + (item.qty * item.price))
+  //     setSave(total + (item.qty * item.price));
+  //     return total + (item.qty * item.price);
+  //   }, 0); //초기값 0설정
+  //   // setSave(totalPrice);
+  //   return totalPrice;
+  // };
+
+  // useEffect(() => {
+  //   console.log("머ㅜ얌어ㅝ망")
+  //   calculateTotal();
+  //   console.log("save==", save)
+  // }, [isCheckedKey]);
+
+// =========================================
+
+
+  // console.log("calculateTotal", calculateTotal());
+
+  // console.log("ㅎ&*&*&*&ㅎ*", save);
+
+  // useEffect(()=>{
+    // calculateTotal();
+  // },[isCheckedItem])
+
+  
+  // useEffect(()=>{
+  //   console.log("뭔가변경~~")
+  // },[isCartListQty])
+  // console.log("isCartListQty",isCartListQty)
+
+  
+
+
+
+
+
+
 
   // const [ observerText, setObserverText ] = useState(null);
   // console.log("observerText1111",observerText);
@@ -110,7 +203,7 @@ const Cart = () => {
                 <tr>
                   <th>
                     <div className="chk_item">
-                      <input id="chk_all" type="checkbox" name="chk_all" checked={isCheckedAll} onChange={()=>{ setIsCheckedAll(state => !state); setIsChecked(isCheckedAll ? [] : cartList.map(el=>el.key)) }}/>
+                      <input id="chk_all" type="checkbox" name="chk_all" checked={isCheckedAll} onChange={()=>{ setIsCheckedAll(state => !state); setIsCheckedKey(isCheckedAll ? [] : cartList.map(el=>el.key)) }}/>
                       <label htmlFor="chk_all"><span className="chk"></span></label>
                     </div>
                   </th>
@@ -128,7 +221,7 @@ const Cart = () => {
                         <td className="chk">
                           <div className="chk_item">
                             {/* <input type="checkbox" name={el.key}/> */}
-                            <input id={el.key} type="checkbox" name={el.key} checked={isChecked.includes(el.key)} onChange={()=>chkChange(el.key)}/>
+                            <input id={el.key} type="checkbox" name={el.key} checked={isCheckedKey.includes(el.key)} onChange={()=>chkChange(el.key)}/>
                             <label htmlFor={el.key}><span className="chk"></span></label>
                           </div>
                         </td>
@@ -144,7 +237,7 @@ const Cart = () => {
                         <td className="num">
                           <div className="btn_qty">
                             <button className="minus">-</button>
-                            <input type="tel" className="qty" value={el.qty} maxLength="4" readOnly/>
+                            <input type="tel" className="qty" value={el.qty} data-qty={el.qty} readOnly/>
                             <button className="plus">+</button>
                           </div>
                         </td>
@@ -160,7 +253,21 @@ const Cart = () => {
               </tbody>
             </table>
             <div className="total_cont">
-              
+              <ul>
+                { isCheckedItem.map((el,idx) => (
+                  <li key={idx}>
+                    {/* <h2>{save}</h2> */}
+                    {/* <h2><span>총합: {calculateTotal().toLocaleString()}원</span></h2> */}
+                    {/* <h2><span>총합: {calculateTotal()}원</span></h2> */}
+                    {/* <h2><span>총합: {console.log("총합?",save)}원</span></h2> */}
+                    {/* <div>
+                      <div>{el.qty}</div>
+                      <div>{el.price}</div>
+                      <div>{el.qty * el.price}</div>
+                    </div> */}
+                  </li>
+                )) }
+              </ul>
             </div>
           </div>
 
