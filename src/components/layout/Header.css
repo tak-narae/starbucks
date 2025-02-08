@@ -142,14 +142,6 @@ header .shop_util .cart a {
   background-image: url("../../images/header_menu3.png");
 }
 
-:has(.order__cart) header .shop_util .cart {
-  cursor:pointer;
-}
-
-:has(.order__cart) header .shop_util .cart a {
-  pointer-events: none;
-}
-
 header .shop_util .card a {
   background-image: url("../../images/header_menu4.png");
 }

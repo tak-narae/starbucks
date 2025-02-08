@@ -75,7 +75,7 @@ const Cart = () => {
     // console.log("####리스트변동###", cartList, isCheckedKey);
     // console.log("cartList.filter(item => isCheckedKey.includes(item.key))", cartList.filter(item => isCheckedKey.includes(item.key)));
     setIsCheckedItem(cartList.filter(item => isCheckedKey.includes(item.key)));
-    console.log("totalPrice==",totalPrice, totalQty)
+    // console.log("totalPrice이전값==",totalPrice, totalQty)
     // console.log("isCheckedItem", isCheckedItem);
   },[isCheckedKey, priceQtyCalc]);
 

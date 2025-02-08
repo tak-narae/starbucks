@@ -15,7 +15,6 @@ const QtyCalc = (setCartList, setPriceQtyCalc) => {
     }
 
     const updatePrice = () => {
-
       if (document.querySelector("#container").classList.contains("prd__detail")) {
         const totalPriceEl = spinner.closest(".total_item").querySelector(".total_price");
         const originPrice = parseInt(document.querySelector('[class^="prd__detail"] .prd_item .info_cont .price').textContent.replaceAll(",", ""));
