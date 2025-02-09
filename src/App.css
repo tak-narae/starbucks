@@ -513,7 +513,8 @@ footer .link b {
   align-items: center;
 }
 
-[class^="heading"]:has(.path){
+[class^="heading"]:has(.path),
+[class^="heading"]:has([class^="desc"]) {
 /* [class^="heading"]:not(:has(h2)), */
   align-items: baseline;
   flex-direction: column;

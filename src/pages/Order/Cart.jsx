@@ -196,7 +196,7 @@ const Cart = () => {
                 <col style={{width:"180px"}}/>
                 <col style={{width:"120px"}}/>
                 <col style={{width:"120px"}}/>
-                <col style={{width:"80px"}}/>
+                <col style={{width:"60px"}}/>
               </colgroup>
               <thead>
                 <tr>
@@ -210,7 +210,7 @@ const Cart = () => {
                   <th>수량</th>
                   <th>상품금액</th>
                   <th>주문금액</th>
-                  <th>처리</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
