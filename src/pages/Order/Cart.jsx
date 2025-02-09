@@ -11,7 +11,7 @@ const Cart = () => {
   const [ deleteItem, setDeleteItem ] = useState([]);
 
   useEffect(() => {
-    //== 로컬스토리지 Detail에서 불러옴
+    //== Detail에서 로컬스토리지 불러옴
     const localCartData = JSON.parse(localStorage.getItem("cartData")) || [];
     setCartList(localCartData);
   }, []);
@@ -27,6 +27,7 @@ const Cart = () => {
     }
   }, [cartList, isQty]);
 
+  
   //=== 삭제
   const localCartDelete = (key)=>{
     const localCartUpdate = cartList.filter((el) => el.key !== key); //삭제 외
@@ -78,6 +79,7 @@ const Cart = () => {
     // console.log("totalPrice이전값==",totalPrice, totalQty)
     // console.log("isCheckedItem", isCheckedItem);
   },[isCheckedKey, priceQtyCalc]);
+  
 
   // #### // console.log("isCheckedItem", isCheckedKey, isCheckedItem);
   // console.log("isCheckedItem",isCheckedItem);

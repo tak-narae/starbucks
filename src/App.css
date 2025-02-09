@@ -513,8 +513,8 @@ footer .link b {
   align-items: center;
 }
 
-[class^="heading"]:has(.path),
-[class^="heading"]:not(:has(h2)) {
+[class^="heading"]:has(.path){
+/* [class^="heading"]:not(:has(h2)), */
   align-items: baseline;
   flex-direction: column;
 }
@@ -548,6 +548,10 @@ footer .link b {
 
 .heading [class^="sub"][class$="-light"] {
   color: var(--bk-color3);
+}
+
+.heading [class^="sub"][class$="-em"]{
+  color:var(--main-color1);
 }
 
 .heading [class^="desc"] {

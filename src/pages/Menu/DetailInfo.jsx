@@ -77,7 +77,8 @@ const DetailInfo = () => {
           </div>
           <div className="info_cont">
             <h3 className="name-en">{productMatch.nameEn}</h3>
-            <h2 className="name">{productMatch.name}</h2>
+            {/* <h2 className="name">{productMatch.name}</h2> */}
+            <h2 className="tit">{productMatch.name}</h2>
             <h4 className="desc">{productMatch.desc}</h4>
             <h4 className="price">{typeof productMatch.price === "number" ? `${productMatch.price.toLocaleString()}원` : productMatch.price}</h4>
           </div>
