@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -40,7 +40,7 @@ const Detail = () => {
     setTimeout(() => {
       QtyCalc();
       
-      const handleScroll = () => { //scroll 위치찾아서 적용
+      const handleScroll = () => { //scroll 위치찾아서 탭적용
         const pinY = window.scrollY - 117;
         // console.log("pin--", pinY, "Delv--", refDelv.current.offsetTop);
 
@@ -79,10 +79,8 @@ const Detail = () => {
       window.scrollTo({ top: targetRef.current.offsetTop + 118 });
     }
   }
-
   
-  
-  const [randomList, setRandomList] = useState([]);
+  const [randomList, setRandomList] = useState([]); //추천상품
   useEffect(()=>{
     if(Array.isArray(cateList) && cateList.length > 0){
       const recommendedList = [...cateList].sort(() => Math.random() - 0.5).slice(0, 10);
@@ -90,10 +88,6 @@ const Detail = () => {
     }
   },[cateList])
   // console.log(randomList);
-
-
-  //#####c ProductLinkMatch();
-  
 
 
   const navigate = useNavigate(); //장바구니 담기
@@ -114,6 +108,16 @@ const Detail = () => {
     localStorage.setItem("cartData", JSON.stringify(cartData));
     navigate("/order/cart");
   }
+
+  const location = useLocation();
+  const handleCopyLink = async (url) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      alert(`링크가 복사되었습니다!\n(${url})`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   
 
   if (!productMatch) {
@@ -197,7 +201,8 @@ const Detail = () => {
             <div className="info_cont">
               <ul className="action">
                 <li className="like"><button>찜</button></li>
-                <li className="share"><button>공유</button></li>
+                {/* <li className="share"><button onClick={()=>handleCopyLink(`${process.env.PUBLIC_URL}${location.pathname}${location.search}`)}>공유</button></li> */}
+                <li className="share"><button onClick={()=>handleCopyLink(`${window.location.origin}${location.pathname}${location.search}`)}>공유</button></li>
               </ul>
               <h2 className="tit">{productMatch.name}</h2>
               {title === "커피" && (

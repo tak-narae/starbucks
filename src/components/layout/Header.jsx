@@ -79,9 +79,15 @@ const Header = () => {
     }
     const actionSearch = (e) => { //검색페이지로 값 전달
         e.preventDefault();
-        const trimValue = searchValue.replace(/\s+/g, ""); //공백제거
-        setSearchWord(trimValue); //**searchValue
-        navigate(`/search?result=${trimValue}`); //**searchValue
+        const splitValue = searchValue.trim().split(/\s+/); //공백기준 분리
+        const splitMerge = splitValue.join("+");
+        setSearchWord(splitValue); //**[안,녕,하세요]
+        navigate(`/search?result=${splitMerge}`); //**안+녕+하세요
+
+        //=== trim keyword()
+        // const trimValue = searchValue.replace(/\s+/g, ""); //공백제거
+        // setSearchWord(searchValue); //**searchValue
+        // navigate(`/search?result=${trimValue}`); //**searchValue
     }
     useEffect(() => { //페이지 이동시 초기화
         document.querySelector("header .search_form.active")?.classList.remove("active");
