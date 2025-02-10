@@ -8,42 +8,63 @@ const Event = () => {
   useEffect(() => {
     setSearch(""); // 페이지 로드 시 검색어 초기화
   }, []); // 의존성 배열이 빈 배열이면 컴포넌트가 처음 마운트될 때만 실행됨
-  
+
   const {
-    isActive, selectedCategory, currentPage, setCurrentPage,
-    toggleActive, handleCategoryClick, handlePageChange,
-    search, setSearch,
-    eventPages, eventitemsPerPage, currentBlock, maxVisiblePages, startPage,
-    activeTab, setActiveTab, today, datefilteredEvents,totalFilteredPages
+    isActive,
+    selectedCategory,
+    currentPage,
+    setCurrentPage,
+    toggleActive,
+    handleCategoryClick,
+    handlePageChange,
+    search,
+    setSearch,
+    eventPages,
+    eventitemsPerPage,
+    currentBlock,
+    maxVisiblePages,
+    startPage,
+    activeTab,
+    setActiveTab,
+    today,
+    datefilteredEvents,
+    totalFilteredPages,
   } = useUtilContext();
+
   const navigate = useNavigate();
 
   const handleCategoryChange = (e) => {
     handleCategoryClick(selectedCategory);
     navigate(`/event?cate=${e}`);
-  }
+  };
 
   const [filteredEvents, setFilteredEvents] = useState(datefilteredEvents);
+
   const searchAction = (e) => {
     e.target.closest(".search_event").classList.toggle("active");
   };
 
   useEffect(() => {
-    if(search.trim() === ""){
+    if (search.trim() === "") {
       setFilteredEvents(datefilteredEvents);
-    } else{
-      const filtered = datefilteredEvents.filter(event =>
-        event.title.toLowerCase().includes(search.toLowerCase())
-        || event.title2.toLowerCase().includes(search.toLowerCase())
+    } else {
+      const filtered = datefilteredEvents.filter(
+        (event) =>
+          event.title.toLowerCase().includes(search.toLowerCase()) ||
+          event.title2.toLowerCase().includes(search.toLowerCase())
       );
       setFilteredEvents(filtered);
     }
     setCurrentPage(1); //검색 시 현재 페이지 초기화
-  }, [search, selectedCategory, datefilteredEvents, setCurrentPage])
+  }, [search, selectedCategory, datefilteredEvents, setCurrentPage]);
 
   //검색 여부에 따른 이벤트 목록
   const isSearching = search.trim() !== ""; //검색어 확인
-  const displayedEvents = isSearching ? filteredEvents : datefilteredEvents;  // 검색이면 필터링된 데이터 사용
+  const displayedEvents = isSearching ? filteredEvents : datefilteredEvents; // 검색이면 필터링된 데이터 사용
+  const paginatedEvents = displayedEvents.slice(
+    (currentPage - 1) * eventitemsPerPage,
+    currentPage * eventitemsPerPage
+  );
   const eventSearchTotalPages = Math.ceil(
     filteredEvents.length / eventitemsPerPage
   );
@@ -52,7 +73,7 @@ const Event = () => {
     eventSearchTotalPages
   );
   const searchPages = Array.from(
-    {length: eventSearchEndPage - startPage + 1},
+    { length: eventSearchEndPage - startPage + 1 },
     (_, i) => startPage + i
   );
   const eventPage = isSearching ? searchPages : eventPages;
@@ -63,7 +84,7 @@ const Event = () => {
         <div className="heading">
           <h2 className="tit">이벤트</h2>
           <ul className="sort_list">
-            <li className={`sort_item`}>
+            <li className="sort_item">
               <label>카테고리</label>
               <Link
                 className={`${isActive ? "active" : ""}`}
@@ -75,7 +96,10 @@ const Event = () => {
                 {["전체", "상품출시", "카드출시"].map((category) => (
                   <li key={category}>
                     <Link
-                      to={{ pathname: `/event/${datefilteredEvents.idx}`, search: `?cate=${category}` }}
+                      to={{
+                        pathname: `/event/${datefilteredEvents.idx}`,
+                        search: `?cate=${category}`,
+                      }}
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -132,12 +156,19 @@ const Event = () => {
         </div>
 
         <ul className="event_list">
-          {displayedEvents.length > 0 ? (
-            displayedEvents.map((event, idx) => {
+          {paginatedEvents.length > 0 ? (
+            paginatedEvents.map((event, idx) => {
               const isEnded = event.endDate && new Date(event.endDate) < today; //종료 이벤트 확인
               return (
                 <li key={idx} className={isEnded ? "li-ended" : ""}>
-                  <Link to={{ pathname: `/event/${idx}`, search: `?cate=${event.category}` }} className="item" state={{event}}>
+                  <Link
+                    to={{
+                      pathname: `/event/${idx}`,
+                      search: `?cate=${event.category}`,
+                    }}
+                    className="item"
+                    state={{ event }}
+                  >
                     <div className="thumbnail">
                       <img src={event.img} alt={event.title} />
                     </div>

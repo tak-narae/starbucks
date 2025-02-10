@@ -19,6 +19,9 @@ import EventDetail from "pages/Event/EventDetail";
 import Notice from "pages/Notice/Notice";
 import NoticeDetail from "pages/Notice/NoticeDetail";
 import Store from "pages/Store/Store";
+import StoreMap from "pages/Store/StoreMap";
+import StoreDrive from "pages/Store/StoreDrive";
+import StoreReserve from "pages/Store/StoreReserve";
 import Footer from "components/layout/Footer";
 import Guide from "pages/guide/Guide";
 import UtilProvider from "hooks/UtilContext";
@@ -121,7 +124,11 @@ function App() {
             <Route path="/event/:idx" element={<EventDetail />}></Route>
             <Route path="/notice" element={<Notice />}></Route>
             <Route path="/notice/:idx" element={<NoticeDetail />}></Route>
-            <Route path="/store" element={<Store />}></Route>
+            <Route path="/store/" element={<Store />}>
+              <Route path="map" element={<StoreMap />}></Route>
+              <Route path="drive" element={<StoreDrive />}></Route>
+              <Route path="reserve" element={<StoreReserve />}></Route>
+            </Route>
             <Route path="/guide" element={<Guide />}></Route>
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signup?step?" element={<SignUpStep />} />
