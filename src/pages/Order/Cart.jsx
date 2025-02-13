@@ -42,7 +42,7 @@ const Cart = () => {
 
   //=== 체크박스
   const [ isCheckedAll, setIsCheckedAll ] = useState(true); //(처음) 전체true
-  const [ isCheckedKey, setIsCheckedKey ] = useState(JSON.parse(localStorage.getItem("cartData"))?.map(item=>item.key)); //(처음)true
+  const [ isCheckedKey, setIsCheckedKey ] = useState(JSON.parse(localStorage.getItem("cartData"))?.map(item=>item.key) || []); //(처음)true
   const [ isCheckedItem, setIsCheckedItem ] = useState([]);
   const [ priceQtyCalc, setPriceQtyCalc ] = useState([]); //수량변경체크
   
