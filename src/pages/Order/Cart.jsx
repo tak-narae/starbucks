@@ -54,7 +54,7 @@ const Cart = () => {
     setIsCheckedKey(prev => prev.filter(el => el !== deleteItem.key));
   },[deleteItem])
   useEffect(()=>{ //아이템 선택시
-    cartList.length === isCheckedKey.length ? setIsCheckedAll(true) : setIsCheckedAll(false); //전체체크
+    Array.isArray(isCheckedKey) && cartList.length === isCheckedKey.length ? setIsCheckedAll(true) : setIsCheckedAll(false); //전체체크
   },[isCheckedKey])
   
 
