@@ -190,7 +190,7 @@ const Main = () => {
             </ul>
           </div>
         </section>
-        <section className="main__res_store">
+        <section className="displaynone main__res_store">
           <div className="layout_fix">
             <div className="heading">
               <span className="sub-light">Starbucks</span>
@@ -211,7 +211,8 @@ const Main = () => {
           </div>
           <div className="loop_event">
             <ul className="event_list">
-              <Swiper className="swiper_event"
+              { !loading && (
+                <Swiper className="swiper_event"
                 modules={[Autoplay]}
                 observer={true}
                 observeParents={true}
@@ -247,6 +248,7 @@ const Main = () => {
                   </SwiperSlide>
                 ))}
               </Swiper>
+              ) }
             </ul>
           </div>
         </section>
@@ -272,35 +274,39 @@ const Main = () => {
             </ul>
             <div className="notice">
               <b>공지</b>
-              <Swiper
-                className="swiper_notice"
-                modules={[Autoplay, Pagination]}
-                slidesPerView={1}
-                touchRatio={0}
-                direction={"vertical"}
-                autoHeight={true}
-                loop
-                autoplay={{
-                  delay: 2000,
-                  disableOnInteraction: false,
-                }}
-              >
-                {datefilteredNotice && datefilteredNotice.length > 0 ? (
-                  datefilteredNotice.slice(0, 10).map((noticeItem, idx) => (
-                    <SwiperSlide key={idx}>
-                      <Link to={`/notice/${idx}?cate=${noticeItem.category}`}>
-                        <p className="tit">{noticeItem.subject}</p>
-                        <span className="date">{noticeItem.date}</span>
-                      </Link>
-                    </SwiperSlide>
-                  ))
-                ) : (
-                  <p>공지사항이 없습니다.</p>
-                )}
-              </Swiper>
-              <Link to="/notice" className="btn_link">
-                더보기 +
-              </Link>
+              { !loading && (
+                <>
+                  <Swiper
+                    className="swiper_notice"
+                    modules={[Autoplay, Pagination]}
+                    slidesPerView={1}
+                    touchRatio={0}
+                    direction={"vertical"}
+                    autoHeight={true}
+                    loop
+                    autoplay={{
+                      delay: 2000,
+                      disableOnInteraction: false,
+                    }}
+                  >
+                    { datefilteredNotice && datefilteredNotice.length > 0 ? (
+                      datefilteredNotice.slice(0, 10).map((noticeItem, idx) => (
+                        <SwiperSlide key={idx}>
+                          <Link to={`/notice/${idx}?cate=${noticeItem.category}`}>
+                            <p className="tit">{noticeItem.subject}</p>
+                            <span className="date">{noticeItem.date}</span>
+                          </Link>
+                        </SwiperSlide>
+                      ))
+                    ) : (
+                      <p>공지사항이 없습니다.</p>
+                    )}
+                  </Swiper>
+                  <Link to="/notice" className="btn_link">
+                    더보기 +
+                  </Link>
+                </>
+              ) }
             </div>
           </div>
         </section>
