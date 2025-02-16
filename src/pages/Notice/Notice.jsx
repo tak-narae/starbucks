@@ -1,37 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 import "pages/Event/Customer.css";
 
 const Notice = () => {
   useEffect(() => {
-      setSearch(""); // 페이지 로드 시 검색어 초기화
-    }, []); // 의존성 배열이 빈 배열이면 컴포넌트가 처음 마운트될 때만 실행됨
+    setSearch(""); // 페이지 로드 시 검색어 초기화
+  }, []); // 의존성 배열이 빈 배열이면 컴포넌트가 처음 마운트될 때만 실행됨
 
   const {
-    isActive, selectedCategory, currentPage, setCurrentPage,
-    toggleActive, handleCategoryClick, handlePageChange,
-    search, setSearch,
-    maxVisiblePages, currentBlock, startPage, noticePages, noticeitemsPerPage, noticetotalPages, datefilteredNotice, paginatedNotices
+    isActive,
+    selectedCategory,
+    currentPage,
+    setCurrentPage,
+    toggleActive,
+    handleCategoryClick,
+    handlePageChange,
+    search,
+    setSearch,
+    maxVisiblePages,
+    currentBlock,
+    startPage,
+    noticePages,
+    noticeitemsPerPage,
+    noticetotalPages,
+    datefilteredNotice,
+    paginatedNotices,
   } = useUtilContext();
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.search.includes("cate=")) {
+      navigate("/notice", { replace: true });
+    }
+  }, []);
 
   const handleCategoryChange = (e) => {
     handleCategoryClick(selectedCategory);
     navigate(`/notice?cate=${e}`);
-  }
+  };
   const [filteredNotices, setFilteredNotices] = useState(datefilteredNotice);
   const searchAction = (e) => {
     e.target.closest(".search_notice").classList.toggle("active");
   };
 
   useEffect(() => {
-    if(search.trim === ""){
+    if (search.trim === "") {
       setFilteredNotices(datefilteredNotice);
-    } else{
-      const filtered = datefilteredNotice.filter(notice =>
+    } else {
+      const filtered = datefilteredNotice.filter((notice) =>
         notice.subject.toLowerCase().includes(search.toLowerCase())
       );
       setFilteredNotices(filtered);
@@ -41,7 +61,7 @@ const Notice = () => {
 
   //검색 여부에 따른 이벤트 목록
   const isSearching = search.trim() !== ""; //검색어 확인
-  const displayedNotice = isSearching ? filteredNotices : paginatedNotices;  // 검색이면 필터링된 데이터 사용
+  const displayedNotice = isSearching ? filteredNotices : paginatedNotices; // 검색이면 필터링된 데이터 사용
   const noticeSearchTotalPages = Math.ceil(
     filteredNotices.length / noticeitemsPerPage
   );
@@ -50,11 +70,10 @@ const Notice = () => {
     noticeSearchTotalPages
   );
   const searchPages = Array.from(
-    {length: noticeSearchEndPage - startPage + 1 }, 
+    { length: noticeSearchEndPage - startPage + 1 },
     (_, i) => startPage + i
   );
   const noticePage = isSearching ? searchPages : noticePages;
-
 
   return (
     <>
@@ -78,22 +97,25 @@ const Notice = () => {
                   {selectedCategory}
                 </Link>
                 <ul className="dropdown">
-                  {["전체", "공지사항", "문화소식", "사회공헌"].map((category) => (
-                    <li key={category}>
-                      <Link to={{
-                        pathname: `/notice/${datefilteredNotice.idx}`, search: `?cate=${category}`
-                      }}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          handleCategoryChange(category);
-                          handleCategoryClick(category);
-                        }}
-                      >
-                        {category}
-                      </Link>
-                    </li>
-                  )
+                  {["전체", "공지사항", "문화소식", "사회공헌"].map(
+                    (category) => (
+                      <li key={category}>
+                        <Link
+                          to={{
+                            pathname: `/notice/${datefilteredNotice.idx}`,
+                            search: `?cate=${category}`,
+                          }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleCategoryChange(category);
+                            handleCategoryClick(category);
+                          }}
+                        >
+                          {category}
+                        </Link>
+                      </li>
+                    )
                   )}
                 </ul>
               </li>
@@ -131,25 +153,30 @@ const Notice = () => {
                   <th>날짜</th>
                 </tr>
               </thead>
-                  <tbody>
-                    {displayedNotice.map((notice, idx) => (
-                      <tr key={idx}>
-                        <td>{(currentPage - 1) * noticeitemsPerPage + idx + 1}</td>
-                        <td>{notice.category}</td>
-                        <td className="subject">
-                          <Link
-                            to={{ pathname: `/notice/${idx}`, search: `?cate=${notice.category}` }}
-                          >{notice.subject}</Link>
-                        </td>
-                        <td>관리자</td>
-                        <td>{notice.date}</td>
-                      </tr>
-                    ))}
-                  </tbody>
+              <tbody>
+                {displayedNotice.map((notice, idx) => (
+                  <tr key={idx}>
+                    <td>{(currentPage - 1) * noticeitemsPerPage + idx + 1}</td>
+                    <td>{notice.category}</td>
+                    <td className="subject">
+                      <Link
+                        to={{
+                          pathname: `/notice/${idx}`,
+                          search: `?cate=${notice.category}`,
+                        }}
+                      >
+                        {notice.subject}
+                      </Link>
+                    </td>
+                    <td>관리자</td>
+                    <td>{notice.date}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
-            ) : (
-              <>
-                <table className="tb_list">
+          ) : (
+            <>
+              <table className="tb_list">
                 <colgroup>
                   <col style={{ width: "100px" }} />
                   <col style={{ width: "160px" }} />
@@ -166,10 +193,10 @@ const Notice = () => {
                     <th>날짜</th>
                   </tr>
                 </thead>
-                </table>
-                <div className="empty">현재 표시할 공지사항이 없습니다.</div>
-              </>
-            )}
+              </table>
+              <div className="empty">현재 표시할 공지사항이 없습니다.</div>
+            </>
+          )}
           <div className="pagination">
             <button
               className="prev"
@@ -178,28 +205,30 @@ const Notice = () => {
             >
               &laquo;
             </button>
-            { noticePage.length !== 0 ? (
+            {noticePage.length !== 0 ? (
               noticePage.map((page) => (
                 <button
                   key={page}
                   className={`page ${currentPage === page ? "active" : ""}`}
-                  onClick={() => handlePageChange(page)} >
+                  onClick={() => handlePageChange(page)}
+                >
                   {page}
                 </button>
               ))
             ) : (
               <button className="active">1</button>
-            ) }
+            )}
             <button
               className="next"
               onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === noticetotalPages} >
+              disabled={currentPage === noticetotalPages}
+            >
               &raquo;
             </button>
           </div>
           {/* { console.log("currentPage",currentPage,"noticetotalPages",noticetotalPages) } */}
-        </div >
-      </div >
+        </div>
+      </div>
     </>
   );
 };
