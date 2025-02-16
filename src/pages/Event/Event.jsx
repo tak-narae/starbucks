@@ -190,32 +190,32 @@ const Event = () => {
           )}
         </ul>
 
-        { console.log("currentPage",currentPage,"totalFilteredPages",totalFilteredPages) }
-
         <div className="pagination">
           <button
             className="prev"
             onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1} >
+            disabled={currentPage === 1}
+          >
             &laquo;
           </button>
-          { eventPage.length !== 0 ? (
+          {eventPage.length !== 0 ? (
             eventPage.map((page) => (
-              <button 
+              <button
                 key={page}
                 className={`page ${currentPage === page ? "active" : ""}`}
-                onClick={() => handlePageChange(page)} >
+                onClick={() => handlePageChange(page)}
+              >
                 {page}
               </button>
             ))
           ) : (
             <button className="active">1</button>
-          ) }
+          )}
 
           <button
             className="next"
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalFilteredPages}
+            disabled={displayedEvents.length <= currentPage * eventitemsPerPage}
           >
             &raquo;
           </button>
