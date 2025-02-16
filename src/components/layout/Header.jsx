@@ -210,8 +210,8 @@ const Header = () => {
                 </div>
                 <div className="customer">
                     <ul className="menu_util">
-                        <li><Link to="/event"><img src={require('../../images/header_util1.png')} alt="이벤트" /><span>이벤트</span></Link></li>
-                        <li><Link to="/notice"><img src={require('../../images/header_util2.png')} alt="공지사항" /><span>공지사항</span></Link></li>
+                        <li><Link to="/event?cate=전체"><img src={require('../../images/header_util1.png')} alt="이벤트" /><span>이벤트</span></Link></li>
+                        <li><Link to="/notice?cate=전체"><img src={require('../../images/header_util2.png')} alt="공지사항" /><span>공지사항</span></Link></li>
                         <li><Link to="/store"><img src={require('../../images/header_util3.png')} alt="매장안내" /><span>매장안내</span></Link></li>
                         <li><Link to="/" onClick={alertReady}><img src={require('../../images/header_util4.png')} alt="고객센터" /><span>고객센터</span></Link></li>
                     </ul>

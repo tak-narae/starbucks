@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 import "pages/Event/Customer.css";
@@ -78,6 +84,10 @@ const Event = () => {
   );
   const eventPage = isSearching ? searchPages : eventPages;
 
+  //쿼리스트링 설정
+  // const [searchParams] = useSearchParams();
+  // const urlCate =  searchParams.get("cate");
+
   return (
     <div id="container" className="board__event">
       <div className="layout_fix">
@@ -87,6 +97,7 @@ const Event = () => {
             <li className="sort_item">
               <label>카테고리</label>
               <Link
+                to={`/event?cate=${selectedCategory}`}
                 className={`${isActive ? "active" : ""}`}
                 onClick={toggleActive}
               >
@@ -220,6 +231,12 @@ const Event = () => {
             &raquo;
           </button>
         </div>
+        {console.log(
+          "currentPage",
+          currentPage,
+          "totalFilteredPages",
+          totalFilteredPages
+        )}
       </div>
     </div>
   );

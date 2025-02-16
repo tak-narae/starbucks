@@ -10,7 +10,7 @@ const Search = () => {
   const searchParams = new URLSearchParams(location.search).get("result");
 
   useEffect(() => { //이후
-    if (!searchWord) {
+    if (searchParams && !searchWord) {
       setSearchWord(searchParams.split(" "));
     }
     if(!searchWord && !searchParams){
