@@ -189,9 +189,6 @@ const Event = () => {
             <li className="empty">현재 표시할 이벤트가 없습니다.</li>
           )}
         </ul>
-
-        { console.log("currentPage",currentPage,"totalFilteredPages",totalFilteredPages) }
-
         <div className="pagination">
           <button
             className="prev"
@@ -215,11 +212,11 @@ const Event = () => {
           <button
             className="next"
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalFilteredPages}
-          >
+            disabled={currentPage === totalFilteredPages + 1}>
             &raquo;
           </button>
         </div>
+        {/* { console.log("currentPage",currentPage,"totalFilteredPages",totalFilteredPages) } */}
       </div>
     </div>
   );
