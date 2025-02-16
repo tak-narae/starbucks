@@ -38,6 +38,13 @@ const Event = () => {
   } = useUtilContext();
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.search.includes("cate=")) {
+      navigate("/event", { replace: true }); // URL에서 카테고리 파라미터 제거
+    }
+  }, []);
 
   const handleCategoryChange = (e) => {
     handleCategoryClick(selectedCategory);
