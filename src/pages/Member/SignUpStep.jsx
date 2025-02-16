@@ -96,12 +96,20 @@ const SignUpStep = () => {
         },[isSubmitted, isRegistered])
     
         const handleAllChecked = () => {
-          setAllChecked(!allChecked);
-          setTermsChecked(!termsChecked);
-          setPrivacyChecked(!privacyChecked);
-          setCardChecked(!cardChecked);
-          setMarketingChecked(!marketingChecked);
-        };
+            if (allChecked) {
+              setTermsChecked(false);
+              setPrivacyChecked(false);
+              setCardChecked(false);
+              setMarketingChecked(false);
+            } else {
+              setTermsChecked(true);
+              setPrivacyChecked(true);
+              setCardChecked(true);
+              setMarketingChecked(true);
+            }
+            setAllChecked(!allChecked);
+          };
+          
     
       useEffect(()=>{
         if(termsChecked && privacyChecked && cardChecked){
