@@ -97,6 +97,7 @@ const Header = () => {
 
     //===ready
     const alertReady = (e) => { //작업중 알림
+        e.preventDefault();
         alert(e.currentTarget.textContent + " 작업중입니다!")
     }
 
