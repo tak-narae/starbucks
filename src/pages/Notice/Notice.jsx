@@ -178,15 +178,18 @@ const Notice = () => {
             >
               &laquo;
             </button>
-            {noticePage.map((page) => (
-              <button
-                key={page}
-                className={`page ${currentPage === page ? "active" : ""}`}
-                onClick={() => handlePageChange(page)}
-              >
-                {page}
-              </button>
-            ))}
+            { noticePage.length !== 0 ? (
+              noticePage.map((page) => (
+                <button
+                  key={page}
+                  className={`page ${currentPage === page ? "active" : ""}`}
+                  onClick={() => handlePageChange(page)} >
+                  {page}
+                </button>
+              ))
+            ) : (
+              <button className="active">1</button>
+            ) }
             <button
               className="next"
               onClick={() => handlePageChange(currentPage + 1)}
