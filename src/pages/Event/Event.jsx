@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 import "pages/Event/Customer.css";
@@ -90,9 +96,11 @@ const Event = () => {
           <ul className="sort_list">
             <li className="sort_item">
               <label>카테고리</label>
-              <Link to={`/event?cate=${selectedCategory}`}
+              <Link
+                to={`/event?cate=${selectedCategory}`}
                 className={`${isActive ? "active" : ""}`}
-                onClick={toggleActive} >
+                onClick={toggleActive}
+              >
                 {selectedCategory}
               </Link>
               <ul className="dropdown">
@@ -192,34 +200,43 @@ const Event = () => {
             <li className="empty">현재 표시할 이벤트가 없습니다.</li>
           )}
         </ul>
+
         <div className="pagination">
           <button
             className="prev"
             onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1} >
+            disabled={currentPage === 1}
+          >
             &laquo;
           </button>
-          { eventPage.length !== 0 ? (
+          {eventPage.length !== 0 ? (
             eventPage.map((page) => (
-              <button 
+              <button
                 key={page}
                 className={`page ${currentPage === page ? "active" : ""}`}
-                onClick={() => handlePageChange(page)} >
+                onClick={() => handlePageChange(page)}
+              >
                 {page}
               </button>
             ))
           ) : (
             <button className="active">1</button>
-          ) }
+          )}
+
           <button
             className="next"
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalFilteredPages}>
-              {/* totalFilteredPages + 1 (전체) => 전체에 맞추면 카테고리 있을때 꼬임 */}
+            disabled={displayedEvents.length <= currentPage * eventitemsPerPage}
+          >
             &raquo;
           </button>
         </div>
-        { console.log("currentPage",currentPage,"totalFilteredPages",totalFilteredPages) }
+        {console.log(
+          "currentPage",
+          currentPage,
+          "totalFilteredPages",
+          totalFilteredPages
+        )}
       </div>
     </div>
   );
