@@ -95,14 +95,18 @@ const Header = () => {
         setHasHistory(true);
     }, [location])
 
+    const alertReady = (e) => { //작업중 알림
+        alert(e.currentTarget.textContent + " 작업중입니다!")
+    }
+
     //banner
-    const handleEvent = () => {
+    const handleEvent = () => { // onClick={handleEvent}
         window.location.replace("/event");
     };
-    const handleNotice = () => {
+    const handleNotice = () => { // onClick={handleNotice}
         window.location.replace("/notice");
     }
-    const handleStore = () => {
+    const handleStore = () => { // onClick={handleStore}
         window.location.replace("/store");
     }
 
@@ -136,7 +140,7 @@ const Header = () => {
                         <li className="mypage"><Link to="/signup?step=1">마이페이지</Link></li>
                         {/* <li className="mypage"><Link to="/mypage">마이페이지</Link></li> */}
                         <li className="cart"><Link to="/order/cart">장바구니</Link></li>
-                        <li className="card"><Link to="/">카드</Link></li>
+                        <li className="card" onClick={alertReady}><Link to="/">카드</Link></li>
                     </ul>
                 </div>
             </div>
@@ -198,17 +202,17 @@ const Header = () => {
                         </ul>
                     </nav>
                     <ul className="banner">
-                        <li><Link to="/event?cate=상품출시"><img src={require("../../images/header_banner1.png")} alt="이벤트 배너" /></Link></li>
-                        <li><Link to="/event/12?cate=상품출시"><img src={require("../../images/header_banner2.png")} alt="이벤트 배너" /></Link></li>
-                        <li><Link to="/event"><img src={require("../../images/header_banner3.png")} alt="이벤트 배너" /></Link></li>
+                        <li><Link to="/" onClick={e=>e.preventDefault()}><img src={require("../../images/header_banner1.png")} alt="이벤트 배너" /></Link></li>
+                        <li><Link to="/" onClick={e=>e.preventDefault()}><img src={require("../../images/header_banner2.png")} alt="이벤트 배너" /></Link></li>
+                        <li><Link to="/" onClick={e=>e.preventDefault()}><img src={require("../../images/header_banner3.png")} alt="이벤트 배너" /></Link></li>
                     </ul>
                 </div>
                 <div className="customer">
                     <ul className="menu_util">
-                        <li><Link to="/event" onClick={handleEvent}><img src={require('../../images/header_util1.png')} alt="이벤트" /><span>이벤트</span></Link></li>
-                        <li><Link to="/notice" onClick={handleNotice}><img src={require('../../images/header_util2.png')} alt="공지사항" /><span>공지사항</span></Link></li>
-                        <li><Link to="/store" onClick={handleStore}><img src={require('../../images/header_util3.png')} alt="매장안내" /><span>매장안내</span></Link></li>
-                        <li><Link to="/"><img src={require('../../images/header_util4.png')} alt="고객센터" /><span>고객센터</span></Link></li>
+                        <li><Link to="/event"><img src={require('../../images/header_util1.png')} alt="이벤트" /><span>이벤트</span></Link></li>
+                        <li><Link to="/notice"><img src={require('../../images/header_util2.png')} alt="공지사항" /><span>공지사항</span></Link></li>
+                        <li><Link to="/store"><img src={require('../../images/header_util3.png')} alt="매장안내" /><span>매장안내</span></Link></li>
+                        <li><Link to="/" onClick={alertReady}><img src={require('../../images/header_util4.png')} alt="고객센터" /><span>고객센터</span></Link></li>
                     </ul>
                 </div>
             </div>

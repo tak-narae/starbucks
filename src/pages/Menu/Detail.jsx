@@ -200,7 +200,7 @@ const Detail = () => {
             </div>
             <div className="info_cont">
               <ul className="action">
-                <li className="like"><button>찜</button></li>
+                <li className="displaynone like"><button>찜</button></li>
                 {/* <li className="share"><button onClick={()=>handleCopyLink(`${process.env.PUBLIC_URL}${location.pathname}${location.search}`)}>공유</button></li> */}
                 <li className="share"><button onClick={()=>handleCopyLink(`${window.location.origin}${location.pathname}${location.search}`)}>공유</button></li>
               </ul>
@@ -238,9 +238,9 @@ const Detail = () => {
                 {/* <h3 className="total_price">{productMatch.price}원</h3> */}
               </div>
               <div className="btn_primary">
-                <button className="btn_normal" onClick={addToCart}>장바구니</button>
+                <button className="btn_dark" onClick={addToCart}>장바구니</button>
                 {/* <Link to="/order/cart" className="btn_normal"></Link> */}
-                <Link to="/" className="btn_dark">구매하기</Link>
+                <Link to="/" className="displaynone btn_dark">구매하기</Link>
               </div>
             </div>
           </div>

@@ -254,6 +254,7 @@ header .header_nav .banner li {
 }
 
 header .header_nav .banner li a {
+  cursor: default;
   display: block;
 }
 
