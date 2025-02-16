@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 import "pages/Event/Customer.css";
@@ -78,6 +78,10 @@ const Event = () => {
   );
   const eventPage = isSearching ? searchPages : eventPages;
 
+  //쿼리스트링 설정
+  // const [searchParams] = useSearchParams();
+  // const urlCate =  searchParams.get("cate");
+
   return (
     <div id="container" className="board__event">
       <div className="layout_fix">
@@ -86,10 +90,9 @@ const Event = () => {
           <ul className="sort_list">
             <li className="sort_item">
               <label>카테고리</label>
-              <Link
+              <Link to={`/event?cate=${selectedCategory}`}
                 className={`${isActive ? "active" : ""}`}
-                onClick={toggleActive}
-              >
+                onClick={toggleActive} >
                 {selectedCategory}
               </Link>
               <ul className="dropdown">
@@ -208,15 +211,15 @@ const Event = () => {
           ) : (
             <button className="active">1</button>
           ) }
-
           <button
             className="next"
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalFilteredPages + 1}>
+            disabled={currentPage === totalFilteredPages}>
+              {/* totalFilteredPages + 1 (전체) => 전체에 맞추면 카테고리 있을때 꼬임 */}
             &raquo;
           </button>
         </div>
-        {/* { console.log("currentPage",currentPage,"totalFilteredPages",totalFilteredPages) } */}
+        { console.log("currentPage",currentPage,"totalFilteredPages",totalFilteredPages) }
       </div>
     </div>
   );
