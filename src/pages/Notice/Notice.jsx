@@ -193,11 +193,11 @@ const Notice = () => {
             <button
               className="next"
               onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === noticetotalPages}
-            >
+              disabled={currentPage === noticetotalPages} >
               &raquo;
             </button>
           </div>
+          {/* { console.log("currentPage",currentPage,"noticetotalPages",noticetotalPages) } */}
         </div >
       </div >
     </>
