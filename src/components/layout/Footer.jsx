@@ -16,13 +16,13 @@ const Footer = () => {
       <div className="fnb">
         <div className="layout_fix">
           <div className="logo_sns">
-            <h1 className="starbucks_logo"><Link to="/">스타벅스 로고</Link></h1>
+            <h1 className="starbucks_logo"><Link to="/" onClick={e=>e.preventDefault()}>스타벅스 로고</Link></h1>
             <div className="sns">
-              <Link to="/" className="insta" title="인스타그램">인스타그램</Link>
-              <Link to="/" className="youtube" title="유튜브">유튜브</Link>
-              <Link to="/" className="x" title="트위터">트위터</Link>
-              <Link to="/" className="facebook" title="페이스북">페이스북</Link>
-              <Link to="/" className="blog" title="네이버 블로그">블로그</Link>
+              <Link to="https://www.instagram.com/starbuckskorea" className="insta" title="인스타그램">인스타그램</Link>
+              <Link to="https://www.youtube.com/user/starbuckskorea" className="youtube" title="유튜브">유튜브</Link>
+              <Link to="https://x.com/StarbucksKorea" className="x" title="트위터">트위터</Link>
+              <Link to="https://www.facebook.com/starbuckskorea" className="facebook" title="페이스북">페이스북</Link>
+              {/* <Link to="/" className="blog" title="네이버 블로그">블로그</Link> */}
             </div>
           </div>
           <div className="biz">
@@ -33,7 +33,7 @@ const Footer = () => {
             <span>대표번호 : 1522-3232</span>
             <span>개인정보 보호책임자 : 이찬우</span>
           </div>
-          <div className="copyright">&copy; 2024 Starbucks Coffee Company. All Rights Reserved.</div>
+          <div className="copyright">&copy; 2025 Starbucks Coffee Company. All Rights Reserved.</div>
           <div className="link">
             <div>
               <button><b>개인정보처리방침</b></button>
