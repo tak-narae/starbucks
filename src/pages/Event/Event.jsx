@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUtilContext } from "hooks/UtilContext";
 
 import "pages/Event/Customer.css";
@@ -55,7 +55,7 @@ const Event = () => {
       );
       setFilteredEvents(filtered);
     }
-    setCurrentPage(1); //검색 시 현재 페이지 초기화
+    // setCurrentPage(1); //검색 시 현재 페이지 초기화 => pagination 안 넘어감
   }, [search, selectedCategory, datefilteredEvents, setCurrentPage]);
 
   //검색 여부에 따른 이벤트 목록
@@ -190,23 +190,28 @@ const Event = () => {
           )}
         </ul>
 
+        { console.log("currentPage",currentPage,"totalFilteredPages",totalFilteredPages) }
+
         <div className="pagination">
           <button
             className="prev"
             onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
+            disabled={currentPage === 1} >
             &laquo;
           </button>
-          {eventPage.map((page) => (
-            <button
-              key={page}
-              className={`page ${currentPage === page ? "active" : ""}`}
-              onClick={() => handlePageChange(page)}
-            >
-              {page}
-            </button>
-          ))}
+          { eventPage.length !== 0 ? (
+            eventPage.map((page) => (
+              <button 
+                key={page}
+                className={`page ${currentPage === page ? "active" : ""}`}
+                onClick={() => handlePageChange(page)} >
+                {page}
+              </button>
+            ))
+          ) : (
+            <button className="active">1</button>
+          ) }
+
           <button
             className="next"
             onClick={() => handlePageChange(currentPage + 1)}
