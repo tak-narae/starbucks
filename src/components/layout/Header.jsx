@@ -95,6 +95,7 @@ const Header = () => {
         setHasHistory(true);
     }, [location])
 
+    //===ready
     const alertReady = (e) => { //작업중 알림
         alert(e.currentTarget.textContent + " 작업중입니다!")
     }

@@ -69,11 +69,11 @@ const QtyCalc = (setCartList, setPriceQtyCalc) => {
 
     plus.addEventListener("click", (e) => {
       let qtyValue = parseInt(qtyEl.value) || 0;
-      console.log("##들어옴##", qtyValue);
+      // console.log("##들어옴##", qtyValue);
       qtyValue += 1;
       qtyEl.value = qtyValue;
       e.target.parentElement.querySelector("input").setAttribute("data-qty", qtyValue);
-      console.log(qtyEl.value, "++++", qtyValue);
+      // console.log(qtyEl.value, "++++", qtyValue);
       if (qtyValue > 1) {
         minus.classList.remove("disabled");
       }
@@ -83,12 +83,12 @@ const QtyCalc = (setCartList, setPriceQtyCalc) => {
 
     minus.addEventListener("click", (e) => {
       let qtyValue = parseInt(qtyEl.value) || 0;
-      console.log("%들어옴%", qtyValue);
+      // console.log("%들어옴%", qtyValue);
       if (qtyValue > 1) {
         qtyValue -= 1;
         qtyEl.value = qtyValue;
         e.target.parentElement.querySelector("input").setAttribute("data-qty", qtyValue);
-        console.log(qtyEl.value, "----", qtyValue);
+        // console.log(qtyEl.value, "----", qtyValue);
         if (qtyValue <= 1) {
           minus.classList.add("disabled");
         }

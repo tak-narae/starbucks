@@ -78,7 +78,7 @@ const Main = () => {
     // })
     // setSeasonData(seasonMerge);
 
-    console.log("visual==",visual)
+    // console.log("visual==",visual)
 
   }, [product, prdSeasonMatch, seasonData]);
 

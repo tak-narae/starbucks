@@ -152,7 +152,7 @@ export const UtilProvider = ({ children }) => {
     { length: eventEndPage - startPage + 1 },
     (_, i) => startPage + i
   );
-  console.log(eventitemsPerPage);
+  // console.log(eventitemsPerPage);
   return (
     <UtilContext.Provider
       value={{

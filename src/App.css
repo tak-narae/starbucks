@@ -235,8 +235,9 @@ footer {
   border-top: 1px solid var(--br-color1);
 }
 
-footer .starbucks_logo {
+footer .starbucks_logo a {
   filter: grayscale(1);
+  cursor: default;
 }
 
 footer .menu_corp .layout_fix {
@@ -250,6 +251,7 @@ footer .menu_corp a {
   line-height: 54px;
   position: relative;
   border-right: 1px solid var(--br-color1);
+  pointer-events: none;
   display: block;
 }
 
@@ -355,6 +357,7 @@ footer .link {
 footer .link button {
   margin-right: 20px;
   color: var(--bk-color1);
+  pointer-events: none;
 }
 
 footer .link>div:last-child button {
@@ -505,7 +508,8 @@ footer .link b {
 
 /* ===== .heading */
 [class^="heading"] {
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
+  margin-bottom: 40px;
 }
 
 :where(#container) [class^="heading"] {
