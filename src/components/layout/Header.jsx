@@ -142,7 +142,7 @@ const Header = () => {
                         <li className="mypage"><Link to="/signup?step=1">마이페이지</Link></li>
                         {/* <li className="mypage"><Link to="/mypage">마이페이지</Link></li> */}
                         <li className="cart"><Link to="/order/cart">장바구니</Link></li>
-                        <li className="card" onClick={alertReady}><Link to="/">카드</Link></li>
+                        <li className="card"><Link to="/" onClick={alertReady}>카드</Link></li>
                     </ul>
                 </div>
             </div>
