@@ -12,8 +12,14 @@ export const UtilProvider = ({ children }) => {
   const [notice, setNotice] = useState([]);
   const [event, setEvent] = useState([]);
 
-  // console.log(event);
-
+  /* ===== Notice Category Key  ===== */
+  //Notice Category 별 key값
+  const categoryKeyStart = {
+    "공지사항": 1,
+    "문화소식": 41,
+    "사회공헌": 71,
+  }
+  
   /* ===== 데이터 불러오기 [Notice, Events]  ===== */
   const getData = async () => {
     try {
@@ -22,11 +28,11 @@ export const UtilProvider = ({ children }) => {
       );
       const fetchedNotices = response.data.notice;
       const fetchedEvents = response.data.events;
-
+      
       // API에서 받은 데이터를 상태에 저장
       setNotice(fetchedNotices);
       setEvent(fetchedEvents);
-
+      
     } catch (err) {
       console.error("데이터를 가져오는 중 오류가 발생했습니다:", err);
     }
@@ -35,14 +41,39 @@ export const UtilProvider = ({ children }) => {
   useEffect(() => {
     getData();
   }, []);
-
+  
   /* ================================================================== */
+
+  /* ===== 카테고리별 데이터 필터링 ===== */
+  const [selectedCategory, setSelectedCategory] = useState("전체");
+  const [noticeCategoryFilteredData, setNoticeCategoryFilteredData] = useState([]);// 필터링된 카테고리 데이터
+
+  useEffect(() => {
+    const categoryNoticeFiltered = selectedCategory === "전체"
+      ? notice
+      : notice.filter((n) => n.category === selectedCategory);
+  
+    // categoryKeyStart의 값을 정확하게 가져오는지 확인
+    const startKey = categoryKeyStart[selectedCategory] || 1; 
+    console.log("selectedCategory:", selectedCategory, "startKey:", startKey); // debug
+  
+    const updatedNotices = categoryNoticeFiltered.map((notice, index) => {
+      console.log("index:", index, "key:", startKey + index); // debug
+      return {
+        ...notice,
+        key: startKey + index, // 각 공지사항의 key 값 업데이트
+      };
+    });
+  
+    setNoticeCategoryFilteredData(updatedNotices);
+  }, [selectedCategory, notice]);
+  
+   
+
 
   /* ===== Notice와 Event 동시에 사용하는 변수 및 설정  ===== */
   const [isActive, setIsActive] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("전체");
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
-  const [noticeCategoryFilteredData, setNoticeCategoryFilteredData] = useState([]); // 필터링된 카테고리 데이터
   const [eventCategoryFilteredData, setEventCategoryFilteredData] = useState([]);
 
   useEffect(() => {

@@ -101,10 +101,7 @@ const Notice = () => {
                     (category) => (
                       <li key={category}>
                         <Link
-                          to={{
-                            pathname: `/notice/${datefilteredNotice.idx}`,
-                            search: `?cate=${category}`,
-                          }}
+                          to={`/notice?cate=${category}`}
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
@@ -154,14 +151,14 @@ const Notice = () => {
                 </tr>
               </thead>
               <tbody>
-                {displayedNotice.map((notice, idx) => (
-                  <tr key={idx}>
-                    <td>{(currentPage - 1) * noticeitemsPerPage + idx + 1}</td>
+                {displayedNotice.map((notice, key) => (
+                  <tr key={key}>
+                    <td>{(currentPage - 1) * noticeitemsPerPage + key + 1}</td>
                     <td>{notice.category}</td>
                     <td className="subject">
                       <Link
                         to={{
-                          pathname: `/notice/${idx}`,
+                          pathname: `/notice/${notice.key}`,
                           search: `?cate=${notice.category}`,
                         }}
                       >

@@ -11,14 +11,14 @@ const NoticeDetail = () => {
 
   console.log("URL에서 가져온 key:", key);
 
-  const notices = datefilteredNotice.find((notice) => notice.key === key); // `key`로 비교
+  const notice = datefilteredNotice.find(
+    (notice) => String(notice.key) === key
+  );
 
   // 현재 공지의 key를 기준으로 이전글과 다음글 찾기
   const currentIndex = datefilteredNotice.findIndex(
-    (notice) => notice.key === key
+    (notice) => String(notice.key) === key // String으로 타입을 맞춰 비교
   );
-
-  console.log("찾은 공지사항:", notices);
 
   const prevNotice =
     currentIndex > 0 ? datefilteredNotice[currentIndex - 1] : null;
@@ -30,24 +30,24 @@ const NoticeDetail = () => {
   return (
     <div id="container" className="board__notice_detail">
       <div className="layout_fix">
-        {notices ? (
+        {notice ? (
           <>
             <div className="heading">
               <div className="path">
                 <Link to={`/notice?cate=${category}`}>{category}</Link>
               </div>
               <div className="notice_tit">
-                <h2 className="tit">{notices.subject}</h2>
-                <p className="date">{notices.date}</p>
+                <h2 className="tit">{notice.subject}</h2>
+                <p className="date">{notice.date}</p>
               </div>
             </div>
             <div className="notice_cont">
-              {notices.contents}
-              {notices.img ? (
+              {notice.contents}
+              {notice.img ? (
                 <div className="detail_img">
                   <img
-                    src={`${process.env.PUBLIC_URL}/${notices.img}`}
-                    alt={notices.subject}
+                    src={`${process.env.PUBLIC_URL}/${notice.img}`}
+                    alt={notice.subject}
                   />
                 </div>
               ) : null}
@@ -85,7 +85,9 @@ const NoticeDetail = () => {
                 <Link
                   to={`/notice?cate=${category}`}
                   onClick={(e) => {
-                    handleCategoryClick(notices.category);
+                    if (notice) {
+                      handleCategoryClick(notice.category);
+                    }
                   }}
                 >
                   목록으로
