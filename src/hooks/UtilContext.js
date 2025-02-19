@@ -58,7 +58,6 @@ export const UtilProvider = ({ children }) => {
     console.log("selectedCategory:", selectedCategory, "startKey:", startKey); // debug
   
     const updatedNotices = categoryNoticeFiltered.map((notice, index) => {
-      console.log("index:", index, "key:", startKey + index); // debug
       return {
         ...notice,
         key: startKey + index, // 각 공지사항의 key 값 업데이트
