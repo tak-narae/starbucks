@@ -54,8 +54,7 @@ export const UtilProvider = ({ children }) => {
       : notice.filter((n) => n.category === selectedCategory);
   
     // categoryKeyStart의 값을 정확하게 가져오는지 확인
-    const startKey = categoryKeyStart[selectedCategory] || 1; 
-    console.log("selectedCategory:", selectedCategory, "startKey:", startKey); // debug
+    const startKey = categoryKeyStart[selectedCategory] || 1;
   
     const updatedNotices = categoryNoticeFiltered.map((notice, index) => {
       return {
