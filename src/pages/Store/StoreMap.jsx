@@ -21,17 +21,29 @@
 
 // export default StoreMap;
 
-import React from "react";
-import PlacePicker from "hooks/PlacePicker";
-import GoogleMapsLoader from "hooks/GoogleMapsLoader";
+import React, { useState } from "react";
+import GoogleMapsLoader from "./GoogleMapsLoader";
+import Map from "./Map";
+import PlaceSearch from "./PlaceSearch";
+import useNearbyStores from "hooks/useNearbyStores";
 
 const StoreMap = () => {
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const { stores, loading } = useNearbyStores(selectedLocation);
+
   return (
-    <GoogleMapsLoader>
-      <PlacePicker />
-    </GoogleMapsLoader>
+    <div>
+      <GoogleMapsLoader>
+        <h1>스타벅스 매장 찾기</h1>
+        <PlaceSearch onPlaceSelect={setSelectedLocation} />
+        <div className="store_findmap">
+          <Map/>
+        </div>
+      </GoogleMapsLoader>
+    </div>
   );
 };
 
 export default StoreMap;
+
 

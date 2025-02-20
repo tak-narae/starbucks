@@ -54,7 +54,7 @@ const PlacePicker = () => {
       />
       <div
         ref={mapRef}
-        style={{ height: "90%", width: "100%" }}
+        style={{ height: "50%", width: "100%" }}
       ></div>
     </div>
   );

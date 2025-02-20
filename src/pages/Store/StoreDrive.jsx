@@ -3,7 +3,6 @@ import React from 'react';
 const StoreDrive = () => {
   return (
     <div>
-      StoreDrive
     </div>
   );
 };
