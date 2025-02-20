@@ -15,6 +15,10 @@
   display: none;
 }
 
-[class$="store"] .store_findmap{
-  margin: 10px 0;
+[class$="store"] .store_search{
+  margin: 20px 0;
+}
+
+[class$="store"] .store_map{
+  margin: 20px 0;
 }
