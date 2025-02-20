@@ -23,18 +23,29 @@ const Map = () => {
   useEffect(() => {
     if (!userLocation || !mapRef.current) return;
 
+    // Google Maps 로드 여부 체크
+    if (!window.google) {
+      console.error("Google Maps API is not loaded");
+      return;
+    }
+
     // Google Maps 초기화
     const map = new window.google.maps.Map(mapRef.current, {
       center: userLocation,
       zoom: 15,
     });
 
+    const starbucksMarker = {
+      url: "/db/images/pin_general.png",
+      scaledSize: new window.google.maps.Size(30, 48),
+    };
+
     // 사용자 위치에 마커 표시
     new window.google.maps.Marker({
       position: userLocation,
       map,
       title: "현재 위치",
-      icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+      icon: starbucksMarker,
     });
 
     // stores가 배열이면 마커 추가
@@ -44,6 +55,7 @@ const Map = () => {
           position: store.geometry.location,
           map,
           title: store.name,
+          icon: starbucksMarker,
         });
       });
     }

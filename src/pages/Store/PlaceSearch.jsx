@@ -39,6 +39,8 @@ const PlaceSearch = ({ onPlaceSelect }) => {
   const handleSearch = async (e) => {
     e.preventDefault();
 
+    console.log("검색: ", query);
+
     if (!query.trim()) {
       alert("검색어를 입력해주세요.");
       return;
@@ -49,6 +51,8 @@ const PlaceSearch = ({ onPlaceSelect }) => {
         `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}+스타벅스&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
       );
       const data = await response.json();
+
+      console.log("API 응답:", data); // 응답 데이터 확인
 
       // Google API 응답 상태가 OK인 경우만 처리
       if (data.status === "OK" && data.results.length > 0) {
@@ -71,7 +75,6 @@ const PlaceSearch = ({ onPlaceSelect }) => {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="매장 검색"
       />
-      <button type="submit">검색</button>
     </form>
   );
 };

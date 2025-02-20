@@ -25,7 +25,6 @@ import React, { useState } from "react";
 import GoogleMapsLoader from "./GoogleMapsLoader";
 import Map from "./Map";
 import PlaceSearch from "./PlaceSearch";
-import StoreList from "./StoreList";
 import useNearbyStores from "hooks/useNearbyStores";
 
 const StoreMap = () => {
@@ -33,12 +32,15 @@ const StoreMap = () => {
   const { stores, loading } = useNearbyStores(selectedLocation);
 
   return (
-    <GoogleMapsLoader>
-      <h1>스타벅스 매장 찾기</h1>
-      <PlaceSearch onPlaceSelect={setSelectedLocation} />
-      <Map />
-      {loading ? <p>매장 정보를 불러오는 중...</p> : <StoreList stores={stores} />}
-    </GoogleMapsLoader>
+    <div>
+      <GoogleMapsLoader>
+        <h1>스타벅스 매장 찾기</h1>
+        <PlaceSearch onPlaceSelect={setSelectedLocation} />
+        <div className="store_findmap">
+          <Map/>
+        </div>
+      </GoogleMapsLoader>
+    </div>
   );
 };
 

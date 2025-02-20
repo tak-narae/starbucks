@@ -14,3 +14,7 @@
   border-radius: 6px;
   display: none;
 }
+
+[class$="store"] .store_findmap{
+  margin: 10px 0;
+}
